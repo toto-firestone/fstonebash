@@ -33,7 +33,7 @@ read -p "Manual check and correct before switching server"
 
 ./switch-server.sh s25
 
-Nlibe=0
+Nlibe=2
 Ndung=0
 ./auto-wm-run.sh $Nlibe $Ndung
 
