@@ -48,14 +48,6 @@ prompt_mouse_position() {
 	read -p "put your mouse pointer above $1 and hit return key"
 }
 
-click_and_go() {
-	echo "let's move to $3..."
-	sleep 1
-	xdotool windowactivate $gamewin_id
-	sleep 1
-	xdotool mousemove $1 $2 click 1
-}
-
 ### ### ### ###
 
 # step 2 : show the way to expedition launch zone

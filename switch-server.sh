@@ -25,14 +25,6 @@ back_to_root_screen() {
 	xdotool key Escape
 }
 
-click_and_go() {
-	echo "let's move to $3..."
-	sleep 1
-	xdotool windowactivate $gamewin_id
-	sleep 1
-	xdotool mousemove $1 $2 click 1
-}
-
 ### ### ### ###
 
 source switch.conf
@@ -56,11 +48,11 @@ else
 	echo "switch to $1"
 	source $1
 	back_to_root_screen
-	click_and_go $X_settings $Y_settings "settings button"
-	click_and_go $X_server_switch $Y_server_switch "server switch"
-	click_and_go $X_fav_servers $Y_fav_servers "favorite servers"
+	click_and_go $X_settings $Y_settings
+	click_and_go $X_server_switch $Y_server_switch
+	click_and_go $X_fav_servers $Y_fav_servers
 	click_and_go $X_serv_i $Y_serv_i "server $1"
-	click_and_go $X_serv_confirm $Y_serv_confirm "confirmation"
+	click_and_go $X_serv_confirm $Y_serv_confirm
 	echo "overwriting $1 to switch file"
 	echo "current_servname=${1}" > switch.conf
 	cat switch.conf
