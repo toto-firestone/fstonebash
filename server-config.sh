@@ -40,28 +40,19 @@ prompt_mouse_position() {
 
 echo "now let's find the setting button"
 back_to_root_screen
-prompt_mouse_position "setting button"
-mouseloc=$(xdotool getmouselocation)
-X_settings=$(echo "$mouseloc" | grep -oP 'x:\K\d+')
-Y_settings=$(echo "$mouseloc" | grep -oP 'y:\K\d+')
+set_mouse_coordinates "setting button" "X_settings" "Y_settings"
 echo "settings button at x: $X_settings, y: $Y_settings"
 click_and_go $X_settings $Y_settings "settings button"
 echo
 
 echo "now let's find the server switch button"
-prompt_mouse_position "server switch"
-mouseloc=$(xdotool getmouselocation)
-X_server_switch=$(echo "$mouseloc" | grep -oP 'x:\K\d+')
-Y_server_switch=$(echo "$mouseloc" | grep -oP 'y:\K\d+')
+set_mouse_coordinates "server switch" "X_server_switch" "Y_server_switch"
 echo "server switch at x: $X_server_switch, y: $Y_server_switch"
 click_and_go $X_server_switch $Y_server_switch "server switch"
 echo
 
 echo "now let's find the favorite servers button"
-prompt_mouse_position "favorite servers"
-mouseloc=$(xdotool getmouselocation)
-X_fav_servers=$(echo "$mouseloc" | grep -oP 'x:\K\d+')
-Y_fav_servers=$(echo "$mouseloc" | grep -oP 'y:\K\d+')
+set_mouse_coordinates "favorite servers" "X_fav_servers" "Y_fav_servers"
 echo "favorite servers at x: $X_fav_servers, y: $Y_fav_servers"
 click_and_go $X_fav_servers $Y_fav_servers "favorite servers"
 echo
@@ -69,10 +60,7 @@ echo
 echo "now configuration of each server's coordiantes"
 for servname in "$@"; do
 	echo "server $servname"
-	prompt_mouse_position "$servname"
-	mouseloc=$(xdotool getmouselocation)
-	X_serv_i=$(echo "$mouseloc" | grep -oP 'x:\K\d+')
-	Y_serv_i=$(echo "$mouseloc" | grep -oP 'y:\K\d+')
+	set_mouse_coordinates "$servname" "X_serv_i" "Y_serv_i"
 	echo "server $servname: $X_serv_i, y: $Y_serv_i"
 	echo "Creating/overwriting file $servname"
 	echo "X_serv_i=${X_serv_i}" > $servname
@@ -83,10 +71,7 @@ echo
 echo "now let's find the servers switch confirmation button"
 echo "Go to game window and select eany server that is not current"
 echo "the confirmation button should appear"
-prompt_mouse_position "server confirmation"
-mouseloc=$(xdotool getmouselocation)
-X_serv_confirm=$(echo "$mouseloc" | grep -oP 'x:\K\d+')
-Y_serv_confirm=$(echo "$mouseloc" | grep -oP 'y:\K\d+')
+set_mouse_coordinates "server confirmation" "X_serv_confirm" "Y_serv_confirm"
 echo "server confirmation at x: $X_serv_confirm, y: $Y_serv_confirm"
 echo
 
