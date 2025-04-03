@@ -33,34 +33,8 @@ fi
 ### ### ### ###
 # retype the functions and make some changes
 
-focus_and_back_to_root_screen() {
-	sleep 1
-	xdotool windowactivate $gamewin_id
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-}
-
 focus_and_go_to_town() {
-	sleep 1
-	xdotool windowactivate $gamewin_id
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
+	focus_and_back_to_root_screen
 	sleep 1
 	xdotool key t
 }

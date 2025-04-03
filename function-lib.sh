@@ -38,3 +38,19 @@ click_and_go() {
 	sleep 1
 	xdotool mousemove $1 $2 click 1
 }
+
+focus_and_back_to_root_screen() {
+	sleep 1
+	xdotool windowactivate $gamewin_id
+	sleep 1
+	xdotool key Escape
+	sleep 1
+	xdotool key Escape
+	sleep 1
+	xdotool key Escape
+	sleep 1
+	xdotool key Escape
+	sleep 1
+	xdotool key Escape
+}
+
