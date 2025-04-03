@@ -1,8 +1,10 @@
 #!/bin/bash
+source function-lib.sh
 
 # THIS IS RADISH AUTOMATION TOOL
 # SERVER SWITCH COMMAND
 echo "MAKE SURE switch.conf IS UP TO DATE WITH YOUR CURRENT SERVER"
+radish_message_noprompt "SERVER SWITCH COMMAND"
 
 source win_id.conf
 echo read id: $gamewin_id

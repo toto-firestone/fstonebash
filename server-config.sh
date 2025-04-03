@@ -1,12 +1,10 @@
 #!/bin/bash
+source function-lib.sh
 
 # THIS IS RADISH AUTOMATION TOOL
 # SERVER CONFIGURATION SCRIPT
 
-echo "THIS IS RADISH AUTOMATION TOOL \\o/"
-echo "SERVER CONFIGURATION SCRIPT"
-echo "DISCLAIMER : always keep in mind what a happy radish is"
-read -p "press return key..."
+radish_message "SERVER CONFIGURATION SCRIPT"
 
 if [ -z "$1" ]; then
 	echo Error : expecting at least 1 server name as argument

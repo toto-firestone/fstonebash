@@ -1,12 +1,10 @@
 #!/bin/bash
+source function-lib.sh
 
 # THIS IS RADISH AUTOMATION TOOL
 # CONFIGURATION SCRIPT
 
-echo "THIS IS RADISH AUTOMATION TOOL \\o/"
-echo "CONFIGURATION SCRIPT"
-echo "DISCLAIMER : always keep in mind what a happy radish is"
-read -p "press return key..."
+radish_message "CONFIGURATION SCRIPT FOR CURRENCY FARM CYCLES"
 
 # step 1 : get the game window ID
 

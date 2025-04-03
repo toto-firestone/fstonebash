@@ -1,8 +1,11 @@
 #!/bin/bash
+source function-lib.sh
 
 # THIS IS RADISH AUTOMATION TOOL
 # DAILY WM RUN SCRIPT
 # JUST EXPECT ./auto-wm-config.sh has been successfully executed
+
+radish_message "DAILY WM RUN SCRIPT"
 
 if [ ! -f "win_id.conf" ]; then
 	echo "please provide a window id file with setwin_id.sh"
@@ -86,10 +89,6 @@ mission_ok() {
 }
 
 ### ### ### ###
-
-echo "THIS IS RADISH AUTOMATION TOOL \\o/"
-echo "DISCLAIMER : always keep in mind what a happy radish is"
-read -p "press return key..."
 
 focus_and_go_to_map
 click_and_go $X_camp_map $Y_camp_map

@@ -1,8 +1,11 @@
 #!/bin/bash
+source function-lib.sh
 
 # THIS IS RADISH AUTOMATION TOOL
 # RUN SCRIPT
 # JUST EXPECT ./auto-cycle-config.sh has been successfully executed
+
+radish_message "RUN SCRIPT FOR CURRENCY FARM CYCLES"
 
 if [ ! -f "win_id.conf" ]; then
 	echo "please provide a window id file with setwin_id.sh"
@@ -130,10 +133,6 @@ claim_tools() {
 }
 
 ### ### ### ###
-
-echo "THIS IS RADISH AUTOMATION TOOL \\o/"
-echo "DISCLAIMER : always keep in mind what a happy radish is"
-read -p "press return key..."
 
 i=1
 while true; do

@@ -1,12 +1,10 @@
 #!/bin/bash
+source function-lib.sh
 
 # THIS IS RADISH AUTOMATION TOOL
 # WM DAILY MISSIONS CONFIGURATION SCRIPT
 
-echo "THIS IS RADISH AUTOMATION TOOL \\o/"
-echo "WM DAILY MISSIONS CONFIGURATION SCRIPT"
-echo "DISCLAIMER : always keep in mind what a happy radish is"
-read -p "press return key..."
+radish_message "WM DAILY MISSIONS CONFIGURATION SCRIPT"
 
 if [ -z "$1" ]; then
 	echo "error : expect the number of scroll down for next liberation"
