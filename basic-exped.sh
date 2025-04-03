@@ -1,4 +1,5 @@
 #!/bin/bash
+source function-lib.sh
 
 # Coordonnées de la position où cliquer :
 
@@ -11,9 +12,10 @@ else
 # positionner la souris sur la zone de lancement et de réclamation
 # des expéditions (non masquée par le terminal du script)
 # exécuter le script (touche return)
-	mouseloc=$(xdotool getmouselocation)
-	X=$(echo "$mouseloc" | grep -oP 'x:\K\d+')
-	Y=$(echo "$mouseloc" | grep -oP 'y:\K\d+')
+	#mouseloc=$(xdotool getmouselocation)
+	#X=$(echo "$mouseloc" | grep -oP 'x:\K\d+')
+	#Y=$(echo "$mouseloc" | grep -oP 'y:\K\d+')
+	set_mouse_coordinates "expedition launch and claim" "X" "Y"
 fi
 echo "x: $X, y: $Y"
 

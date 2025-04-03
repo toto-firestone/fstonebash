@@ -14,3 +14,15 @@ radish_message_noprompt() {
 	echo "$1"
 	echo "DISCLAIMER : always keep in mind what a happy radish is"
 }
+
+set_mouse_coordinates() {
+	echo "click back to the terminal where the script is running"
+	read -p "put your mouse pointer above $1 and hit return key"
+	local mouseloc=$(xdotool getmouselocation)
+	local cmd_X="$2=\$(echo "\$mouseloc" | grep -oP 'x:\\K\\d+')"
+	#echo $cmd_X
+	local cmd_Y="$3=\$(echo "\$mouseloc" | grep -oP 'y:\\K\\d+')"
+	#echo $cmd_Y
+	eval $cmd_X
+	eval $cmd_Y
+}
