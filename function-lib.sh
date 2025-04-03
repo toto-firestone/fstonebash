@@ -26,3 +26,15 @@ set_mouse_coordinates() {
 	eval $cmd_X
 	eval $cmd_Y
 }
+
+click_and_go() {
+	if [ -n "$3" ]; then
+		echo "let's move to $3"
+	fi
+	sleep 1
+	# gamewin_id is a global variable defined by
+        # source win_id.conf
+	xdotool windowactivate $gamewin_id
+	sleep 1
+	xdotool mousemove $1 $2 click 1
+}

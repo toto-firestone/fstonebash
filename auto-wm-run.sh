@@ -75,13 +75,6 @@ focus_and_go_to_map() {
 	xdotool key m
 }
 
-click_and_go() {
-	sleep 1
-	xdotool windowactivate $gamewin_id
-	sleep 1
-	xdotool mousemove $1 $2 click 1
-}
-
 mission_ok() {
 	xdotool windowactivate $gamewin_id
 	sleep 1
@@ -98,28 +91,28 @@ click_and_go $X_liberations $Y_liberations
 
 i=0
 if [ "$i" -lt  "$N_liber" ]; then
-	click_and_go $X_liberation_1 $Y_liberation_1
+	i=$((i+1))
+	click_and_go $X_liberation_1 $Y_liberation_1 "liberation $i"
 	sleep 60
 	mission_ok
-	i=$((i+1))
 fi
 if [ "$i" -lt  "$N_liber" ]; then
-	click_and_go $X_liberation_2 $Y_liberation_2
+	i=$((i+1))
+	click_and_go $X_liberation_2 $Y_liberation_2 "liberation $i"
 	sleep 60
 	mission_ok
-	i=$((i+1))
 fi
 if [ "$i" -lt  "$N_liber" ]; then
-	click_and_go $X_liberation_3 $Y_liberation_3
+	i=$((i+1))
+	click_and_go $X_liberation_3 $Y_liberation_3 "liberation $i"
 	sleep 60
 	mission_ok
-	i=$((i+1))
 fi
 if [ "$i" -lt  "$N_liber" ]; then
-	click_and_go $X_liberation_4 $Y_liberation_4
+	i=$((i+1))
+	click_and_go $X_liberation_4 $Y_liberation_4 "liberation $i"
 	sleep 60
 	mission_ok
-	i=$((i+1))
 fi
 
 # scrolled part
@@ -129,12 +122,15 @@ xdotool windowactivate $gamewin_id
 sleep 1
 xdotool mousemove $X_liberation_4 $Y_liberation_4
 while [ "$i" -lt  "$N_liber" ]; do
+	i=$((i+1))
+	echo "let's scroll to liberation $i"
 	xdotool click --repeat $n_scroll_libe --delay 200 5
 	sleep 1
 	xdotool click 1
 	sleep 60
 	mission_ok
-	i=$((i+1))
+	# tempo correction
+	sleep 4
 done
 
 
@@ -143,16 +139,16 @@ click_and_go $X_dungeons $Y_dungeons
 
 i=0
 if [ "$i" -lt  "$N_dung" ]; then
-	click_and_go $X_dungeon_1 $Y_dungeon_1
+	i=$((i+1))
+	click_and_go $X_dungeon_1 $Y_dungeon_1 "dungeons $i"
 	sleep 60
 	mission_ok
-	i=$((i+1))
 fi
 if [ "$i" -lt  "$N_dung" ]; then
-	click_and_go $X_dungeon_2 $Y_dungeon_2
+	i=$((i+1))
+	click_and_go $X_dungeon_2 $Y_dungeon_2 "dungeons $i"
 	sleep 60
 	mission_ok
-	i=$((i+1))
 fi
 
 focus_and_back_to_root_screen
