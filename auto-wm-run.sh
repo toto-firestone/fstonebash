@@ -5,7 +5,7 @@ source function-lib.sh
 # DAILY WM RUN SCRIPT
 # JUST EXPECT ./auto-wm-config.sh has been successfully executed
 
-radish_message "DAILY WM RUN SCRIPT"
+radish_message_noprompt "DAILY WM RUN SCRIPT"
 
 if [ ! -f "win_id.conf" ]; then
 	echo "please provide a window id file with setwin_id.sh"
@@ -41,13 +41,6 @@ fi
 source wm.conf
 
 ### ### ### ###
-# retype the functions and make some changes
-
-focus_and_go_to_map() {
-	focus_and_back_to_root_screen
-	sleep 1
-	xdotool key m
-}
 
 mission_ok() {
 	xdotool windowactivate $gamewin_id
@@ -57,7 +50,7 @@ mission_ok() {
 
 ### ### ### ###
 
-focus_and_go_to_map
+go_to_map
 click_and_go $X_camp_map $Y_camp_map
 click_and_go $X_mission_button $Y_mission_button
 
