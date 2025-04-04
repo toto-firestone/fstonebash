@@ -5,8 +5,6 @@ source function-lib.sh
 # RUN SCRIPT
 # JUST EXPECT ./auto-cycle-config.sh has been successfully executed
 
-radish_message "RUN SCRIPT FOR CURRENCY FARM CYCLES"
-
 if [ ! -f "win_id.conf" ]; then
 	echo "please provide a window id file with setwin_id.sh"
 	exit 1
@@ -28,7 +26,13 @@ if [ -f "switch.conf" ]; then
 		echo "using default firestone.conf and hope it works..."
 		source firestone.conf
 	fi
+else
+	echo "no server configuration file"
+	echo "using default firestone.conf and hope it works..."
+	source firestone.conf
 fi
+
+radish_message "RUN SCRIPT FOR CURRENCY FARM CYCLES"
 
 ### ### ### ###
 # retype the functions and make some changes
