@@ -61,7 +61,7 @@ echo "now configuration of each server's coordiantes"
 for servname in "$@"; do
 	echo "server $servname"
 	set_mouse_coordinates "$servname" "X_serv_i" "Y_serv_i"
-	echo "server $servname: $X_serv_i, y: $Y_serv_i"
+	echo "server $servname x: $X_serv_i, y: $Y_serv_i"
 	echo "Creating/overwriting file $servname"
 	echo "X_serv_i=${X_serv_i}" > $servname
 	echo "Y_serv_i=${Y_serv_i}" >> $servname
