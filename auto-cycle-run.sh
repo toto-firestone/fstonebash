@@ -35,17 +35,9 @@ fi
 radish_message "RUN SCRIPT FOR CURRENCY FARM CYCLES"
 
 ### ### ### ###
-# retype the functions and make some changes
 
-focus_and_go_to_town() {
-	focus_and_back_to_root_screen
-	sleep 1
-	xdotool key t
-}
-
-# not same name as in auto-cycle-config.sh
 launch_and_claim_expedition() {
-	focus_and_go_to_town
+	go_to_town
 	sleep 1
 	xdotool mousemove $X_guild_portal $Y_guild_portal click 1
 	sleep 1
@@ -57,9 +49,7 @@ launch_and_claim_expedition() {
 }
 
 launch_and_claim_rituals() {
-	focus_and_back_to_root_screen
-	sleep 1
-	xdotool key o
+	go_to_oracle
 	sleep 1
 	xdotool mousemove $X_ritual $Y_ritual click 1
 	sleep 2
@@ -81,9 +71,7 @@ launch_and_claim_rituals() {
 }
 
 train_guardian() {
-	focus_and_back_to_root_screen
-	sleep 1
-	xdotool key g
+	go_to_guardian
 	sleep 1
 	xdotool mousemove $X_guard $Y_guard click 1
 	sleep 2
@@ -91,9 +79,7 @@ train_guardian() {
 }
 
 claim_campaign_loot() {
-	focus_and_back_to_root_screen
-	sleep 1
-	xdotool key m
+	go_to_map
 	sleep 1
 	xdotool mousemove $X_campaign $Y_campaign click 1
 	sleep 2
@@ -101,7 +87,7 @@ claim_campaign_loot() {
 }
 
 claim_tools() {
-	focus_and_go_to_town
+	go_to_town
 	sleep 1
 	xdotool mousemove $X_engi $Y_engi click 1
 	sleep 1
@@ -135,4 +121,5 @@ while true; do
 	sleep 10
 	echo "starting automated sequence"
 	i=$((i+1))
+	anti_ad
 done

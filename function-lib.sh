@@ -79,3 +79,8 @@ go_to_map() {
 	sleep 1
 	xdotool key m
 }
+
+anti_ad() {
+	click_and_go $X_game_tab $Y_game_tab "anti-ad"
+}
+
