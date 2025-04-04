@@ -56,3 +56,26 @@ focus_and_back_to_root_screen() {
 	xdotool key Escape
 }
 
+go_to_town() {
+	focus_and_back_to_root_screen
+	sleep 1
+	xdotool key t
+}
+
+go_to_oracle() {
+	focus_and_back_to_root_screen
+	sleep 1
+	xdotool key o
+}
+
+go_to_guardian() {
+	focus_and_back_to_root_screen
+	sleep 1
+	xdotool key g
+}
+
+go_to_map() {
+	focus_and_back_to_root_screen
+	sleep 1
+	xdotool key m
+}
