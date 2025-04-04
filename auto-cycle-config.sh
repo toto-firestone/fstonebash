@@ -4,11 +4,24 @@ source function-lib.sh
 # THIS IS RADISH AUTOMATION TOOL
 # CONFIGURATION SCRIPT
 
+# Set the output file
+
+if [ -f "switch.conf" ]; then
+	echo "Server swich file detected"
+	source switch.conf
+
+	config_output="$current_servname.firestone.conf"
+else
+	echo "no server configuration file"
+	config_output=firestone.conf
+fi
+echo "output set to $config_output"
+
 radish_message "CONFIGURATION SCRIPT FOR CURRENCY FARM CYCLES"
 
-# step 1 : get the game window ID
+# Set the game window ID
 
-echo "step 1 : set game window id"
+echo "Set game window id"
 #read -p "press return key..."
 #gamewin_id=$(xdotool getmouselocation | grep -oP 'window:\K\d+')
 #echo id: $gamewin_id
@@ -50,9 +63,9 @@ prompt_mouse_position() {
 
 ### ### ### ###
 
-# step 2 : show the way to expedition launch zone
+# Show the way to expedition launch zone
 
-echo "step 2 : the guild expeditions"
+echo "The guild expeditions"
 echo "you will be asked to point the mouse several times on some places"
 echo "please don't click in the game"
 echo "follow the script's instructions"
@@ -104,10 +117,10 @@ lauch_claim_expedition() {
 
 ### ### ### ###
 
-# step 3 : Oracle rituals
+# Oracle rituals
 # We assume that 4 oracle slots are unlocked
 # It should work with 3 slots. Just provide a 4th location to netral spot
-echo "step 3 : the oracle rituals"
+echo "The oracle rituals"
 echo "you will be asked to point the mouse several times on some places"
 echo "please don't click in the game"
 echo "follow the script's instructions"
@@ -183,8 +196,8 @@ launch_and_claim_rituals() {
 
 ### ### ### ###
 
-# step 4 : guardian trainings
-echo "step 4 : the guardian trainings"
+# Guardian trainings
+echo "The guardian trainings"
 echo "you will be asked to point the mouse several times on some places"
 echo "please don't click in the game"
 echo "follow the script's instructions"
@@ -228,8 +241,8 @@ train_guardian() {
 
 ### ### ### ###
 
-# step 5 : claim campaign loot
-echo "step 5 : claim campaign loot"
+# Claim campaign loot
+echo "Claim campaign loot"
 echo "you will be asked to point the mouse several times on some places"
 echo "please don't click in the game"
 echo "follow the script's instructions"
@@ -274,8 +287,8 @@ claim_campaign_loot() {
 
 ### ### ### ###
 
-# step 6 : claim tools
-echo "step 6 : claim tools"
+# Claim tools
+echo "Claim tools"
 echo "you will be asked to point the mouse several times on some places"
 echo "please don't click in the game"
 echo "follow the script's instructions"
@@ -330,37 +343,37 @@ claim_tools() {
 
 ### ### ### ###
 
-echo "final step : save coordinates in a configuration file"
+echo "Save coordinates in a configuration file"
 
 #echo "gamewin_id=${gamewin_id}" > firestone.conf
 # now we don't keep anymore gamewinid with coordinates
-echo "X_guild_portal=${X_guild_portal}" > firestone.conf
-echo "Y_guild_portal=${Y_guild_portal}" >> firestone.conf
-echo "X_exped=${X_exped}" >> firestone.conf
-echo "Y_exped=${Y_exped}" >> firestone.conf
-echo "X_exped_but=${X_exped_but}" >> firestone.conf
-echo "Y_exped_but=${Y_exped_but}" >> firestone.conf
-echo "X_ritual=${X_ritual}" >> firestone.conf
-echo "Y_ritual=${Y_ritual}" >> firestone.conf
-echo "X_ritual_1=${X_ritual_1}" >> firestone.conf
-echo "Y_ritual_1=${Y_ritual_1}" >> firestone.conf
-echo "X_ritual_2=${X_ritual_2}" >> firestone.conf
-echo "Y_ritual_2=${Y_ritual_2}" >> firestone.conf
-echo "X_ritual_3=${X_ritual_3}" >> firestone.conf
-echo "Y_ritual_3=${Y_ritual_3}" >> firestone.conf
-echo "X_ritual_4=${X_ritual_4}" >> firestone.conf
-echo "Y_ritual_4=${Y_ritual_4}" >> firestone.conf
-echo "X_guard=${X_guard}" >> firestone.conf
-echo "Y_guard=${Y_guard}" >> firestone.conf
-echo "X_guard_train=${X_guard_train}" >> firestone.conf
-echo "Y_guard_train=${Y_guard_train}" >> firestone.conf
-echo "X_campaign=${X_campaign}" >> firestone.conf
-echo "Y_campaign=${Y_campaign}" >> firestone.conf
-echo "X_campaign_loot=${X_campaign_loot}" >> firestone.conf
-echo "Y_campaign_loot=${Y_campaign_loot}" >> firestone.conf
-echo "X_engi=${X_engi}" >> firestone.conf
-echo "Y_engi=${Y_engi}" >> firestone.conf
-echo "X_engi_shop=${X_engi_shop}" >> firestone.conf
-echo "Y_engi_shop=${Y_engi_shop}" >> firestone.conf
-echo "X_toolclaim=${X_toolclaim}" >> firestone.conf
-echo "Y_toolclaim=${Y_toolclaim}" >> firestone.conf
+echo "X_guild_portal=${X_guild_portal}" > $config_output
+echo "Y_guild_portal=${Y_guild_portal}" >> $config_output
+echo "X_exped=${X_exped}" >> $config_output
+echo "Y_exped=${Y_exped}" >> $config_output
+echo "X_exped_but=${X_exped_but}" >> $config_output
+echo "Y_exped_but=${Y_exped_but}" >> $config_output
+echo "X_ritual=${X_ritual}" >> $config_output
+echo "Y_ritual=${Y_ritual}" >> $config_output
+echo "X_ritual_1=${X_ritual_1}" >> $config_output
+echo "Y_ritual_1=${Y_ritual_1}" >> $config_output
+echo "X_ritual_2=${X_ritual_2}" >> $config_output
+echo "Y_ritual_2=${Y_ritual_2}" >> $config_output
+echo "X_ritual_3=${X_ritual_3}" >> $config_output
+echo "Y_ritual_3=${Y_ritual_3}" >> $config_output
+echo "X_ritual_4=${X_ritual_4}" >> $config_output
+echo "Y_ritual_4=${Y_ritual_4}" >> $config_output
+echo "X_guard=${X_guard}" >> $config_output
+echo "Y_guard=${Y_guard}" >> $config_output
+echo "X_guard_train=${X_guard_train}" >> $config_output
+echo "Y_guard_train=${Y_guard_train}" >> $config_output
+echo "X_campaign=${X_campaign}" >> $config_output
+echo "Y_campaign=${Y_campaign}" >> $config_output
+echo "X_campaign_loot=${X_campaign_loot}" >> $config_output
+echo "Y_campaign_loot=${Y_campaign_loot}" >> $config_output
+echo "X_engi=${X_engi}" >> $config_output
+echo "Y_engi=${Y_engi}" >> $config_output
+echo "X_engi_shop=${X_engi_shop}" >> $config_output
+echo "Y_engi_shop=${Y_engi_shop}" >> $config_output
+echo "X_toolclaim=${X_toolclaim}" >> $config_output
+echo "Y_toolclaim=${Y_toolclaim}" >> $config_output
