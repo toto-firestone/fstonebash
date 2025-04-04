@@ -16,7 +16,9 @@ radish_message_noprompt() {
 }
 
 set_mouse_coordinates() {
-	echo "click back to the terminal where the script is running"
+	sleep 1
+	xdotool windowactivate $termwin_id
+	echo "stay in the terminal where the script is running"
 	read -p "put your mouse pointer above $1 and hit return key"
 	local mouseloc=$(xdotool getmouselocation)
 	local cmd_X="$2=\$(echo "\$mouseloc" | grep -oP 'x:\\K\\d+')"
