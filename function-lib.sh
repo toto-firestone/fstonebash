@@ -84,6 +84,12 @@ go_to_map() {
 	xdotool key m
 }
 
+go_to_exotic() {
+	focus_and_back_to_root_screen
+	sleep 1
+	xdotool key x
+}
+
 anti_ad() {
 	click_and_go $X_game_tab $Y_game_tab "anti-ad"
 }
