@@ -25,6 +25,8 @@ go_to_town
 click_and_go $X_main_shop $Y_main_shop
 click_and_go $X_free_box $Y_free_box
 click_and_go $X_checkin_tab $Y_checkin_tab
+echo "Warning : check-in button may change place when special offer occurs"
+echo "a wrong check-in coordinate is not harmful"
 click_and_go $X_checkin_but $Y_checkin_but
 
 go_to_exotic

@@ -21,6 +21,8 @@ click_and_go $X_main_shop $Y_main_shop
 set_mouse_coordinates "free box" "X_free_box" "Y_free_box"
 set_mouse_coordinates "check-in tab" "X_checkin_tab" "Y_checkin_tab"
 click_and_go $X_checkin_tab $Y_checkin_tab
+echo "Warning : check-in button may change place when special offer occurs"
+echo "a wrong check-in coordinate is not harmful"
 set_mouse_coordinates "check-in button" "X_checkin_but" "Y_checkin_but"
 
 # the difficult one : sell stuffs other than gold items
