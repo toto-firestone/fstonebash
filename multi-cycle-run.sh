@@ -5,7 +5,7 @@ source function-lib.sh
 # MULTI SERVER RUN SCRIPT
 # JUST EXPECT ./auto-cycle-config.sh has been successfully executed
 
-radish_message "MULTISERVER RUN SCRIPT FOR CURRENCY FARM CYCLES"
+radish_message_noprompt "MULTISERVER RUN SCRIPT FOR CURRENCY FARM CYCLES"
 
 if [ ! -f "win_id.conf" ]; then
 	echo "please provide a window id file with setwin_id.sh"
