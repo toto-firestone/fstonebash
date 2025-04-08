@@ -50,6 +50,7 @@ mission_ok() {
 
 ### ### ### ###
 
+anti_ad
 go_to_map
 click_and_go $X_camp_map $Y_camp_map
 click_and_go $X_mission_button $Y_mission_button

@@ -39,12 +39,7 @@ while true; do
 	echo
 	echo "cycle ${i}"
 
-	launch_and_claim_expedition
-	launch_and_claim_rituals
-	train_guardian
-	claim_campaign_loot
-	claim_tools
-	focus_and_back_to_root_screen
+	launch_claim_all_timer_income
 
 	echo
 	echo "5 minutes manual mode... interrupt with CTRL+C"
@@ -57,5 +52,4 @@ while true; do
 	sleep 10
 	echo "starting automated sequence"
 	i=$((i+1))
-	anti_ad
 done

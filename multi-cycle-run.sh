@@ -48,7 +48,6 @@ while true; do
 	echo "meta cycle ${i}"
 
 	for i_serv in $@; do
-		anti_ad
 		./switch-server.sh $i_serv
 		source switch.conf
 
@@ -70,13 +69,7 @@ while true; do
 			echo "skip manual mode for testing"
 		fi
 
-		anti_ad
-		launch_and_claim_expedition
-		launch_and_claim_rituals
-		train_guardian
-		claim_campaign_loot
-		claim_tools
-		focus_and_back_to_root_screen
+		launch_claim_all_timer_income
 	done
 
 	i=$((i+1))

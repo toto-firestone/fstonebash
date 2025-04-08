@@ -158,4 +158,14 @@ claim_tools() {
 	xdotool mousemove $X_toolclaim $Y_toolclaim click 1
 }
 
+launch_claim_all_timer_income() {
+	anti_ad
+	launch_and_claim_expedition
+	launch_and_claim_rituals
+	train_guardian
+	claim_campaign_loot
+	claim_tools
+	focus_and_back_to_root_screen
+}
+
 ### ### ### ### ###

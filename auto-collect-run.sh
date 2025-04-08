@@ -17,6 +17,7 @@ source collect.conf
 
 radish_message_noprompt "FARMING DAILY CURRENCIES"
 
+anti_ad
 go_to_oracle
 click_and_go $X_oracle_shop $Y_oracle_shop
 click_and_go $X_oracle_gift $Y_oracle_gift

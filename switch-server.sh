@@ -47,6 +47,7 @@ if [ "$current_servname" = "$1" ]; then
 else
 	echo "switch to $1"
 	source $1
+	anti_ad
 	back_to_root_screen
 	click_and_go $X_settings $Y_settings
 	click_and_go $X_server_switch $Y_server_switch
@@ -56,7 +57,7 @@ else
 	echo "overwriting $1 to switch file"
 	echo "current_servname=${1}" > switch.conf
 	cat switch.conf
-	sleep 30
+	sleep 26
 	back_to_root_screen
 fi
 
