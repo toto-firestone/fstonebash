@@ -28,6 +28,8 @@ click_and_go $X_checkin_tab $Y_checkin_tab
 echo "Warning : check-in button may change place when special offer occurs"
 echo "a wrong check-in coordinate is not harmful"
 click_and_go $X_checkin_but $Y_checkin_but
+echo "try alternative position..."
+click_and_go $X_checkin_but $((Y_checkin_but+46))
 
 go_to_exotic
 # toggle to X50
