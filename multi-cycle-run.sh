@@ -45,7 +45,7 @@ testing=""
 i=1
 while true; do
 	echo
-	echo "meta cycle ${i}"
+	echo "macro cycle ${i}"
 
 	for i_serv in $@; do
 		./switch-server.sh $i_serv
