@@ -57,8 +57,8 @@ else
 	echo "overwriting $1 to switch file"
 	echo "current_servname=${1}" > switch.conf
 	cat switch.conf
-	sleep 26
-	back_to_root_screen
+	sleep 25
 fi
+back_to_root_screen
 
 echo "end of server switch"
