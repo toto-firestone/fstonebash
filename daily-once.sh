@@ -18,7 +18,7 @@ Ndung=1
 
 ./switch-server.sh s1
 
-Nlibe=7
+Nlibe=8
 Ndung=2
 ./auto-wm-run.sh $Nlibe $Ndung
 ./auto-collect-run.sh
