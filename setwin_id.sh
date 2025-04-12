@@ -3,7 +3,7 @@ source function-lib.sh
 
 # PROMPT USER FOR GAME WINDOW AND SAVE ID IN FILE
 
-radish_message_noprompt "RUN THIS AFTER BROWSER AND GAME PLATFORM LOGIN"
+radish_message_noprompt "RUN THIS AFTER BROWSER AND BEFORE ANY OTHER SCRIPT"
 termwin_id=$(xdotool getwindowfocus)
 
 echo "put your mouse above the game window, do not click"
