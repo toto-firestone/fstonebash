@@ -13,7 +13,6 @@ echo "gamewin_id: $gamewin_id, termwin_id: $termwin_id"
 echo "gamewin_id=${gamewin_id}" > win_id.conf
 echo "termwin_id=${termwin_id}" >> win_id.conf
 
-set_mouse_coordinates "game tab selector" "X_game_tab" "Y_game_tab"
-echo "game tab selector at x: $X_game_tab, y: $Y_game_tab"
-echo "X_game_tab=${X_game_tab}" >> win_id.conf
-echo "Y_game_tab=${Y_game_tab}" >> win_id.conf
+#set_mouse_coordinates "game tab selector" "X_game_tab" "Y_game_tab"
+# xdotool mousemove --window $gamewin_id --sync 220 40
+# no more game tab location
