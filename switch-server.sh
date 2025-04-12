@@ -44,6 +44,7 @@ fi
 
 if [ "$current_servname" = "$1" ]; then
 	echo "server switch not required"
+	anti_ad
 else
 	echo "switch to $1"
 	source $1
