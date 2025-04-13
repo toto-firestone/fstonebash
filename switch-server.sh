@@ -58,7 +58,8 @@ else
 	echo "overwriting $1 to switch file"
 	echo "current_servname=${1}" > switch.conf
 	cat switch.conf
-	sleep 25
+	xdotool windowactivate $termwin_id
+	sleep 22
 fi
 back_to_root_screen
 
