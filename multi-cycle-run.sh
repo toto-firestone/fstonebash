@@ -56,12 +56,12 @@ while true; do
 		source $server_config
 		echo
 		if [ -z "$testing" ]; then
-			#echo "5 minutes manual mode... interrupt with CTRL+C"
-			#sleep 120
 			echo "3 minutes manual mode... interrupt with CTRL+C"
-			sleep 120
+			read -t 120 -p "or hit RETURN to speed-up"
+			echo
 			echo "1 minutes manual mode... interrupt with CTRL+C"
-			sleep 50
+			read -t 50 -p "or hit RETURN to speed-up"
+			echo
 			echo "manual mode ends in 10 secdonds"
 			sleep 10
 			echo "starting automated sequence"
