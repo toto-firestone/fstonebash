@@ -93,7 +93,10 @@ go_to_exotic() {
 anti_ad() {
 	#click_and_go $X_game_tab $Y_game_tab "anti-ad"
 	echo "anti-AD"
+	# for pop-ups
+	xdotool windowactivate --sync $gamewin_id
 	sleep 1
+	# for extra tabs
 	xdotool mousemove --window $gamewin_id --sync 220 40 click 1
 	sleep 1
 }
