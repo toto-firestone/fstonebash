@@ -38,6 +38,30 @@ else
 fi
 echo "very basic checks performed..."
 
+### ### ### ###
+
+
+interactive_session() {
+	local actions="Quit Assisted-Map"
+
+	xdotool windowactivate --sync $gamewin_id
+	sleep 2
+	xdotool windowactivate --sync $termwin_id
+	select i_todo in $actions; do
+		case $i_todo in
+			Quit ) echo "Choice : $i_todo"
+				break;;
+			Assisted-Map ) echo "Choice : $i_todo"
+				./assisted-map.sh
+				continue;;
+			* ) echo "Invalid choice : $i_todo"
+				continue;;
+		esac
+	done
+}
+
+
+### ### ### ###
 
 i=1
 while true; do
@@ -58,12 +82,18 @@ while true; do
 		echo
 		echo "3 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
-		read -t 120 -p "or hit only RETURN to speed-up"
+		read -t 120 -p "or hit only RETURN to speed-up >" user_input
 		echo
+		if [ -n "$user_input" ]; then
+			interactive_session
+		fi
 		echo "1 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
-		read -t 50 -p "or hit only RETURN to speed-up"
+		read -t 50 -p "or hit only RETURN to speed-up >" user_input
 		echo
+		if [ -n "$user_input" ]; then
+			interactive_session
+		fi
 		echo "idle mode ends in 10 secdonds"
 		sleep 10
 		echo "starting automated sequence"

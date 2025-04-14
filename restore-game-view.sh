@@ -4,10 +4,13 @@ source function-lib.sh
 source win_id.conf
 
 # User defined variables
+# default values
 X_WIN_POS="-26"
 Y_WIN_POS="2"
 WIN_WIDTH="1430"
 WIN_HEIGHT="947"
+# overwrite with user defined values in file
+source view.conf
 
 echo "MAKE SURE ./setwin_id HAS BEEN RUN"
 echo "AND THE GAME IS LOADING OR LOADED BEFORE DOING THIS"
