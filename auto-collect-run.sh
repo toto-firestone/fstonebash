@@ -17,6 +17,7 @@ source collect.conf
 
 radish_message_noprompt "FARMING DAILY CURRENCIES"
 
+xdotool windowactivate --sync $gamewin_id
 anti_ad
 go_to_oracle
 click_and_go $X_oracle_shop $Y_oracle_shop

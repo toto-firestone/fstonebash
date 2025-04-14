@@ -50,6 +50,7 @@ mission_ok() {
 
 ### ### ### ###
 
+xdotool windowactivate --sync $gamewin_id
 anti_ad
 go_to_map
 click_and_go $X_camp_map $Y_camp_map

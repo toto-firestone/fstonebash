@@ -25,6 +25,7 @@ if [ ! -f "$1" ]; then
 	exit 1
 fi
 
+xdotool windowactivate --sync $gamewin_id
 if [ "$current_servname" = "$1" ]; then
 	echo "server switch not required"
 	anti_ad
