@@ -42,7 +42,7 @@ echo "very basic checks performed..."
 
 
 interactive_session() {
-	local actions="Quit Assisted-Map"
+	local actions="Quit Assisted-Map Brute-Force"
 
 	xdotool windowactivate --sync $gamewin_id
 	sleep 2
@@ -53,6 +53,9 @@ interactive_session() {
 				break;;
 			Assisted-Map ) echo "Choice : $i_todo"
 				./assisted-map.sh
+				continue;;
+			Brute-Force ) echo "Choice : $i_todo"
+				./brute-force.sh
 				continue;;
 			* ) echo "Invalid choice : $i_todo"
 				continue;;
@@ -82,14 +85,14 @@ while true; do
 		echo
 		echo "3 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
-		read -t 120 -p "or hit only RETURN to speed-up >" user_input
+		read -t 120 -p "or hit only RETURN to speed-up > " user_input
 		echo
 		if [ -n "$user_input" ]; then
 			interactive_session
 		fi
 		echo "1 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
-		read -t 50 -p "or hit only RETURN to speed-up >" user_input
+		read -t 50 -p "or hit only RETURN to speed-up > " user_input
 		echo
 		if [ -n "$user_input" ]; then
 			interactive_session

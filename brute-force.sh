@@ -40,8 +40,12 @@ while true; do
 	sleep 5
 	xdotool windowactivate --sync $termwin_id
 	sleep 1
-	echo "CTRL+C if mission won... or give up"
-	sleep $battle_timer
+	echo "type ANY KEY + RETURN for loop exit"
+	read -t $battle_timer -p "> " user_input
+	echo
+	if [ -n "$user_input" ]; then
+		break
+	fi
 	go_to_map
 	click_and_go $X_camp_map $Y_camp_map
 	click_and_go $X_WM_mission $Y_WM_mission
