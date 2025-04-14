@@ -14,7 +14,7 @@ fi
 
 source win_id.conf
 
-if [ -z "$@" ]; then
+if [ -z "$1" ]; then
 	echo Error : expecting at least 1 server name as argument
 	exit 1
 fi
@@ -47,20 +47,27 @@ while true; do
 	for i_serv in $@; do
 		./switch-server.sh $i_serv
 		source switch.conf
-
 		server_config="$current_servname.firestone.conf"
 		echo "reading $server_config"
 		source $server_config
+
+		xdotool windowminimize --sync $gamewin_id
+		echo "screen and cpu saving during idle mode"
+		sleep 2
+		xdotool windowactivate --sync $termwin_id
 		echo
-		echo "3 minutes manual mode... interrupt with CTRL+C"
+		echo "3 minutes idle mode... interrupt with CTRL+C"
+		echo "type any key + RETURN for manual mode"
 		read -t 120 -p "or hit only RETURN to speed-up"
 		echo
-		echo "1 minutes manual mode... interrupt with CTRL+C"
+		echo "1 minutes idle mode... interrupt with CTRL+C"
+		echo "type any key + RETURN for manual mode"
 		read -t 50 -p "or hit only RETURN to speed-up"
 		echo
-		echo "manual mode ends in 10 secdonds"
+		echo "idle mode ends in 10 secdonds"
 		sleep 10
 		echo "starting automated sequence"
+		xdotool windowactivate --sync $gamewin_id
 
 		launch_claim_all_timer_income
 	done
