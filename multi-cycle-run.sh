@@ -39,9 +39,6 @@ fi
 echo "very basic checks performed..."
 
 
-# disable with empty string
-testing=""
-
 i=1
 while true; do
 	echo
@@ -55,19 +52,15 @@ while true; do
 		echo "reading $server_config"
 		source $server_config
 		echo
-		if [ -z "$testing" ]; then
-			echo "3 minutes manual mode... interrupt with CTRL+C"
-			read -t 120 -p "or hit RETURN to speed-up"
-			echo
-			echo "1 minutes manual mode... interrupt with CTRL+C"
-			read -t 50 -p "or hit RETURN to speed-up"
-			echo
-			echo "manual mode ends in 10 secdonds"
-			sleep 10
-			echo "starting automated sequence"
-		else
-			echo "skip manual mode for testing"
-		fi
+		echo "3 minutes manual mode... interrupt with CTRL+C"
+		read -t 120 -p "or hit only RETURN to speed-up"
+		echo
+		echo "1 minutes manual mode... interrupt with CTRL+C"
+		read -t 50 -p "or hit only RETURN to speed-up"
+		echo
+		echo "manual mode ends in 10 secdonds"
+		sleep 10
+		echo "starting automated sequence"
 
 		launch_claim_all_timer_income
 	done
