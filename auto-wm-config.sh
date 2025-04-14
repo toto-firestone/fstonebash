@@ -49,7 +49,7 @@ echo "dungeon 2 button at x: $X_dungeon_2, y: $Y_dungeon_2"
 
 # tests 
 echo tests dungeons
-xdotool windowactivate $gamewin_id
+xdotool windowactivate --sync $gamewin_id
 xdotool mousemove $X_dungeon_1 $Y_dungeon_1
 sleep 4
 xdotool mousemove $X_dungeon_2 $Y_dungeon_2
@@ -57,7 +57,7 @@ sleep 4
 echo "interrupt with CTRL+C if something is wrong"
 
 echo "back to mission window"
-xdotool windowactivate $gamewin_id
+xdotool windowactivate --sync $gamewin_id
 sleep 1
 xdotool key Escape
 click_and_go $X_liberations $Y_liberations "liberation open button"
@@ -78,7 +78,7 @@ echo "liberation 4 button at x: $X_liberation_4, y: $Y_liberation_4"
 
 # tests
 echo "test liberation 1-4"
-xdotool windowactivate $gamewin_id
+xdotool windowactivate --sync $gamewin_id
 xdotool mousemove $X_liberation_1 $Y_liberation_1
 sleep 4
 xdotool mousemove $X_liberation_2 $Y_liberation_2
@@ -91,7 +91,7 @@ echo "interrupt with CTRL+C if something is wrong"
 
 # the difficult part
 echo "Calibration of right shift"
-xdotool windowactivate $gamewin_id
+xdotool windowactivate --sync $gamewin_id
 xdotool mousemove $X_liberation_4 $Y_liberation_4
 sleep 4
 xdotool click --repeat $n_scroll_libe --delay 200 5
@@ -113,7 +113,7 @@ xdotool click --repeat $n_scroll_libe --delay 200 5
 echo "should be Thal Badur"
 sleep 4
 
-xdotool windowactivate $termwin_id
+xdotool windowactivate --sync $termwin_id
 read -p "If everything is OK, type return. Else interrupt with CTRL+C"
 
 echo "Saving coordinates to wm.conf"

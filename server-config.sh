@@ -16,30 +16,8 @@ source win_id.conf
 echo read id: $gamewin_id
 echo
 
-### ### ### ###
-
-back_to_root_screen() {
-	sleep 1
-	xdotool windowactivate $gamewin_id
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-}
-
-prompt_mouse_position() {
-	echo "click back to the terminal where the script is running"
-	read -p "put your mouse pointer above $1 and hit return key"
-}
-
-### ### ### ###
-
 echo "now let's find the setting button"
-back_to_root_screen
+focus_and_back_to_root_screen
 set_mouse_coordinates "setting button" "X_settings" "Y_settings"
 echo "settings button at x: $X_settings, y: $Y_settings"
 click_and_go $X_settings $Y_settings "settings button"
@@ -94,4 +72,4 @@ read -p "write the current server name and type return > " current_servname
 echo "writing $current_servname to switch file"
 echo "current_servname=${current_servname}" > switch.conf
 echo "configuration done"
-back_to_root_screen
+focus_and_back_to_root_screen

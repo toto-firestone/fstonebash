@@ -38,7 +38,7 @@ while true; do
 	echo "Attempt $i"
 	click_and_go $X_mission_but $Y_mission_but
 	sleep 5
-	xdotool windowactivate $termwin_id
+	xdotool windowactivate --sync $termwin_id
 	sleep 1
 	echo "CTRL+C if mission won... or give up"
 	sleep $battle_timer

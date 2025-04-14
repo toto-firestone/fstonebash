@@ -17,7 +17,7 @@ radish_message_noprompt() {
 
 set_mouse_coordinates() {
 	sleep 1
-	xdotool windowactivate $termwin_id
+	xdotool windowactivate --sync $termwin_id
 	echo "stay in the terminal where the script is running"
 	read -p "put your mouse pointer above $1 and hit return key"
 	local mouseloc=$(xdotool getmouselocation)
@@ -40,14 +40,14 @@ click_and_go() {
 	sleep 1
 	# gamewin_id is a global variable defined by
         # source win_id.conf
-	xdotool windowactivate $gamewin_id
+	xdotool windowactivate --sync $gamewin_id
 	sleep 1
 	xdotool mousemove $1 $2 click 1
 }
 
 focus_and_back_to_root_screen() {
 	sleep 1
-	xdotool windowactivate $gamewin_id
+	xdotool windowactivate --sync $gamewin_id
 	sleep 1
 	xdotool key Escape
 	sleep 1

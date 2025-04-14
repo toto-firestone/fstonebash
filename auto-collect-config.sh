@@ -35,7 +35,7 @@ set_mouse_coordinates "health scroll" "X_health_scroll" "Y_health_scroll"
 set_mouse_coordinates "midas touch" "X_midas_touch" "Y_midas_touch"
 echo "scrolling to the bottom part"
 sleep 4
-xdotool windowactivate $gamewin_id
+xdotool windowactivate --sync $gamewin_id
 xdotool click --repeat 30 --delay 200 5
 set_mouse_coordinates "drums of war" "X_drum_war" "Y_drum_war"
 set_mouse_coordinates "dragon armor" "X_dragon_armor" "Y_dragon_armor"

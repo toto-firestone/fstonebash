@@ -13,7 +13,7 @@ echo "MAKE SURE ./setwin_id HAS BEEN RUN"
 echo "AND THE GAME IS LOADING OR LOADED BEFORE DOING THIS"
 radish_message "RESTORE GAME STANDARD VIEW"
 
-xdotool windowactivate $gamewin_id
+xdotool windowactivate --sync $gamewin_id
 sleep 1
 echo "selected game window"
 xdotool windowsize --sync $gamewin_id $WIN_WIDTH $WIN_HEIGHT

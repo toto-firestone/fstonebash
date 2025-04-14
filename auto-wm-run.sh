@@ -43,7 +43,7 @@ source wm.conf
 ### ### ### ###
 
 mission_ok() {
-	xdotool windowactivate $gamewin_id
+	xdotool windowactivate --sync $gamewin_id
 	sleep 1
 	xdotool key Escape
 }
@@ -86,7 +86,7 @@ fi
 # scrolled part
 echo "DON'T MOVE MOUSE NOW"
 sleep 4
-xdotool windowactivate $gamewin_id
+xdotool windowactivate --sync $gamewin_id
 sleep 1
 xdotool mousemove $X_liberation_4 $Y_liberation_4
 while [ "$i" -lt  "$N_liber" ]; do

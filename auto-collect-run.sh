@@ -44,7 +44,7 @@ click_and_go $X_midas_touch $Y_midas_touch
 
 echo "scrolling to the bottom part"
 sleep 4
-xdotool windowactivate $gamewin_id
+xdotool windowactivate --sync $gamewin_id
 xdotool click --repeat 30 --delay 200 5
 
 click_and_go $X_drum_war $Y_drum_war

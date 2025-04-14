@@ -10,23 +10,6 @@ source win_id.conf
 echo read id: $gamewin_id
 echo
 
-### ### ### ###
-
-back_to_root_screen() {
-	sleep 1
-	xdotool windowactivate $gamewin_id
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-}
-
-### ### ### ###
-
 source switch.conf
 if [ -z "$current_servname" ]; then
 	echo Error : invalid switch.conf
@@ -49,7 +32,7 @@ else
 	echo "switch to $1"
 	source $1
 	anti_ad
-	back_to_root_screen
+	focus_and_back_to_root_screen
 	click_and_go $X_settings $Y_settings
 	click_and_go $X_server_switch $Y_server_switch
 	click_and_go $X_fav_servers $Y_fav_servers
@@ -58,9 +41,9 @@ else
 	echo "overwriting $1 to switch file"
 	echo "current_servname=${1}" > switch.conf
 	cat switch.conf
-	xdotool windowactivate $termwin_id
+	xdotool windowactivate --sync $termwin_id
 	sleep 22
 fi
-back_to_root_screen
+focus_and_back_to_root_screen
 
 echo "end of server switch"
