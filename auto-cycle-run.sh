@@ -34,6 +34,9 @@ fi
 
 radish_message "RUN SCRIPT FOR CURRENCY FARM CYCLES"
 
+xdotool windowactivate --sync $gamewin_id
+anti_ad
+
 i=1
 while true; do
 	echo
