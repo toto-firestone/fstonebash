@@ -33,136 +33,121 @@ set_mouse_coordinates() {
 ## MOTION FUNCTIONS  ##
 ### ### ### ### ### ###
 
+move_wait_click() {
+	xdotool mousemove $1 $2
+	sleep $3
+	xdotool click 1
+	# constant micro temporisatrion
+	sleep .1
+}
+
 click_and_go() {
 	if [ -n "$3" ]; then
 		echo "let's move to $3"
 	fi
-	sleep 1
+	#sleep 1
 	# gamewin_id is a global variable defined by
-        # source win_id.conf
+	# source win_id.conf
 	xdotool windowactivate --sync $gamewin_id
-	sleep 1
-	xdotool mousemove $1 $2 click 1
+	# Move, Wait, Click paradigm
+	move_wait_click $1 $2 1
 }
 
 focus_and_back_to_root_screen() {
-	sleep 1
+	#sleep 1
 	xdotool windowactivate --sync $gamewin_id
 	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
-	sleep 1
-	xdotool key Escape
+	xdotool key --delay 500 Escape Escape Escape Escape Escape Escape
 }
 
 go_to_town() {
 	focus_and_back_to_root_screen
-	sleep 1
 	xdotool key t
 }
 
 go_to_oracle() {
 	focus_and_back_to_root_screen
-	sleep 1
 	xdotool key o
 }
 
 go_to_guardian() {
 	focus_and_back_to_root_screen
-	sleep 1
 	xdotool key g
 }
 
 go_to_map() {
 	focus_and_back_to_root_screen
-	sleep 1
 	xdotool key m
 }
 
 go_to_exotic() {
 	focus_and_back_to_root_screen
-	sleep 1
 	xdotool key x
 }
 
 anti_ad() {
 	#click_and_go $X_game_tab $Y_game_tab "anti-ad"
+	# this one is not move_wait_click since it requires
+	# --windows parameter for relative coodinates
 	echo "anti-AD"
 	# for pop-ups
 	xdotool windowactivate --sync $gamewin_id
 	sleep 1
 	# for extra tabs
-	xdotool mousemove --window $gamewin_id --sync 220 40 click 1
+	xdotool mousemove --window $gamewin_id --sync 220 40
 	sleep 1
+	xdotool click 1 mousemove --window $gamewin_id --sync 700 450
+	# and puts back mouse to window at the end
+	# keys do not work if mouse is on tab selector
+	# outside windows keys still work
 }
 
 ### ### ### ### ### ###
 ## ACTION FUNCTIONS  ##
 ### ### ### ### ### ###
 
+claim_and_restart() {
+	move_wait_click $1 $2 $3
+	sleep $4
+	# mouse should not have moved but we never know
+	xdotool mousemove $1 $2 click 1
+}
+
 launch_and_claim_expedition() {
 	go_to_town
-	sleep 1
-	xdotool mousemove $X_guild_portal $Y_guild_portal click 1
-	sleep 1
-	xdotool mousemove $X_exped $Y_exped click 1
-	sleep 2
-	xdotool mousemove $X_exped_but $Y_exped_but click 1
-	sleep 4
-	xdotool mousemove $X_exped_but $Y_exped_but click 1
+	move_wait_click $X_guild_portal $Y_guild_portal 1
+	move_wait_click $X_exped $Y_exped 1
+
+	claim_and_restart $X_exped_but $Y_exped_but 1 3
 }
 
 launch_and_claim_rituals() {
 	go_to_oracle
-	sleep 1
-	xdotool mousemove $X_ritual $Y_ritual click 1
-	sleep 2
-	xdotool mousemove $X_ritual_1 $Y_ritual_1 click 1
-	sleep 4
-	xdotool mousemove $X_ritual_1 $Y_ritual_1 click 1
-	sleep 4
-	xdotool mousemove $X_ritual_2 $Y_ritual_2 click 1
-	sleep 4
-	xdotool mousemove $X_ritual_2 $Y_ritual_2 click 1
-	sleep 4
-	xdotool mousemove $X_ritual_3 $Y_ritual_3 click 1
-	sleep 4
-	xdotool mousemove $X_ritual_3 $Y_ritual_3 click 1
-	sleep 4
-	xdotool mousemove $X_ritual_4 $Y_ritual_4 click 1
-	sleep 4
-	xdotool mousemove $X_ritual_4 $Y_ritual_4 click 1
+	move_wait_click $X_ritual $Y_ritual 1
+
+	claim_and_restart $X_ritual_1 $Y_ritual_1 1 3
+	claim_and_restart $X_ritual_2 $Y_ritual_2 1 3
+	claim_and_restart $X_ritual_3 $Y_ritual_3 1 3
+	claim_and_restart $X_ritual_4 $Y_ritual_4 1 3
 }
 
 train_guardian() {
 	go_to_guardian
-	sleep 2
-	xdotool mousemove $X_guard $Y_guard click 1
-	sleep 2
-	xdotool mousemove $X_guard_train $Y_guard_train click 1
+	move_wait_click $X_guard $Y_guard 3
+	move_wait_click $X_guard_train $Y_guard_train 1
 }
 
 claim_campaign_loot() {
 	go_to_map
-	sleep 1
-	xdotool mousemove $X_campaign $Y_campaign click 1
-	sleep 2
-	xdotool mousemove $X_campaign_loot $Y_campaign_loot click 1
+	move_wait_click $X_campaign $Y_campaign 1
+	move_wait_click $X_campaign_loot $Y_campaign_loot 1
 }
 
 claim_tools() {
 	go_to_town
-	sleep 1
-	xdotool mousemove $X_engi $Y_engi click 1
-	sleep 1
-	xdotool mousemove $X_engi_shop $Y_engi_shop click 1
-	sleep 2
-	xdotool mousemove $X_toolclaim $Y_toolclaim click 1
+	move_wait_click $X_engi $Y_engi 1
+	move_wait_click $X_engi_shop $Y_engi_shop 1
+	move_wait_click $X_toolclaim $Y_toolclaim 1
 }
 
 launch_claim_all_timer_income() {
