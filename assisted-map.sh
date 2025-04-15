@@ -21,6 +21,11 @@ faster_click_and_go() {
 	xdotool mousemove $1 $2 click 1
 }
 
+fast_click_here_and_there() {
+	xdotool windowactivate --sync $gamewin_id
+	xdotool mousemove $1 $2 click 1 mousemove --sync $3 $4 click 1
+}
+
 go_to_map
 
 set_mouse_coordinates "a mission to start" "X_mission" "Y_mission"
@@ -34,7 +39,8 @@ faster_click_and_go $X_start $Y_start
 while true; do
 	set_mouse_coordinates "a mission to start" "X_mission" "Y_mission"
 	test_and_exit $X_mission $Y_mission
-	faster_click_and_go $X_mission $Y_mission
-	sleep 1
-	faster_click_and_go $X_start $Y_start
+	#faster_click_and_go $X_mission $Y_mission
+	#sleep 1
+	#faster_click_and_go $X_start $Y_start
+	fast_click_here_and_there $X_mission $Y_mission $X_start $Y_start
 done
