@@ -36,7 +36,7 @@ Ndung=2
 
 ./switch-server.sh s25
 
-Nlibe=2
+Nlibe=3
 Ndung=0
 ./auto-wm-run.sh $Nlibe $Ndung
 ./auto-collect-run.sh
