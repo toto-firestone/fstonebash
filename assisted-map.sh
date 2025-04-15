@@ -16,14 +16,22 @@ test_and_exit() {
 	fi
 }
 
+### Move, Wait, Click
 faster_click_and_go() {
 	xdotool windowactivate --sync $gamewin_id
-	xdotool mousemove $1 $2 click 1
+	xdotool mousemove $1 $2
+	sleep .15
+	xdotool click 1
 }
 
+### Move, Wait, Click... and come back
 fast_click_here_and_there() {
 	xdotool windowactivate --sync $gamewin_id
-	xdotool mousemove $1 $2 click 1 mousemove --sync $3 $4 click 1
+	xdotool mousemove $1 $2
+	sleep .15
+	xdotool click 1 mousemove --sync $3 $4
+	sleep .15
+	xdotool click 1 mousemove --sync $1 $2
 }
 
 go_to_map
