@@ -36,6 +36,13 @@ else
 	echo "error : switch.conf not found"
 	exit 1
 fi
+
+if [ ! -f "auto-accept.conf" ]; then
+	echo "error : missing auto-accept.conf file"
+	exit 1
+fi
+source auto-accept.conf
+
 echo "very basic checks performed..."
 
 ### ### ### ###
@@ -103,6 +110,19 @@ while true; do
 		xdotool windowactivate --sync $gamewin_id
 
 		launch_claim_all_timer_income
+
+		curr_flag=${flags_H[$i_serv]-false}
+		if $curr_flag; then
+			echo "auto-accept on for $i_serv"
+			go_to_town
+			click_and_go $X_guild_portal $Y_guild_portal
+			click_and_go $X_guild_hall $Y_guild_hall
+			click_and_go $X_applications $Y_applications
+			click_and_go $X_accept_player $Y_accept_player
+			focus_and_back_to_root_screen
+		else
+			echo "auto-accept off for $i_serv"
+		fi
 	done
 
 	i=$((i+1))
