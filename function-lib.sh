@@ -57,7 +57,7 @@ focus_and_back_to_root_screen() {
 	#sleep 1
 	xdotool windowactivate --sync $gamewin_id
 	sleep 1
-	xdotool key --delay 500 Escape Escape Escape Escape Escape Escape
+	xdotool key --delay 1000 Escape Escape Escape Escape Escape Escape
 }
 
 go_to_town() {
