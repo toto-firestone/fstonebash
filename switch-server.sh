@@ -33,9 +33,6 @@ else
 	echo "switch to $1"
 	source $1
 	anti_ad
-	focus_and_back_to_root_screen
-	#click_and_go $X_settings $Y_settings
-	# think about remove usage of X_settings and Y_settings
 	go_to_settings
 	click_and_go $X_server_switch $Y_server_switch
 	click_and_go $X_fav_servers $Y_fav_servers
@@ -45,7 +42,7 @@ else
 	echo "current_servname=${1}" > switch.conf
 	cat switch.conf
 	xdotool windowactivate --sync $termwin_id
-	sleep 22
+	sleep 20
 fi
 focus_and_back_to_root_screen
 

@@ -16,12 +16,8 @@ source win_id.conf
 echo read id: $gamewin_id
 echo
 
-echo "now let's find the setting button"
-focus_and_back_to_root_screen
-set_mouse_coordinates "setting button" "X_settings" "Y_settings"
-echo "settings button at x: $X_settings, y: $Y_settings"
-click_and_go $X_settings $Y_settings "settings button"
-echo
+echo "Setting window"
+go_to_settings
 
 echo "now let's find the server switch button"
 set_mouse_coordinates "server switch" "X_server_switch" "Y_server_switch"
@@ -56,8 +52,6 @@ echo
 echo "completing configuration of each server's coordiantes"
 for servname in "$@"; do
 	echo "server $servname"
-	echo "X_settings=${X_settings}" >> $servname
-	echo "Y_settings=${Y_settings}" >> $servname
 	echo "X_server_switch=${X_server_switch}" >> $servname
 	echo "Y_server_switch=${Y_server_switch}" >> $servname
 	echo "X_fav_servers=${X_fav_servers}" >> $servname
