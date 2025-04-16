@@ -34,10 +34,17 @@ Ndung=2
 
 #read -p "Manual check and correct before switching server"
 
+./switch-server.sh s8
+
+Nlibe=6
+Ndung=1
+
+./auto-wm-run.sh $Nlibe $Ndung
+./auto-collect-run.sh
+
+# only a daily visit on s25
 ./switch-server.sh s25
 
 Nlibe=3
 Ndung=0
-./auto-wm-run.sh $Nlibe $Ndung
-./auto-collect-run.sh
 
