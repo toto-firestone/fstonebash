@@ -16,7 +16,7 @@ radish_message_noprompt() {
 }
 
 set_mouse_coordinates() {
-	sleep 1
+	#sleep 1
 	xdotool windowactivate --sync $termwin_id
 	echo "stay in the terminal where the script is running"
 	read -p "put your mouse pointer above $1 and hit return key"
@@ -63,26 +63,43 @@ focus_and_back_to_root_screen() {
 go_to_town() {
 	focus_and_back_to_root_screen
 	xdotool key t
+	# constant micro temporisatrion
+	sleep .1
 }
 
 go_to_oracle() {
 	focus_and_back_to_root_screen
 	xdotool key o
+	# constant micro temporisatrion
+	sleep .1
 }
 
 go_to_guardian() {
 	focus_and_back_to_root_screen
 	xdotool key g
+	# constant micro temporisatrion
+	sleep .1
 }
 
 go_to_map() {
 	focus_and_back_to_root_screen
 	xdotool key m
+	# constant micro temporisatrion
+	sleep .1
 }
 
 go_to_exotic() {
 	focus_and_back_to_root_screen
 	xdotool key x
+	# constant micro temporisatrion
+	sleep .1
+}
+
+go_to_settings() {
+	focus_and_back_to_root_screen
+	xdotool key s
+	# constant micro temporisatrion
+	sleep .1
 }
 
 anti_ad() {
@@ -110,7 +127,9 @@ claim_and_restart() {
 	move_wait_click $1 $2 $3
 	sleep $4
 	# mouse should not have moved but we never know
-	xdotool mousemove $1 $2 click 1
+	#xdotool mousemove $1 $2 click 1
+	move_wait_click $1 $2 $3
+	# need more robustness here
 }
 
 launch_and_claim_expedition() {
@@ -140,14 +159,14 @@ train_guardian() {
 claim_campaign_loot() {
 	go_to_map
 	move_wait_click $X_campaign $Y_campaign 1
-	move_wait_click $X_campaign_loot $Y_campaign_loot 1
+	move_wait_click $X_campaign_loot $Y_campaign_loot 2
 }
 
 claim_tools() {
 	go_to_town
 	move_wait_click $X_engi $Y_engi 1
 	move_wait_click $X_engi_shop $Y_engi_shop 1
-	move_wait_click $X_toolclaim $Y_toolclaim 1
+	move_wait_click $X_toolclaim $Y_toolclaim 2
 }
 
 launch_claim_all_timer_income() {

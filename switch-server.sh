@@ -34,7 +34,9 @@ else
 	source $1
 	anti_ad
 	focus_and_back_to_root_screen
-	click_and_go $X_settings $Y_settings
+	#click_and_go $X_settings $Y_settings
+	# think about remove usage of X_settings and Y_settings
+	go_to_settings
 	click_and_go $X_server_switch $Y_server_switch
 	click_and_go $X_fav_servers $Y_fav_servers
 	click_and_go $X_serv_i $Y_serv_i "server $1"
