@@ -30,21 +30,15 @@ fast_click_here_and_there() {
 	xdotool mousemove --sync $1 $2
 }
 
+# hard coded parameters : cannot stay here. change at next upgrade
+X_map_mission_start=771
+Y_map_mission_start=770
+
 go_to_map
-
-set_mouse_coordinates "a mission to start" "X_mission" "Y_mission"
-test_and_exit $X_mission $Y_mission
-faster_click_and_go $X_mission $Y_mission
-
-set_mouse_coordinates "start button" "X_start" "Y_start"
-test_and_exit $X_start $Y_start
-faster_click_and_go $X_start $Y_start
 
 while true; do
 	set_mouse_coordinates "a mission to start" "X_mission" "Y_mission"
 	test_and_exit $X_mission $Y_mission
-	#faster_click_and_go $X_mission $Y_mission
-	#sleep 1
-	#faster_click_and_go $X_start $Y_start
-	fast_click_here_and_there $X_mission $Y_mission $X_start $Y_start
+	fast_click_here_and_there $X_mission $Y_mission $X_map_mission_start $Y_map_mission_start
+
 done
