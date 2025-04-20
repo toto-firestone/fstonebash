@@ -57,49 +57,62 @@ focus_and_back_to_root_screen() {
 	#sleep 1
 	xdotool windowactivate --sync $gamewin_id
 	sleep 1
-	xdotool key --delay 1000 Escape Escape Escape Escape Escape Escape
+	# i don't know why but this one is not so good
+	#xdotool key --delay 1000 Escape Escape Escape Escape Escape Escape
+	xdotool key Escape
+	sleep .5
+	xdotool key Escape
+	sleep .5
+	xdotool key Escape
+	sleep .5
+	xdotool key Escape
+	sleep .5
+	xdotool key Escape
+	sleep .5
+	xdotool key Escape
+	sleep .5
 }
 
 go_to_town() {
 	focus_and_back_to_root_screen
 	xdotool key t
 	# constant micro temporisatrion
-	sleep .1
+	sleep .5
 }
 
 go_to_oracle() {
 	focus_and_back_to_root_screen
 	xdotool key o
 	# constant micro temporisatrion
-	sleep .1
+	sleep .5
 }
 
 go_to_guardian() {
 	focus_and_back_to_root_screen
 	xdotool key g
 	# constant micro temporisatrion
-	sleep .1
+	sleep .5
 }
 
 go_to_map() {
 	focus_and_back_to_root_screen
 	xdotool key m
 	# constant micro temporisatrion
-	sleep .1
+	sleep .5
 }
 
 go_to_exotic() {
 	focus_and_back_to_root_screen
 	xdotool key x
 	# constant micro temporisatrion
-	sleep .1
+	sleep .5
 }
 
 go_to_settings() {
 	focus_and_back_to_root_screen
 	xdotool key s
 	# constant micro temporisatrion
-	sleep .1
+	sleep .5
 }
 
 anti_ad() {
