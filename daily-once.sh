@@ -39,7 +39,8 @@ Ndung=2
 Nlibe=6
 Ndung=1
 
-./auto-wm-run.sh $Nlibe $Ndung
+#./auto-wm-run.sh $Nlibe $Ndung
+# no more liberation on s8
 ./auto-collect-run.sh
 
 # only a daily visit on s25
