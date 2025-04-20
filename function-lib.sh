@@ -29,6 +29,12 @@ set_mouse_coordinates() {
 	eval $cmd_Y
 }
 
+test_and_exit() {
+	if [ "$1" -gt "$X_max" ] || [ "$2" -gt "$Y_max" ]; then
+		exit 0
+	fi
+}
+
 ### ### ### ### ### ###
 ## MOTION FUNCTIONS  ##
 ### ### ### ### ### ###

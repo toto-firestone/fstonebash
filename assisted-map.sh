@@ -10,11 +10,6 @@ Y_max=$((Y_WIN_POS+WIN_HEIGHT))
 echo "**************************************************"
 echo "INTERRUPT BY SELECTING AN OUT OF WINDOW COORDINATE"
 echo "**************************************************"
-test_and_exit() {
-	if [ "$1" -gt "$X_max" ] || [ "$2" -gt "$Y_max" ]; then
-		exit 0
-	fi
-}
 
 ### Move, Wait, Click
 faster_click_and_go() {
