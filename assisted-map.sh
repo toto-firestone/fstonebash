@@ -30,9 +30,7 @@ fast_click_here_and_there() {
 	xdotool mousemove --sync $1 $2
 }
 
-# hard coded parameters : cannot stay here. change at next upgrade
-X_map_mission_start=771
-Y_map_mission_start=770
+source map.conf
 
 go_to_map
 
