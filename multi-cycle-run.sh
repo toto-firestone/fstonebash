@@ -49,7 +49,7 @@ echo "very basic checks performed..."
 
 
 interactive_session() {
-	local actions="Quit Assisted-Map Brute-Force"
+	local actions="Quit Assisted-Map Brute-Force Learn-Map"
 
 	xdotool windowactivate --sync $gamewin_id
 	sleep 2
@@ -63,6 +63,9 @@ interactive_session() {
 				continue;;
 			Brute-Force ) echo "Choice : $i_todo"
 				./brute-force.sh
+				continue;;
+			Learn-Map ) echo "Choice : $i_todo"
+				./learning.sh
 				continue;;
 			* ) echo "Invalid choice : $i_todo"
 				continue;;
