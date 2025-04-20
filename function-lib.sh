@@ -30,6 +30,8 @@ set_mouse_coordinates() {
 }
 
 test_and_exit() {
+	X_max=$((X_WIN_POS+WIN_WIDTH))
+	Y_max=$((Y_WIN_POS+WIN_HEIGHT))
 	if [ "$1" -gt "$X_max" ] || [ "$2" -gt "$Y_max" ]; then
 		exit 0
 	fi
