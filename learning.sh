@@ -69,6 +69,9 @@ while true; do
 
 	click_and_go $X_mission $Y_mission "testing coordinates"
 	xdotool windowactivate --sync $termwin_id
+	echo "****** ****** ****** ****** ****** ******* ****** ******"
+	echo "MAKE SURE MAP HAS NOT BEEN MOVED BEFORE VALIDATING INPUT"
+	echo "****** ****** ****** ****** ****** ******* ****** ******"
 	echo "type any NON SPACE KEY + RETURN to validate"
 	read -p "otherwise NOTHING + RETURN to cancel > " i_valid
 	if [ -n "$i_valid" ]; then
