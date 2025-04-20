@@ -5,8 +5,6 @@ source view.conf
 
 
 radish_message_noprompt "Assisted Map tool"
-X_max=$((X_WIN_POS+WIN_WIDTH))
-Y_max=$((Y_WIN_POS+WIN_HEIGHT))
 echo "**************************************************"
 echo "INTERRUPT BY SELECTING AN OUT OF WINDOW COORDINATE"
 echo "**************************************************"
