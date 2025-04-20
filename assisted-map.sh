@@ -33,3 +33,8 @@ while true; do
 	fast_click_here_and_there $X_mission $Y_mission $X_map_mission_start $Y_map_mission_start
 
 done
+#
+# VERY IMPORTANT : make sure that mission start coordinates
+# provided in map.conf, is out of the mission cancel button zone
+# Their intersection is non void
+#
