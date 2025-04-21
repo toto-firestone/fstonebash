@@ -102,6 +102,11 @@ while true; do
 		elapsed=$(get_elapsed $time_file)
 		echo
 		echo "Elapsed Map Time since reset : $elapsed / 12 half hours"
+		if [ "$elapsed" -ge "12" ]; then
+			echo "*** Auto reset of Map Cycle timer for $current_servname ***"
+
+			reset_timestamp $time_file
+		fi
 
 		echo
 		echo "3 minutes idle mode... interrupt with CTRL+C"
