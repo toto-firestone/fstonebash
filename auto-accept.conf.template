@@ -1,0 +1,19 @@
+# flags
+# undefined valuess will be set to false
+
+declare -A flags_H
+
+#flags_H["s14"]=true
+flags_H["s31"]=true
+
+# coordinates
+X_guild_hall=776
+Y_guild_hall=485
+
+X_applications=657
+Y_applications=850
+
+X_accept_player=854
+Y_accept_player=317
+
+echo "loaded user defined values for guild auto-accept applications"

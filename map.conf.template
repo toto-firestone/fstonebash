@@ -1,0 +1,9 @@
+# please check if intersection with mission cancel zone is avoided
+X_map_mission_start=696
+Y_map_mission_start=792
+
+CURR_DATAFILE="data20avril.csv"
+#CURR_DATAFILE="testing.csv"
+
+X_map_mission_claim=156
+Y_map_mission_claim=385
