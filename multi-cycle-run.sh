@@ -49,7 +49,7 @@ echo "very basic checks performed..."
 
 
 interactive_session() {
-	local actions="Quit Assisted-Map Brute-Force Learn-Map"
+	local actions="Quit Assisted-Map Brute-Force Learn-Map Reset-Map-Cycle"
 
 	xdotool windowactivate --sync $gamewin_id
 	sleep 2
@@ -66,6 +66,11 @@ interactive_session() {
 				continue;;
 			Learn-Map ) echo "Choice : $i_todo"
 				./learning.sh
+				continue;;
+			Reset-Map-Cycle ) echo "Choice : $i_todo"
+				local time_file="$current_servname.mapcycle.timestamp"
+
+				reset_timestamp $time_file
 				continue;;
 			* ) echo "Invalid choice : $i_todo"
 				continue;;
@@ -92,6 +97,12 @@ while true; do
 		echo "screen and cpu saving during idle mode"
 		sleep 2
 		xdotool windowactivate --sync $termwin_id
+
+		time_file="$current_servname.mapcycle.timestamp"
+		elapsed=$(get_elapsed $time_file)
+		echo
+		echo "Elapsed Map Time since reset : $elapsed / 12 half hours"
+
 		echo
 		echo "3 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"

@@ -192,12 +192,65 @@ claim_tools() {
 
 launch_claim_all_timer_income() {
 	anti_ad
+	echo "claim timer income"
 	launch_and_claim_expedition
 	launch_and_claim_rituals
 	train_guardian
 	claim_campaign_loot
 	claim_tools
 	focus_and_back_to_root_screen
+}
+
+### ### ### ### ### ### ### ###
+## TIME MANAGEMENT FUNCTIONS ##
+### ### ### ### ### ### ### ###
+
+reset_timestamp() {
+	local time_file=$1
+	if [ -z "$time_file" ]; then
+		echo "Warning : expect file name as argument 1"
+		time_file="default.timestamp"
+	fi
+	if [ ! -d "./tmp/" ]; then
+		echo "Warning : ./tmp/ directory not found"
+		echo "creating it"
+		mkdir tmp
+	fi
+	local time_full_path="./tmp/$time_file"
+	echo "using $time_full_path"
+	# overwrite any existing file without check
+	date +%F/%T/%s > $time_full_path
+	cat $time_full_path
+}
+
+get_elapsed() {
+	local time_file=$1
+	if [ -z "$time_file" ]; then
+		echo "9999"
+		return
+	fi
+	# NOT REACHED if argument 1 not provided
+	if [ ! -d "./tmp/" ]; then
+		echo "9999"
+		return
+	fi
+	# NOT REACHED if tmp/ directory not found
+	local time_full_path="./tmp/$time_file"
+	if [ ! -f "$time_full_path" ]; then
+		echo "9999"
+		return
+	fi
+	# NOT REACHED if timestamp file not found
+	local ts_txt=$(cat $time_full_path)
+	local ts_num=${ts_txt#*/*/}
+	if [ -z "$ts_num" ]; then
+		echo "9999"
+		return
+	fi
+	# NOT REACHED if timestamp file read fails
+	local ts_now=$(date +%s)
+	local n_halfhour=$(( (ts_now - ts_num) / 1800))
+	echo "$n_halfhour"
 }
 
 ### ### ### ### ###

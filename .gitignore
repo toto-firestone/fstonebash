@@ -12,3 +12,4 @@ firestone.conf.bak
 # map lab : ignore all right now but it may change in the future
 #
 map-lab/
+tmp/
