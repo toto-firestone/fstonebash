@@ -148,6 +148,69 @@ auto_reset_timestamps() {
 	fi
 }
 
+check_scheduled_tasks() {
+	local ls_todo=$(ls ./tmp/$current_servname.*.todo)
+	echo "*** sceduled todo list ***"
+	if [ -z "$ls_todo" ]; then
+		echo "Nothing"
+	else
+		for i_file in $ls_todo; do
+			echo $i_file
+		done
+	fi
+	echo "*** *** ***"
+}
+
+check_before_doit() {
+	select ans in "do" "cancel"; do
+		echo $ans
+		break;
+	done
+}
+
+interactive_scheduled() {
+	local ls_todo=$(ls ./tmp/$current_servname.*.todo)
+	local actions="Quit"
+	xdotool windowactivate --sync $gamewin_id
+	sleep 2
+	xdotool windowactivate --sync $termwin_id
+	for i_file in $ls_todo; do
+		# remove directory
+		local i_task=${i_file##*/}
+		# remove server name
+		i_task=${i_task#*.}
+		# remove todo word
+		i_task=${i_task%.*}
+		actions="$actions $i_task"
+	done
+
+	echo "**** check if server is $current_servname and timer is ok before accepting ****"
+
+	select i_choice in $actions; do
+		case $i_choice in
+			Quit ) echo "Choice : $i_choice"
+				break;;
+			dummy ) echo "Choice : $i_choice"
+				if [ $(check_before_doit) == "do" ]; then
+					echo "doing it"
+					#
+					# Some commands here
+					#
+					log_msg "* doing dummy on $current_servname"
+
+				else
+					echo "canceling it"
+					log_msg "* canceling dummy on $current_servname"
+
+				fi
+				remove_task "$current_servname.dummy.todo"
+				break;;
+			* ) echo "Invalid choice : $i_choice"
+				continue;;
+		esac
+	done
+}
+
 ### ### ### ###
 log_msg "***** multi server script starts *****"
 ctrl_c() {
@@ -170,6 +233,17 @@ while true; do
 		echo "reading $server_config"
 		source $server_config
 
+		# Scheduling a dummy task
+		# if todo file already exists, just change his date
+		schedule_task "$current_servname.dummy.todo"
+		# at this stage, we must be aware that server switch
+		# might have failed. in that case, $current_servname is
+		# just one or more steps in front of real server name
+		# The worse case is server switch remains stuck. Then any
+		# scheduling request will follow the bot's own data.
+		# Re-schedule again and again, without having the task
+		# actually done is fine.
+
 		xdotool windowminimize --sync $gamewin_id
 		echo "screen and cpu saving during idle mode"
 		sleep 2
@@ -184,12 +258,14 @@ while true; do
 		if [ -n "$user_input" ]; then
 			interactive_session
 		fi
+
+		check_scheduled_tasks
 		echo "1 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
 		read -t 50 -p "or hit only RETURN to speed-up > " user_input
 		echo
 		if [ -n "$user_input" ]; then
-			interactive_session
+			interactive_scheduled
 		fi
 		echo "idle mode ends in 10 secdonds"
 		sleep 10

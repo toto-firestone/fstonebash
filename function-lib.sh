@@ -271,4 +271,46 @@ log_msg() {
 	echo "$(date +%F/%T) $1" >> $log_file
 }
 
+schedule_task() {
+	local task_file=$1
+	if [ -z "$task_file" ]; then
+		echo "Warning : argument 1 not provided. Nothing to schedule"
+		return
+	fi
+	# NOT REACHED if argument 1 not provided
+	if [ ! -d "./tmp/" ]; then
+		echo "Warning : ./tmp/ not found. Nothing to schedule"
+		return
+	fi
+	# NOT REACHED if tmp/ directory not found
+	local task_full_path="./tmp/$task_file"
+	if [ ! -f "$task_full_path" ]; then
+		log_msg "* Scheduling $task_full_path"
+	else
+		log_msg "* Re-scheduling $task_full_path"
+	fi
+	touch "$task_full_path"
+}
+
+remove_task() {
+	local task_file=$1
+	if [ -z "$task_file" ]; then
+		echo "Warning : argument 1 not provided. Nothing to remove"
+		return
+	fi
+	# NOT REACHED if argument 1 not provided
+	if [ ! -d "./tmp/" ]; then
+		echo "Warning : ./tmp/ not found. Nothing to remove"
+		return
+	fi
+	# NOT REACHED if tmp/ directory not found
+	local task_full_path="./tmp/$task_file"
+	if [ ! -f "$task_full_path" ]; then
+		echo "Warning : $task_full_path not found. Nothing to remove"
+	else
+		rm -f "$task_full_path"
+		log_msg "* Removing $task_full_path"
+	fi
+}
+
 ### ### ### ### ###
