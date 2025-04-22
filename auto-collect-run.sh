@@ -25,6 +25,7 @@ click_and_go $X_oracle_gift $Y_oracle_gift
 
 go_to_town
 click_and_go $X_main_shop $Y_main_shop
+sleep 1
 click_and_go $X_free_box $Y_free_box
 click_and_go $X_checkin_tab $Y_checkin_tab
 echo "Warning : check-in button may change place when special offer occurs"
