@@ -256,4 +256,19 @@ get_elapsed() {
 	echo "$n_halfhour"
 }
 
+log_msg() {
+	if [ ! -d "./tmp/" ]; then
+		echo "Warning : ./tmp/ directory not found"
+		echo "creating it"
+		mkdir tmp
+	fi
+	local log_file="./tmp/firestone.log"
+	if [ ! -f "$log_file" ]; then
+		echo "Warning : $log_file not found"
+		echo "creating it"
+		touch $log_file
+	fi
+	echo "$(date +%F/%T) $1" >> $log_file
+}
+
 ### ### ### ### ###

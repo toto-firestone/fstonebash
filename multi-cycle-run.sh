@@ -71,6 +71,7 @@ interactive_session() {
 				local time_file="$current_servname.mapcycle.timestamp"
 
 				reset_timestamp $time_file
+				log_msg "** manual reset of $time_file"
 				continue;;
 			* ) echo "Invalid choice : $i_todo"
 				continue;;
@@ -80,6 +81,14 @@ interactive_session() {
 
 
 ### ### ### ###
+log_msg "***** multi server script starts *****"
+ctrl_c() {
+	log_msg "**** multi server script exits ****"
+	echo
+	exit 0
+}
+# disturbs stdin... not now
+#trap ctrl_c SIGINT
 
 i=1
 while true; do
@@ -106,6 +115,7 @@ while true; do
 			echo "*** Auto reset of Map Cycle timer for $current_servname ***"
 
 			reset_timestamp $time_file
+			log_msg "** auto reset of $time_file"
 		fi
 
 		echo
