@@ -64,6 +64,7 @@ click_and_go() {
 focus_and_back_to_root_screen() {
 	#sleep 1
 	xdotool windowactivate --sync $gamewin_id
+	xdotool mousemove --window $gamewin_id 700 450
 	sleep 1
 	# i don't know why but this one is not so good
 	#xdotool key --delay 1000 Escape Escape Escape Escape Escape Escape
@@ -132,9 +133,11 @@ anti_ad() {
 	xdotool windowactivate --sync $gamewin_id
 	sleep 1
 	# for extra tabs
-	xdotool mousemove --window $gamewin_id --sync 220 40
+	xdotool mousemove --window $gamewin_id 220 40
 	sleep 1
-	xdotool click 1 mousemove --window $gamewin_id --sync 700 450
+	xdotool click 1
+	sleep .5
+	xdotool mousemove --window $gamewin_id 700 450
 	# and puts back mouse to window at the end
 	# keys do not work if mouse is on tab selector
 	# outside windows keys still work
