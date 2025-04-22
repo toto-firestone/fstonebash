@@ -47,9 +47,39 @@ echo "very basic checks performed..."
 
 ### ### ### ###
 
+manual_reset_timestamps() {
+	if [ -z "$1" ]; then
+		echo "Warning : no argument for manual_reset_timestamps"
+		echo "doing nothig"
+		return
+	fi
+	# NOW REACHED if arguments 1 is not provided
+	local time_file="$current_servname.$1.timestamp"
+	echo "*** Manual reset timestamp ***"
+	reset_timestamp $time_file
+	log_msg "** manual reset of $time_file"
+}
+
+dialog_reset_timestamps() {
+	local actions="Quit mapcycle daily"
+	select i_reset in $actions; do
+		case $i_reset in
+			Quit ) echo "Choice : $i_reset"
+				break;;
+			mapcycle ) echo "Choice : $i_reset"
+				manual_reset_timestamps "mapcycle"
+				continue;;
+			daily ) echo "Choice : $i_reset"
+				manual_reset_timestamps "daily"
+				continue;;
+			* ) echo "Invalid choice : $i_reset"
+				continue;;
+		esac
+	done
+}
 
 interactive_session() {
-	local actions="Quit Assisted-Map Brute-Force Learn-Map Reset-Map-Cycle"
+	local actions="Quit Assisted-Map Brute-Force Learn-Map Reset-Timestamps"
 
 	xdotool windowactivate --sync $gamewin_id
 	sleep 2
@@ -67,11 +97,8 @@ interactive_session() {
 			Learn-Map ) echo "Choice : $i_todo"
 				./learning.sh
 				continue;;
-			Reset-Map-Cycle ) echo "Choice : $i_todo"
-				local time_file="$current_servname.mapcycle.timestamp"
-
-				reset_timestamp $time_file
-				log_msg "** manual reset of $time_file"
+			Reset-Timestamps ) echo "Choice : $i_todo"
+				dialog_reset_timestamps
 				continue;;
 			* ) echo "Invalid choice : $i_todo"
 				continue;;
@@ -79,6 +106,47 @@ interactive_session() {
 	done
 }
 
+read_timestamps() {
+	if [ -z "$1" ]; then
+		echo "Warning : no argument for read_timestamps"
+		echo "doing nothig"
+		return
+	fi
+	if [ -z "$2" ]; then
+		echo "Warning : no duration before reset for read_timestamps"
+		echo "doing nothig"
+		return
+	fi
+	# NOW REACHED if arguments 1 and 2 are not provided
+	local time_file="$current_servname.$1.timestamp"
+	local elapsed=$(get_elapsed $time_file)
+	echo
+	echo "Elapsed $1 Time since reset : $elapsed / $2 half hours"
+}
+
+auto_reset_timestamps() {
+	if [ -z "$1" ]; then
+		echo "Warning : no argument for auto_reset_timestamps"
+		echo "doing nothig"
+		return
+	fi
+	if [ -z "$2" ]; then
+		echo "Warning : no duration before reset for auto_reset_timestamps"
+
+		echo "doing nothig"
+		return
+	fi
+	# NOW REACHED if arguments 1 and 2 are not provided
+	local time_file="$current_servname.$1.timestamp"
+	local elapsed=$(get_elapsed $time_file)
+	echo
+	echo "Elapsed $1 Time since reset : $elapsed / $2 half hours"
+	if [ "$elapsed" -ge "$2" ]; then
+		echo "*** Auto reset timestamp ***"
+		reset_timestamp $time_file
+		log_msg "** auto reset of $time_file"
+	fi
+}
 
 ### ### ### ###
 log_msg "***** multi server script starts *****"
@@ -106,18 +174,8 @@ while true; do
 		echo "screen and cpu saving during idle mode"
 		sleep 2
 		xdotool windowactivate --sync $termwin_id
-
-		time_file="$current_servname.mapcycle.timestamp"
-		elapsed=$(get_elapsed $time_file)
-		echo
-		echo "Elapsed Map Time since reset : $elapsed / 12 half hours"
-		if [ "$elapsed" -ge "12" ]; then
-			echo "*** Auto reset of Map Cycle timer for $current_servname ***"
-
-			reset_timestamp $time_file
-			log_msg "** auto reset of $time_file"
-		fi
-
+		read_timestamps "mapcycle" 12
+		read_timestamps "daily" 48
 		echo
 		echo "3 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
@@ -136,6 +194,10 @@ while true; do
 		echo "idle mode ends in 10 secdonds"
 		sleep 10
 		echo "starting automated sequence"
+
+		auto_reset_timestamps "mapcycle" 12
+		auto_reset_timestamps "daily" 48
+
 		xdotool windowactivate --sync $gamewin_id
 
 		launch_claim_all_timer_income

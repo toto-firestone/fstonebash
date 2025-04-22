@@ -220,7 +220,7 @@ reset_timestamp() {
 		mkdir tmp
 	fi
 	local time_full_path="./tmp/$time_file"
-	echo "using $time_full_path"
+	echo "reset timestamp using $time_full_path"
 	# overwrite any existing file without check
 	date +%F/%T/%s > $time_full_path
 	cat $time_full_path
