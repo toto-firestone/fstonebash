@@ -1,0 +1,38 @@
+# flags
+# do not leave undefined values
+
+declare -A do_libe_H=(
+	["s1"]=true
+	["s14"]=true
+	["s27"]=true
+	["s31"]=true
+	["s8"]=false
+	["s25"]=true
+)
+
+declare -A do_collect_H=(
+	["s1"]=true
+	["s14"]=true
+	["s27"]=true
+	["s31"]=true
+	["s8"]=true
+	["s25"]=false
+)
+
+declare -A Nlibe_H=(
+	["s1"]="8"
+	["s14"]="7"
+	["s27"]="6"
+	["s31"]="2"
+	["s8"]="6"
+	["s25"]="3"
+)
+
+declare -A Ndung_H=(
+	["s1"]="2"
+	["s14"]="2"
+	["s27"]="1"
+	["s31"]="0"
+	["s8"]="1"
+	["s25"]="0"
+)

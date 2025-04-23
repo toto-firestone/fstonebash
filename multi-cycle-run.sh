@@ -71,6 +71,7 @@ dialog_reset_timestamps() {
 				continue;;
 			daily ) echo "Choice : $i_reset"
 				manual_reset_timestamps "daily"
+				schedule_task "$current_servname.daily.todo"
 				continue;;
 			* ) echo "Invalid choice : $i_reset"
 				continue;;
@@ -145,6 +146,11 @@ auto_reset_timestamps() {
 		echo "*** Auto reset timestamp ***"
 		reset_timestamp $time_file
 		log_msg "** auto reset of $time_file"
+		case $1 in
+			daily ) echo "* reschedule task : $1"
+				schedule_task "$current_servname.daily.todo";;
+			* ) echo "* no task to reschedule for $1";;
+		esac
 	fi
 }
 
@@ -204,6 +210,19 @@ interactive_scheduled() {
 
 				fi
 				remove_task "$current_servname.dummy.todo"
+				break;;
+			daily ) echo "Choice : $i_choice"
+				if [ $(check_before_doit) == "do" ]; then
+					echo "doing it"
+					./daily-once.sh
+					log_msg "* doing daily on $current_servname"
+
+				else
+					echo "canceling it"
+					log_msg "* canceling daily on $current_servname"
+
+				fi
+				remove_task "$current_servname.daily.todo"
 				break;;
 			* ) echo "Invalid choice : $i_choice"
 				continue;;

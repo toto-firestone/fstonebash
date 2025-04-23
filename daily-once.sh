@@ -5,47 +5,23 @@
 
 read -p "MAKE SURE YOU RUN IT ONCE A DAY. Press return or CTRL+C"
 
-echo "Let's go"
 
-./switch-server.sh s27
+source daily.conf
+source switch.conf
+echo "Let's start on $current_servname"
 
-Nlibe=6
-Ndung=1
-./auto-wm-run.sh $Nlibe $Ndung
-./auto-collect-run.sh
-
-#read -p "Manual check and correct before switching server"
-
-./switch-server.sh s1
-
-Nlibe=8
-Ndung=2
-./auto-wm-run.sh $Nlibe $Ndung
-./auto-collect-run.sh
-
-#read -p "Manual check and correct before switching server"
-
-./switch-server.sh s14
-
-Nlibe=7
-Ndung=2
-./auto-wm-run.sh $Nlibe $Ndung
-./auto-collect-run.sh
-
-#read -p "Manual check and correct before switching server"
-
-./switch-server.sh s8
-
-Nlibe=6
-Ndung=1
-
-#./auto-wm-run.sh $Nlibe $Ndung
-# no more liberation on s8
-./auto-collect-run.sh
-
-# only a daily visit on s25
-./switch-server.sh s25
-
-Nlibe=3
-Ndung=0
+Nlibe=${Nlibe_H[$current_servname]-"0"}
+Ndung=${Ndung_H[$current_servname]-"0"}
+if ${do_libe_H[$current_servname]}; then
+	echo "doing $Nlibe liberations and $Ndung dungeons"
+	./auto-wm-run.sh $Nlibe $Ndung
+else
+	echo "skip WM daily missions"
+fi
+if ${do_collect_H[$current_servname]}; then
+	echo "doing auto daily collect"
+	./auto-collect-run.sh
+else
+	echo "skip daily collect"
+fi
 
