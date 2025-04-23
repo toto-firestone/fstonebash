@@ -230,6 +230,20 @@ interactive_scheduled() {
 	done
 }
 
+handle_fridaycode() {
+	local friday_task="$current_servname.fridaycode.todo"
+	if [ -f "./tmp/$friday_task" ]; then
+		echo "* handling friday code on $current_servname"
+		source "./tmp/$friday_task"
+		go_to_settings
+		click_and_go $X_more $Y_more
+		click_and_go $X_code $Y_code
+		xdotool type --delay 600 $reward_code
+		click_and_go $X_submit $Y_submit
+		remove_task $friday_task
+	fi
+}
+
 ### ### ### ###
 log_msg "***** multi server script starts *****"
 ctrl_c() {
@@ -292,6 +306,7 @@ while true; do
 
 		auto_reset_timestamps "mapcycle" 12
 		auto_reset_timestamps "daily" 48
+		handle_fridaycode
 
 		xdotool windowactivate --sync $gamewin_id
 
