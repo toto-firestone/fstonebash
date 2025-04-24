@@ -87,4 +87,5 @@ while true; do
 	echo "going to write : $csv_line"
 	echo
 	echo $csv_line >> $DATA_FILE
+	click_and_go $X_map_mission_start $Y_map_mission_start "start mission"
 done

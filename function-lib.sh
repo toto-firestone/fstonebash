@@ -166,6 +166,7 @@ launch_and_claim_expedition() {
 
 launch_and_claim_rituals() {
 	go_to_oracle
+	sleep 1
 	move_wait_click $X_ritual $Y_ritual 1
 
 	claim_and_restart $X_ritual_1 $Y_ritual_1 1 3
