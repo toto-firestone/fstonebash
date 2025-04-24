@@ -7,3 +7,51 @@ CURR_DATAFILE="data20avril.csv"
 
 X_map_mission_claim=156
 Y_map_mission_claim=385
+
+# Number of squads
+
+declare -A N_squads_H=(
+	["s31"]="2"
+	["s27"]="9"
+	["s1"]="13"
+	["s14"]="14"
+	["s8"]="9"
+	["s25"]="3"
+)
+
+# High value missions
+# Monster, Dragon, Naval, etc... (not exploration, adventure or war)
+#
+
+declare -a X_HV_map_mission_A=(
+# naval
+	"273"
+	"887"
+	"816"
+# dragon
+	"338"
+	"1054"
+	"433"
+	"444"
+# monster
+	"390"
+	"689"
+	"785"
+	"626"
+)
+declare -a Y_HV_map_mission_A=(
+# naval
+	"853"
+	"757"
+	"395"
+# dragon
+	"803"
+	"700"
+	"554"
+	"289"
+# monster
+	"890"
+	"720"
+	"544"
+	"476"
+)
