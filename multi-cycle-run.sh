@@ -277,6 +277,9 @@ while true; do
 		# Re-schedule again and again, without having the task
 		# actually done is fine.
 
+		echo "starting with auto-map"
+		./auto-map.sh
+
 		xdotool windowminimize --sync $gamewin_id
 		echo "screen and cpu saving during idle mode"
 		sleep 2
