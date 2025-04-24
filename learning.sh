@@ -29,14 +29,14 @@ fi
 # Defining constatants
 #
 
-TAG_EXP="1"
+TAG_SCO="1"
 TAG_ADV="2"
 TAG_WAR="3"
 TAG_MON="4"
 TAG_DRA="5"
 TAG_NAV="6"
 
-MISSION_LIST="exploration adventure war monster dragon naval"
+MISSION_LIST="scout adventure war monster dragon naval"
 
 
 while true; do
@@ -56,7 +56,7 @@ while true; do
 		echo "nothing valid selected"
 	fi
 	case $i_mission in
-		exploration ) i_tag=$TAG_EXP;;
+		scout ) i_tag=$TAG_SCO;;
 		adventure ) i_tag=$TAG_ADV;;
 		war ) i_tag=$TAG_WAR;;
 		monster ) i_tag=$TAG_MON;;

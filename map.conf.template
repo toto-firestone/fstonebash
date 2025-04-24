@@ -20,7 +20,7 @@ declare -A N_squads_H=(
 )
 
 # High value missions
-# Monster, Dragon, Naval, etc... (not exploration, adventure or war)
+# Monster, Dragon, Naval, etc... (not scout, adventure or war)
 #
 
 declare -a X_HV_map_mission_A=(
