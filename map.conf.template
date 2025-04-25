@@ -28,6 +28,7 @@ declare -a X_HV_map_mission_A=(
 	"273"
 	"887"
 	"816"
+	"602"
 # dragon
 	"338"
 	"1054"
@@ -44,6 +45,7 @@ declare -a Y_HV_map_mission_A=(
 	"853"
 	"757"
 	"395"
+	"888"
 # dragon
 	"803"
 	"700"
