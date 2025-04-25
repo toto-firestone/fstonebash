@@ -75,6 +75,8 @@ declare -a X_war_map_mission_A=(
 	"943"
 	"997"
 	"1029"
+	"550"
+	"647"
 )
 
 declare -a Y_war_map_mission_A=(
@@ -94,6 +96,8 @@ declare -a Y_war_map_mission_A=(
 	"717"
 	"699"
 	"508"
+	"751"
+	"688"
 )
 
 declare -a X_adv_map_mission_A=(
