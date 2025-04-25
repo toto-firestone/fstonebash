@@ -159,6 +159,7 @@ claim_and_restart() {
 launch_and_claim_expedition() {
 	go_to_town
 	move_wait_click $X_guild_portal $Y_guild_portal 1
+	sleep 2
 	move_wait_click $X_exped $Y_exped 1
 
 	claim_and_restart $X_exped_but $Y_exped_but 1 3
@@ -166,7 +167,7 @@ launch_and_claim_expedition() {
 
 launch_and_claim_rituals() {
 	go_to_oracle
-	sleep 1
+	sleep 2
 	move_wait_click $X_ritual $Y_ritual 1
 
 	claim_and_restart $X_ritual_1 $Y_ritual_1 1 3
