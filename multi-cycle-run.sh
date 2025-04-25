@@ -54,10 +54,16 @@ manual_reset_timestamps() {
 		return
 	fi
 	# NOW REACHED if arguments 1 is not provided
+	if [ -n "$2" ]; then
+		echo "With time correction of $2 secs"
+	fi
 	local time_file="$current_servname.$1.timestamp"
 	echo "*** Manual reset timestamp ***"
-	reset_timestamp $time_file
+	reset_timestamp $time_file $2
 	log_msg "** manual reset of $time_file"
+	if [ -n "$2" ]; then
+		log_msg "* time correction : $2 secs"
+	fi
 }
 
 dialog_reset_timestamps() {
@@ -67,7 +73,29 @@ dialog_reset_timestamps() {
 			Quit ) echo "Choice : $i_reset"
 				break;;
 			mapcycle ) echo "Choice : $i_reset"
-				manual_reset_timestamps "mapcycle"
+				echo "*** input remaining map time for correct clock ***"
+
+				read -p "type [ hh:mm or nothing ] + RETURN > " map_time
+
+				if [ -n "$map_time" ]; then
+					ts_6h=$(date -d "06:00" +%s)
+					ts_map=$(date -d "$map_time" +%s)
+					if [ -z "$ts_map" ]; then
+						# bad format
+						ts_diff=""
+					elif [ "$ts_map" -ge "$ts_6h" ]; then
+						# another issue...
+						# better avoid negative
+						ts_diff=""
+					else
+						# all good
+						ts_diff=$((ts_6h-ts_map))
+					fi
+				else
+					# no tweek required
+					ts_diff=""
+				fi
+				manual_reset_timestamps "mapcycle" $ts_diff
 				continue;;
 			daily ) echo "Choice : $i_reset"
 				manual_reset_timestamps "daily"
@@ -277,9 +305,6 @@ while true; do
 		# Re-schedule again and again, without having the task
 		# actually done is fine.
 
-		echo "starting with auto-map"
-		./auto-map.sh
-
 		xdotool windowminimize --sync $gamewin_id
 		echo "screen and cpu saving during idle mode"
 		sleep 2
@@ -309,6 +334,10 @@ while true; do
 
 		auto_reset_timestamps "mapcycle" 12
 		auto_reset_timestamps "daily" 48
+
+		echo "... with auto-map first"
+		./auto-map.sh
+
 		handle_fridaycode
 
 		xdotool windowactivate --sync $gamewin_id
@@ -321,6 +350,7 @@ while true; do
 			go_to_town
 			click_and_go $X_guild_portal $Y_guild_portal
 			click_and_go $X_guild_hall $Y_guild_hall
+			sleep 5
 			click_and_go $X_applications $Y_applications
 			click_and_go $X_accept_player $Y_accept_player
 			focus_and_back_to_root_screen

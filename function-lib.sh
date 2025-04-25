@@ -191,6 +191,7 @@ claim_campaign_loot() {
 claim_tools() {
 	go_to_town
 	move_wait_click $X_engi $Y_engi 1
+	sleep 1
 	move_wait_click $X_engi_shop $Y_engi_shop 1
 	move_wait_click $X_toolclaim $Y_toolclaim 2
 }
@@ -224,8 +225,19 @@ reset_timestamp() {
 	local time_full_path="./tmp/$time_file"
 	echo "reset timestamp using $time_full_path"
 	# overwrite any existing file without check
-	date +%F/%T/%s > $time_full_path
+	if [ -z "$2" ]; then
+		# no tweek
+		date +%F/%T/%s > $time_full_path
+	else
+		local ts_diff=$2
+		local part_true=$(date +%F/%T)
+		local ts_true=$(date +%s)
+		local part_fake=$((ts_true-ts_diff))
+		echo "$part_true/$part_fake" > $time_full_path
+	fi
 	cat $time_full_path
+	# just check
+	#echo "... actual timestamp is $(date +%s)"
 }
 
 get_elapsed() {
