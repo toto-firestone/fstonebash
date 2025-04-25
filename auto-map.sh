@@ -46,10 +46,10 @@ fast_return_to_map() {
 
 fast_return_to_map
 
-### High value mission during first hour and a half
+### High value mission during first 2 hours
 
 if [ "$elapsed" -le "3" ]; then
-	echo "** doing high value missions before 3 half-hours"
+	echo "** doing high value missions before 4 half-hours"
 	for i_m in ${!X_HV_map_mission_A[@]}; do
 		X_mission=${X_HV_map_mission_A[$i_m]}
 		Y_mission=${Y_HV_map_mission_A[$i_m]}
@@ -64,5 +64,68 @@ if [ "$elapsed" -le "3" ]; then
 		fast_return_to_map
 	done
 else
-	echo "** skip high value missions after 3 half-hours"
+	echo "** skip high value missions after 4 half-hours"
+fi
+
+### War missions during first 3 hours
+
+if [ "$elapsed" -le "5" ]; then
+	echo "** doing war missions before 6 half-hours"
+	for i_m in ${!X_war_map_mission_A[@]}; do
+		X_mission=${X_war_map_mission_A[$i_m]}
+		Y_mission=${Y_war_map_mission_A[$i_m]}
+		echo "* try $i_m : mission X=$X_mission Y=$Y_mission"
+		if [ -z "$Y_mission" ]; then
+			echo "* missing Y for X=$X_mission"
+			continue;
+		fi
+		# NOT REACHED if coordinates are incomplete
+		click_and_go $X_mission $Y_mission
+		click_and_go $X_map_mission_start $Y_map_mission_start
+		fast_return_to_map
+	done
+else
+	echo "** skip war missions after 6 half-hours"
+fi
+
+### Adventure missions in 4th and 5th hours
+
+if [ "$elapsed" -ge "6" ] && [ "$elapsed" -le "9" ]; then
+	echo "** doing adventure missions between half-hours 6 and 9"
+	for i_m in ${!X_adv_map_mission_A[@]}; do
+		X_mission=${X_adv_map_mission_A[$i_m]}
+		Y_mission=${Y_adv_map_mission_A[$i_m]}
+		echo "* try $i_m : mission X=$X_mission Y=$Y_mission"
+		if [ -z "$Y_mission" ]; then
+			echo "* missing Y for X=$X_mission"
+			continue;
+		fi
+		# NOT REACHED if coordinates are incomplete
+		click_and_go $X_mission $Y_mission
+		click_and_go $X_map_mission_start $Y_map_mission_start
+		fast_return_to_map
+	done
+else
+	echo "** skip adventure missions outside half-hours 6 and 9"
+fi
+
+### Scout missions during last hour
+
+if [ "$elapsed" -ge "10" ] && [ "$elapsed" -le "11" ]; then
+	echo "** doing scout missions during half-hours 10 and 11"
+	for i_m in ${!X_sco_map_mission_A[@]}; do
+		X_mission=${X_sco_map_mission_A[$i_m]}
+		Y_mission=${Y_sco_map_mission_A[$i_m]}
+		echo "* try $i_m : mission X=$X_mission Y=$Y_mission"
+		if [ -z "$Y_mission" ]; then
+			echo "* missing Y for X=$X_mission"
+			continue;
+		fi
+		# NOT REACHED if coordinates are incomplete
+		click_and_go $X_mission $Y_mission
+		click_and_go $X_map_mission_start $Y_map_mission_start
+		fast_return_to_map
+	done
+else
+	echo "** skip scout missions outside half-hours 10 and 11"
 fi
