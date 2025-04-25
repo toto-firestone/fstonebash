@@ -6,7 +6,7 @@ game_url="https://armorgames.com/firestone-idle-rpg-game/18485?tag-referral=idle
 
 firefox $game_url &
 echo
-sleep 8
+sleep 18
 gamewin_id=$(xdotool getwindowfocus)
 
 echo "gamewin_id: $gamewin_id, termwin_id: $termwin_id"
