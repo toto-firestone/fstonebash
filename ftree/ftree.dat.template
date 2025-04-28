@@ -17,7 +17,7 @@ FtreeNode_1_levelMax=
 # integer >= 0
 FtreeNode_1_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_1_unlockReq=
 #
 # true or false
@@ -44,7 +44,7 @@ FtreeNode_2_levelMax=
 # integer >= 0
 FtreeNode_2_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_2_unlockReq=
 #
 # true or false
@@ -71,7 +71,7 @@ FtreeNode_3_levelMax=
 # integer >= 0
 FtreeNode_3_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_3_unlockReq=
 #
 # true or false
@@ -98,7 +98,7 @@ FtreeNode_4_levelMax=
 # integer >= 0
 FtreeNode_4_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_4_unlockReq=
 #
 # true or false
@@ -125,7 +125,7 @@ FtreeNode_5_levelMax=
 # integer >= 0
 FtreeNode_5_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_5_unlockReq=
 #
 # true or false
@@ -152,7 +152,7 @@ FtreeNode_6_levelMax=
 # integer >= 0
 FtreeNode_6_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_6_unlockReq=
 #
 # true or false
@@ -179,7 +179,7 @@ FtreeNode_7_levelMax=
 # integer >= 0
 FtreeNode_7_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_7_unlockReq=
 #
 # true or false
@@ -206,7 +206,7 @@ FtreeNode_8_levelMax=
 # integer >= 0
 FtreeNode_8_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_8_unlockReq=
 #
 # true or false
@@ -233,7 +233,7 @@ FtreeNode_9_levelMax=
 # integer >= 0
 FtreeNode_9_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_9_unlockReq=
 #
 # true or false
@@ -260,7 +260,7 @@ FtreeNode_10_levelMax=
 # integer >= 0
 FtreeNode_10_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_10_unlockReq=
 #
 # true or false
@@ -287,7 +287,7 @@ FtreeNode_11_levelMax=
 # integer >= 0
 FtreeNode_11_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_11_unlockReq=
 #
 # true or false
@@ -314,7 +314,7 @@ FtreeNode_12_levelMax=
 # integer >= 0
 FtreeNode_12_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_12_unlockReq=
 #
 # true or false
@@ -341,7 +341,7 @@ FtreeNode_13_levelMax=
 # integer >= 0
 FtreeNode_13_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_13_unlockReq=
 #
 # true or false
@@ -368,7 +368,7 @@ FtreeNode_14_levelMax=
 # integer >= 0
 FtreeNode_14_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_14_unlockReq=
 #
 # true or false
@@ -395,7 +395,7 @@ FtreeNode_15_levelMax=
 # integer >= 0
 FtreeNode_15_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_15_unlockReq=
 #
 # true or false
@@ -422,7 +422,7 @@ FtreeNode_16_levelMax=
 # integer >= 0
 FtreeNode_16_levelCurr=
 #
-# string logical expression
+# integer >= 0
 FtreeNode_16_unlockReq=
 #
 # true or false
