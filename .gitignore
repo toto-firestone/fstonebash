@@ -8,6 +8,7 @@ s31
 firestone.conf.bak
 *.conf
 *.swp
+*.dat
 #
 # map lab : ignore all right now but it may change in the future
 #
