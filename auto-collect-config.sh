@@ -36,7 +36,7 @@ set_mouse_coordinates "midas touch" "X_midas_touch" "Y_midas_touch"
 echo "scrolling to the bottom part"
 sleep 4
 xdotool windowactivate --sync $gamewin_id
-xdotool click --repeat 30 --delay 200 5
+roll_scroll_down 30
 set_mouse_coordinates "drums of war" "X_drum_war" "Y_drum_war"
 set_mouse_coordinates "dragon armor" "X_dragon_armor" "Y_dragon_armor"
 set_mouse_coordinates "guardian rune" "X_guardian_rune" "Y_guardian_rune"

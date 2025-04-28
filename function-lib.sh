@@ -37,6 +37,15 @@ test_and_exit() {
 	fi
 }
 
+roll_scroll_down() {
+	local i=0
+	while [ "$i" -lt "$1" ]; do
+		xdotool click 5
+		sleep .3
+		i=$((i+1))
+	done
+}
+
 ### ### ### ### ### ###
 ## MOTION FUNCTIONS  ##
 ### ### ### ### ### ###

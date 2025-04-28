@@ -93,7 +93,7 @@ xdotool mousemove $X_liberation_4 $Y_liberation_4
 while [ "$i" -lt  "$N_liber" ]; do
 	i=$((i+1))
 	echo "let's scroll to liberation $i"
-	xdotool click --repeat $n_scroll_libe --delay 200 5
+	roll_scroll_down $n_scroll_libe
 	sleep 1
 	xdotool click 1
 	sleep 60

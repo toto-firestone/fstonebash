@@ -94,22 +94,22 @@ echo "Calibration of right shift"
 xdotool windowactivate --sync $gamewin_id
 xdotool mousemove $X_liberation_4 $Y_liberation_4
 sleep 4
-xdotool click --repeat $n_scroll_libe --delay 200 5
+roll_scroll_down $n_scroll_libe
 echo "should be Goldfell"
 sleep 4
-xdotool click --repeat $n_scroll_libe --delay 200 5
+roll_scroll_down $n_scroll_libe
 echo "should be Xandor"
 sleep 4
-xdotool click --repeat $n_scroll_libe --delay 200 5
+roll_scroll_down $n_scroll_libe
 echo "should be Talamer"
 sleep 4
-xdotool click --repeat $n_scroll_libe --delay 200 5
+roll_scroll_down $n_scroll_libe
 echo "should be Hombor"
 sleep 4
-xdotool click --repeat $n_scroll_libe --delay 200 5
+roll_scroll_down $n_scroll_libe
 echo "should be Stormspire"
 sleep 4
-xdotool click --repeat $n_scroll_libe --delay 200 5
+roll_scroll_down $n_scroll_libe
 echo "should be Thal Badur"
 sleep 4
 
