@@ -23,11 +23,11 @@ FtreeNode_1_unlockReq=
 # true or false
 FtreeNode_1_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_1_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_1_columnNumber=
+# integer in range 0...7
+FtreeNode_1_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_1_slotKind=
@@ -50,11 +50,11 @@ FtreeNode_2_unlockReq=
 # true or false
 FtreeNode_2_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_2_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_2_columnNumber=
+# integer in range 0...7
+FtreeNode_2_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_2_slotKind=
@@ -77,11 +77,11 @@ FtreeNode_3_unlockReq=
 # true or false
 FtreeNode_3_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_3_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_3_columnNumber=
+# integer in range 0...7
+FtreeNode_3_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_3_slotKind=
@@ -104,11 +104,11 @@ FtreeNode_4_unlockReq=
 # true or false
 FtreeNode_4_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_4_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_4_columnNumber=
+# integer in range 0...7
+FtreeNode_4_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_4_slotKind=
@@ -131,11 +131,11 @@ FtreeNode_5_unlockReq=
 # true or false
 FtreeNode_5_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_5_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_5_columnNumber=
+# integer in range 0...7
+FtreeNode_5_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_5_slotKind=
@@ -158,11 +158,11 @@ FtreeNode_6_unlockReq=
 # true or false
 FtreeNode_6_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_6_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_6_columnNumber=
+# integer in range 0...7
+FtreeNode_6_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_6_slotKind=
@@ -185,11 +185,11 @@ FtreeNode_7_unlockReq=
 # true or false
 FtreeNode_7_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_7_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_7_columnNumber=
+# integer in range 0...7
+FtreeNode_7_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_7_slotKind=
@@ -212,11 +212,11 @@ FtreeNode_8_unlockReq=
 # true or false
 FtreeNode_8_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_8_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_8_columnNumber=
+# integer in range 0...7
+FtreeNode_8_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_8_slotKind=
@@ -239,11 +239,11 @@ FtreeNode_9_unlockReq=
 # true or false
 FtreeNode_9_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_9_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_9_columnNumber=
+# integer in range 0...7
+FtreeNode_9_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_9_slotKind=
@@ -266,11 +266,11 @@ FtreeNode_10_unlockReq=
 # true or false
 FtreeNode_10_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_10_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_10_columnNumber=
+# integer in range 0...7
+FtreeNode_10_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_10_slotKind=
@@ -293,11 +293,11 @@ FtreeNode_11_unlockReq=
 # true or false
 FtreeNode_11_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_11_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_11_columnNumber=
+# integer in range 0...7
+FtreeNode_11_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_11_slotKind=
@@ -320,11 +320,11 @@ FtreeNode_12_unlockReq=
 # true or false
 FtreeNode_12_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_12_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_12_columnNumber=
+# integer in range 0...7
+FtreeNode_12_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_12_slotKind=
@@ -347,11 +347,11 @@ FtreeNode_13_unlockReq=
 # true or false
 FtreeNode_13_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_13_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_13_columnNumber=
+# integer in range 0...7
+FtreeNode_13_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_13_slotKind=
@@ -374,11 +374,11 @@ FtreeNode_14_unlockReq=
 # true or false
 FtreeNode_14_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_14_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_14_columnNumber=
+# integer in range 0...7
+FtreeNode_14_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_14_slotKind=
@@ -401,11 +401,11 @@ FtreeNode_15_unlockReq=
 # true or false
 FtreeNode_15_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_15_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_15_columnNumber=
+# integer in range 0...7
+FtreeNode_15_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_15_slotKind=
@@ -428,11 +428,11 @@ FtreeNode_16_unlockReq=
 # true or false
 FtreeNode_16_unlockStatus=
 #
-# integer in range 1...8
+# integer in range 1...2
 FtreeNode_16_pageNumber=
 #
-# integer in range 1...8
-FtreeNode_16_columnNumber=
+# integer in range 0...7
+FtreeNode_16_columnIndex=
 #
 # integer in range 1...3
 FtreeNode_16_slotKind=
