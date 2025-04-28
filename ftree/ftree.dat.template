@@ -11,6 +11,9 @@
 
 ### NODE 1 ###
 
+# string
+FtreeNode_1_name=
+#
 # integer >= 1
 FtreeNode_1_levelMax=
 #
@@ -19,9 +22,6 @@ FtreeNode_1_levelCurr=
 #
 # integer >= 0
 FtreeNode_1_unlockReq=
-#
-# true or false
-FtreeNode_1_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_1_pageNumber=
@@ -38,6 +38,9 @@ FtreeNode_1_slotIndex=
 
 ### NODE 2 ###
 
+# string
+FtreeNode_2_name=
+#
 # integer >= 1
 FtreeNode_2_levelMax=
 #
@@ -46,9 +49,6 @@ FtreeNode_2_levelCurr=
 #
 # integer >= 0
 FtreeNode_2_unlockReq=
-#
-# true or false
-FtreeNode_2_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_2_pageNumber=
@@ -65,6 +65,9 @@ FtreeNode_2_slotIndex=
 
 ### NODE 3 ###
 
+# string
+FtreeNode_3_name=
+#
 # integer >= 1
 FtreeNode_3_levelMax=
 #
@@ -73,9 +76,6 @@ FtreeNode_3_levelCurr=
 #
 # integer >= 0
 FtreeNode_3_unlockReq=
-#
-# true or false
-FtreeNode_3_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_3_pageNumber=
@@ -92,6 +92,9 @@ FtreeNode_3_slotIndex=
 
 ### NODE 4 ###
 
+# string
+FtreeNode_4_name=
+#
 # integer >= 1
 FtreeNode_4_levelMax=
 #
@@ -100,9 +103,6 @@ FtreeNode_4_levelCurr=
 #
 # integer >= 0
 FtreeNode_4_unlockReq=
-#
-# true or false
-FtreeNode_4_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_4_pageNumber=
@@ -119,6 +119,9 @@ FtreeNode_4_slotIndex=
 
 ### NODE 5 ###
 
+# string
+FtreeNode_5_name=
+#
 # integer >= 1
 FtreeNode_5_levelMax=
 #
@@ -127,9 +130,6 @@ FtreeNode_5_levelCurr=
 #
 # integer >= 0
 FtreeNode_5_unlockReq=
-#
-# true or false
-FtreeNode_5_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_5_pageNumber=
@@ -146,6 +146,9 @@ FtreeNode_5_slotIndex=
 
 ### NODE 6 ###
 
+# string
+FtreeNode_6_name=
+#
 # integer >= 1
 FtreeNode_6_levelMax=
 #
@@ -154,9 +157,6 @@ FtreeNode_6_levelCurr=
 #
 # integer >= 0
 FtreeNode_6_unlockReq=
-#
-# true or false
-FtreeNode_6_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_6_pageNumber=
@@ -173,6 +173,9 @@ FtreeNode_6_slotIndex=
 
 ### NODE 7 ###
 
+# string
+FtreeNode_7_name=
+#
 # integer >= 1
 FtreeNode_7_levelMax=
 #
@@ -181,9 +184,6 @@ FtreeNode_7_levelCurr=
 #
 # integer >= 0
 FtreeNode_7_unlockReq=
-#
-# true or false
-FtreeNode_7_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_7_pageNumber=
@@ -200,6 +200,9 @@ FtreeNode_7_slotIndex=
 
 ### NODE 8 ###
 
+# string
+FtreeNode_8_name=
+#
 # integer >= 1
 FtreeNode_8_levelMax=
 #
@@ -208,9 +211,6 @@ FtreeNode_8_levelCurr=
 #
 # integer >= 0
 FtreeNode_8_unlockReq=
-#
-# true or false
-FtreeNode_8_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_8_pageNumber=
@@ -227,6 +227,9 @@ FtreeNode_8_slotIndex=
 
 ### NODE 9 ###
 
+# string
+FtreeNode_9_name=
+#
 # integer >= 1
 FtreeNode_9_levelMax=
 #
@@ -235,9 +238,6 @@ FtreeNode_9_levelCurr=
 #
 # integer >= 0
 FtreeNode_9_unlockReq=
-#
-# true or false
-FtreeNode_9_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_9_pageNumber=
@@ -254,6 +254,9 @@ FtreeNode_9_slotIndex=
 
 ### NODE 10 ###
 
+# string
+FtreeNode_10_name=
+#
 # integer >= 1
 FtreeNode_10_levelMax=
 #
@@ -262,9 +265,6 @@ FtreeNode_10_levelCurr=
 #
 # integer >= 0
 FtreeNode_10_unlockReq=
-#
-# true or false
-FtreeNode_10_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_10_pageNumber=
@@ -281,6 +281,9 @@ FtreeNode_10_slotIndex=
 
 ### NODE 11 ###
 
+# string
+FtreeNode_11_name=
+#
 # integer >= 1
 FtreeNode_11_levelMax=
 #
@@ -289,9 +292,6 @@ FtreeNode_11_levelCurr=
 #
 # integer >= 0
 FtreeNode_11_unlockReq=
-#
-# true or false
-FtreeNode_11_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_11_pageNumber=
@@ -308,6 +308,9 @@ FtreeNode_11_slotIndex=
 
 ### NODE 12 ###
 
+# string
+FtreeNode_12_name=
+#
 # integer >= 1
 FtreeNode_12_levelMax=
 #
@@ -316,9 +319,6 @@ FtreeNode_12_levelCurr=
 #
 # integer >= 0
 FtreeNode_12_unlockReq=
-#
-# true or false
-FtreeNode_12_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_12_pageNumber=
@@ -335,6 +335,9 @@ FtreeNode_12_slotIndex=
 
 ### NODE 13 ###
 
+# string
+FtreeNode_13_name=
+#
 # integer >= 1
 FtreeNode_13_levelMax=
 #
@@ -343,9 +346,6 @@ FtreeNode_13_levelCurr=
 #
 # integer >= 0
 FtreeNode_13_unlockReq=
-#
-# true or false
-FtreeNode_13_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_13_pageNumber=
@@ -362,6 +362,9 @@ FtreeNode_13_slotIndex=
 
 ### NODE 14 ###
 
+# string
+FtreeNode_14_name=
+#
 # integer >= 1
 FtreeNode_14_levelMax=
 #
@@ -370,9 +373,6 @@ FtreeNode_14_levelCurr=
 #
 # integer >= 0
 FtreeNode_14_unlockReq=
-#
-# true or false
-FtreeNode_14_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_14_pageNumber=
@@ -389,6 +389,9 @@ FtreeNode_14_slotIndex=
 
 ### NODE 15 ###
 
+# string
+FtreeNode_15_name=
+#
 # integer >= 1
 FtreeNode_15_levelMax=
 #
@@ -397,9 +400,6 @@ FtreeNode_15_levelCurr=
 #
 # integer >= 0
 FtreeNode_15_unlockReq=
-#
-# true or false
-FtreeNode_15_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_15_pageNumber=
@@ -416,6 +416,9 @@ FtreeNode_15_slotIndex=
 
 ### NODE 16 ###
 
+# string
+FtreeNode_16_name=
+#
 # integer >= 1
 FtreeNode_16_levelMax=
 #
@@ -424,9 +427,6 @@ FtreeNode_16_levelCurr=
 #
 # integer >= 0
 FtreeNode_16_unlockReq=
-#
-# true or false
-FtreeNode_16_unlockStatus=
 #
 # integer in range 1...2
 FtreeNode_16_pageNumber=
