@@ -312,9 +312,9 @@ while true; do
 		read_timestamps "mapcycle" 12
 		read_timestamps "daily" 48
 		echo
-		echo "3 minutes idle mode... interrupt with CTRL+C"
+		echo "2 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
-		read -t 120 -p "or hit only RETURN to speed-up > " user_input
+		read -t 60 -p "or hit only RETURN to speed-up > " user_input
 		echo
 		if [ -n "$user_input" ]; then
 			interactive_session
