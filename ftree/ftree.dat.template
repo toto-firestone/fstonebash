@@ -8,6 +8,16 @@
 
 # This template can be used for a fresh new ftree as well as an old one
 
+### GLOBAL DATA ###
+
+# string
+FtreeGlob_name=
+#
+# integer >= 0 (time unit is half-hours)
+FtreeGlob_time=
+#
+# integer = 1,2
+FtreeGlob_currPage=
 
 ### NODE 1 ###
 
