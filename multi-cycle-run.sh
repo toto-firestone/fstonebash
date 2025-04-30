@@ -150,6 +150,7 @@ read_timestamps() {
 	local time_file="$current_servname.$1.timestamp"
 	local elapsed=$(get_elapsed $time_file)
 	echo
+	echo "* reading $time_file"
 	echo "Elapsed $1 Time since reset : $elapsed / $2 half hours"
 }
 
@@ -167,18 +168,22 @@ auto_reset_timestamps() {
 	fi
 	# NOW REACHED if arguments 1 and 2 are not provided
 	local time_file="$current_servname.$1.timestamp"
+	echo "* auto reset for $time_file"
 	local elapsed=$(get_elapsed $time_file)
 	echo
-	echo "Elapsed $1 Time since reset : $elapsed / $2 half hours"
+	#echo "Elapsed $1 Time since reset : $elapsed / $2 half hours"
 	if [ "$elapsed" -ge "$2" ]; then
 		echo "*** Auto reset timestamp ***"
 		reset_timestamp $time_file
 		log_msg "** auto reset of $time_file"
+		read_timestamps $1 $2
 		case $1 in
 			daily ) echo "* reschedule task : $1"
 				schedule_task "$current_servname.daily.todo";;
 			* ) echo "* no task to reschedule for $1";;
 		esac
+	else
+		echo "*** Nothing to do ***"
 	fi
 }
 
@@ -294,7 +299,9 @@ while true; do
 		echo "reading $server_config"
 		source $server_config
 
+		read_timestamps "mapcycle" 12
 		auto_reset_timestamps "mapcycle" 12
+		read_timestamps "daily" 48
 		auto_reset_timestamps "daily" 48
 
 		# Scheduling a dummy task
@@ -312,8 +319,6 @@ while true; do
 		echo "screen and cpu saving during idle mode"
 		sleep 2
 		xdotool windowactivate --sync $termwin_id
-		read_timestamps "mapcycle" 12
-		read_timestamps "daily" 48
 		echo
 		echo "2 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
