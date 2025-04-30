@@ -294,6 +294,9 @@ while true; do
 		echo "reading $server_config"
 		source $server_config
 
+		auto_reset_timestamps "mapcycle" 12
+		auto_reset_timestamps "daily" 48
+
 		# Scheduling a dummy task
 		# if todo file already exists, just change his date
 		schedule_task "$current_servname.dummy.todo"
@@ -331,9 +334,6 @@ while true; do
 		echo "idle mode ends in 10 secdonds"
 		sleep 10
 		echo "starting automated sequence"
-
-		auto_reset_timestamps "mapcycle" 12
-		auto_reset_timestamps "daily" 48
 
 		echo "... with auto-map first"
 		./auto-map.sh
