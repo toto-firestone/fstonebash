@@ -9,7 +9,9 @@ radish_message_noprompt "AUTOMATIC FTREE TOOL"
 echo
 echo "for manual configuration of ftree.conf. Use :"
 echo "./auto-ftree config"
-echo "for running ftree automation, use command without argument"
+echo
+echo "for auti claim mode, use :"
+echo "./auto-ftree claim"
 echo
 
 ### ### ###
@@ -58,12 +60,8 @@ ftree_page_2() {
 load_ftree_from_file() {
 	echo "*** loading $1 ***"
 	source $1
+	# always restart at page 1
 	ftree_rewind
-	if [ "$FtreeGlob_currPage" -eq "2" ]; then
-		ftree_page_2
-	else
-		ftree_page_1
-	fi
 }
 
 X_ftree_mouse_test() {
@@ -217,7 +215,10 @@ if [ ! -f "$ftree_fullpath" ]; then
 fi
 
 # do not load now
-#load_ftree_from_file $ftree_fullpath
+
+###### ##### ##### ##### ##### ##### ##### #####
+# PROCESSING CASES WITH COMMAND LINE ARGUMENTS #
+###### ##### ##### ##### ##### ##### ##### #####
 
 ## manual setting of node coordinates ##
 
@@ -230,9 +231,11 @@ if [ "$1" == "config" ]; then
 	read -p "press RETURN to finish"
 	exit
 fi
-
-## back to normal ##
 # NOT REACHED IF CONFIGURATION IS CHOSEN
+
+###### ###### ###### ###### ###### ###### #########
+####  always require schedule file of waiting  ####
+###### ###### ###### ###### ###### ###### #########
 
 wait_fullpath="./tmp/${current_servname}.ftreewait.todo"
 if [ ! -f "$wait_fullpath" ]; then
@@ -243,13 +246,46 @@ else
 	no_wait=false
 fi
 
+
+
+### clear claim zone : still interactive with timeout ###
+
+if [ "$1" == "claim" ]; then
+	read -t 10 -p "last chance to cancel claim = NON SPACE + RETURN > " do_cancel
+
+	if [ -n "$do_cancel" ]; then
+		echo "** cancel auto claim session **"
+		exit
+	fi
+	go_to_ftree
+	echo "** claiming finished researches **"
+	click_and_go $X_ftree_claim $Y_ftree_claim "ftree claim"
+	sleep 2
+	click_and_go $X_ftree_claim $Y_ftree_claim "ftree claim"
+	sleep 1
+
+	# remove wait task
+	remove_task ${wait_fullpath#./tmp/}
+	exit
+fi
+# NOT REACHED IF CLAIM IS CHOSEN
+
+## schedule file is not required before claim ##
+
+
+#### #### #### #### #### ###
+## AUTOMATION STARTS HERE ##
+#### #### #### #### #### ###
+
+# first thing of automation is requiring the schedule file of tasks
+
 todo_fullpath="./tmp/${current_servname}.ftreestart.todo"
 if [ ! -f "$todo_fullpath" ]; then
 	echo "Error : cannot find schedule file $todo_fullpath"
 	exit
 fi
 
-## automation starts here ##
+
 # todo file format is one node number or w letter (actually anything invalid)
 # per line. each call to automation script reads 2 lines exactly
 # one ftree slot per node number (they must be different)
@@ -276,7 +312,7 @@ if [ -s "$todo_fullpath" ]; then
 	sed -i '1d' $todo_fullpath
 else
 	echo "Warning : $todo_fullpath is empty on startup. removing"
-	rm -f $todo_fullpath
+	remove_task ${todo_fullpath#./tmp/}
 	echo "* nothing to do"
 	exit
 fi
@@ -308,9 +344,8 @@ fi
 
 if [ ! -s "$todo_fullpath" ]; then
 	echo "Schedule file is empty now. Removing"
-	rm -f $todo_fullpath
+	remove_task ${todo_fullpath#./tmp/}
 fi
-
 
 #load_ftree_from_file $ftree_fullpath
 
