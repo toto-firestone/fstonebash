@@ -220,7 +220,7 @@ claim_tools() {
 	move_wait_click $X_engi $Y_engi 1
 	sleep 1
 	move_wait_click $X_engi_shop $Y_engi_shop 1
-	move_wait_click $X_toolclaim $Y_toolclaim 2
+	move_wait_click $X_toolclaim $Y_toolclaim 3
 }
 
 launch_claim_all_timer_income() {
