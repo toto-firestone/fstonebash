@@ -156,6 +156,8 @@ declare -a X_sco_map_mission_A=(
 	"947"
 	"991"
 	"954"
+	"1029"
+	"504"
 )
 
 declare -a Y_sco_map_mission_A=(
@@ -175,4 +177,6 @@ declare -a Y_sco_map_mission_A=(
 	"456"
 	"404"
 	"610"
+	"566"
+	"314"
 )
