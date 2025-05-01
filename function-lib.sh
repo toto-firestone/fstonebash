@@ -218,8 +218,7 @@ claim_campaign_loot() {
 claim_tools() {
 	go_to_town
 	move_wait_click $X_engi $Y_engi 1
-	sleep 1
-	move_wait_click $X_engi_shop $Y_engi_shop 1
+	move_wait_click $X_engi_shop $Y_engi_shop 3
 	move_wait_click $X_toolclaim $Y_toolclaim 3
 }
 
