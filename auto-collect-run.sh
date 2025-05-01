@@ -20,16 +20,20 @@ radish_message_noprompt "FARMING DAILY CURRENCIES"
 xdotool windowactivate --sync $gamewin_id
 anti_ad
 go_to_oracle
+sleep 1
 click_and_go $X_oracle_shop $Y_oracle_shop
+sleep 2
 click_and_go $X_oracle_gift $Y_oracle_gift
 
 go_to_town
 click_and_go $X_main_shop $Y_main_shop
 sleep 1
 click_and_go $X_free_box $Y_free_box
+sleep 1
 click_and_go $X_checkin_tab $Y_checkin_tab
 echo "Warning : check-in button may change place when special offer occurs"
 echo "a wrong check-in coordinate is not harmful"
+sleep 1
 click_and_go $X_checkin_but $Y_checkin_but
 echo "try alternative position..."
 click_and_go $X_checkin_but $((Y_checkin_but+46))
