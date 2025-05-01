@@ -6,6 +6,7 @@ source ftree.conf
 source switch.conf
 
 radish_message_noprompt "AUTOMATIC FTREE TOOL"
+echo "WARNING : START AUTOMATION WITH NO UNCLAIMED RESEARCH SLOTS"
 echo
 echo "for manual configuration of ftree.conf. Use :"
 echo "./auto-ftree config"
@@ -213,8 +214,7 @@ if [ ! -f "$ftree_fullpath" ]; then
 	echo "Error : cannot find ftree file $ftree_fullpath"
 	exit
 fi
-
-# do not load now
+# don't go further is server has not been configured for auto ftree
 
 ###### ##### ##### ##### ##### ##### ##### #####
 # PROCESSING CASES WITH COMMAND LINE ARGUMENTS #
@@ -241,9 +241,11 @@ wait_fullpath="./tmp/${current_servname}.ftreewait.todo"
 if [ ! -f "$wait_fullpath" ]; then
 	echo "** no wait directive $wait_fullpath **"
 	no_wait=true
+	do_wait=false
 else
 	echo "** wait directive scheduled in $wait_fullpath **"
 	no_wait=false
+	do_wait=true
 fi
 
 
@@ -251,8 +253,14 @@ fi
 ### clear claim zone : still interactive with timeout ###
 
 if [ "$1" == "claim" ]; then
+	if $do_wait; then
+		echo "** wait directive detected : do nothing and exit **"
+		exit
+	fi
+
 	read -t 10 -p "last chance to cancel claim = NON SPACE + RETURN > " do_cancel
 
+	echo
 	if [ -n "$do_cancel" ]; then
 		echo "** cancel auto claim session **"
 		exit
@@ -264,8 +272,6 @@ if [ "$1" == "claim" ]; then
 	click_and_go $X_ftree_claim $Y_ftree_claim "ftree claim"
 	sleep 1
 
-	# remove wait task
-	remove_task ${wait_fullpath#./tmp/}
 	exit
 fi
 # NOT REACHED IF CLAIM IS CHOSEN
@@ -281,9 +287,15 @@ fi
 
 todo_fullpath="./tmp/${current_servname}.ftreestart.todo"
 if [ ! -f "$todo_fullpath" ]; then
-	echo "Error : cannot find schedule file $todo_fullpath"
-	exit
+	if $no_wait; then
+		echo "Error : cannot find schedule file $todo_fullpath"
+		exit
+	else
+		echo "No more schedule file $todo_fullpath"
+		echo "but wait has been sceduled"
+	fi
 fi
+# CAN REACH HERE IF WAIT IS SCHEDULED WITH EMPTY TASK FILE
 
 
 # todo file format is one node number or w letter (actually anything invalid)
@@ -291,6 +303,24 @@ fi
 # one ftree slot per node number (they must be different)
 # if a line contains 1 invalid entry (not a node number) then it means that
 # 1 slot remains unused
+
+if $do_wait; then
+	echo "** check if wait directive has expired **"
+	now_timestamp=$(date +%s)
+	wait_timestamp=$(cat $wait_fullpath)
+	if [ "$now_timestamp" -gt "$wait_timestamp" ]; then
+		echo "* end of wait directive *"
+		remove_task ${wait_fullpath#./tmp/}
+		echo "* claiming..."
+		./auto-ftree.sh claim
+	else
+		echo "* still waiting and do nothing *"
+		exit
+	fi
+fi
+
+# AT THIS POINT, SLOTS SHOULD BE EMPTY
+echo "***** claim is over and slots should be empty *****"
 
 valid_cmd() {
 	if [[ "$1" =~ ^[0-9]+$ ]]; then
@@ -318,6 +348,7 @@ else
 fi
 
 # NOT REACHED IF SCHEDULE FILE WAS EMPTY ON START UP
+# EVEN WITH A WAIT FILE
 if $(valid_cmd $ftree_cmd_1); then
 	echo "Command 1 : node $ftree_cmd_1"
 else
@@ -347,7 +378,38 @@ if [ ! -s "$todo_fullpath" ]; then
 	remove_task ${todo_fullpath#./tmp/}
 fi
 
-#load_ftree_from_file $ftree_fullpath
+load_ftree_from_file $ftree_fullpath
+# at this point ftree_cmd_1 is valid and ftree_cmd_2 could be "w"
 
+echo "* first slot to start"
+sleep 1
+goto_ftree_node $ftree_cmd_1
+sleep 2
+xdotool click 1
+sleep 1
+click_and_go $X_ftree_start $Y_ftree_start "ftree start"
+if [ "$ftree_cmd_2" == "w" ]; then
+	echo "* only 1 slot"
+else
+	echo "* second slot to start"
+	sleep 1
+	goto_ftree_node $ftree_cmd_2
+	sleep 2
+	xdotool click 1
+	sleep 1
+	click_and_go $X_ftree_start $Y_ftree_start "ftree start"
+fi
 
+echo "* schedule a wait of $FtreeGlob_time half hours"
+schedule_task ${wait_fullpath#./tmp/}
+now_timestamp=$(date +%s)
+echo "now timestamp = $now_timestamp"
+
+wait_expire=$((now_timestamp+1800*$FtreeGlob_time))
+#wait_expire=$((now_timestamp+60))
+echo $wait_expire >> $wait_fullpath
+echo "* wait directive scheduled *"
+cat $wait_fullpath
+
+## NOT NOW ##
 #save_ftree_to_file "ftree/testfile.dat"
