@@ -11,8 +11,11 @@ echo
 echo "for manual configuration of ftree.conf. Use :"
 echo "./auto-ftree config"
 echo
-echo "for auti claim mode, use :"
+echo "for auto claim mode, use :"
 echo "./auto-ftree claim"
+echo
+echo "for check mode, use :"
+echo "./auto-ftree check"
 echo
 
 ### ### ###
@@ -219,6 +222,21 @@ fi
 ###### ##### ##### ##### ##### ##### ##### #####
 # PROCESSING CASES WITH COMMAND LINE ARGUMENTS #
 ###### ##### ##### ##### ##### ##### ##### #####
+
+## Check mode ##
+if [ "$1" == "check" ]; then
+	echo "**** Check mode ****"
+	load_ftree_from_file $ftree_fullpath
+	print_ftree_info $ftree_fullpath
+	sleep 4
+	n_node=1
+	while [ "$n_node" -le "16" ]; do
+		goto_ftree_node $n_node
+		sleep 3
+		n_node=$((n_node+1))
+	done
+	exit
+fi
 
 ## manual setting of node coordinates ##
 
