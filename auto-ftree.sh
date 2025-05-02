@@ -267,9 +267,10 @@ if [ "$1" == "claim" ]; then
 	fi
 	go_to_ftree
 	echo "** claiming finished researches **"
-	click_and_go $X_ftree_claim $Y_ftree_claim "ftree claim"
-	sleep 2
-	click_and_go $X_ftree_claim $Y_ftree_claim "ftree claim"
+	echo "once"
+	move_wait_click $X_ftree_claim $Y_ftree_claim 2
+	echo "twice"
+	move_wait_click $X_ftree_claim $Y_ftree_claim 2
 	sleep 1
 
 	exit
@@ -385,9 +386,9 @@ echo "* first slot to start"
 sleep 1
 goto_ftree_node $ftree_cmd_1
 sleep 2
-xdotool click 1
+slow_safe_click
 sleep 1
-click_and_go $X_ftree_start $Y_ftree_start "ftree start"
+move_wait_click $X_ftree_start $Y_ftree_start 2
 if [ "$ftree_cmd_2" == "w" ]; then
 	echo "* only 1 slot"
 else
@@ -395,9 +396,9 @@ else
 	sleep 1
 	goto_ftree_node $ftree_cmd_2
 	sleep 2
-	xdotool click 1
+	slow_safe_click
 	sleep 1
-	click_and_go $X_ftree_start $Y_ftree_start "ftree start"
+	move_wait_click $X_ftree_start $Y_ftree_start 2
 fi
 
 echo "* schedule a wait of $FtreeGlob_time half hours"

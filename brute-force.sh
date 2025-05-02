@@ -25,18 +25,21 @@ radish_message "BRUTE FORCE ON WM CAMPAIGN MISSION"
 
 # go back to root screen after each try to avoid uncontrolled infinite clicks
 go_to_map
-click_and_go $X_camp_map $Y_camp_map
+move_wait_click $X_camp_map $Y_camp_map 2
 
 # select mission and start button
 set_mouse_coordinates "wm mission" "X_WM_mission" "Y_WM_mission"
-click_and_go $X_WM_mission $Y_WM_mission
+xdotool windowactivate --sync $gamewin_id
+
+move_wait_click $X_WM_mission $Y_WM_mission 2
 set_mouse_coordinates "mission starter" "X_mission_but" "Y_mission_but"
+xdotool windowactivate --sync $gamewin_id
 
 i=0
 while true; do
 	i=$((i+1))
 	echo "Attempt $i"
-	click_and_go $X_mission_but $Y_mission_but
+	move_wait_click $X_mission_but $Y_mission_but 2
 	sleep 5
 	xdotool windowactivate --sync $termwin_id
 	sleep 1
@@ -47,6 +50,6 @@ while true; do
 		break
 	fi
 	go_to_map
-	click_and_go $X_camp_map $Y_camp_map
-	click_and_go $X_WM_mission $Y_WM_mission
+	move_wait_click $X_camp_map $Y_camp_map 2
+	move_wait_click $X_WM_mission $Y_WM_mission 2
 done

@@ -28,8 +28,7 @@ echo "* claiming $n_squad map missions"
 
 i_claim="0"
 while [ "$i_claim" -lt "$n_squad" ]; do
-	click_and_go $X_map_mission_claim $Y_map_mission_claim
-	sleep 1
+	move_wait_click $X_map_mission_claim $Y_map_mission_claim 1
 	i_claim=$((i_claim+1))
 done
 
@@ -59,8 +58,8 @@ if [ "$elapsed" -le "3" ]; then
 			continue;
 		fi
 		# NOT REACHED if coordinates are incomplete
-		click_and_go $X_mission $Y_mission
-		click_and_go $X_map_mission_start $Y_map_mission_start
+		move_wait_click $X_mission $Y_mission 2
+		move_wait_click $X_map_mission_start $Y_map_mission_start 1
 		fast_return_to_map
 	done
 else
@@ -80,8 +79,8 @@ if [ "$elapsed" -le "5" ]; then
 			continue;
 		fi
 		# NOT REACHED if coordinates are incomplete
-		click_and_go $X_mission $Y_mission
-		click_and_go $X_map_mission_start $Y_map_mission_start
+		move_wait_click $X_mission $Y_mission 2
+		move_wait_click $X_map_mission_start $Y_map_mission_start 1
 		fast_return_to_map
 	done
 else
@@ -101,8 +100,8 @@ if [ "$elapsed" -ge "6" ] && [ "$elapsed" -le "9" ]; then
 			continue;
 		fi
 		# NOT REACHED if coordinates are incomplete
-		click_and_go $X_mission $Y_mission
-		click_and_go $X_map_mission_start $Y_map_mission_start
+		move_wait_click $X_mission $Y_mission 2
+		move_wait_click $X_map_mission_start $Y_map_mission_start 1
 		fast_return_to_map
 	done
 else
@@ -122,8 +121,8 @@ if [ "$elapsed" -ge "10" ] && [ "$elapsed" -le "11" ]; then
 			continue;
 		fi
 		# NOT REACHED if coordinates are incomplete
-		click_and_go $X_mission $Y_mission
-		click_and_go $X_map_mission_start $Y_map_mission_start
+		move_wait_click $X_mission $Y_mission 2
+		move_wait_click $X_map_mission_start $Y_map_mission_start 1
 		fast_return_to_map
 	done
 else

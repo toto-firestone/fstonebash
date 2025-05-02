@@ -68,6 +68,8 @@ manual_reset_timestamps() {
 
 dialog_reset_timestamps() {
 	local actions="Quit mapcycle daily"
+	local i_reset map_time ts_6h ts_map ts_diff
+
 	select i_reset in $actions; do
 		case $i_reset in
 			Quit ) echo "Choice : $i_reset"
@@ -109,6 +111,7 @@ dialog_reset_timestamps() {
 
 interactive_session() {
 	local actions="Quit Assisted-Map Brute-Force Learn-Map Reset-Timestamps"
+	local i_todo
 
 	xdotool windowactivate --sync $gamewin_id
 	sleep 2
@@ -189,6 +192,8 @@ auto_reset_timestamps() {
 
 check_scheduled_tasks() {
 	local ls_todo=$(ls ./tmp/$current_servname.*.todo)
+	local i_file
+
 	echo "*** sceduled todo list ***"
 	if [ -z "$ls_todo" ]; then
 		echo "Nothing"
@@ -210,6 +215,8 @@ check_before_doit() {
 interactive_scheduled() {
 	local ls_todo=$(ls ./tmp/$current_servname.*.todo)
 	local actions="Quit"
+	local i_file i_choice
+
 	xdotool windowactivate --sync $gamewin_id
 	sleep 2
 	xdotool windowactivate --sync $termwin_id
@@ -269,10 +276,10 @@ handle_fridaycode() {
 		echo "* handling friday code on $current_servname"
 		source "./tmp/$friday_task"
 		go_to_settings
-		click_and_go $X_more $Y_more
-		click_and_go $X_code $Y_code
+		move_wait_click $X_more $Y_more 2
+		move_wait_click $X_code $Y_code 2
 		xdotool type --delay 600 $reward_code
-		click_and_go $X_submit $Y_submit
+		move_wait_click $X_submit $Y_submit 2
 		remove_task $friday_task
 	fi
 }
@@ -356,11 +363,11 @@ while true; do
 		if $curr_flag; then
 			echo "auto-accept on for $i_serv"
 			go_to_town
-			click_and_go $X_guild_portal $Y_guild_portal
-			click_and_go $X_guild_hall $Y_guild_hall
+			move_wait_click $X_guild_portal $Y_guild_portal 2
+			move_wait_click $X_guild_hall $Y_guild_hall 2
 			sleep 5
-			click_and_go $X_applications $Y_applications
-			click_and_go $X_accept_player $Y_accept_player
+			move_wait_click $X_applications $Y_applications 2
+			move_wait_click $X_accept_player $Y_accept_player 2
 			focus_and_back_to_root_screen
 		else
 			echo "auto-accept off for $i_serv"

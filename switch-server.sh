@@ -35,14 +35,11 @@ else
 	anti_ad
 	go_to_settings
 	# additional tempo for server switch task
-	sleep .5
-	click_and_go $X_server_switch $Y_server_switch
-	sleep .5
-	click_and_go $X_fav_servers $Y_fav_servers
-	sleep .5
-	click_and_go $X_serv_i $Y_serv_i "server $1"
-	sleep .5
-	click_and_go $X_serv_confirm $Y_serv_confirm
+	move_wait_click $X_server_switch $Y_server_switch 3
+	move_wait_click $X_fav_servers $Y_fav_servers 3
+	echo "server $1"
+	move_wait_click $X_serv_i $Y_serv_i 3
+	move_wait_click $X_serv_confirm $Y_serv_confirm 3
 	echo "overwriting $1 to switch file"
 	echo "current_servname=${1}" > switch.conf
 	cat switch.conf

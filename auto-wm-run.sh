@@ -53,49 +53,51 @@ mission_ok() {
 xdotool windowactivate --sync $gamewin_id
 anti_ad
 go_to_map
-click_and_go $X_camp_map $Y_camp_map
-click_and_go $X_mission_button $Y_mission_button
+move_wait_click $X_camp_map $Y_camp_map 2
+move_wait_click $X_mission_button $Y_mission_button 2
 
-click_and_go $X_liberations $Y_liberations
+move_wait_click $X_liberations $Y_liberations 2
 
 i=0
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
-	click_and_go $X_liberation_1 $Y_liberation_1 "liberation $i"
+	echo "liberation $i"
+	move_wait_click $X_liberation_1 $Y_liberation_1 2
 	sleep 60
 	mission_ok
 fi
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
-	click_and_go $X_liberation_2 $Y_liberation_2 "liberation $i"
+	echo "liberation $i"
+	move_wait_click $X_liberation_2 $Y_liberation_2 2
 	sleep 60
 	mission_ok
 fi
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
-	click_and_go $X_liberation_3 $Y_liberation_3 "liberation $i"
+	echo "liberation $i"
+	move_wait_click $X_liberation_3 $Y_liberation_3 2
 	sleep 60
 	mission_ok
 fi
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
-	click_and_go $X_liberation_4 $Y_liberation_4 "liberation $i"
+	echo "liberation $i"
+	move_wait_click $X_liberation_4 $Y_liberation_4 2
 	sleep 60
 	mission_ok
 fi
 
 # scrolled part
 echo "DON'T MOVE MOUSE NOW"
-sleep 4
-xdotool windowactivate --sync $gamewin_id
-sleep 1
 xdotool mousemove $X_liberation_4 $Y_liberation_4
+sleep 4
 while [ "$i" -lt  "$N_liber" ]; do
 	i=$((i+1))
 	echo "let's scroll to liberation $i"
 	roll_scroll_down $n_scroll_libe
-	sleep 1
-	xdotool click 1
+	sleep 2
+	slow_safe_click
 	sleep 60
 	mission_ok
 	# tempo correction
@@ -104,18 +106,20 @@ done
 
 
 mission_ok
-click_and_go $X_dungeons $Y_dungeons
+move_wait_click $X_dungeons $Y_dungeons 2
 
 i=0
 if [ "$i" -lt  "$N_dung" ]; then
 	i=$((i+1))
-	click_and_go $X_dungeon_1 $Y_dungeon_1 "dungeons $i"
+	echo "dungeons $i"
+	move_wait_click $X_dungeon_1 $Y_dungeon_1 2
 	sleep 60
 	mission_ok
 fi
 if [ "$i" -lt  "$N_dung" ]; then
 	i=$((i+1))
-	click_and_go $X_dungeon_2 $Y_dungeon_2 "dungeons $i"
+	echo "dungeons $i"
+	move_wait_click $X_dungeon_2 $Y_dungeon_2 2
 	sleep 60
 	mission_ok
 fi

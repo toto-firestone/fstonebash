@@ -20,44 +20,39 @@ radish_message_noprompt "FARMING DAILY CURRENCIES"
 xdotool windowactivate --sync $gamewin_id
 anti_ad
 go_to_oracle
-sleep 1
-click_and_go $X_oracle_shop $Y_oracle_shop
-sleep 2
-click_and_go $X_oracle_gift $Y_oracle_gift
+move_wait_click $X_oracle_shop $Y_oracle_shop 2
+move_wait_click $X_oracle_gift $Y_oracle_gift 2
 
 go_to_town
-click_and_go $X_main_shop $Y_main_shop
-sleep 1
-click_and_go $X_free_box $Y_free_box
-sleep 1
-click_and_go $X_checkin_tab $Y_checkin_tab
+move_wait_click $X_main_shop $Y_main_shop 2
+move_wait_click $X_free_box $Y_free_box 2
+move_wait_click $X_checkin_tab $Y_checkin_tab 2
 echo "Warning : check-in button may change place when special offer occurs"
 echo "a wrong check-in coordinate is not harmful"
-sleep 1
-click_and_go $X_checkin_but $Y_checkin_but
+move_wait_click $X_checkin_but $Y_checkin_but 2
 echo "try alternative position..."
-click_and_go $X_checkin_but $((Y_checkin_but+46))
+move_wait_click $X_checkin_but $((Y_checkin_but+46)) 2
 
 go_to_exotic
 # toggle to X50
-click_and_go $X_exo_toggle $Y_exo_toggle
-click_and_go $X_exo_toggle $Y_exo_toggle
+move_wait_click $X_exo_toggle $Y_exo_toggle 2
+move_wait_click $X_exo_toggle $Y_exo_toggle 2
 
-click_and_go $X_speed_scroll $Y_speed_scroll
-click_and_go $X_damage_scroll $Y_damage_scroll
-click_and_go $X_health_scroll $Y_health_scroll
-click_and_go $X_midas_touch $Y_midas_touch
+move_wait_click $X_speed_scroll $Y_speed_scroll 2
+move_wait_click $X_damage_scroll $Y_damage_scroll 2
+move_wait_click $X_health_scroll $Y_health_scroll 2
+move_wait_click $X_midas_touch $Y_midas_touch 2
 
 echo "scrolling to the bottom part"
-sleep 4
-xdotool windowactivate --sync $gamewin_id
+sleep 2
 roll_scroll_down 30
+sleep 2
 
-click_and_go $X_drum_war $Y_drum_war
-click_and_go $X_dragon_armor $Y_dragon_armor
-click_and_go $X_guardian_rune $Y_guardian_rune
-click_and_go $X_totem_agony $Y_totem_agony
-click_and_go $X_totem_annihil $Y_totem_annihil
+move_wait_click $X_drum_war $Y_drum_war 2
+move_wait_click $X_dragon_armor $Y_dragon_armor 2
+move_wait_click $X_guardian_rune $Y_guardian_rune 2
+move_wait_click $X_totem_agony $Y_totem_agony 2
+move_wait_click $X_totem_annihil $Y_totem_annihil 2
 
 focus_and_back_to_root_screen
 

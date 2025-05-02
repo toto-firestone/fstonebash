@@ -59,10 +59,18 @@ roll_scroll_up() {
 ## MOTION FUNCTIONS  ##
 ### ### ### ### ### ###
 
+slow_safe_click() {
+	xdotool mousedown 1
+	sleep .2
+	xdotool mouseup 1
+	sleep .2
+}
+
 move_wait_click() {
 	xdotool mousemove $1 $2
 	sleep $3
-	xdotool click 1
+	#xdotool click 1
+	slow_safe_click
 	# constant micro temporisatrion
 	sleep .1
 }
@@ -177,36 +185,33 @@ anti_ad() {
 claim_and_restart() {
 	move_wait_click $1 $2 $3
 	sleep $4
-	# mouse should not have moved but we never know
-	#xdotool mousemove $1 $2 click 1
-	move_wait_click $1 $2 $3
-	# need more robustness here
+	#move_wait_click $1 $2 $3
+	# let's assume that mouse has not moved
+	slow_safe_click
 }
 
 launch_and_claim_expedition() {
 	go_to_town
-	move_wait_click $X_guild_portal $Y_guild_portal 1
-	sleep 2
-	move_wait_click $X_exped $Y_exped 1
+	move_wait_click $X_guild_portal $Y_guild_portal 2
+	move_wait_click $X_exped $Y_exped 3
 
-	claim_and_restart $X_exped_but $Y_exped_but 1 3
+	claim_and_restart $X_exped_but $Y_exped_but 2 2
 }
 
 launch_and_claim_rituals() {
 	go_to_oracle
-	sleep 2
-	move_wait_click $X_ritual $Y_ritual 1
+	move_wait_click $X_ritual $Y_ritual 3
 
-	claim_and_restart $X_ritual_1 $Y_ritual_1 1 3
-	claim_and_restart $X_ritual_2 $Y_ritual_2 1 3
-	claim_and_restart $X_ritual_3 $Y_ritual_3 1 3
-	claim_and_restart $X_ritual_4 $Y_ritual_4 1 3
+	claim_and_restart $X_ritual_1 $Y_ritual_1 2 2
+	claim_and_restart $X_ritual_2 $Y_ritual_2 2 2
+	claim_and_restart $X_ritual_3 $Y_ritual_3 2 2
+	claim_and_restart $X_ritual_4 $Y_ritual_4 2 2
 }
 
 train_guardian() {
 	go_to_guardian
-	move_wait_click $X_guard $Y_guard 3
-	move_wait_click $X_guard_train $Y_guard_train 1
+	move_wait_click $X_guard $Y_guard 2
+	move_wait_click $X_guard_train $Y_guard_train 2
 }
 
 claim_campaign_loot() {
@@ -217,9 +222,9 @@ claim_campaign_loot() {
 
 claim_tools() {
 	go_to_town
-	move_wait_click $X_engi $Y_engi 1
-	move_wait_click $X_engi_shop $Y_engi_shop 3
-	move_wait_click $X_toolclaim $Y_toolclaim 3
+	move_wait_click $X_engi $Y_engi 2
+	move_wait_click $X_engi_shop $Y_engi_shop 2
+	move_wait_click $X_toolclaim $Y_toolclaim 2
 }
 
 launch_claim_all_timer_income() {
