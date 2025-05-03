@@ -16,16 +16,18 @@
 #     requires a ftree data file with only global data fields set
 #
 # 6 - Processing wait directive file
-#     prevents from claiming if not finished
+#     sets variables that prevent from claiming if not finished
 #
 # 7 - Option "claim"
-#     can't do that if wait directive exists and is no over
+#     can't do that if wait directive exists
+#     that file exists just means it is no over
 #
 # 8 - Search queue file
 #     can go on if search fails when wait directive exists
 #
 # 9 - Decide if wait directive is over
-#     claim (nested call of auto-ftree.sh) or exit
+#     actually reads timestamp in wait file and removes it if required
+#     claim (nested call of auto-ftree.sh) or exit if wait not over
 #
 # 10 - Read and consume commands in queue
 #      each line of queue that is read is consumed
@@ -260,7 +262,7 @@ if [ ! -f "$ftree_fullpath" ]; then
 	echo "Error : cannot find ftree file $ftree_fullpath"
 	exit
 fi
-# don't go further is server has not been configured for auto ftree
+# don't go further if server has not been configured for auto ftree
 
 ###### ##### ##### ##### ##### ##### ##### #####
 # PROCESSING CASES WITH COMMAND LINE ARGUMENTS #
@@ -319,6 +321,7 @@ if [ "$1" == "claim" ]; then
 		exit
 	fi
 
+	go_to_ftree
 	read -t 10 -p "last chance to cancel claim = NON SPACE + RETURN > " do_cancel
 
 	echo
@@ -326,7 +329,6 @@ if [ "$1" == "claim" ]; then
 		echo "** cancel auto claim session **"
 		exit
 	fi
-	go_to_ftree
 	echo "** claiming finished researches **"
 	echo "once"
 	move_wait_click $X_ftree_claim $Y_ftree_claim 2
