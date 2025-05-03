@@ -25,7 +25,7 @@ radish_message "BRUTE FORCE ON WM CAMPAIGN MISSION"
 
 # go back to root screen after each try to avoid uncontrolled infinite clicks
 go_to_map
-move_wait_click $X_camp_map $Y_camp_map 2
+move_wait_click $X_camp_map $Y_camp_map 3
 
 # select mission and start button
 set_mouse_coordinates "wm mission" "X_WM_mission" "Y_WM_mission"
@@ -50,6 +50,6 @@ while true; do
 		break
 	fi
 	go_to_map
-	move_wait_click $X_camp_map $Y_camp_map 2
+	move_wait_click $X_camp_map $Y_camp_map 3
 	move_wait_click $X_WM_mission $Y_WM_mission 2
 done

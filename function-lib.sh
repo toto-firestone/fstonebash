@@ -227,14 +227,14 @@ train_guardian() {
 
 claim_campaign_loot() {
 	go_to_map
-	move_wait_click $X_campaign $Y_campaign 2
+	move_wait_click $X_campaign $Y_campaign 3
 	move_wait_click $X_campaign_loot $Y_campaign_loot 2
 }
 
 claim_tools() {
 	go_to_town
 	move_wait_click $X_engi $Y_engi 2
-	move_wait_click $X_engi_shop $Y_engi_shop 2
+	move_wait_click $X_engi_shop $Y_engi_shop 3
 	move_wait_click $X_toolclaim $Y_toolclaim 2
 }
 
