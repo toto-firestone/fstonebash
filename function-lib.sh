@@ -63,7 +63,7 @@ slow_safe_click() {
 	xdotool mousedown 1
 	sleep .2
 	xdotool mouseup 1
-	sleep .2
+	sleep .4
 }
 
 move_wait_click() {
@@ -71,8 +71,12 @@ move_wait_click() {
 	sleep $3
 	#xdotool click 1
 	slow_safe_click
-	# constant micro temporisatrion
-	sleep .1
+	# constant micro temporisatrion now included in click function
+}
+
+move_wait_only() {
+	xdotool mousemove $1 $2
+	sleep $3
 }
 
 click_and_go() {
@@ -155,6 +159,13 @@ go_to_ftree() {
 	xdotool key l
 	sleep 2
 	move_wait_click $X_ftree_tab $Y_ftree_tab 1
+	# constant micro temporisatrion
+	sleep .5
+}
+
+go_to_alchemy() {
+	focus_and_back_to_root_screen
+	xdotool key a
 	# constant micro temporisatrion
 	sleep .5
 }
