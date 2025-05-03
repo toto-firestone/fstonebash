@@ -58,7 +58,7 @@ if [ "$elapsed" -le "3" ]; then
 			continue;
 		fi
 		# NOT REACHED if coordinates are incomplete
-		move_wait_click $X_mission $Y_mission 2
+		move_wait_click $X_mission $Y_mission 3
 		move_wait_click $X_map_mission_start $Y_map_mission_start 1
 		fast_return_to_map
 	done
@@ -79,7 +79,7 @@ if [ "$elapsed" -le "5" ]; then
 			continue;
 		fi
 		# NOT REACHED if coordinates are incomplete
-		move_wait_click $X_mission $Y_mission 2
+		move_wait_click $X_mission $Y_mission 3
 		move_wait_click $X_map_mission_start $Y_map_mission_start 1
 		fast_return_to_map
 	done
@@ -100,7 +100,7 @@ if [ "$elapsed" -ge "6" ] && [ "$elapsed" -le "9" ]; then
 			continue;
 		fi
 		# NOT REACHED if coordinates are incomplete
-		move_wait_click $X_mission $Y_mission 2
+		move_wait_click $X_mission $Y_mission 3
 		move_wait_click $X_map_mission_start $Y_map_mission_start 1
 		fast_return_to_map
 	done
@@ -121,7 +121,7 @@ if [ "$elapsed" -ge "10" ] && [ "$elapsed" -le "11" ]; then
 			continue;
 		fi
 		# NOT REACHED if coordinates are incomplete
-		move_wait_click $X_mission $Y_mission 2
+		move_wait_click $X_mission $Y_mission 3
 		move_wait_click $X_map_mission_start $Y_map_mission_start 1
 		fast_return_to_map
 	done
