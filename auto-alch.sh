@@ -18,7 +18,9 @@ alchemy_special_click() {
 	xdotool mousedown 1
 	sleep 1
 	xdotool mouseup 1
-	sleep .5
+	sleep 1
+	# extra click in case timing is screwed up
+	move_wait_click $X_alch_close_gem $Y_alch_close_gem 2
 }
 
 claim_alch_experiments() {
