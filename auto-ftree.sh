@@ -1,4 +1,47 @@
 #!/bin/bash
+#
+# ########## Structure of this long script ##########
+#
+# 1 - Load libs and confs, display usage
+#
+# 2 - Functions (a lot)
+#
+# 3 - Search server name, ftree data file
+#     can't go further if this step fails
+#
+# 4 - Option "check" : visual check of each node coordinate
+#     requires ftree data file
+#
+# 5 - Option "config" : useful when starting from scratch
+#     requires a ftree data file with only global data fields set
+#
+# 6 - Processing wait directive file
+#     prevents from claiming if not finished
+#
+# 7 - Option "claim"
+#     can't do that if wait directive exists and is no over
+#
+# 8 - Search queue file
+#     can go on if search fails when wait directive exists
+#
+# 9 - Decide if wait directive is over
+#     claim (nested call of auto-ftree.sh) or exit
+#
+# 10 - Read and consume commands in queue
+#      each line of queue that is read is consumed
+#      ensure that next step can be executed without fail
+#      - remove queue file and exit if it is empty
+#      - exit if first command is not valid or "w"
+#      - only second command can be invalid -> do only one slot
+#      - invalid second command becomes "w" (valid nop)
+#      - remove queue file if all commands consumed
+#
+# 11 - Start ftree nodes
+#      executes at least 1 non "w" command
+#
+# 12 - Send wait directives
+#      we ensured that start is successful
+#
 source function-lib.sh
 source win_id.conf
 
