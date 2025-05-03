@@ -36,7 +36,10 @@ else
 	go_to_settings
 	# additional tempo for server switch task
 	move_wait_click $X_server_switch $Y_server_switch 3
+	# this one deserves a triple click
 	move_wait_click $X_fav_servers $Y_fav_servers 3
+	move_wait_click $X_fav_servers $Y_fav_servers 2
+	move_wait_click $X_fav_servers $Y_fav_servers 1
 	echo "server $1"
 	move_wait_click $X_serv_i $Y_serv_i 3
 	move_wait_click $X_serv_confirm $Y_serv_confirm 3
