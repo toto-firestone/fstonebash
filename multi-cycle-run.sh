@@ -350,6 +350,9 @@ while true; do
 		echo "... with auto-map first"
 		./auto-map.sh
 
+		echo "... then auto alchemy"
+		./auto-alch.sh
+
 		echo "... then auto ftree"
 		./auto-ftree.sh
 
