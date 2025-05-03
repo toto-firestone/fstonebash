@@ -1,0 +1,36 @@
+# manual initialization right now
+X_ftree_tab=1256
+Y_ftree_tab=594
+ftree_n_scroll=33
+X_ftree_start=571
+Y_ftree_start=691
+X_ftree_claim=429
+Y_ftree_claim=828
+
+# slots locations
+declare -a Y_ftree_3_slot=(
+	"348"
+	"521"
+	"700"
+)
+declare -a Y_ftree_2_slot=(
+	"434"
+	"611"
+)
+declare -a Y_ftree_1_slot=(
+	"525"
+)
+
+declare -a X_ftree_page_1=(
+	"178"
+	"503"
+	"831"
+	"1161"
+)
+declare -a X_ftree_page_2=(
+	"167"
+	"495"
+	"822"
+	"1151"
+)
+
