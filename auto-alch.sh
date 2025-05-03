@@ -14,6 +14,13 @@ echo
 
 ### ### ### ###
 
+alchemy_special_click() {
+	xdotool mousedown 1
+	sleep 1
+	xdotool mouseup 1
+	sleep .5
+}
+
 claim_alch_experiments() {
 	local expes=$1
 	if [ -z "$expes" ]; then
@@ -29,18 +36,18 @@ claim_alch_experiments() {
 
 	if [ "${expes:0:1}" == "1" ]; then
 		echo "* claim blood experiment"
-		move_wait_only $X_alch_blood_exp $Y_alch_experiments 3
-		slow_safe_click
+		move_wait_only $X_alch_blood_exp $Y_alch_experiments 4
+		alchemy_special_click
 	fi
 	if [ "${expes:1:1}" == "1" ]; then
 		echo "* claim dust experiment"
-		move_wait_only $X_alch_dust_exp $Y_alch_experiments 3
-		slow_safe_click
+		move_wait_only $X_alch_dust_exp $Y_alch_experiments 4
+		alchemy_special_click
 	fi
 	if [ "${expes:2:1}" == "1" ]; then
 		echo "* claim coin experiment"
-		move_wait_only $X_alch_coin_exp $Y_alch_experiments 3
-		slow_safe_click
+		move_wait_only $X_alch_coin_exp $Y_alch_experiments 4
+		alchemy_special_click
 	fi
 }
 
@@ -166,18 +173,18 @@ fi
 go_to_alchemy
 if [ "${atree_cmd:0:1}" == "1" ]; then
 	echo "* start blood experiment"
-	move_wait_only $X_alch_blood_exp $Y_alch_experiments 3
-	slow_safe_click
+	move_wait_only $X_alch_blood_exp $Y_alch_experiments 4
+	alchemy_special_click
 fi
 if [ "${atree_cmd:1:1}" == "1" ]; then
 	echo "* start dust experiment"
-	move_wait_only $X_alch_dust_exp $Y_alch_experiments 3
-	slow_safe_click
+	move_wait_only $X_alch_dust_exp $Y_alch_experiments 4
+	alchemy_special_click
 fi
 if [ "${atree_cmd:2:1}" == "1" ]; then
 	echo "* start coin experiment"
-	move_wait_only $X_alch_coin_exp $Y_alch_experiments 3
-	slow_safe_click
+	move_wait_only $X_alch_coin_exp $Y_alch_experiments 4
+	alchemy_special_click
 fi
 
 echo "* schedule a wait of $alch_timer half hours"
