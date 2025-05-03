@@ -375,6 +375,11 @@ while true; do
 		else
 			echo "auto-accept off for $i_serv"
 		fi
+
+		xdotool windowactivate --sync $termwin_id
+		echo
+		echo "***** LAST CHANCE TO CTRL+C BEFORE SERVER SWITCH *****"
+		sleep 10
 	done
 
 	i=$((i+1))
