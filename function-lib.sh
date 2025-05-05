@@ -242,6 +242,10 @@ launch_claim_all_timer_income() {
 	anti_ad
 	echo "claim timer income"
 	launch_and_claim_expedition
+	if $1; then
+		echo "*** game over : expedition only ***"
+		return
+	fi
 	launch_and_claim_rituals
 	train_guardian
 	claim_campaign_loot

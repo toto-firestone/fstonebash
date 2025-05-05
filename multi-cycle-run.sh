@@ -294,6 +294,9 @@ ctrl_c() {
 # disturbs stdin... not now
 #trap ctrl_c SIGINT
 
+### game over ###
+source gameover.conf
+
 i=1
 while true; do
 	echo
@@ -305,11 +308,16 @@ while true; do
 		server_config="$current_servname.firestone.conf"
 		echo "reading $server_config"
 		source $server_config
+		gameover_status=$(game_is_over_on_server $current_servname)
+		if $gameover_status; then
+			echo "***** game is over on this server *****"
+		fi
 
 		read_timestamps "mapcycle" 12
 		auto_reset_timestamps "mapcycle" 12
 		read_timestamps "daily" 48
 		auto_reset_timestamps "daily" 48
+		echo
 
 		# Scheduling a dummy task
 		# if todo file already exists, just change his date
@@ -360,7 +368,7 @@ while true; do
 
 		xdotool windowactivate --sync $gamewin_id
 
-		launch_claim_all_timer_income
+		launch_claim_all_timer_income $gameover_status
 
 		curr_flag=${flags_H[$i_serv]-false}
 		if $curr_flag; then

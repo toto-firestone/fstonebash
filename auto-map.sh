@@ -66,6 +66,13 @@ else
 	echo "** skip high value missions after 4 half-hours"
 fi
 
+### game over ###
+source gameover.conf
+if $(game_is_over_on_server $current_servname); then
+	echo "*** game over : skip war, adventure and scout missions ***"
+	exit
+fi
+
 ### War missions during first 3 hours
 
 if [ "$elapsed" -le "5" ]; then
