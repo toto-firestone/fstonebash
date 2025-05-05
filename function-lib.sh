@@ -59,6 +59,13 @@ roll_scroll_up() {
 ## MOTION FUNCTIONS  ##
 ### ### ### ### ### ###
 
+super_slow_click() {
+	xdotool mousedown 1
+	sleep 1
+	xdotool mouseup 1
+	sleep 1
+}
+
 slow_safe_click() {
 	xdotool mousedown 1
 	sleep .2

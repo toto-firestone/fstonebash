@@ -449,8 +449,7 @@ echo "* first slot to start"
 sleep 1
 goto_ftree_node $ftree_cmd_1
 sleep 2
-slow_safe_click
-sleep 1
+super_slow_click
 move_wait_click $X_ftree_start $Y_ftree_start 2
 if [ "$ftree_cmd_2" == "w" ]; then
 	echo "* only 1 slot"
@@ -459,8 +458,7 @@ else
 	sleep 1
 	goto_ftree_node $ftree_cmd_2
 	sleep 2
-	slow_safe_click
-	sleep 1
+	super_slow_click
 	move_wait_click $X_ftree_start $Y_ftree_start 2
 fi
 
