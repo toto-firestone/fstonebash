@@ -39,6 +39,10 @@ echo "hold left button"
 xdotool mousemove_relative --sync 0 112
 sleep 1
 echo "... and drag"
+
+# adjustment due to gui change on armor games platform
+xdotool mousemove_relative --sync 0 -59
+
 xdotool mouseup 1
 sleep 1
 echo "release left button"

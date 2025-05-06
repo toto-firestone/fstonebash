@@ -24,7 +24,7 @@ sleep 5
 echo "ready to load"
 
 X_load=678
-Y_load=823
+Y_load=565
 xdotool mousemove $X_load $Y_load
 sleep 1
 xdotool click 1
