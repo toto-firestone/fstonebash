@@ -75,7 +75,6 @@ ftree_rewind() {
 }
 
 ftree_page_forward() {
-	go_to_ftree
 	if [ "$FtreeGlob_currPage" -lt "2" ]; then
 		xdotool mousemove --window $gamewin_id 700 450
 		sleep 1
@@ -85,7 +84,6 @@ ftree_page_forward() {
 }
 
 ftree_page_backward() {
-	go_to_ftree
 	if [ "$FtreeGlob_currPage" -gt "1" ]; then
 		xdotool mousemove --window $gamewin_id 700 450
 		sleep 1
@@ -95,12 +93,14 @@ ftree_page_backward() {
 }
 
 ftree_page_1() {
+	go_to_ftree
 	if [ "$FtreeGlob_currPage" -gt "1" ]; then
 		ftree_page_backward
 	fi
 }
 
 ftree_page_2() {
+	go_to_ftree
 	if [ "$FtreeGlob_currPage" -lt "2" ]; then
 		ftree_page_forward
 	fi
