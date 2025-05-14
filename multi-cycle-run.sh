@@ -385,6 +385,8 @@ while true; do
 		fi
 
 		xdotool windowactivate --sync $termwin_id
+		read_timestamps "mapcycle" 12
+		auto_reset_timestamps "mapcycle" 12
 		echo
 		echo "***** LAST CHANCE TO CTRL+C BEFORE SERVER SWITCH *****"
 		sleep 10
