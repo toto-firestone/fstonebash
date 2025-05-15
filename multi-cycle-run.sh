@@ -337,26 +337,30 @@ while true; do
 		echo
 		echo "2 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
-		read -t 60 -p "or hit only RETURN to speed-up > " user_input
+		read -t 60 -p "or hit only RETURN to speed-up > " user_input1
 		echo
-		if [ -n "$user_input" ]; then
+		if [ -n "$user_input1" ]; then
 			interactive_session
 		fi
 
 		check_scheduled_tasks
 		echo "1 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
-		read -t 50 -p "or hit only RETURN to speed-up > " user_input
+		read -t 50 -p "or hit only RETURN to speed-up > " user_input2
 		echo
-		if [ -n "$user_input" ]; then
+		if [ -n "$user_input2" ]; then
 			interactive_scheduled
 		fi
-		echo "idle mode ends in 10 secdonds"
-		sleep 10
-		echo "starting automated sequence"
 
-		echo "... with auto-map first"
-		./auto-map.sh
+		if [ -n "$user_input1" ] || [ -n "$user_input2" ]; then
+			echo "WARNING : manual intervention detected"
+			echo "10 seconds before SKIP AUTO-MAP"
+			sleep 10
+		else
+			echo "10 seconds before AUTO-MAP"
+			sleep 10
+			./auto-map.sh
+		fi
 
 		echo "... then auto alchemy"
 		./auto-alch.sh
