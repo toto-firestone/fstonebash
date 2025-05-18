@@ -352,6 +352,9 @@ while true; do
 			interactive_scheduled
 		fi
 
+		read_timestamps "mapcycle" 12
+		auto_reset_timestamps "mapcycle" 12
+		echo
 		if [ -n "$user_input1" ] || [ -n "$user_input2" ]; then
 			echo "WARNING : manual intervention detected"
 			echo "10 seconds before SKIP AUTO-MAP"
@@ -374,6 +377,7 @@ while true; do
 
 		launch_claim_all_timer_income $gameover_status
 
+		source auto-accept.conf
 		curr_flag=${flags_H[$i_serv]-false}
 		if $curr_flag; then
 			echo "auto-accept on for $i_serv"
