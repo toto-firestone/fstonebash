@@ -14,7 +14,7 @@ source view.conf
 
 echo "MAKE SURE ./setwin_id HAS BEEN RUN"
 echo "AND THE GAME IS LOADING OR LOADED BEFORE DOING THIS"
-radish_message "RESTORE GAME STANDARD VIEW"
+radish_message_noprompt "RESTORE GAME STANDARD VIEW"
 
 xdotool windowactivate --sync $gamewin_id
 sleep 1

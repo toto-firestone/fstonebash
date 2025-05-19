@@ -33,3 +33,15 @@ sleep 10
 xdotool windowactivate --sync $termwin_id
 sleep 1
 ./restore-game-view.sh
+
+source function-lib.sh
+
+X_avatar=105
+Y_avatar=233
+
+echo "***** wait for loading before close loot and event windows *****"
+sleep 80
+move_wait_click $X_avatar $Y_avatar 2
+move_wait_click $X_avatar $Y_avatar 2
+focus_and_back_to_root_screen
+echo "***** ready to grind *****"
