@@ -383,7 +383,7 @@ while true; do
 			echo "auto-accept on for $i_serv"
 			go_to_town
 			move_wait_click $X_guild_portal $Y_guild_portal 2
-			move_wait_click $X_guild_hall $Y_guild_hall 2
+			move_wait_click $X_guild_hall $Y_guild_hall 6
 			sleep 5
 			move_wait_click $X_applications $Y_applications 2
 			move_wait_click $X_accept_player $Y_accept_player 2
@@ -399,6 +399,9 @@ while true; do
 		echo "***** LAST CHANCE TO CTRL+C BEFORE SERVER SWITCH *****"
 		sleep 10
 	done
+	./firestone-quit.sh
+	sleep 30
+	./firestone-starter.sh
 
 	i=$((i+1))
 done

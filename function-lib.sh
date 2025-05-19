@@ -211,7 +211,7 @@ claim_and_restart() {
 launch_and_claim_expedition() {
 	go_to_town
 	move_wait_click $X_guild_portal $Y_guild_portal 2
-	move_wait_click $X_exped $Y_exped 3
+	move_wait_click $X_exped $Y_exped 6
 
 	claim_and_restart $X_exped_but $Y_exped_but 2 2
 }
