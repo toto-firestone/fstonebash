@@ -32,7 +32,7 @@ ncc_similarity() {
 		echo "0"
 		return
 	fi
-	compare -metric NCC $img1 $img2 null 2> /tmp/ncc.txt
+	compare -metric NCC $img1 $img2 null: 2> /tmp/ncc.txt
 	local comp_out=$(cat /tmp/ncc.txt)
 	echo "$comp_out"
 }
