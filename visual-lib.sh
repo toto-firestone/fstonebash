@@ -37,3 +37,34 @@ ncc_similarity() {
 	echo "$comp_out"
 }
 
+
+### ### ### ### ### ####
+### GLOBAL VARIABLES ###
+### ### ### ### ### ####
+
+# Should not be here, but right now it's OK
+
+x_irongard_ul=501
+y_irongard_ul=176
+x_irongard_br=881
+y_irongard_br=215
+
+
+#### ### ### ### ####
+### VISUAL CHECKS ###
+#### ### ### ### ####
+
+test_freeze() {
+	focus_and_back_to_root_screen
+	make_ROI $x_irongard_ul $y_irongard_ul $x_irongard_br $y_irongard_br /tmp/test_freeze_root.png
+
+	go_to_town
+	make_ROI $x_irongard_ul $y_irongard_ul $x_irongard_br $y_irongard_br /tmp/test_freeze_town.png
+
+	local ncc=$(ncc_similarity /tmp/test_freeze_root.png /tmp/test_freeze_town.png)
+
+	focus_and_back_to_root_screen
+
+	local compare=$(echo "$ncc > 0.5" | bc -l)
+	log_msg "* test freeze $1 : ncc=$ncc freeze=$compare"
+}

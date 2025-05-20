@@ -297,12 +297,18 @@ ctrl_c() {
 ### game over ###
 source gameover.conf
 
+### visual tools ###
+source visual-lib.sh
+
 i=1
 while true; do
 	echo
 	echo "macro cycle ${i}"
 
 	for i_serv in $@; do
+		test_freeze "before switch to $i_serv"
+		tail -n 1 ./tmp/firestone.log
+
 		./switch-server.sh $i_serv
 		source switch.conf
 		server_config="$current_servname.firestone.conf"
@@ -399,8 +405,10 @@ while true; do
 		echo "***** LAST CHANCE TO CTRL+C BEFORE SERVER SWITCH *****"
 		sleep 10
 	done
+	log_msg "quit firestone"
 	./firestone-quit.sh
 	./firestone-starter.sh
+	log_msg "firestone restarted"
 
 	i=$((i+1))
 done
