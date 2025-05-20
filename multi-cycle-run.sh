@@ -400,7 +400,6 @@ while true; do
 		sleep 10
 	done
 	./firestone-quit.sh
-	sleep 30
 	./firestone-starter.sh
 
 	i=$((i+1))

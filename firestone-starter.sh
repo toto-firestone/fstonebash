@@ -40,8 +40,11 @@ X_avatar=105
 Y_avatar=233
 
 echo "***** wait for loading before close loot and event windows *****"
-sleep 80
+echo "** interrupt with RETURN if loading finishes before time limit"
+read -t 180 -p " > " dummy
+xdotool windowactivate --sync $gamewin_id
 move_wait_click $X_avatar $Y_avatar 2
 move_wait_click $X_avatar $Y_avatar 2
 focus_and_back_to_root_screen
+echo
 echo "***** ready to grind *****"
