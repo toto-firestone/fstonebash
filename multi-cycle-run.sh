@@ -307,7 +307,15 @@ while true; do
 
 	for i_serv in $@; do
 		test_freeze "before switch to $i_serv"
-		tail -n 1 ./tmp/firestone.log
+		freeze_crit=$(tail -n 1 ./tmp/firestone.log | grep 'freeze=1')
+		if [ -n "$freeze_crit" ]; then
+			echo "*** freeze detected before switch to $i_serv"
+			echo "*** skip all remaining servers"
+			echo "*** reach restart at next macro cycle"
+			break
+		else
+			echo "*** no freeze before switch to $i_serv"
+		fi
 
 		./switch-server.sh $i_serv
 		source switch.conf
