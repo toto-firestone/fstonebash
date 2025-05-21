@@ -54,6 +54,13 @@ y_url_ul=73
 x_url_br=1123
 y_url_br=103
 
+start_ref_pic="./tmp/start-ref.png"
+x_startref_ul=72
+y_startref_ul=699
+x_startref_br=109
+y_startref_br=732
+
+
 #### ### ### ### ####
 ### VISUAL CHECKS ###
 #### ### ### ### ####
@@ -100,4 +107,41 @@ safe_quit() {
 		log_msg "* quit attempt $i_try : ncc=$ncc fail=$compare"
 	done
 	echo "* quit successful"
+}
+
+init_start_ref_picture() {
+	make_ROI $x_startref_ul $y_startref_ul $x_startref_br $y_startref_br $start_ref_pic
+}
+
+# does not make sense to retry forever
+# just don't let the bot play on nothing
+# wait for human intervention after a timeout
+wait_game_start() {
+	local n_try=$1
+	local t_interval=$2
+	local i_check=1
+	local ncc=0
+	local compare=0
+	while [ "$i_check" -le "$n_try" ]; do
+		sleep $t_interval
+		echo "* check $i_check"
+		make_ROI $x_startref_ul $y_startref_ul $x_startref_br $y_startref_br /tmp/start-check.png
+
+		ncc=$(ncc_similarity /tmp/start-check.png $start_ref_pic)
+		compare=$(echo "$ncc > 0.5" | bc -l)
+		if [ "$compare" == "1" ]; then
+			log_msg "* start check $i_check/$n_try : ncc=$ncc success=$compare"
+			return
+		else
+			echo "* wait $t_interval more sec."
+		fi
+		i_check=$((i_check+1))
+	done
+	# NOT REACHED IF FAIL
+	local dummy=""
+	log_msg "* start failed ($i_check/$n_try) : ncc=$ncc success=$compare"
+	echo
+	echo "*** There is a problem : human intervention required ***"
+	read -p "stop with CTRL+C or continue with RETURN " dummy
+	log_msg "* human intervention after start failure"
 }

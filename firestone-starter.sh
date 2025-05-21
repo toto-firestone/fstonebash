@@ -35,13 +35,18 @@ sleep 1
 ./restore-game-view.sh
 
 source function-lib.sh
+source visual-lib.sh
 
 X_avatar=105
 Y_avatar=233
 
 echo "***** wait for loading before close loot and event windows *****"
-echo "** interrupt with RETURN if loading finishes before time limit"
-read -t 180 -p " > " dummy
+#echo "** interrupt with RETURN if loading finishes before time limit"
+#read -t 180 -p " > " dummy
+
+# 72 x 20 secs.
+wait_game_start 72 20
+
 xdotool windowactivate --sync $gamewin_id
 move_wait_click $X_avatar $Y_avatar 2
 move_wait_click $X_avatar $Y_avatar 2
