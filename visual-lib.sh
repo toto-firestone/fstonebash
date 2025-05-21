@@ -49,6 +49,10 @@ y_irongard_ul=176
 x_irongard_br=881
 y_irongard_br=215
 
+x_url_ul=258
+y_url_ul=73
+x_url_br=1123
+y_url_br=103
 
 #### ### ### ### ####
 ### VISUAL CHECKS ###
@@ -67,4 +71,33 @@ test_freeze() {
 
 	local compare=$(echo "$ncc > 0.5" | bc -l)
 	log_msg "* test freeze $1 : ncc=$ncc freeze=$compare"
+}
+
+
+### ### ### ### ### ###
+### ROBUST COMMANDS ###
+### ### ### ### ### ###
+
+safe_quit() {
+	make_ROI $x_url_ul $y_url_ul $x_url_br $y_url_br /tmp/before_quit.png
+
+	local i_try=1
+	echo "* quit - attempt $i_try"
+	./firestone-quit.sh
+	make_ROI $x_url_ul $y_url_ul $x_url_br $y_url_br /tmp/after_quit.png
+	local ncc=$(ncc_similarity /tmp/before_quit.png /tmp/after_quit.png)
+	local compare=$(echo "$ncc > 0.5" | bc -l)
+	log_msg "* quit attempt $i_try : ncc=$ncc fail=$compare"
+
+	while [ "$compare" != "0" ]; do
+		i_try=$((i_try+1))
+		echo "* quit - attempt $i_try"
+		./firestone-quit.sh
+		make_ROI $x_url_ul $y_url_ul $x_url_br $y_url_br /tmp/after_quit.png
+
+		ncc=$(ncc_similarity /tmp/before_quit.png /tmp/after_quit.png)
+		compare=$(echo "$ncc > 0.5" | bc -l)
+		log_msg "* quit attempt $i_try : ncc=$ncc fail=$compare"
+	done
+	echo "* quit successful"
 }

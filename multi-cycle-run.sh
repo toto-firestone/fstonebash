@@ -406,7 +406,8 @@ while true; do
 		sleep 10
 	done
 	log_msg "quit firestone"
-	./firestone-quit.sh
+	#./firestone-quit.sh
+	safe_quit
 	./firestone-starter.sh
 	log_msg "firestone restarted"
 
