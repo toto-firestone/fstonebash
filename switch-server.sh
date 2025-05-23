@@ -56,10 +56,11 @@ else
 		echo "* game did non restarted after server switch"
 		echo "* try to quit and restart once"
 		#read -p "stop with CTRL+C or continue with RETURN " dummy
-		log_msg "quit firestone"
+		# the blocking read statement is in firestone starter
+		log_msg "*** quit firestone ***"
 		safe_quit
 		./firestone-starter.sh
-		log_msg "firestone restarted"
+		log_msg "*** firestone restarted ***"
 		source win_id.conf
 	else
 		echo "* game restarted without error after server switch"

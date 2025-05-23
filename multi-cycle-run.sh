@@ -416,10 +416,10 @@ while true; do
 		echo "***** LAST CHANCE TO CTRL+C BEFORE SERVER SWITCH *****"
 		sleep 10
 	done
-	log_msg "quit firestone"
+	log_msg "*** quit firestone ***"
 	safe_quit
 	./firestone-starter.sh
-	log_msg "firestone restarted"
+	log_msg "*** firestone restarted ***"
 	source win_id.conf
 
 	i=$((i+1))
