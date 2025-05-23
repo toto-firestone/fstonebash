@@ -7,7 +7,7 @@
 
 screenshot() {
 	import -window root /tmp/shot.png
-	echo "* screenshot at /tmp/shot.png"
+	#echo "* screenshot at /tmp/shot.png"
 }
 
 make_ROI() {
@@ -20,7 +20,7 @@ make_ROI() {
 	local w_roi=$((x_max-x_min))
 	local h_roi=$((y_max-y_min))
 	local geom="${w_roi}x${h_roi}+${x_min}+${y_min}"
-	echo "* ROI is rectangle $geom"
+	#echo "* ROI is rectangle $geom"
 
 	convert /tmp/shot.png -crop $geom $roi_file
 }
