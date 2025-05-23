@@ -116,9 +116,18 @@ init_start_ref_picture() {
 # does not make sense to retry forever
 # just don't let the bot play on nothing
 # wait for human intervention after a timeout
+# or let it go if 3rd argument is provided
 wait_game_start() {
 	local n_try=$1
 	local t_interval=$2
+	if [ -z "$3" ]; then
+		echo "** blocking wait **"
+		log_msg "** blocking wait **"
+	else
+		echo "** non-blocking wait **"
+		log_msg "** non-blocking wait **"
+	fi
+
 	local i_check=1
 	local ncc=0
 	local compare=0
@@ -137,11 +146,15 @@ wait_game_start() {
 		fi
 		i_check=$((i_check+1))
 	done
-	# NOT REACHED IF FAIL
+	# NOT REACHED IF SUCCESS
 	local dummy=""
 	log_msg "* start failed ($i_check/$n_try) : ncc=$ncc success=$compare"
 	echo
-	echo "*** There is a problem : human intervention required ***"
-	read -p "stop with CTRL+C or continue with RETURN " dummy
-	log_msg "* human intervention after start failure"
+	if [ -z "$3" ]; then
+		echo "*** There is a problem : human intervention required ***"
+		read -p "stop with CTRL+C or continue with RETURN " dummy
+		log_msg "* human intervention now"
+	else
+		echo "*** There is a problem : further action is required ***"
+	fi
 }

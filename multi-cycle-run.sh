@@ -318,7 +318,10 @@ while true; do
 		fi
 
 		./switch-server.sh $i_serv
+		# LAST USAGE OF i_serv ON THE ITERATION
+		source win_id.conf
 		source switch.conf
+
 		server_config="$current_servname.firestone.conf"
 		echo "reading $server_config"
 		source $server_config
@@ -392,9 +395,9 @@ while true; do
 		launch_claim_all_timer_income $gameover_status
 
 		source auto-accept.conf
-		curr_flag=${flags_H[$i_serv]-false}
+		curr_flag=${flags_H[$current_servname]-false}
 		if $curr_flag; then
-			echo "auto-accept on for $i_serv"
+			echo "auto-accept on for $current_servname"
 			go_to_town
 			move_wait_click $X_guild_portal $Y_guild_portal 2
 			move_wait_click $X_guild_hall $Y_guild_hall 6
@@ -403,7 +406,7 @@ while true; do
 			move_wait_click $X_accept_player $Y_accept_player 2
 			focus_and_back_to_root_screen
 		else
-			echo "auto-accept off for $i_serv"
+			echo "auto-accept off for $current_servname"
 		fi
 
 		xdotool windowactivate --sync $termwin_id
@@ -414,10 +417,10 @@ while true; do
 		sleep 10
 	done
 	log_msg "quit firestone"
-	#./firestone-quit.sh
 	safe_quit
 	./firestone-starter.sh
 	log_msg "firestone restarted"
+	source win_id.conf
 
 	i=$((i+1))
 done

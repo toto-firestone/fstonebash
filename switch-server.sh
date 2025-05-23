@@ -1,5 +1,6 @@
 #!/bin/bash
 source function-lib.sh
+source visual-lib.sh
 
 # THIS IS RADISH AUTOMATION TOOL
 # SERVER SWITCH COMMAND
@@ -25,8 +26,9 @@ if [ ! -f "$1" ]; then
 	exit 1
 fi
 
+log_msg "** switch from $current_servname to $1 **"
 xdotool windowactivate --sync $gamewin_id
-if [ "$current_servname" = "$1" ]; then
+if [ "$current_servname" == "$1" ]; then
 	echo "server switch not required"
 	anti_ad
 else
@@ -47,7 +49,21 @@ else
 	echo "current_servname=${1}" > switch.conf
 	cat switch.conf
 	xdotool windowactivate --sync $termwin_id
-	sleep 20
+	#sleep 20
+	wait_game_start 8 20 "non-blocking"
+	fail_crit=$(tail -n 1 ./tmp/firestone.log | grep 'success=0')
+	if [ -n "$fail_crit" ]; then
+		echo "* game did non restarted after server switch"
+		echo "* try to quit and restart once"
+		#read -p "stop with CTRL+C or continue with RETURN " dummy
+		log_msg "quit firestone"
+		safe_quit
+		./firestone-starter.sh
+		log_msg "firestone restarted"
+		source win_id.conf
+	else
+		echo "* game restarted without error after server switch"
+	fi
 fi
 focus_and_back_to_root_screen
 
