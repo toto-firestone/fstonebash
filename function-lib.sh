@@ -55,6 +55,17 @@ roll_scroll_up() {
 	done
 }
 
+drag_and_drop() {
+	xdotool mousemove $1 $2
+	sleep 1
+	xdotool mousedown 1
+	sleep 1
+	xdotool mousemove $3 $4
+	sleep 1
+	xdotool mouseup 1
+	sleep 1
+}
+
 ### ### ### ### ### ###
 ## MOTION FUNCTIONS  ##
 ### ### ### ### ### ###
