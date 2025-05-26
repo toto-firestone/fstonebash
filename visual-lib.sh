@@ -60,6 +60,21 @@ y_startref_ul=699
 x_startref_br=109
 y_startref_br=732
 
+x_servname_ul=877
+y_servname_ul=442
+x_servname_br=1210
+y_servname_br=555
+fav_server_list="s1 s27 s31 s8 s14"
+server_pic() {
+	echo "./tmp/${1}-server-pic.png"
+}
+
+x_switch_fav_ul=352
+y_switch_fav_ul=211
+x_switch_fav_br=1023
+y_switch_fav_br=320
+switch_fav_pic="./tmp/switch-fav-ref.png"
+
 
 #### ### ### ### ####
 ### VISUAL CHECKS ###
@@ -69,7 +84,10 @@ test_freeze() {
 	focus_and_back_to_root_screen
 	make_ROI $x_irongard_ul $y_irongard_ul $x_irongard_br $y_irongard_br /tmp/test_freeze_root.png
 
-	go_to_town
+	#go_to_town
+	sleep 1
+	xdotool key t
+	sleep 3
 	make_ROI $x_irongard_ul $y_irongard_ul $x_irongard_br $y_irongard_br /tmp/test_freeze_town.png
 
 	local ncc=$(ncc_similarity /tmp/test_freeze_root.png /tmp/test_freeze_town.png)
@@ -78,6 +96,63 @@ test_freeze() {
 
 	local compare=$(echo "$ncc > 0.5" | bc -l)
 	log_msg "* test freeze $1 : ncc=$ncc freeze=$compare"
+}
+
+init_server_pic() {
+	local i_serv=""
+	for i_serv in $fav_server_list; do
+		./switch-server.sh $i_serv
+		go_to_settings
+		source switch.conf
+		echo "** initializing server picture for $current_servname"
+		make_ROI $x_servname_ul $y_servname_ul $x_servname_br $y_servname_br $(server_pic $current_servname)
+
+	done
+}
+
+find_real_servername() {
+	local answer="unknown"
+	local i_try=""
+
+	go_to_settings
+	make_ROI $x_servname_ul $y_servname_ul $x_servname_br $y_servname_br /tmp/this-server-pic.png
+
+	local ncc=""
+	local compare=""
+	for i_try in $fav_server_list; do
+		ncc=$(ncc_similarity /tmp/this-server-pic.png $(server_pic $i_try))
+
+		compare=$(echo "$ncc > 0.8" | bc -l)
+		#echo "* trying to match with $i_try : $ncc"
+		if [ "$compare" == "1" ]; then
+			answer=$i_try
+			break
+		fi
+	done
+	log_msg "* real_servername=$answer"
+}
+
+init_switch_to_fav_pic() {
+	go_to_settings
+	source switch.conf
+	source $current_servname
+	move_wait_click $X_server_switch $Y_server_switch 3
+	# this one deserves a triple click
+	move_wait_click $X_fav_servers $Y_fav_servers 3
+	move_wait_click $X_fav_servers $Y_fav_servers 2
+	move_wait_click $X_fav_servers $Y_fav_servers 1
+	make_ROI $x_switch_fav_ul $y_switch_fav_ul $x_switch_fav_br $y_switch_fav_br $switch_fav_pic
+
+}
+
+check_switch_to_fav_reached() {
+	make_ROI $x_switch_fav_ul $y_switch_fav_ul $x_switch_fav_br $y_switch_fav_br /tmp/switch-fav.png
+
+	local ncc=""
+	local compare=""
+	ncc=$(ncc_similarity /tmp/switch-fav.png $switch_fav_pic)
+	compare=$(echo "$ncc > 0.95" | bc -l)
+	log_msg "* switch_fav_reached=$compare"
 }
 
 
@@ -158,3 +233,4 @@ wait_game_start() {
 		echo "*** There is a problem : further action is required ***"
 	fi
 }
+

@@ -318,9 +318,14 @@ while true; do
 		fi
 
 		./switch-server.sh $i_serv
-		# LAST USAGE OF i_serv ON THE ITERATION
 		source win_id.conf
 		source switch.conf
+		# LAST USAGE OF i_serv ON THE ITERATION
+		if [ "$i_serv" != "$current_servname" ]; then
+			echo "* server switch in wrong server"
+			echo "**** SKIP THIS SERVER CYCLE ****"
+			continue
+		fi
 
 		server_config="$current_servname.firestone.conf"
 		echo "reading $server_config"
