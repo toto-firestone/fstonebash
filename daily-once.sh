@@ -5,6 +5,7 @@
 
 source daily.conf
 source switch.conf
+source function-lib.sh
 
 if [ "$1" == "force" ]; then
 	echo "** enforce doing daily now **"
