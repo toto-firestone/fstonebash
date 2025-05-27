@@ -62,3 +62,6 @@ else
 	echo "skip daily collect"
 fi
 
+if [ "$1" != "force" ]; then
+	remove_task "$current_servname.daily.todo"
+fi
