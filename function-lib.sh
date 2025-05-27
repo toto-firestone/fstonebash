@@ -191,6 +191,24 @@ go_to_alchemy() {
 	sleep .5
 }
 
+go_to_daily_quests() {
+	focus_and_back_to_root_screen
+	xdotool key q
+	sleep 2
+	move_wait_click $X_daily_quests $Y_daily_quests 3
+	move_wait_click $X_daily_quests $Y_daily_quests 2
+	move_wait_click $X_daily_quests $Y_daily_quests 1
+}
+
+go_to_weekly_quests() {
+	focus_and_back_to_root_screen
+	xdotool key q
+	sleep 2
+	move_wait_click $X_weekly_quests $Y_weekly_quests 3
+	move_wait_click $X_weekly_quests $Y_weekly_quests 2
+	move_wait_click $X_weekly_quests $Y_weekly_quests 1
+}
+
 anti_ad() {
 	#click_and_go $X_game_tab $Y_game_tab "anti-ad"
 	# this one is not move_wait_click since it requires

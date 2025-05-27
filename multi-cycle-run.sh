@@ -45,6 +45,15 @@ source auto-accept.conf
 
 echo "very basic checks performed..."
 
+### ADDITIONAL VARIABLES THAT WILL BE MOVED... LATER ###
+X_daily_quests=552
+Y_daily_quests=258
+X_weekly_quests=828
+Y_weekly_quests=257
+X_quests_claim=1116
+Y_quests_claim=368
+N_max_quests=10
+
 ### ### ### ###
 
 manual_reset_timestamps() {
@@ -301,6 +310,21 @@ handle_auto_accept() {
 	fi
 }
 
+handle_quests_claim() {
+	if [ ! -f "./tmp/$current_servname.quests.todo" ]; then
+		echo "* no quests claim"
+		return
+	else
+		echo "* quests claim"
+	fi
+	# NOT REACHED IF NO SCHEDULE FILE
+	go_to_daily_quests
+	go_to_weekly_quests
+	focus_and_back_to_root_screen
+
+	remove_task $current_servname.quests.todo
+}
+
 ### ### ### ###
 log_msg "***** multi server script starts *****"
 ctrl_c() {
@@ -385,7 +409,7 @@ while true; do
 		check_scheduled_tasks
 		echo "1 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
-		read -t 50 -p "or hit only RETURN to speed-up > " user_input2
+		read -t 60 -p "or hit only RETURN to speed-up > " user_input2
 		echo
 		if [ -n "$user_input2" ]; then
 			interactive_scheduled
@@ -393,6 +417,8 @@ while true; do
 
 		read_timestamps "mapcycle" 12
 		auto_reset_timestamps "mapcycle" 12
+
+		xdotool windowactivate --sync $gamewin_id
 
 		./daily-once.sh
 
@@ -417,9 +443,9 @@ while true; do
 
 		handle_fridaycode
 
-		xdotool windowactivate --sync $gamewin_id
-
 		launch_claim_all_timer_income $gameover_status
+
+		handle_quests_claim
 
 		handle_auto_accept
 
