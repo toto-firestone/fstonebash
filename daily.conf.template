@@ -1,9 +1,28 @@
 # flags
 # do not leave undefined values
 
+declare -A auto_daily_H=(
+	["s1"]=true
+	["s14"]=false
+	["s27"]=true
+	["s31"]=true
+	["s8"]=false
+	["s25"]=false
+)
+
+# time unit is half-hour
+declare -A daily_start_delay_H=(
+	["s1"]="2"
+	["s14"]="0"
+	["s27"]="4"
+	["s31"]="0"
+	["s8"]="0"
+	["s25"]="0"
+)
+
 declare -A do_libe_H=(
 	["s1"]=true
-	["s14"]=true
+	["s14"]=false
 	["s27"]=true
 	["s31"]=true
 	["s8"]=false
@@ -23,7 +42,7 @@ declare -A Nlibe_H=(
 	["s1"]="8"
 	["s14"]="7"
 	["s27"]="6"
-	["s31"]="2"
+	["s31"]="4"
 	["s8"]="6"
 	["s25"]="3"
 )

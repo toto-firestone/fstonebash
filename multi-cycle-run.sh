@@ -254,7 +254,7 @@ interactive_scheduled() {
 			daily ) echo "Choice : $i_choice"
 				if [ $(check_before_doit) == "do" ]; then
 					echo "doing it"
-					./daily-once.sh
+					./daily-once.sh "force"
 					log_msg "* doing daily on $current_servname"
 
 				else
@@ -281,6 +281,23 @@ handle_fridaycode() {
 		xdotool type --delay 600 $reward_code
 		move_wait_click $X_submit $Y_submit 2
 		remove_task $friday_task
+	fi
+}
+
+handle_auto_accept() {
+	source auto-accept.conf
+	local curr_flag=${flags_H[$current_servname]-false}
+	if $curr_flag; then
+		echo "auto-accept on for $current_servname"
+		go_to_town
+		move_wait_click $X_guild_portal $Y_guild_portal 2
+		move_wait_click $X_guild_hall $Y_guild_hall 6
+		sleep 5
+		move_wait_click $X_applications $Y_applications 2
+		move_wait_click $X_accept_player $Y_accept_player 2
+		focus_and_back_to_root_screen
+	else
+		echo "auto-accept off for $current_servname"
 	fi
 }
 
@@ -376,6 +393,11 @@ while true; do
 
 		read_timestamps "mapcycle" 12
 		auto_reset_timestamps "mapcycle" 12
+
+		./daily-once.sh
+
+		read_timestamps "mapcycle" 12
+		auto_reset_timestamps "mapcycle" 12
 		echo
 		if [ -n "$user_input1" ] || [ -n "$user_input2" ]; then
 			echo "WARNING : manual intervention detected"
@@ -399,20 +421,7 @@ while true; do
 
 		launch_claim_all_timer_income $gameover_status
 
-		source auto-accept.conf
-		curr_flag=${flags_H[$current_servname]-false}
-		if $curr_flag; then
-			echo "auto-accept on for $current_servname"
-			go_to_town
-			move_wait_click $X_guild_portal $Y_guild_portal 2
-			move_wait_click $X_guild_hall $Y_guild_hall 6
-			sleep 5
-			move_wait_click $X_applications $Y_applications 2
-			move_wait_click $X_accept_player $Y_accept_player 2
-			focus_and_back_to_root_screen
-		else
-			echo "auto-accept off for $current_servname"
-		fi
+		handle_auto_accept
 
 		xdotool windowactivate --sync $termwin_id
 		read_timestamps "mapcycle" 12
