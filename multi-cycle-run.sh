@@ -73,6 +73,11 @@ manual_reset_timestamps() {
 	if [ -n "$2" ]; then
 		log_msg "* time correction : $2 secs"
 	fi
+
+	## manual reset of mapcycle timestamp -> quests claim task ##
+	if [ "$1" == "mapcycle" ]; then
+		schedule_task "$current_servname.quests.todo"
+	fi
 }
 
 dialog_reset_timestamps() {
@@ -192,11 +197,18 @@ auto_reset_timestamps() {
 		case $1 in
 			daily ) echo "* reschedule task : $1"
 				schedule_task "$current_servname.daily.todo";;
+
+			## auto reset of mapcycle timestamp ##
+			## -> quests claim task ##
+			mapcycle ) echo "* mapcycle reset -> quests claim"
+				schedule_task "$current_servname.quests.todo";;
+
 			* ) echo "* no task to reschedule for $1";;
 		esac
 	else
 		echo "*** Nothing to do ***"
 	fi
+	echo
 }
 
 check_scheduled_tasks() {
@@ -319,7 +331,25 @@ handle_quests_claim() {
 	fi
 	# NOT REACHED IF NO SCHEDULE FILE
 	go_to_daily_quests
-	go_to_weekly_quests
+	echo "* claim daily"
+	local i_claim="0"
+	while [ "$i_claim" -lt "$N_max_quests" ]; do
+		move_wait_click $X_quests_claim $Y_quests_claim 1
+		i_claim=$((i_claim+1))
+	done
+
+	local week_crit=$(date +%A | grep -E 'dimanche|lundi|mardi')
+	if [ -n "$week_crit" ]; then
+		go_to_weekly_quests
+		echo "* claim weekly"
+		i_claim="0"
+		while [ "$i_claim" -lt "$N_max_quests" ]; do
+			move_wait_click $X_quests_claim $Y_quests_claim 1
+			i_claim=$((i_claim+1))
+		done
+	else
+		echo "* skip weekly"
+	fi
 	focus_and_back_to_root_screen
 
 	remove_task $current_servname.quests.todo
