@@ -177,6 +177,9 @@ go_to_ftree() {
 	xdotool key l
 	sleep 2
 	move_wait_click $X_ftree_tab $Y_ftree_tab 1
+	# need to do it 3 times
+	move_wait_click $X_ftree_tab $Y_ftree_tab 1
+	move_wait_click $X_ftree_tab $Y_ftree_tab 2
 	# constant micro temporisatrion
 	sleep .5
 }
