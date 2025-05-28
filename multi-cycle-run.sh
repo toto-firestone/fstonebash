@@ -439,7 +439,7 @@ while true; do
 		check_scheduled_tasks
 		echo "1 minutes idle mode... interrupt with CTRL+C"
 		echo "type any key + RETURN for manual mode"
-		read -t 60 -p "or hit only RETURN to speed-up > " user_input2
+		read -t 50 -p "or hit only RETURN to speed-up > " user_input2
 		echo
 		if [ -n "$user_input2" ]; then
 			interactive_scheduled
@@ -449,11 +449,6 @@ while true; do
 		auto_reset_timestamps "mapcycle" 12
 
 		xdotool windowactivate --sync $gamewin_id
-
-		./daily-once.sh
-
-		read_timestamps "mapcycle" 12
-		auto_reset_timestamps "mapcycle" 12
 		echo
 		if [ -n "$user_input1" ] || [ -n "$user_input2" ]; then
 			echo "WARNING : manual intervention detected"
@@ -464,6 +459,11 @@ while true; do
 			sleep 10
 			./auto-map.sh
 		fi
+
+		./daily-once.sh
+
+		read_timestamps "mapcycle" 12
+		auto_reset_timestamps "mapcycle" 12
 
 		echo "... then auto alchemy"
 		./auto-alch.sh
