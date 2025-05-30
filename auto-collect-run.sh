@@ -54,5 +54,8 @@ move_wait_click $X_guardian_rune $Y_guardian_rune 2
 move_wait_click $X_totem_agony $Y_totem_agony 2
 move_wait_click $X_totem_annihil $Y_totem_annihil 2
 
+echo "claim pickaxes"
+./claim-pickaxe.sh
+
 focus_and_back_to_root_screen
 
