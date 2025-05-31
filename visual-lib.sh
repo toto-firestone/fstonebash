@@ -115,13 +115,16 @@ find_real_servername() {
 	local i_try=""
 
 	go_to_settings
+	sleep 3
 	make_ROI $x_servname_ul $y_servname_ul $x_servname_br $y_servname_br /tmp/this-server-pic.png
 
 	local ncc=""
 	local compare=""
 	for i_try in $fav_server_list; do
+		#echo "* trying $(server_pic $i_try)"
 		ncc=$(ncc_similarity /tmp/this-server-pic.png $(server_pic $i_try))
 
+		#echo "* ncc=$ncc"
 		compare=$(echo "$ncc > 0.8" | bc -l)
 		#echo "* trying to match with $i_try : $ncc"
 		if [ "$compare" == "1" ]; then
