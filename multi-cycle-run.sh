@@ -424,22 +424,22 @@ while true; do
 		# actually done is fine.
 
 		xdotool windowminimize --sync $gamewin_id
-		echo "screen and cpu saving during idle mode"
+		echo "screen and cpu saving"
 		sleep 2
 		xdotool windowactivate --sync $termwin_id
 		echo
-		echo "2 minutes idle mode... interrupt with CTRL+C"
-		echo "type any key + RETURN for manual mode"
-		read -t 60 -p "or hit only RETURN to speed-up > " user_input1
+		echo "interrupt with CTRL+C"
+		echo "type any non space key + RETURN for manual mode"
+		read -t 40 -p "or hit only RETURN to speed-up > " user_input1
 		echo
 		if [ -n "$user_input1" ]; then
 			interactive_session
 		fi
 
 		check_scheduled_tasks
-		echo "1 minutes idle mode... interrupt with CTRL+C"
-		echo "type any key + RETURN for manual mode"
-		read -t 50 -p "or hit only RETURN to speed-up > " user_input2
+		echo "interrupt with CTRL+C"
+		echo "type any non space key + RETURN for manual mode"
+		read -t 20 -p "or hit only RETURN to speed-up > " user_input2
 		echo
 		if [ -n "$user_input2" ]; then
 			interactive_scheduled
@@ -488,6 +488,12 @@ while true; do
 	done
 	log_msg "*** quit firestone ***"
 	safe_quit
+
+	echo
+	echo "*** please let 8 minutes pause for computer cooling down ***"
+	read -t 480 -p "** interrupt with RETURN "
+	echo
+
 	./firestone-starter.sh
 	log_msg "*** firestone restarted ***"
 	source win_id.conf
