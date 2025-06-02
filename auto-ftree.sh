@@ -334,6 +334,10 @@ if [ "$1" == "claim" ]; then
 	move_wait_click $X_ftree_claim $Y_ftree_claim 2
 	echo "twice"
 	move_wait_click $X_ftree_claim $Y_ftree_claim 2
+	echo "once bis"
+	move_wait_click $X_ftree_claim $Y_ftree_claim 2
+	echo "twice bis"
+	move_wait_click $X_ftree_claim $Y_ftree_claim 2
 	sleep 1
 
 	exit
