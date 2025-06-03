@@ -41,7 +41,7 @@ roll_scroll_down() {
 	local i=0
 	while [ "$i" -lt "$1" ]; do
 		xdotool click 5
-		sleep .3
+		sleep 1
 		i=$((i+1))
 	done
 }
@@ -50,7 +50,7 @@ roll_scroll_up() {
 	local i=0
 	while [ "$i" -lt "$1" ]; do
 		xdotool click 4
-		sleep .3
+		sleep 1
 		i=$((i+1))
 	done
 }
