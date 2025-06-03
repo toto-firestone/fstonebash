@@ -68,7 +68,7 @@ echo
 ftree_rewind() {
 	go_to_ftree
 	xdotool mousemove --window $gamewin_id 700 450
-	sleep 1
+	sleep 2
 	roll_scroll_up $ftree_n_scroll
 	roll_scroll_up $((ftree_n_scroll/2))
 	FtreeGlob_currPage="1"
@@ -77,7 +77,7 @@ ftree_rewind() {
 ftree_page_forward() {
 	if [ "$FtreeGlob_currPage" -lt "2" ]; then
 		xdotool mousemove --window $gamewin_id 700 450
-		sleep 1
+		sleep 2
 		roll_scroll_down $ftree_n_scroll
 		FtreeGlob_currPage=$((FtreeGlob_currPage+1))
 	fi
@@ -86,7 +86,7 @@ ftree_page_forward() {
 ftree_page_backward() {
 	if [ "$FtreeGlob_currPage" -gt "1" ]; then
 		xdotool mousemove --window $gamewin_id 700 450
-		sleep 1
+		sleep 2
 		roll_scroll_up $ftree_n_scroll
 		FtreeGlob_currPage=$((FtreeGlob_currPage-1))
 	fi
