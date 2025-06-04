@@ -463,7 +463,7 @@ else
 	goto_ftree_node $ftree_cmd_2
 	sleep 2
 	super_slow_click
-	move_wait_click $X_ftree_start $Y_ftree_start 2
+	move_wait_click $X_ftree_start $Y_ftree_start 3
 fi
 
 echo "* schedule a wait of $FtreeGlob_time half hours"
