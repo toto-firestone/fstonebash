@@ -64,30 +64,71 @@ echo "./auto-ftree check"
 echo
 
 ### ### ###
+# Global variables that should be in config files
+# but for a hot-fix, it can be here
+# ... Some day, all coordinates should be re-organized
+# then it would be worth moving hot-fix variables into clean config files
+# In other words, next generation architecture is work in progress,
+# and hot-fixes play a major role in this work
+
+Y_ftree_scroll=276
+X_ftree_scroll_right=697
+X_ftree_scroll_left=355
+
+### ### ###
+
+scroll_up_ftree_1_step() {
+	smooth_drag_and_drop $X_ftree_scroll_left $Y_ftree_scroll $X_ftree_scroll_right $Y_ftree_scroll
+}
+
+scroll_down_ftree_1_step() {
+	smooth_drag_and_drop $X_ftree_scroll_right $Y_ftree_scroll $X_ftree_scroll_left $Y_ftree_scroll
+}
 
 ftree_rewind() {
 	go_to_ftree
-	xdotool mousemove --window $gamewin_id 700 450
 	sleep 2
-	roll_scroll_up $ftree_n_scroll
-	roll_scroll_up $((ftree_n_scroll/2))
+	scroll_up_ftree_1_step
+	sleep 1
+	scroll_up_ftree_1_step
+	sleep 1
+	scroll_up_ftree_1_step
+	sleep 1
+	scroll_up_ftree_1_step
+	sleep 1
+	scroll_up_ftree_1_step
+	sleep 1
+	scroll_up_ftree_1_step
+	sleep 1
 	FtreeGlob_currPage="1"
 }
 
 ftree_page_forward() {
 	if [ "$FtreeGlob_currPage" -lt "2" ]; then
-		xdotool mousemove --window $gamewin_id 700 450
 		sleep 2
-		roll_scroll_down $ftree_n_scroll
+		scroll_down_ftree_1_step
+		sleep 1
+		scroll_down_ftree_1_step
+		sleep 1
+		scroll_down_ftree_1_step
+		sleep 1
+		scroll_down_ftree_1_step
+		sleep 1
 		FtreeGlob_currPage=$((FtreeGlob_currPage+1))
 	fi
 }
 
 ftree_page_backward() {
 	if [ "$FtreeGlob_currPage" -gt "1" ]; then
-		xdotool mousemove --window $gamewin_id 700 450
 		sleep 2
-		roll_scroll_up $ftree_n_scroll
+		scroll_up_ftree_1_step
+		sleep 1
+		scroll_up_ftree_1_step
+		sleep 1
+		scroll_up_ftree_1_step
+		sleep 1
+		scroll_up_ftree_1_step
+		sleep 1
 		FtreeGlob_currPage=$((FtreeGlob_currPage-1))
 	fi
 }
@@ -273,12 +314,21 @@ if [ "$1" == "check" ]; then
 	echo "**** Check mode ****"
 	load_ftree_from_file $ftree_fullpath
 	print_ftree_info $ftree_fullpath
+	goto_ftree_node 16
+	goto_ftree_node 7
 	sleep 4
 	n_node=1
 	while [ "$n_node" -le "16" ]; do
 		goto_ftree_node $n_node
 		sleep 3
 		n_node=$((n_node+1))
+	done
+	ftree_rewind
+	n_node=16
+	while [ "$n_node" -ge "1" ]; do
+		goto_ftree_node $n_node
+		sleep 3
+		n_node=$((n_node-1))
 	done
 	exit
 fi

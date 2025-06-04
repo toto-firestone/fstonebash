@@ -38,6 +38,7 @@ test_and_exit() {
 }
 
 roll_scroll_down() {
+	echo "*** WARNING : UNSAFE FUNCTION ***"
 	local i=0
 	while [ "$i" -lt "$1" ]; do
 		xdotool click 5
@@ -47,6 +48,7 @@ roll_scroll_down() {
 }
 
 roll_scroll_up() {
+	echo "*** WARNING : UNSAFE FUNCTION ***"
 	local i=0
 	while [ "$i" -lt "$1" ]; do
 		xdotool click 4
@@ -59,9 +61,50 @@ drag_and_drop() {
 	xdotool mousemove $1 $2
 	sleep 1
 	xdotool mousedown 1
-	sleep 1
+	sleep 2
 	xdotool mousemove $3 $4
 	sleep 1
+	xdotool mouseup 1
+	sleep 1
+}
+
+smooth_drag_and_drop() {
+	#xdotool windowactivate --sync $gamewin_id
+	local x1=$1
+	local y1=$2
+	xdotool mousemove $x1 $y1
+	sleep 1
+
+	local x2=$3
+	local y2=$4
+	local nx=$((x2-x1))
+	local ny=$((y2-y1))
+	local incr_x=1
+	if [ "$nx" -lt "0" ]; then
+		incr_x="-1"
+	fi
+	local incr_y=1
+	if [ "$ny" -lt "0" ]; then
+		incr_y="-1"
+	fi
+
+	xdotool click 1
+	sleep 1
+	xdotool mousedown 1
+	sleep 2
+
+	while [ "$x1" -ne "$x2" ]; do
+		x1=$((x1+incr_x))
+		xdotool mousemove_relative -- $incr_x 0
+		sleep .04
+	done
+	while [ "$y1" -ne "$y2" ]; do
+		y1=$((y1+incr_y))
+		xdotool mousemove_relative -- 0 $incr_y
+		sleep .04
+	done
+
+	sleep 2
 	xdotool mouseup 1
 	sleep 1
 }
