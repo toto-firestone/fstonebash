@@ -40,6 +40,13 @@ fi
 
 source wm.conf
 
+### ### hot-fox variables ### ###
+
+X_liber_scroll_right=1035
+X_liber_scroll_left=750
+Y_liber_scroll=631
+
+
 ### ### ### ###
 
 mission_ok() {
@@ -95,9 +102,11 @@ sleep 4
 while [ "$i" -lt  "$N_liber" ]; do
 	i=$((i+1))
 	echo "let's scroll to liberation $i"
-	roll_scroll_down $n_scroll_libe
-	sleep 2
-	slow_safe_click
+	#roll_scroll_down $n_scroll_libe
+	smooth_drag_and_drop $X_liber_scroll_right $Y_liber_scroll $X_liber_scroll_left $Y_liber_scroll
+
+	#slow_safe_click
+	move_wait_click $X_liberation_4 $Y_liberation_4 2
 	sleep 60
 	mission_ok
 	# tempo correction

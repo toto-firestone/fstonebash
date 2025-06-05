@@ -15,6 +15,13 @@ fi
 
 source collect.conf
 
+### ### hot-fox variables ### ###
+
+X_exotic_scroll=559
+Y_exotic_scroll_bottom=844
+Y_exotic_scroll_top=388
+
+
 radish_message_noprompt "FARMING DAILY CURRENCIES"
 
 xdotool windowactivate --sync $gamewin_id
@@ -44,9 +51,11 @@ move_wait_click $X_health_scroll $Y_health_scroll 2
 move_wait_click $X_midas_touch $Y_midas_touch 2
 
 echo "scrolling to the bottom part"
+#sleep 2
+#roll_scroll_down 30
+smooth_drag_and_drop $X_exotic_scroll $Y_exotic_scroll_bottom $X_exotic_scroll $Y_exotic_scroll_top
 sleep 2
-roll_scroll_down 30
-sleep 2
+smooth_drag_and_drop $X_exotic_scroll $Y_exotic_scroll_bottom $X_exotic_scroll $Y_exotic_scroll_top
 
 move_wait_click $X_drum_war $Y_drum_war 2
 move_wait_click $X_dragon_armor $Y_dragon_armor 2
