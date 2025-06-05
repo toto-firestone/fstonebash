@@ -2,6 +2,7 @@
 source function-lib.sh
 source win_id.conf
 source view.conf
+source visual-lib.sh
 
 radish_message_noprompt "Automated Map tool"
 
@@ -44,6 +45,17 @@ fast_return_to_map() {
 }
 
 fast_return_to_map
+sleep 3
+check_map_idle_notif
+no_idle_test=$(tail -n 1 ./tmp/firestone.log | grep 'map_idle_notif=0')
+if [ -n "$no_idle_test" ]; then
+	echo
+	echo "*** no idle squads after claim : SKIP ***"
+	echo "*** map empty or all squads busy ***"
+	echo
+	exit
+fi
+# NOT REACHED IF NO IDLING SQUAD
 
 ### High value mission during first 2 hours
 
