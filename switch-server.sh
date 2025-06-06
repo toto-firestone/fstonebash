@@ -73,7 +73,7 @@ else
 		exit
 	fi
 	# NOT REACHED IF FAILED TO REACH FAVORITE SERVERS PAGE
-	move_wait_click $X_serv_i $Y_serv_i 3
+	move_wait_click $X_serv_i $Y_serv_i 6
 	move_wait_click $X_serv_confirm $Y_serv_confirm 3
 
 	# for the sake of failure detection
