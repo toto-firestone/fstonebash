@@ -46,6 +46,7 @@
 #
 source function-lib.sh
 source win_id.conf
+source visual-lib.sh
 
 source ftree.conf
 source switch.conf
@@ -87,6 +88,13 @@ scroll_down_ftree_1_step() {
 
 ftree_rewind() {
 	go_to_ftree
+	FtreeGlob_currPage="1"
+	check_ftree_rewind
+	local rew_test=$(tail -n 1 ./tmp/firestone.log | grep 'ftree_rewind=1')
+
+	if [ -n "$rew_test" ]; then
+		return
+	fi
 	sleep 2
 	scroll_up_ftree_1_step
 	sleep 1
@@ -100,7 +108,6 @@ ftree_rewind() {
 	sleep 1
 	scroll_up_ftree_1_step
 	sleep 1
-	FtreeGlob_currPage="1"
 }
 
 ftree_page_forward() {

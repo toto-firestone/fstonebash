@@ -88,6 +88,12 @@ x_map_idle_notif_br=853
 y_map_idle_notif_br=876
 map_idle_notif_pic="./tmp/map-idle-notif.png"
 
+x_ftree_rew_test_ul=55
+y_ftree_rew_test_ul=371
+x_ftree_rew_test_br=154
+y_ftree_rew_test_br=669
+ftree_rew_test_pic="./tmp/ftree-rewind.png"
+
 
 #### ### ### ### ####
 ### VISUAL CHECKS ###
@@ -224,6 +230,22 @@ check_map_idle_notif() {
 	ncc=$(ncc_similarity /tmp/map-idle-check.png $map_idle_notif_pic)
 	compare=$(echo "$ncc > 0.95" | bc -l)
 	log_msg "* map_idle_notif=$compare"
+}
+
+init_ftree_rewind_picture() {
+	echo "** go to ftree and make sure it is rewinded **"
+	read -p "press RETURN to take screenshot > "
+	make_ROI $x_ftree_rew_test_ul $y_ftree_rew_test_ul $x_ftree_rew_test_br $y_ftree_rew_test_br $ftree_rew_test_pic
+}
+
+check_ftree_rewind() {
+	make_ROI $x_ftree_rew_test_ul $y_ftree_rew_test_ul $x_ftree_rew_test_br $y_ftree_rew_test_br /tmp/ftree-rewind-test.png
+
+	local ncc=""
+	local compare=""
+	ncc=$(ncc_similarity /tmp/ftree-rewind-test.png $ftree_rew_test_pic)
+	compare=$(echo "$ncc > 0.6" | bc -l)
+	log_msg "* ftree rewind test : ncc=$ncc ftree_rewind=$compare"
 }
 
 
