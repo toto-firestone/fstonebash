@@ -114,6 +114,7 @@ smooth_drag_and_drop() {
 ### ### ### ### ### ###
 
 super_slow_click() {
+	sleep .4
 	xdotool mousedown 1
 	sleep 1
 	xdotool mouseup 1
@@ -121,6 +122,7 @@ super_slow_click() {
 }
 
 slow_safe_click() {
+	sleep .4
 	xdotool mousedown 1
 	sleep .4
 	xdotool mouseup 1
