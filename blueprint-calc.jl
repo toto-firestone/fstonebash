@@ -112,6 +112,8 @@ function C_x_at_y_eq_0(N::Int64,K::Int64)
 	return firestone_to_float(x)
 end
 
+## Feasible parameter for constraint ##
+
 function constraint_zero_xy(t::Float64,h::firestone_number,a::firestone_number,
 			N::Int64,K::Int64)
 	p1_y = C_y_at_x_eq_0(h,a,N,K)
@@ -120,6 +122,8 @@ function constraint_zero_xy(t::Float64,h::firestone_number,a::firestone_number,
 	yy = (1.0 - t)*p1_y
 	return xx, yy
 end
+
+## Evaluation of constraint ##
 
 function constraint_function(x::Float64,y::Float64,
 			h::firestone_number,a::firestone_number,
@@ -142,6 +146,8 @@ function constraint_function(x::Float64,y::Float64,
 	mcc = firestone_negative(cc)
 	return firestone_addition(f_x_y,mcc)
 end
+
+## Evaluation of cost ##
 
 function unitary_bp_cost(i)
 	return 100 + (i-1)*5
@@ -173,6 +179,8 @@ function bp_cost(t::Float64,h::firestone_number,a::firestone_number,
 	return total_cost, h_cost, a_cost, p_h, q_a, x, y, c_check
 end
 
+## Basic test ##
+
 function tester(h_str,a_str,N,K,m,n)
 	h = firestone_number_normalize(h_str)
 	println("h = ",h)
@@ -189,4 +197,35 @@ function tester(h_str,a_str,N,K,m,n)
 		println("x,y = $x,$y")
 		println("c(x,y) = $c_xy_check")
 	end
+end
+
+## Manual ##
+
+PURPOSE = """
+I - Purpose
+"""
+
+BACKGROUND = """
+II - Background
+"""
+
+METHODS = """
+III - Method
+"""
+
+FORMULAS = """
+IV - Formulas
+"""
+
+USAGE = """
+V - Usage
+"""
+
+function manual()
+	println(PURPOSE)
+	println(BACKGROUND)
+	println(METHODS)
+	println(FORMULAS)
+	println(USAGE)
+	println("Version 1.0")
 end
