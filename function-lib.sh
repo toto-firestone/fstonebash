@@ -126,7 +126,7 @@ slow_safe_click() {
 	xdotool mousedown 1
 	sleep .4
 	xdotool mouseup 1
-	sleep 1
+	sleep .8
 }
 
 move_wait_click() {
