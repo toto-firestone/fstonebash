@@ -179,9 +179,9 @@ function bp_cost(t::Float64,h::firestone_number,a::firestone_number,
 	return total_cost, h_cost, a_cost, p_h, q_a, x, y, c_check
 end
 
-## Basic test ##
+## Basic process ##
 
-function tester(h_str,a_str,N,K,m,n)
+function optimizer(h_str,a_str,N,K,m,n)
 	h = firestone_number_normalize(h_str)
 	println("h = ",h)
 	a = firestone_number_normalize(a_str)
@@ -203,29 +203,216 @@ end
 
 PURPOSE = """
 I - Purpose
+
+When I started playing firestone on s8, the standard strategy for blueprint
+upgrade on WM was : maximize everything in only one WM. On s10, my second
+server, it was also the most followed blueprint upgrade pattern. After a
+long break, I restarted on s14 and some players started to state that
+blueprint upgrades on WM armor were useless. I also started to read some
+old players on official discord server of Firestone, giving the same kind of
+advice. Either useless or not a priority, WM armor is not as wanted as before.
+
+However, we need to recall that winnning a WM campaign mission is a two steps
+process : 1) reach the battle power requirement for mission unlocking, 2) beat
+the mobs in less than 20 rounds. Even if WM armor does not help for step 2),
+it may help for step 1) in a solo WM configuration.
+
+This software is intended to check whether spending blueprints in WM armor is
+worthy or not. In order to answer to that question, we can try to find the
+optimal combination of WM health and armor upgrades for the achievement of
+a precise defensive improvement : survive 1 or more ennemy hits.
+
+There will be a summary of some mathematical background that have been used
+in this quest. Then we will explain how the answer to our question is
+derived from actual data. After that, there are more details about how
+answer is actually calculated. And finally, a user manual of the software
+is given.
 """
 
 BACKGROUND = """
 II - Background
+
+Optimization is a frequent word in Firestone. We all try to obtain the
+maximum efficiency at minimal cost. In mathematics, optimization is a
+field dedicated to applications. The goal is not building some new theories.
+It's rather about using theories for the improvement of our technologies.
+
+The first step is to write down the cost with a math function. We have
+2 parameters related to blueprint upgrade levels in HP and armor respectively.
+And we want to minimize the cost of these upgrades. This one is easy to figure
+out. The second step is to write down the constraints on our parameters
+with a math function again. That one is more tricky. We need to say "I want
+to survive longer" with only maths. How to evaluate survival potential
+as a function by blueprint upgrade is the key of the method.
+
+Let's introduce now some notations :
+J : cost function
+C : constraint function
+h : health
+a : armor
+N : number of hits that 1 WM can take before destruction
+K : number of extra hits that we need
+n : current number of blueprints in health
+m : current number of blueprints in armor
+p : number of health upgrades
+q : number of armor upgrades
+x : relative increase in health
+y : relative increase in armor
+D : current ennemy damage
 """
 
 METHODS = """
 III - Method
+
+Let's start by writing the constraint, which is the most difficult task. In
+optimization, integer number parameters is way more difficult to handle than
+real number ones. Continuous maths offer way more tools than discrete maths.
+So the first step consist in finding a formulation in the continuous field
+that can be related to the discrete problem.
+
+Each blueprint upgrade gives a 1.05 multiplier to an attribute. The attribute
+multiplier after p blueprint upgrades is 1.05^p (power function). Then we
+introduce the relative increase of an attribute value after p upgrades :
+
+x = (upgraded_value - base_value) / base_value
+
+Let's apply this for health and armor blueprint upgrades :
+
+x = (h*1.05^p - h) / h = 1.05^p - 1
+y = 1.05^q - 1
+
+Now we are going to work with x and y (real numbers) instead of p and q
+(integer numbers). So health and armor improvement can be written as follows :
+
+h_upgr = (1 + x)*h
+a_upgr = (1 + y)*a
+
+The second step is another choice for the sake of simplification. Ennemy
+damage is written no where in the game. The scaling up law of ennemy stats
+is given only in Fandom Wiki. It's still a complex formula depending on
+mission number and difficulty type. Then the two options we have are :
+1) Code the ennemy damage as a function of mission and difficulty. This is
+technically possible but quite difficult to test and check. Actual ennemy
+damage value is written no where and too many missions remain locked
+in my accounts at the time I write this.
+2) Use an approximation of ennemy damage by replacing it with the number
+of ennemy hits required to destroy the WM that needs defensive improvement.
+Thus ennemy damage is estimated approximatively while watching the battle
+we need to win, which is a practical way to ensure that the damage value
+is realistic. 
+So I choose 2) in order to avoid an implementation and test difficulties.
+Being destroyed by N hits is written as follows :
+
+N*(D - a) = h
+
+The approximations come from counting the hits (not easy with healing ability)
+and from the assumption that the equality should actually be a greater or equal
+(>=). The damage estimation is :
+
+D = a + h/N
+
+Since h is quite huge, a counting error on N will not be a big deal. With this
+approximation of ennemy damage, we can update the number of hits by using
+upgraded values of health and armor (h_upgr and a_upgr). A substitution
+leads to :
+
+N + K = h_upgr / (a + h/N - a_upgr)
+
+Note that N + K is the number of hits that the WM should be able to take after
+blueprint upgrades. With some calculations, the final expression of constraint
+is :
+
+C(x,y) = h*x + a*(N + K)*y - (K/N)*h = 0
+
+x and y are positive real numbers.
+
+Now it's cost function's turn. We need to go back to integer field using
+logarithm and ceil rounding :
+
+p = ceil(Ln(1 + x)/Ln(1.05))
+q = ceil(Ln(1 + y)/Ln(1.05))
+
+p and q are now functions of x and y.
+
+Then the cost of p health and q armor blueprint upgrades, starting from
+levels m+1 and n+1 respectively is :
+
+J = sum{i=m+1 to m+p} cost(i) + sum{i=n+1 to n+q} cost (i)
+cost(i) = 100 + (i - 1)*5
 """
 
-FORMULAS = """
-IV - Formulas
+SOLVING = """
+IV - Solving
+
+The optimization of blueprint upgrades can be written as :
+
+find (x,y) that minimize J(x,y) such that C(x,y) = 0
+
+We are going to find that with a basic approach that does not exhibit the
+exact formula of optimal (x,y). Instead of that, we go for an approxmimated
+graphical solution of the problem. There are already approximations so
+is does not make sense to look for an exact formula.
+
+We start to reduce the 2-dimensional parameter space into a 1-dimensional
+one. C(x,y) = 0 is actually 1 dimensional and affine. So we reduce that
+to a single parameter t in the [0,1] interval :
+
+(1 - t)*(0,y_0) + t*(x_0,0)
+
+where y_0 and x_0 are admissible values for the constraint when x=0 or y=0.
+They can be found easily by solving  C(x_0,y=0)=0 and C(x=0,y_0)=0 :
+
+x_0 = K/N
+y_0 = (h/a) * K/(N*(N+K))
+
+The set of points defined by (x(t),y(t)) is a zero line for the constraint.
+We can easily check that :
+
+C(x(t),y(t)) = 0
+
+Then we only need to find t that minimize J(x(t),y(t)). By calculating several
+values of the cost J in the range [0,1] by steps of 0.1, we can see which
+values of x(t) and y(t) have the smaller cost, given h, a, N, K, m, and n.
+By transforling x(t) and y(t) to p and q, we get the number of blueprints
+upgrades for health and armor for each value of the parameter t.
+
+This calculation leads to the conclusion that armor is worthless in battle.
+Minimal values of J are always found at y=0, which means no armor upgrade.
+The fact that x_0 is independant of current health and armor values means
+that health upgrade is a good deal in any case. 
+Furthermore, the (h/a) term in y_0 tells that once armor lags behind
+health, it becomes even more useless to catch up... unless pure battle power
+increase is required to unlock a new mission in a solo WM set up.
 """
 
 USAGE = """
 V - Usage
+
+optimizer(h_str,a_str,N,K,m,n)
+
+Example :
+
+optimizer("9.15e8","6.52e6",23,1,40,38)
+
+"9.15e8" is the value of health found in crew edition screen
+"6.52e6" is the value of armor found in crew edition screen
+23 is the number of hits counted during a lost battle
+1 is the additional hit i need to take
+40 is the blueprint level of health found in garage
+38 is the blueprint level of armor found in garage
+
+Be careful to enclose health and armor values in double quotes. Scientific
+notation is a requirement. it means that an armor of 90 needs to be written
+like "9e1". The presence of e is always required.
 """
 
 function manual()
 	println(PURPOSE)
 	println(BACKGROUND)
 	println(METHODS)
-	println(FORMULAS)
+	println(SOLVING)
 	println(USAGE)
 	println("Version 1.0")
 end
+
+manual()
