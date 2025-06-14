@@ -32,7 +32,8 @@ move_wait_click $X_oracle_gift $Y_oracle_gift 2
 
 go_to_town
 move_wait_click $X_main_shop $Y_main_shop 2
-move_wait_click $X_free_box $Y_free_box 2
+move_wait_click $X_free_box $Y_free_box 3
+sleep 1
 move_wait_click $X_checkin_tab $Y_checkin_tab 2
 echo "Warning : check-in button may change place when special offer occurs"
 echo "a wrong check-in coordinate is not harmful"
@@ -43,7 +44,8 @@ move_wait_click $X_checkin_but $((Y_checkin_but+46)) 2
 go_to_exotic
 # toggle to X50
 move_wait_click $X_exo_toggle $Y_exo_toggle 2
-move_wait_click $X_exo_toggle $Y_exo_toggle 2
+move_wait_click $X_exo_toggle $Y_exo_toggle 3
+sleep 1
 
 move_wait_click $X_speed_scroll $Y_speed_scroll 2
 move_wait_click $X_damage_scroll $Y_damage_scroll 2

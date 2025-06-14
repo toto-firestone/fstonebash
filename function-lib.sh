@@ -157,7 +157,7 @@ click_and_go() {
 focus_and_back_to_root_screen() {
 	#sleep 1
 	xdotool windowactivate --sync $gamewin_id
-	xdotool mousemove --window $gamewin_id 700 450
+	xdotool mousemove --window $gamewin_id 630 450
 	sleep 1
 	# i don't know why but this one is not so good
 	#xdotool key --delay 1000 Escape Escape Escape Escape Escape Escape
@@ -299,6 +299,7 @@ launch_and_claim_expedition() {
 launch_and_claim_rituals() {
 	go_to_oracle
 	move_wait_click $X_ritual $Y_ritual 3
+	move_wait_click $X_ritual $Y_ritual 1
 
 	claim_and_restart $X_ritual_1 $Y_ritual_1 2 2
 	claim_and_restart $X_ritual_2 $Y_ritual_2 2 2

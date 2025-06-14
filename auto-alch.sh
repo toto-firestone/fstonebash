@@ -99,7 +99,8 @@ if [ "$1" == "claim" ]; then
 	fi
 
 	go_to_alchemy
-	read -t 10 -p "last chance to cancel claim = NON SPACE + RETURN > " do_cancel
+	# no cancel chance at 2 secs.
+	read -t 2 -p "last chance to cancel claim = NON SPACE + RETURN > " do_cancel
 
 	echo
 	if [ -n "$do_cancel" ]; then
