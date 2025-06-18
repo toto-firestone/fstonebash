@@ -262,7 +262,11 @@ end
 using Combinatorics
 
 function cost_of_level(i)
-	return ceil(2000*1.13^(i-1))
+	if i <= 0
+		return 0
+	else
+		return ceil(2000*1.13^(i-1))
+	end
 end
 
 function cost_of_guardian(lvl_i)
@@ -349,4 +353,15 @@ function higher_damage(n_orb,n_guard)
 	println("")
 	println("*** optimal combination : ",save_upgr)
 	println("*** damage = $save_max")
+end
+
+## A usable optimization tool ##
+
+function optimize_orbs(guards_levels,orb_for_spend)
+	n_guards = length(guards_levels)
+	all_orbs = orb_for_spend + total_cost(guards_levels)
+	higher_damage(all_orbs,n_guards)
+	println("*** results given for $n_guards guardians")
+	println("*** $orb_for_spend additional orbs to spend ***")
+	println("*** optimal guardians are given in arbitrary order ***")
 end
