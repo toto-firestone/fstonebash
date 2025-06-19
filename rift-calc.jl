@@ -328,7 +328,7 @@ function higher_damage(n_orb,n_guard)
 	println("")
 	println("*** higher_damage heuristic ***")
 	println("* max_damage solution : ",nn_max_dmg)
-	min_dmg = sum(nn_max_dmg)
+	min_dmg = sum(damages(nn_max_dmg))
 	println("* looking for combinations with damage >= $min_dmg")
 	println("* and cost lower than $n_orb")
 	println("* and maximum level per guardian <= $n_up")
@@ -355,13 +355,189 @@ function higher_damage(n_orb,n_guard)
 	println("*** damage = $save_max")
 end
 
+## Heuristic 6 : look for combinations with damage higher than min_cost ##
+## After some trials, this heuristic should be the goog one ##
+
+function better_min_cost(n_orb,n_guard)
+	nn_min_cost = min_cost_each(n_orb,n_guard)
+	n_up = sum(nn_min_cost)
+	println("")
+	println("*** better than minimal cost heuristic ***")
+	println("* min_cost solution : ",nn_min_cost)
+	min_dmg = sum(damages(nn_min_cost))
+	println("* looking for combinations with damage >= $min_dmg")
+	println("* and cost lower than $n_orb")
+	println("* and maximum level per guardian <= $n_up")
+
+	save_max = 0.0
+	save_upgr = init_state(n_guard)
+	for combi in with_replacement_combinations(collect(0:n_up),n_guard)
+		dmg = damages(combi)
+		dmg_f = sum(dmg)
+		tc = total_cost(combi)
+		if dmg_f >= min_dmg && tc <= n_orb
+			println("")
+			println("** admissible upgrade pattern : ",combi)
+			println("* cost = $tc orbs")
+			println("* total damage = $dmg_f")
+			if dmg_f >= save_max
+				save_max = dmg_f
+				save_upgr = combi
+			end
+		end
+	end
+	println("")
+	println("*** optimal combination : ",save_upgr)
+	println("*** damage = $save_max")
+end
+
+
 ## A usable optimization tool ##
 
 function optimize_orbs(guards_levels,orb_for_spend)
 	n_guards = length(guards_levels)
 	all_orbs = orb_for_spend + total_cost(guards_levels)
-	higher_damage(all_orbs,n_guards)
+	better_min_cost(all_orbs,n_guards)
 	println("*** results given for $n_guards guardians")
 	println("*** $orb_for_spend additional orbs to spend ***")
 	println("*** optimal guardians are given in arbitrary order ***")
 end
+
+
+## Manual ##
+
+PURPOSE = """
+I - Purpose
+
+This tools has been written for optimizing the holy damage upgrade pattern
+for guardians. In other words, how to spend orbs in order to obtain the
+maximum damage.
+
+Since chaos rift start, one year ago, i was using the following holy upgrade
+pattern : always give maximum of orbs to 1 guardian, and lefover to other
+ones. Trying another pattern in order to compare is hard since it requires
+writing down damage done and upgrade purchased each day. And there is no
+guarantee that these measurements are comparable over time, since guardians
+are upgrading holy features with evolution and rarities. But the main
+difficulty come from double and critical hits that make the data collected
+in-game definitely non usable for an optimization process.
+
+It took me one year to realize that i need a simulator that ignores all
+random special hits that may boost damage occasionally. In this way, we can
+focus on the maximization of holy BASE DAMAGE only.
+"""
+
+BACKGROUND = """
+II - Background
+
+At the begining, i was looking for an optimal way to spend orbs day after day
+during the whole month of competition. In other words, it was trying to
+calculate a time dependant function that tells which gardians are upgraded
+at day 1, 2, 3, ... 30. The difficulty of that exercise in insane.
+
+Then, i tried something much simpler : compare the method i used so far with
+another commonly used one, which was upgrade equally all guardian. This
+task was easy and the first result showed that upgrading equally holy damage
+of all guardian leads to significantly better base damage than upgrading
+one guardian as much as possible, leaving leftover to others.
+
+The next question was : is there a better method  than upgrading equally
+for the maximization of total base damage of all guardians ? To answer this
+question, no need to go into theories. Just need to write a random upgrade
+method, run it several times, and if it catches a better pattern, then the
+answer will be clearly yes. So the answer was yes. But now, how to compute
+that optimal upgrade pattern ?
+"""
+
+METHODS = """
+III - Method
+
+Finding the optimal holy upgrade pattern for a set of guardians can be
+expressed as follows : Maximize the total base damage that we can obtain
+with N orbs and G guardians.
+
+Of course, we need to optimize daily orb spending. At this point, an important
+choice has been made. In order to ensure that the calculator gives optimal
+solution, incremental approaches with time dependant upgrade patterns will be
+ignored. This choice has been influence by the difficulty to handle time
+in the preliminary studies.
+
+This calulator will consider that already spent orbs are refund, guardian's
+holy levels are reset. Refunded orbs are gathered with freshly gained orbs
+in order to upgrade again the same number of guardians. Of course the games
+doesn't work like this. But this "reset" approach will definitely avoid
+the risk of computing suboptimal answers.
+
+However, keep in mind that the risk taken is that the computed optimal
+upgrades may be non feasible. In real game, guardians cannot be downgraded.
+In this case, which WILL HAPPEN, use EQUAL UPGRADE paradigm.
+"""
+
+SOLVING = """
+IV - Solving
+
+Nothing special to say about it : according to the small size of input data,
+a brute force method is affordable. The combinatory explosion remains
+ridiculous.
+
+All combinations of possible guardian holy upgrade are tested. Then only
+feasible ones are selected (cost lower than orb stock) and only relevant ones
+are shown (total holy base damage greater or equal than minimal cost solution ;
+that minimal cost solution correspond to the equally upgraded guardians).
+
+Brute force is the way that optimality is ensured. This explains why the
+"reset" approach has been chosen.
+"""
+
+USAGE = """
+V - Usage
+
+Let's say i have 3 guardians at holy level equal to 10, 11 and 19. The order
+does not matter. I also have 20741 more orbs to spend after having claimed
+the reward.
+
+This command line in Julia session :
+
+julia> optimize_orbs([10, 11, 19],20741)
+
+will end like this :
+
+*** optimal combination : [15, 15, 15]
+*** damage = 6236.784538234106
+*** results given for 3 guardians
+*** 20741 additional orbs to spend ***
+*** optimal guardians are given in arbitrary order ***
+
+which means that i can level up only the 2 lowest guardians. This is a non
+feasible optimal solution.
+
+Another example with 2 guardians at levels 1é and 16, and 14994 orbs to spend :
+
+julia> optimize_orbs([12, 16],14994)
+
+*** optimal combination : [12, 17]
+*** damage = 4087.8746438231638
+*** results given for 2 guardians
+*** 14994 additional orbs to spend ***
+*** optimal guardians are given in arbitrary order ***
+
+This is a feasible solution. Just upgrade once the level 16 guardian.
+
+How to install Julia is beyond the scope of this manual. This calculator
+requires an external package :
+
+julia> import Pkg
+julia> Pkg.add("Combinatorics")
+
+"""
+
+function manual()
+	println(PURPOSE)
+	println(BACKGROUND)
+	println(METHODS)
+	println(SOLVING)
+	println(USAGE)
+	println("Version 1.0")
+end
+
+manual()
