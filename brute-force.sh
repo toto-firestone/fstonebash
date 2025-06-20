@@ -50,9 +50,21 @@ map_position_handle() {
 	fi
 }
 
+X_battle_building=250
+Y_battle_building=296
+X_campaign_access=562
+Y_campaign_access=529
+
+wm_campaign_safe_path() {
+	go_to_town
+	move_wait_click $X_battle_building $Y_battle_building 3
+	move_wait_click $X_campaign_access $Y_campaign_access 3
+}
+
 # go back to root screen after each try to avoid uncontrolled infinite clicks
-go_to_map
-move_wait_click $X_camp_map $Y_camp_map 3
+#go_to_map
+#move_wait_click $X_camp_map $Y_camp_map 3
+wm_campaign_safe_path
 
 # handle map positioning issues
 map_position_handle
@@ -79,8 +91,9 @@ while true; do
 	if [ -n "$user_input" ]; then
 		break
 	fi
-	go_to_map
-	move_wait_click $X_camp_map $Y_camp_map 3
+	#go_to_map
+	#move_wait_click $X_camp_map $Y_camp_map 3
+	wm_campaign_safe_path
 	# this one is not required as long as battle timer is short enough
 	#map_position_handle
 	move_wait_click $X_WM_mission $Y_WM_mission 2
