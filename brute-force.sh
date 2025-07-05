@@ -17,8 +17,8 @@ if [ -n "$1" ]; then
 	echo "battle timer provided : $1 sec"
 	battle_timer=$1
 else
-	echo "default timer : 25 sec"
-	battle_timer=25
+	echo "default timer : 40 sec"
+	battle_timer=40
 fi
 
 radish_message_noprompt "BRUTE FORCE ON WM CAMPAIGN MISSION"

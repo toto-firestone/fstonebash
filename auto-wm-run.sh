@@ -55,6 +55,11 @@ mission_ok() {
 	xdotool key Escape
 }
 
+liberation_click() {
+	move_wait_only $1 $2 $3
+	super_slow_click
+}
+
 ### ### ### ###
 
 xdotool windowactivate --sync $gamewin_id
@@ -69,28 +74,28 @@ i=0
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
 	echo "liberation $i"
-	move_wait_click $X_liberation_1 $Y_liberation_1 2
+	liberation_click $X_liberation_1 $Y_liberation_1 2
 	sleep 60
 	mission_ok
 fi
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
 	echo "liberation $i"
-	move_wait_click $X_liberation_2 $Y_liberation_2 2
+	liberation_click $X_liberation_2 $Y_liberation_2 2
 	sleep 60
 	mission_ok
 fi
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
 	echo "liberation $i"
-	move_wait_click $X_liberation_3 $Y_liberation_3 2
+	liberation_click $X_liberation_3 $Y_liberation_3 2
 	sleep 60
 	mission_ok
 fi
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
 	echo "liberation $i"
-	move_wait_click $X_liberation_4 $Y_liberation_4 2
+	liberation_click $X_liberation_4 $Y_liberation_4 2
 	sleep 60
 	mission_ok
 fi
@@ -106,7 +111,7 @@ while [ "$i" -lt  "$N_liber" ]; do
 	smooth_drag_and_drop $X_liber_scroll_right $Y_liber_scroll $X_liber_scroll_left $Y_liber_scroll
 
 	#slow_safe_click
-	move_wait_click $X_liberation_4 $Y_liberation_4 2
+	liberation_click $X_liberation_4 $Y_liberation_4 2
 	sleep 60
 	mission_ok
 	# tempo correction
@@ -121,14 +126,14 @@ i=0
 if [ "$i" -lt  "$N_dung" ]; then
 	i=$((i+1))
 	echo "dungeons $i"
-	move_wait_click $X_dungeon_1 $Y_dungeon_1 2
+	liberation_click $X_dungeon_1 $Y_dungeon_1 2
 	sleep 60
 	mission_ok
 fi
 if [ "$i" -lt  "$N_dung" ]; then
 	i=$((i+1))
 	echo "dungeons $i"
-	move_wait_click $X_dungeon_2 $Y_dungeon_2 2
+	liberation_click $X_dungeon_2 $Y_dungeon_2 2
 	sleep 60
 	mission_ok
 fi
