@@ -35,8 +35,9 @@ TAG_WAR="3"
 TAG_MON="4"
 TAG_DRA="5"
 TAG_NAV="6"
+TAG_TIT="7"
 
-MISSION_LIST="scout adventure war monster dragon naval"
+MISSION_LIST="scout adventure war monster dragon naval titan"
 
 
 while true; do
@@ -62,6 +63,7 @@ while true; do
 		monster ) i_tag=$TAG_MON;;
 		dragon ) i_tag=$TAG_DRA;;
 		naval ) i_tag=$TAG_NAV;;
+		titan ) i_tag=$TAG_TIT;;
 		* ) echo "Unknown mission : exit now"
 			break;;
 	esac
