@@ -65,10 +65,10 @@ liberation_click() {
 xdotool windowactivate --sync $gamewin_id
 anti_ad
 go_to_map
-move_wait_click $X_camp_map $Y_camp_map 3
-move_wait_click $X_mission_button $Y_mission_button 2
+move_wait_click $X_camp_map $Y_camp_map 4
+move_wait_click $X_mission_button $Y_mission_button 6
 
-move_wait_click $X_liberations $Y_liberations 2
+move_wait_click $X_liberations $Y_liberations 4
 
 i=0
 if [ "$i" -lt  "$N_liber" ]; then
