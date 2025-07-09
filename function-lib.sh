@@ -309,7 +309,7 @@ launch_and_claim_rituals() {
 
 train_guardian() {
 	go_to_guardian
-	move_wait_click $X_guard $Y_guard 2
+	move_wait_click $X_guard $Y_guard 5
 	move_wait_click $X_guard_train $Y_guard_train 2
 }
 

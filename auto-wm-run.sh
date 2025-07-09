@@ -120,7 +120,7 @@ done
 
 
 mission_ok
-move_wait_click $X_dungeons $Y_dungeons 2
+move_wait_click $X_dungeons $Y_dungeons 6
 
 i=0
 if [ "$i" -lt  "$N_dung" ]; then
