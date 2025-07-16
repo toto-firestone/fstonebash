@@ -69,6 +69,7 @@ move_wait_click $X_camp_map $Y_camp_map 4
 move_wait_click $X_mission_button $Y_mission_button 6
 
 move_wait_click $X_liberations $Y_liberations 4
+sleep 4
 
 i=0
 if [ "$i" -lt  "$N_liber" ]; then

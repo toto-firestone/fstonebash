@@ -20,12 +20,16 @@ echo "selected game window"
 xdotool windowsize --sync $gamewin_id $WIN_WIDTH $WIN_HEIGHT
 sleep 1
 xdotool windowmove --sync $gamewin_id $X_WIN_POS $Y_WIN_POS
-sleep 5
+sleep 10
 echo "ready to load"
 
 X_load=678
 Y_load=565
 xdotool mousemove $X_load $Y_load
+sleep 1
+xdotool click 1
+sleep 1
+xdotool click 1
 sleep 1
 xdotool click 1
 sleep 10
