@@ -27,7 +27,7 @@ fstone_coordinate("guard", "s1.firestone.conf", "X_guard", "Y_guard", "741", "84
 ;
 fstone_coordinate("guard_train", "s1.firestone.conf", "X_guard_train", "Y_guard_train", "812", "708", "Guardian", "description")
 ;
-fstone_coordinate("campaign", "s1.firestone.conf", "X_campaign", "Y_campaign", "1271", "581", "WM", "description")
+fstone_coordinate("campaign", "s1.firestone.conf", "X_campaign", "Y_campaign", "1271", "581", "Redundance", "description")
 ;
 fstone_coordinate("campaign_loot", "s1.firestone.conf", "X_campaign_loot", "Y_campaign_loot", "150", "841", "WM", "description")
 ;
@@ -87,9 +87,9 @@ fstone_coordinate("map_mission_start", "map.conf", "X_map_mission_start", "Y_map
 ;
 fstone_coordinate("map_mission_claim", "map.conf", "X_map_mission_claim", "Y_map_mission_claim", "156", "385", "Map", "description")
 ;
-fstone_coordinate("WIN_POS", "view.conf", "X_WIN_POS", "Y_WIN_POS", "0", "0", "StartQuit", "description")
+fstone_coordinate("WIN_POS", "view.conf", "X_WIN_POS", "Y_WIN_POS", "-26", "2", "StartQuit", "description")
 ;
-fstone_coordinate("camp_map", "wm.conf", "X_camp_map", "Y_camp_map", "1271", "582", "Redundance", "description")
+fstone_coordinate("camp_map", "wm.conf", "X_camp_map", "Y_camp_map", "1271", "582", "WM", "description")
 ;
 fstone_coordinate("mission_button", "wm.conf", "X_mission_button", "Y_mission_button", "1228", "857", "WM", "description")
 ;
@@ -141,9 +141,9 @@ fstone_coordinate("weekly_quests", "multi-cycle-run.sh", "X_weekly_quests", "Y_w
 ;
 fstone_coordinate("quests_claim", "multi-cycle-run.sh", "X_quests_claim", "Y_quests_claim", "1116", "368", "Quests", "description")
 ;
-fstone_coordinate("WIN_POS", "restore-game-view.sh", "X_WIN_POS", "Y_WIN_POS", "0", "0", "Redundance", "description")
+fstone_coordinate("WIN_POS", "restore-game-view.sh", "X_WIN_POS", "Y_WIN_POS", "0", "0", "HardCode", "description")
 ;
-fstone_coordinate("sidebar", "restore-game-view.sh", "X_sidebar", "Y_sidebar", "0", "0", "StartQuit", "description")
+fstone_coordinate("sidebar", "restore-game-view.sh", "X_sidebar", "Y_sidebar", "0", "0", "HardCode", "description")
 ;
 fstone_coordinate("irongard_ul", "visual-lib.sh", "x_irongard_ul", "y_irongard_ul", "501", "176", "Robustness", "description")
 ;
