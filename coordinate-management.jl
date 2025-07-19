@@ -42,6 +42,9 @@ function read_filter_file(fname)
 		if i2 != nothing
 			var2 = splice!(filter_content,i2)
 			push!(var_pairs,(var1,var2))
+		else
+			push!(var_pairs,(var1,"SOLO_VAR"))
+			println("Warning : $var1 is solo variable")
 		end
 	end
 

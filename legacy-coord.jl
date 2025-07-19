@@ -177,4 +177,30 @@ fstone_coordinate("ftree_rew_test_ul", "visual-lib.sh", "x_ftree_rew_test_ul", "
 ;
 fstone_coordinate("ftree_rew_test_br", "visual-lib.sh", "x_ftree_rew_test_br", "y_ftree_rew_test_br", "154", "669", "Research", "description")
 ;
+fstone_coordinate("alch_blood_exp", "alch.conf", "X_alch_blood_exp", "SOLO_VAR", "0", "0", "Alchemy", "description")
+;
+fstone_coordinate("alch_dust_exp", "alch.conf", "X_alch_dust_exp", "SOLO_VAR", "0", "0", "Alchemy", "description")
+;
+fstone_coordinate("alch_coin_exp", "alch.conf", "X_alch_coin_exp", "SOLO_VAR", "0", "0", "Alchemy", "description")
+;
+fstone_coordinate("alch_experiments", "alch.conf", "Y_alch_experiments", "SOLO_VAR", "0", "0", "Alchemy", "description")
+;
+fstone_coordinate("exotic_scroll", "auto-collect-run.sh", "X_exotic_scroll", "SOLO_VAR", "559", "0", "Exotic", "description")
+;
+fstone_coordinate("exotic_scroll_bottom", "auto-collect-run.sh", "Y_exotic_scroll_bottom", "SOLO_VAR", "844", "0", "Exotic", "description")
+;
+fstone_coordinate("exotic_scroll_top", "auto-collect-run.sh", "Y_exotic_scroll_top", "SOLO_VAR", "388", "0", "Exotic", "description")
+;
+fstone_coordinate("ftree_scroll", "auto-ftree.sh", "Y_ftree_scroll", "SOLO_VAR", "276", "0", "Research", "description")
+;
+fstone_coordinate("ftree_scroll_right", "auto-ftree.sh", "X_ftree_scroll_right", "SOLO_VAR", "697", "0", "Research", "description")
+;
+fstone_coordinate("ftree_scroll_left", "auto-ftree.sh", "X_ftree_scroll_left", "SOLO_VAR", "355", "0", "Research", "description")
+;
+fstone_coordinate("liber_scroll_right", "auto-wm-run.sh", "X_liber_scroll_right", "SOLO_VAR", "1035", "0", "WM", "description")
+;
+fstone_coordinate("liber_scroll_left", "auto-wm-run.sh", "X_liber_scroll_left", "SOLO_VAR", "750", "0", "WM", "description")
+;
+fstone_coordinate("liber_scroll", "auto-wm-run.sh", "Y_liber_scroll", "SOLO_VAR", "631", "0", "WM", "description")
+;
 ]
