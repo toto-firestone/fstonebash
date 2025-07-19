@@ -112,8 +112,8 @@ function init_fstone_coordinate(v_triplet,fstone_path)
 
 	full_fname = "$fstone_path/$legacy_f_name"
 	f_str = read(full_fname,String)
-	reg_x = Regex("^$coord_x_name=(\\d+)\$","m")
-	reg_y = Regex("^$coord_y_name=(\\d+)\$","m")
+	reg_x = Regex("^$coord_x_name=\"?(-?\\d+)\"?\$","m")
+	reg_y = Regex("^$coord_y_name=\"?(-?\\d+)\"?\$","m")
 	mx = match(reg_x,f_str)
 	if mx == nothing
 		x_val = "0"
