@@ -165,10 +165,6 @@ fstone_coordinate("switch_fav_ul", "visual-lib.sh", "x_switch_fav_ul", "y_switch
 ;
 fstone_coordinate("switch_fav_br", "visual-lib.sh", "x_switch_fav_br", "y_switch_fav_br", "1023", "320", "Robustness", "description")
 ;
-fstone_coordinate("map_zero_squad_ul", "visual-lib.sh", "x_map_zero_squad_ul", "y_map_zero_squad_ul", "813", "188", "Deprecated", "description")
-;
-fstone_coordinate("map_zero_squad_br", "visual-lib.sh", "x_map_zero_squad_br", "y_map_zero_squad_br", "842", "212", "Deprecated", "description")
-;
 fstone_coordinate("map_idle_notif_ul", "visual-lib.sh", "x_map_idle_notif_ul", "y_map_idle_notif_ul", "344", "854", "Map", "description")
 ;
 fstone_coordinate("map_idle_notif_br", "visual-lib.sh", "x_map_idle_notif_br", "y_map_idle_notif_br", "853", "876", "Map", "description")

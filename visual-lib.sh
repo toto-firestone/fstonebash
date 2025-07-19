@@ -75,13 +75,6 @@ x_switch_fav_br=1023
 y_switch_fav_br=320
 switch_fav_pic="./tmp/switch-fav-ref.png"
 
-x_map_zero_squad_ul=813
-y_map_zero_squad_ul=188
-x_map_zero_squad_br=842
-y_map_zero_squad_br=212
-zero_squad_pic="./tmp/zero-squad.png"
-zero_search_x_zone=8
-
 x_map_idle_notif_ul=344
 y_map_idle_notif_ul=854
 x_map_idle_notif_br=853
@@ -175,45 +168,6 @@ check_switch_to_fav_reached() {
 	ncc=$(ncc_similarity /tmp/switch-fav.png $switch_fav_pic)
 	compare=$(echo "$ncc > 0.95" | bc -l)
 	log_msg "* switch_fav_reached=$compare"
-}
-
-init_zero_squad_picture() {
-	echo "** go to map and make sure number of available squads is zero **"
-	read -p "press RETURN to take screenshot > "
-	make_ROI $x_map_zero_squad_ul $y_map_zero_squad_ul $x_map_zero_squad_br $y_map_zero_squad_br $zero_squad_pic
-}
-
-check_zero_squad() {
-	local ncc=""
-	local compare=""
-
-	screenshot
-	local x_min=$x_map_zero_squad_ul
-	local y_min=$y_map_zero_squad_ul
-	local x_max=$x_map_zero_squad_br
-	local y_max=$y_map_zero_squad_br
-	local w_roi=$((x_max-x_min))
-	local h_roi=$((y_max-y_min))
-	local geom="${w_roi}x${h_roi}+${x_min}+${y_min}"
-
-	local x_start=$((x_map_zero_squad_ul-zero_search_x_zone))
-	local x_end=$((x_map_zero_squad_ul+zero_search_x_zone))
-	local roi_file=""
-	local i=1
-	local x_curr=$x_start
-	while [ "$x_curr" -le "$x_end" ]; do
-		geom="${w_roi}x${h_roi}+${x_curr}+${y_min}"
-		roi_file="/tmp/check-squad-$i.png"
-		convert /tmp/shot.png -crop $geom $roi_file
-		ncc=$(ncc_similarity $roi_file $zero_squad_pic)
-		## number 6 is at 0.91
-		## 0 is at 0.93 on s31
-		compare=$(echo "$ncc > 0.93" | bc -l)
-		echo "* roi_file=$roi_file : ncc=$ncc / compare=$compare"
-
-		i=$((i+1))
-		x_curr=$((x_curr+1))
-	done
 }
 
 init_map_idle_picture() {
