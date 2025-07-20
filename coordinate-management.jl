@@ -100,7 +100,7 @@ struct fstone_coordinate
 	legacy_y_val
 
 	category
-	#conf_file
+	conf_file
 	description
 end
 
@@ -130,7 +130,7 @@ function init_fstone_coordinate(v_triplet,fstone_path)
 
 	return fstone_coordinate(coord_name,legacy_f_name,
 			coord_x_name,coord_y_name,x_val,y_val,
-			"category","description")
+			"category",".conf","description")
 end
 
 #
