@@ -1,4 +1,5 @@
 #!/bin/bash
+source glob-coord.conf
 source function-lib.sh
 source visual-lib.sh
 

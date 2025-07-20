@@ -1,20 +1,15 @@
 # please check if intersection with mission cancel zone is avoided
-X_map_mission_start=696
-Y_map_mission_start=792
 
 CURR_DATAFILE="titan-missions.csv"
 #CURR_DATAFILE="data20avril.csv"
 #CURR_DATAFILE="testing.csv"
 
-X_map_mission_claim=156
-Y_map_mission_claim=385
-
 # Number of squads
 
 declare -A N_squads_H=(
-	["s31"]="7"
-	["s27"]="12"
-	["s1"]="16"
+	["s31"]="8"
+	["s27"]="13"
+	["s1"]="17"
 	["s14"]="4"
 	["s8"]="4"
 	["s25"]="3"
@@ -28,6 +23,8 @@ declare -a X_HV_map_mission_A=(
 # titan
 	"786"
 	"923"
+	"836"
+	"863"
 # naval
 	"273"
 	"887"
@@ -48,6 +45,8 @@ declare -a Y_HV_map_mission_A=(
 # titan
 	"177"
 	"177"
+	"178"
+	"176"
 # naval
 	"851"
 	"757"

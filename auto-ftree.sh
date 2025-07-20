@@ -44,6 +44,7 @@
 # 12 - Send wait directives
 #      we ensured that start is successful
 #
+source glob-coord.conf
 source function-lib.sh
 source win_id.conf
 source visual-lib.sh
@@ -63,20 +64,6 @@ echo
 echo "for check mode, use :"
 echo "./auto-ftree check"
 echo
-
-### ### ###
-# Global variables that should be in config files
-# but for a hot-fix, it can be here
-# ... Some day, all coordinates should be re-organized
-# then it would be worth moving hot-fix variables into clean config files
-# In other words, next generation architecture is work in progress,
-# and hot-fixes play a major role in this work
-
-Y_ftree_scroll=276
-X_ftree_scroll_right=697
-X_ftree_scroll_left=355
-
-### ### ###
 
 scroll_up_ftree_1_step() {
 	smooth_drag_and_drop $X_ftree_scroll_left $Y_ftree_scroll $X_ftree_scroll_right $Y_ftree_scroll

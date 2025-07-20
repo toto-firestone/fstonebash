@@ -1,4 +1,5 @@
 #!/bin/bash
+source glob-coord.conf
 source function-lib.sh
 
 if [ ! -f "win_id.conf" ]; then
@@ -7,20 +8,6 @@ if [ ! -f "win_id.conf" ]; then
 fi
 
 source win_id.conf
-
-if [ ! -f "collect.conf" ]; then
-	echo "please provide a collect.conf file with auto-collect-config.sh"
-	exit 1
-fi
-
-source collect.conf
-
-### ### hot-fox variables ### ###
-
-X_exotic_scroll=559
-Y_exotic_scroll_bottom=844
-Y_exotic_scroll_top=388
-
 
 radish_message_noprompt "FARMING DAILY CURRENCIES"
 

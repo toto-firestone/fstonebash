@@ -1,22 +1,14 @@
 declare -A alch_flag_H=(
-	["s31"]=false
+	["s31"]=true
 	["s27"]=true
 	["s1"]=true
 	["s14"]=true
 )
 
-X_alch_blood_exp="670"
-X_alch_dust_exp="923"
-X_alch_coin_exp="1180"
-
-Y_alch_experiments="709"
-
 declare -A alch_timer_H=(
-	["s31"]=5
+	["s31"]=6
 	["s27"]=7
-	["s1"]=5
+	["s1"]=4
 	["s14"]=5
 )
 
-X_alch_close_gem="943"
-Y_alch_close_gem="354"

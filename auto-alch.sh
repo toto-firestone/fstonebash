@@ -1,5 +1,5 @@
 #!/bin/bash
-
+source glob-coord.conf
 source function-lib.sh
 source win_id.conf
 

@@ -44,47 +44,17 @@ ncc_similarity() {
 
 # Should not be here, but right now it's OK
 
-x_irongard_ul=501
-y_irongard_ul=176
-x_irongard_br=881
-y_irongard_br=215
-
-x_url_ul=258
-y_url_ul=73
-x_url_br=1123
-y_url_br=103
-
 start_ref_pic="./tmp/start-ref.png"
-x_startref_ul=72
-y_startref_ul=699
-x_startref_br=109
-y_startref_br=732
 
-x_servname_ul=877
-y_servname_ul=442
-x_servname_br=1210
-y_servname_br=555
 fav_server_list="s1 s27 s31 s8 s14"
 server_pic() {
 	echo "./tmp/${1}-server-pic.png"
 }
 
-x_switch_fav_ul=352
-y_switch_fav_ul=211
-x_switch_fav_br=1023
-y_switch_fav_br=320
 switch_fav_pic="./tmp/switch-fav-ref.png"
 
-x_map_idle_notif_ul=344
-y_map_idle_notif_ul=854
-x_map_idle_notif_br=853
-y_map_idle_notif_br=876
 map_idle_notif_pic="./tmp/map-idle-notif.png"
 
-x_ftree_rew_test_ul=55
-y_ftree_rew_test_ul=371
-x_ftree_rew_test_br=154
-y_ftree_rew_test_br=669
 ftree_rew_test_pic="./tmp/ftree-rewind.png"
 
 

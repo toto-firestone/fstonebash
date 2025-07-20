@@ -1,11 +1,6 @@
 #!/bin/bash
+source glob-coord.conf
 source function-lib.sh
-
-if [ ! -f "wm.conf" ]; then
-	echo "Error : expect to find wm.conf"
-	exit 1
-fi
-source wm.conf
 
 if [ ! -f "win_id.conf" ]; then
 	echo "Error : expect to find win_id.conf"
@@ -28,13 +23,11 @@ select map_position in "no-move" "map-bug" "map-bug+north"; do
 	break
 done
 
-X1_map_bug=335
-Y1_map_bug=585
-X2_map_bug=323
-Y2_map_bug=700
-
-X_north_island=315
-Y_north_island=811
+# could be deprecated some day
+	X1_map_bug=335
+	Y1_map_bug=585
+	X2_map_bug=323
+	Y2_map_bug=700
 
 map_position_handle() {
 	if [ "$map_position" == "map-bug" ]; then
@@ -49,11 +42,6 @@ map_position_handle() {
 		echo "* no map position change"
 	fi
 }
-
-X_battle_building=250
-Y_battle_building=296
-X_campaign_access=562
-Y_campaign_access=529
 
 wm_campaign_safe_path() {
 	go_to_town

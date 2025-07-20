@@ -3,6 +3,7 @@
 # ONLY ONCE PER DAY TASKS
 # DO NOT RUN TWICE A DAY
 
+source glob-coord.conf
 source daily.conf
 source switch.conf
 source function-lib.sh

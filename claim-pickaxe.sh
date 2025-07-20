@@ -1,4 +1,5 @@
 #!/bin/bash
+source glob-coord.conf
 source function-lib.sh
 source win_id.conf
 source switch.conf
@@ -11,14 +12,6 @@ source $server_config
 
 go_to_town
 move_wait_click $X_guild_portal $Y_guild_portal 2
-
-## THESE ONES SHOULD NOT BE HERE
-X_guild_shop=464
-Y_guild_shop=337
-X_guild_supplies=159
-Y_guild_supplies=689
-X_claim_pickaxe=510
-Y_claim_pickaxe=466
 
 move_wait_click $X_guild_shop $Y_guild_shop 6
 move_wait_click $X_guild_supplies $Y_guild_supplies 3

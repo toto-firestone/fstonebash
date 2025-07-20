@@ -1,4 +1,5 @@
 #!/bin/bash
+source glob-coord.conf
 source function-lib.sh
 
 # THIS IS RADISH AUTOMATION TOOL
@@ -46,12 +47,7 @@ source auto-accept.conf
 echo "very basic checks performed..."
 
 ### ADDITIONAL VARIABLES THAT WILL BE MOVED... LATER ###
-X_daily_quests=552
-Y_daily_quests=258
-X_weekly_quests=828
-Y_weekly_quests=257
-X_quests_claim=1116
-Y_quests_claim=368
+
 N_max_quests=10
 
 ### ### ### ###

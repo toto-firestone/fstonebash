@@ -1,9 +1,9 @@
 #!/bin/bash
+source glob-coord.conf
 source function-lib.sh
 
 # THIS IS RADISH AUTOMATION TOOL
 # DAILY WM RUN SCRIPT
-# JUST EXPECT ./auto-wm-config.sh has been successfully executed
 
 radish_message_noprompt "DAILY WM RUN SCRIPT"
 
@@ -13,11 +13,6 @@ if [ ! -f "win_id.conf" ]; then
 fi
 
 source win_id.conf
-
-if [ ! -f "wm.conf" ]; then
-	echo "error : wm.conf not found. run ./auto-wm-config.sh N_SCROLL"
-	exit 1
-fi
 
 if [ -z "$1" ]; then
 	echo "error : argument 1 should be number of liberation missions"
@@ -37,17 +32,6 @@ if [[ "$N_liber" -le "0" && "$N_dung" -le "0" ]]; then
 	echo "Nothing to do"
 	exit 0
 fi
-
-source wm.conf
-
-### ### hot-fox variables ### ###
-
-X_liber_scroll_right=1035
-X_liber_scroll_left=750
-Y_liber_scroll=631
-
-
-### ### ### ###
 
 mission_ok() {
 	xdotool windowactivate --sync $gamewin_id
@@ -108,7 +92,6 @@ sleep 4
 while [ "$i" -lt  "$N_liber" ]; do
 	i=$((i+1))
 	echo "let's scroll to liberation $i"
-	#roll_scroll_down $n_scroll_libe
 	smooth_drag_and_drop $X_liber_scroll_right $Y_liber_scroll $X_liber_scroll_left $Y_liber_scroll
 
 	#slow_safe_click

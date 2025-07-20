@@ -1,4 +1,5 @@
 #!/bin/bash
+source glob-coord.conf
 source view.conf
 
 termwin_id=$(xdotool getwindowfocus)
@@ -23,8 +24,6 @@ xdotool windowmove --sync $gamewin_id $X_WIN_POS $Y_WIN_POS
 sleep 10
 echo "ready to load"
 
-X_load=678
-Y_load=565
 xdotool mousemove $X_load $Y_load
 sleep 1
 xdotool click 1
@@ -40,9 +39,6 @@ sleep 1
 
 source function-lib.sh
 source visual-lib.sh
-
-X_avatar=105
-Y_avatar=233
 
 echo "***** wait for loading before close loot and event windows *****"
 #echo "** interrupt with RETURN if loading finishes before time limit"

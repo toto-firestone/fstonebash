@@ -1,4 +1,5 @@
 #!/bin/bash
+source glob-coord.conf
 source function-lib.sh
 source win_id.conf
 
@@ -17,15 +18,6 @@ fi
 serv_list=$2
 
 echo "typing $reward_code on $serv_list"
-
-X_more=977
-Y_more=209
-
-X_code=456
-Y_code=588
-
-X_submit=848
-Y_submit=592
 
 for i_serv in $serv_list; do
 	#click_and_go $X_more $Y_more

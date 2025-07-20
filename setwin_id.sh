@@ -1,4 +1,5 @@
 #!/bin/bash
+source glob-coord.conf
 source function-lib.sh
 
 # PROMPT USER FOR GAME WINDOW AND SAVE ID IN FILE
