@@ -64,7 +64,7 @@ if [ "$elapsed" -le "3" ]; then
 	for i_m in ${!X_HV_map_mission_A[@]}; do
 		X_mission=${X_HV_map_mission_A[$i_m]}
 		Y_mission=${Y_HV_map_mission_A[$i_m]}
-		echo "* try $i_m : mission X=$X_mission Y=$Y_mission"
+		echo "* try $i_m : mission X=$X_mission Y=$Y_mission (HV)"
 		if [ -z "$Y_mission" ]; then
 			echo "* missing Y for X=$X_mission"
 			continue;
@@ -92,7 +92,7 @@ if [ "$elapsed" -le "5" ]; then
 	for i_m in ${!X_war_map_mission_A[@]}; do
 		X_mission=${X_war_map_mission_A[$i_m]}
 		Y_mission=${Y_war_map_mission_A[$i_m]}
-		echo "* try $i_m : mission X=$X_mission Y=$Y_mission"
+		echo "* try $i_m : mission X=$X_mission Y=$Y_mission (WR)"
 		if [ -z "$Y_mission" ]; then
 			echo "* missing Y for X=$X_mission"
 			continue;
@@ -113,7 +113,7 @@ if [ "$elapsed" -ge "6" ] && [ "$elapsed" -le "9" ]; then
 	for i_m in ${!X_adv_map_mission_A[@]}; do
 		X_mission=${X_adv_map_mission_A[$i_m]}
 		Y_mission=${Y_adv_map_mission_A[$i_m]}
-		echo "* try $i_m : mission X=$X_mission Y=$Y_mission"
+		echo "* try $i_m : mission X=$X_mission Y=$Y_mission (AD)"
 		if [ -z "$Y_mission" ]; then
 			echo "* missing Y for X=$X_mission"
 			continue;
@@ -134,7 +134,7 @@ if [ "$elapsed" -ge "10" ] && [ "$elapsed" -le "11" ]; then
 	for i_m in ${!X_sco_map_mission_A[@]}; do
 		X_mission=${X_sco_map_mission_A[$i_m]}
 		Y_mission=${Y_sco_map_mission_A[$i_m]}
-		echo "* try $i_m : mission X=$X_mission Y=$Y_mission"
+		echo "* try $i_m : mission X=$X_mission Y=$Y_mission (SC)"
 		if [ -z "$Y_mission" ]; then
 			echo "* missing Y for X=$X_mission"
 			continue;
