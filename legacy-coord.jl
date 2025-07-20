@@ -1,4 +1,4 @@
-COORD_DB = [
+LEGACY_COORD_DB = [
 fstone_coordinate("serv_i", "s1", "X_serv_i", "Y_serv_i", "898", "616", "category", "description")
 ;
 fstone_coordinate("server_switch", "s1", "X_server_switch", "Y_server_switch", "1046", "593", "category", "description")
@@ -166,10 +166,6 @@ fstone_coordinate("daily_quests", "multi-cycle-run.sh", "X_daily_quests", "Y_dai
 fstone_coordinate("weekly_quests", "multi-cycle-run.sh", "X_weekly_quests", "Y_weekly_quests", "828", "257", "category", "description")
 ;
 fstone_coordinate("quests_claim", "multi-cycle-run.sh", "X_quests_claim", "Y_quests_claim", "1116", "368", "category", "description")
-;
-fstone_coordinate("WIN_POS", "restore-game-view.sh", "X_WIN_POS", "Y_WIN_POS", "-26", "2", "category", "description")
-;
-fstone_coordinate("sidebar", "restore-game-view.sh", "X_sidebar", "Y_sidebar", "0", "0", "category", "description")
 ;
 fstone_coordinate("irongard_ul", "visual-lib.sh", "x_irongard_ul", "y_irongard_ul", "501", "176", "category", "description")
 ;

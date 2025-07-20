@@ -100,6 +100,7 @@ struct fstone_coordinate
 	legacy_y_val
 
 	category
+	#conf_file
 	description
 end
 
@@ -133,7 +134,7 @@ function init_fstone_coordinate(v_triplet,fstone_path)
 end
 
 #
-# Parse and init
+# Parse and init legacy database
 #
 
 function parse_and_init_database(fstone_path)
@@ -151,11 +152,11 @@ end
 # Write human editable and loadable form
 #
 
-function write_init_database(fstone_path)
+function write_init_legacy_database(fstone_path)
 	init_db = parse_and_init_database(fstone_path)
 
-	open("init_coord.jl","w") do f_out
-		println(f_out,"COORD_DB = [")
+	open("legacy-coord.jl","w") do f_out
+		println(f_out,"LEGACY_COORD_DB = [")
 
 		for i in 1:length(init_db)
 			println(f_out,init_db[i])

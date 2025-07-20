@@ -5,8 +5,9 @@ source win_id.conf
 
 # User defined variables
 # default values
-X_WIN_POS="-26"
-Y_WIN_POS="2"
+# identation makes variables invisible to coordinate manager
+	X_WIN_POS="-26"
+	Y_WIN_POS="2"
 WIN_WIDTH="1430"
 WIN_HEIGHT="947"
 # overwrite with user defined values in file
@@ -26,8 +27,9 @@ xdotool windowmove --sync $gamewin_id $X_WIN_POS $Y_WIN_POS
 sleep 1
 echo "moved to top left"
 
-X_sidebar=$((X_WIN_POS+WIN_WIDTH-30))
-Y_sidebar=$((WIN_HEIGHT/4))
+# identation makes variables invisible to coordinate manager
+	X_sidebar=$((X_WIN_POS+WIN_WIDTH-30))
+	Y_sidebar=$((WIN_HEIGHT/4))
 xdotool mousemove --sync $X_sidebar $Y_sidebar
 sleep 1
 xdotool click --delay 100 --repeat 15 4
