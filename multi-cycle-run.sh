@@ -164,7 +164,17 @@ read_timestamps() {
 	local elapsed=$(get_elapsed $time_file)
 	echo
 	echo "* reading $time_file"
-	echo "Elapsed $1 Time since reset : $elapsed / $2 half hours"
+	# do it again in seconds
+	elapsed_sec=$(get_elapsed_sec $time_file)
+	local t_cycle=$2
+	local remain=$((1800*t_cycle - elapsed_sec))
+	if [ "$remain" -lt "0" ]; then
+		remain=0
+	fi
+	local zero_t=$(date -d "00:00" +%s)
+	remain=$((zero_t + remain))
+	echo "Elapsed $1 Time since reset : $elapsed / $2 half hours (countdown = $(date -d @$remain +%H:%M))"
+
 }
 
 auto_reset_timestamps() {

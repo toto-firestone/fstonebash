@@ -404,6 +404,36 @@ get_elapsed() {
 	echo "$n_halfhour"
 }
 
+get_elapsed_sec() {
+	local time_file=$1
+	if [ -z "$time_file" ]; then
+		echo "9999"
+		return
+	fi
+	# NOT REACHED if argument 1 not provided
+	if [ ! -d "./tmp/" ]; then
+		echo "9999"
+		return
+	fi
+	# NOT REACHED if tmp/ directory not found
+	local time_full_path="./tmp/$time_file"
+	if [ ! -f "$time_full_path" ]; then
+		echo "9999"
+		return
+	fi
+	# NOT REACHED if timestamp file not found
+	local ts_txt=$(cat $time_full_path)
+	local ts_num=${ts_txt#*/*/}
+	if [ -z "$ts_num" ]; then
+		echo "9999"
+		return
+	fi
+	# NOT REACHED if timestamp file read fails
+	local ts_now=$(date +%s)
+	local n_secs=$(( ts_now - ts_num ))
+	echo "$n_secs"
+}
+
 log_msg() {
 	if [ ! -d "./tmp/" ]; then
 		echo "Warning : ./tmp/ directory not found"
