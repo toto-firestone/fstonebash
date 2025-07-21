@@ -315,7 +315,7 @@ train_guardian() {
 
 claim_campaign_loot() {
 	go_to_map
-	move_wait_click $X_campaign $Y_campaign 3
+	move_wait_click $X_camp_map $Y_camp_map 3
 	move_wait_click $X_campaign_loot $Y_campaign_loot 2
 }
 
