@@ -223,6 +223,24 @@ fstone_globcoord("switch_fav_ul", "x_switch_fav_ul", "y_switch_fav_ul", "352", "
 # (10) switch_fav_br
 fstone_globcoord("switch_fav_br", "x_switch_fav_br", "y_switch_fav_br", "1023", "320", "Settings", "description")
 ;
+# (11) server_s1
+fstone_globcoord("server_s1", "X_server_s1", "Y_server_s1", "898", "616", "Settings", "server switch button to s1 (6 favorites)")
+;
+# (12) server_s27
+fstone_globcoord("server_s27", "X_server_s27", "Y_server_s27", "911", "395", "Settings", "server switch button to s27 (6 favorites)")
+;
+# (13) server_s31
+fstone_globcoord("server_s31", "X_server_s31", "Y_server_s31", "397", "402", "Settings", "server switch button to s31 (6 favorites)")
+;
+# (14) server_s14
+fstone_globcoord("server_s14", "X_server_s14", "Y_server_s14", "911", "499", "Settings", "server switch button to s14 (6 favorites)")
+;
+# (15) server_s8
+fstone_globcoord("server_s8", "X_server_s8", "Y_server_s8", "410", "610", "Settings", "server switch button to s8 (6 favorites)")
+;
+# (16) server_s25
+fstone_globcoord("server_s25", "X_server_s25", "Y_server_s25", "406", "503", "Settings", "server switch button to s25 (6 favorites)")
+;
 
 
 ### StartQuit ###

@@ -22,11 +22,12 @@ if [ -z "$1" ]; then
 	echo Error : expecting 1 server name as argument
 	exit 1
 fi
-if [ ! -f "$1" ]; then
-	echo Error : expecting configured server name as argument
+if [ ! -f "$1.firestone.conf" ]; then
+	echo Error : expecting $1 is a configured server
 	exit 1
 fi
-source $1
+eval "X_serv_i=\$X_server_$1"
+eval "Y_serv_i=\$Y_server_$1"
 
 try_reach_fav_servers() {
 	anti_ad
