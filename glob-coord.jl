@@ -6,12 +6,6 @@
 GLOB_COORD_DB = [
 
 
-### Duplicate ###
-# (1) campaign
-fstone_globcoord("campaign", "X_campaign", "Y_campaign", "1271", "581", "Duplicate", "description")
-;
-
-
 ### Alchemy ###
 # (1) alch_blood_exp
 fstone_globcoord("alch_blood_exp", "X_alch_blood_exp", "SOLO_VAR", "670", "0", "Alchemy", "description")
