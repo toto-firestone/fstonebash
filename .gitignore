@@ -1,11 +1,5 @@
 # Anything I don't need here but don't want to erase on local computer
-s1
-s14
-s25
-s27
-s8
-s31
-firestone.conf.bak
+*.bak
 *.conf
 *.swp
 *.dat
