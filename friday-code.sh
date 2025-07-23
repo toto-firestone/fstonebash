@@ -3,7 +3,7 @@ source glob-coord.conf
 source function-lib.sh
 source win_id.conf
 
-radish_message "FRIDAY CODE FOR SERVERS : $serv_list"
+radish_message "FRIDAY CODE"
 
 if [ -z "$1" ]; then
 	echo "Error : expect friday code as argument 1"
