@@ -184,6 +184,16 @@ struct fstone_globcoord
 	description
 end
 
+function print_globcoord(coo)
+	println("** coordinate info for coord_name=$(coo.coord_name)")
+	println("* category=$(coo.category)")
+	println("* description=$(coo.description)")
+	println("* x_varname=$(coo.x_varname) / x_val=$(coo.x_val)")
+	println("* y_varname=$(coo.y_varname) / y_val=$(coo.y_val)")
+
+	return
+end
+
 function init_globcoord_from_legacy(lc)
 	return fstone_globcoord(lc.coord_name,lc.x_varname,lc.y_varname,
 			lc.legacy_x_val,lc.legacy_y_val,
@@ -198,10 +208,14 @@ function coord_summary(c::fstone_globcoord)
 	return "$(c.category); $(c.coord_name)"
 end
 
-function print_db(coord_db)
+function print_db(coord_db; verb=false)
 	for i in 1:length(coord_db)
 		elm = coord_db[i]
 		println(i," - ",coord_summary(elm))
+		if verb
+			print_globcoord(elm)
+			println()
+		end
 	end
 end
 
@@ -388,3 +402,124 @@ function save_globcoord_db(coord_db)
 
 	return
 end
+
+#
+# Coordinate kind
+#
+
+function get_coord_kind(coo)
+	l1 = coo.x_varname[1]
+	l2 = coo.y_varname[1]
+	# will fail here if nothing or empty
+
+	if l1 == 'x' && l2 == 'y'
+		k = "xy"
+	elseif l1 == 'X' && l2 == 'Y'
+		k = "XY"
+
+	# now only solo variables with single component
+	elseif l1 == 'x'
+		k = "x"
+	elseif l1 == 'y'
+		k = "y"
+	elseif l1 == 'X'
+		k = "X"
+	elseif l1 == 'Y'
+		k = "Y"
+
+	# error case
+	else
+		k = "error"
+	end
+
+	return k
+end
+
+#
+# Set coordinates with xdotools
+#
+
+function xdotool_mouseloc()
+	out_str = read(`xdotool getmouselocation`,String)
+	println(out_str)
+	m = match(r"x:(\d+)\s+y:(\d+)",out_str)
+
+	return m.captures[1], m.captures[2]
+end
+
+#
+# Add new entry and set coordinates with xdotool
+#
+
+function add_globcoord_to_db(coord_db,coord_name,category,kind,description)
+	println("Add and set $coord_name ($category,$kind) : $description")
+	println("When mouse is placed...")
+	println("Hit RETURN to record coordinates")
+	readline()
+	x_read, y_read = xdotool_mouseloc()
+	if kind == "XY" || kind == "xy"
+		x_varname = "$(kind[1])_$coord_name"
+		y_varname = "$(kind[2])_$coord_name"
+		x_val = x_read
+		y_val = y_read
+	elseif kind == "X" || kind == "x"
+		x_varname = "$(kind)_$coord_name"
+		y_varname = "SOLO_VAR"
+		x_val = x_read
+		y_val = "0"
+	elseif kind == "Y" || kind == "y"
+		x_varname = "$(kind)_$coord_name"
+		y_varname = "SOLO_VAR"
+		x_val = y_read
+		y_val = "0"
+	else
+		error("Invalid kind=$kind")
+	end
+	new_coo = fstone_globcoord(coord_name,x_varname,y_varname,
+			x_val,y_val,category,description)
+	print_globcoord(new_coo)
+	push!(coord_db,new_coo)
+	by_cat_db = sort(coord_db,by=c->c.category,alg=Base.Sort.MergeSort)
+
+	return by_cat_db
+end
+
+#
+# Short tutorial
+#
+
+function show_tuto()
+	TUTORIAL = """
+Some examples of command sequences in interactive Julia session.
+
+1 - Add coordinates for the 4 guardian slots
+
+	julia> a = load_globcoord_db();
+
+	julia> a = add_globcoord_to_db(a,"guard_slot_1","Guardian","X","first guardian slot starting from left");
+
+	julia> a = add_globcoord_to_db(a,"guard_slot_2","Guardian","X","2nd guardian slot starting from left");
+
+	julia> a = add_globcoord_to_db(a,"guard_slot_3","Guardian","X","3rd guardian slot starting from left");
+
+	julia> a = add_globcoord_to_db(a,"guard_slot_4","Guardian","X","4th guardian slot starting from left");
+
+	julia> a = add_globcoord_to_db(a,"guard_slot","Guardian","Y","all guardian slots Y coordinate");
+
+	julia> print_db(a,verb=true)
+
+	julia> save_globcoord_db(a)
+
+	julia> rewrite_globcoord_conf()
+"""
+
+	println(TUTORIAL)
+
+	return
+end
+
+#
+#
+#
+
+show_tuto()
