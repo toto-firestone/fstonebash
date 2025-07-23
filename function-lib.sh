@@ -309,7 +309,8 @@ launch_and_claim_rituals() {
 
 train_guardian() {
 	go_to_guardian
-	move_wait_click $X_guard $Y_guard 5
+	eval "X_guard=\$X_guard_slot_${i_guardian_slot-1}"
+	move_wait_click $X_guard $Y_guard_slot 5
 	move_wait_click $X_guard_train $Y_guard_train 2
 }
 
