@@ -110,8 +110,9 @@ dialog_reset_timestamps() {
 				manual_reset_timestamps "mapcycle" $ts_diff
 				continue;;
 			daily ) echo "Choice : $i_reset"
-				manual_reset_timestamps "daily"
-				schedule_task "$current_servname.daily.todo"
+				#manual_reset_timestamps "daily"
+				#schedule_task "$current_servname.daily.todo"
+				./daily-once.sh reset $current_servname
 				continue;;
 			* ) echo "Invalid choice : $i_reset"
 				continue;;
@@ -197,16 +198,16 @@ auto_reset_timestamps() {
 	#echo "Elapsed $1 Time since reset : $elapsed / $2 half hours"
 	if [ "$elapsed" -ge "$2" ]; then
 		echo "*** Auto reset timestamp ***"
-		reset_timestamp $time_file
-		log_msg "** auto reset of $time_file"
-		read_timestamps $1 $2
 		case $1 in
 			daily ) echo "* reschedule task : $1"
-				schedule_task "$current_servname.daily.todo";;
+				#schedule_task "$current_servname.daily.todo";;
+				./daily-once.sh reset $current_servname;;
 
 			## auto reset of mapcycle timestamp ##
 			## -> quests claim task ##
 			mapcycle ) echo "* mapcycle reset -> quests claim"
+				reset_timestamp $time_file
+				log_msg "** auto reset of $time_file"
 				schedule_task "$current_servname.quests.todo";;
 
 			* ) echo "* no task to reschedule for $1";;
@@ -214,6 +215,7 @@ auto_reset_timestamps() {
 	else
 		echo "*** Nothing to do ***"
 	fi
+	read_timestamps $1 $2
 	echo
 }
 

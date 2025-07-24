@@ -11,6 +11,24 @@ source function-lib.sh
 if [ "$1" == "force" ]; then
 	echo "** enforce doing daily now **"
 	read -p "MAKE SURE YOU RUN IT ONCE A DAY. Press return or CTRL+C"
+elif [ "$1" == "reset" ]; then
+	echo "** reset for servers : $2 **"
+	for serv in $2; do
+		if [ ! -f "$serv.firestone.conf" ]; then
+			echo "* server $serv not set : skip"
+			continue
+		else
+			echo "* reset daily timer and schecule task on $serv"
+		fi
+		# NOT REACHED IF INVALID SERVER
+		time_file="$serv.daily.timestamp"
+		reset_timestamp $time_file
+		log_msg "** reset of $time_file"
+		schedule_task "$serv.daily.todo"
+	done
+
+	exit
+	# CANNOT REACH FURTHER
 else
 	echo "** automatic daily : checks before doing it **"
 
