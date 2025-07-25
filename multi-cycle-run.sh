@@ -244,7 +244,10 @@ interactive_scheduled() {
 		i_task=${i_task#*.}
 		# remove todo word
 		i_task=${i_task%.*}
-		actions="$actions $i_task"
+		# Only adds valid task to action list
+		if [ "$i_task" == "daily" ]; then
+			actions="$actions $i_task"
+		fi
 	done
 
 	echo "**** check if server is $current_servname and timer is ok before accepting ****"
@@ -252,21 +255,6 @@ interactive_scheduled() {
 	select i_choice in $actions; do
 		case $i_choice in
 			Quit ) echo "Choice : $i_choice"
-				break;;
-			dummy ) echo "Choice : $i_choice"
-				if [ $(check_before_doit) == "do" ]; then
-					echo "doing it"
-					#
-					# Some commands here
-					#
-					log_msg "* doing dummy on $current_servname"
-
-				else
-					echo "canceling it"
-					log_msg "* canceling dummy on $current_servname"
-
-				fi
-				remove_task "$current_servname.dummy.todo"
 				break;;
 			daily ) echo "Choice : $i_choice"
 				if [ $(check_before_doit) == "do" ]; then
@@ -407,17 +395,6 @@ while true; do
 		read_timestamps "daily" 48
 		auto_reset_timestamps "daily" 48
 		echo
-
-		# Scheduling a dummy task
-		# if todo file already exists, just change his date
-		schedule_task "$current_servname.dummy.todo"
-		# at this stage, we must be aware that server switch
-		# might have failed. in that case, $current_servname is
-		# just one or more steps in front of real server name
-		# The worse case is server switch remains stuck. Then any
-		# scheduling request will follow the bot's own data.
-		# Re-schedule again and again, without having the task
-		# actually done is fine.
 
 		xdotool windowminimize --sync $gamewin_id
 		echo "screen and cpu saving"
