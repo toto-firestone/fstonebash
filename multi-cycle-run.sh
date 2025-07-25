@@ -111,7 +111,7 @@ dialog_reset_timestamps() {
 }
 
 interactive_session() {
-	local actions="Quit Assisted-Map Brute-Force Learn-Map Reset-Timestamps"
+	local actions="Quit Brute-Force Learn-Map Reset-Timestamps"
 	local i_todo
 
 	xdotool windowactivate --sync $gamewin_id
@@ -121,9 +121,6 @@ interactive_session() {
 		case $i_todo in
 			Quit ) echo "Choice : $i_todo"
 				break;;
-			Assisted-Map ) echo "Choice : $i_todo"
-				./assisted-map.sh
-				continue;;
 			Brute-Force ) echo "Choice : $i_todo"
 				./brute-force.sh
 				continue;;
