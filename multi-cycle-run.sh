@@ -52,28 +52,20 @@ N_max_quests=10
 
 ### ### ### ###
 
-manual_reset_timestamps() {
-	if [ -z "$1" ]; then
-		echo "Warning : no argument for manual_reset_timestamps"
-		echo "doing nothig"
-		return
+reset_mapcycle_timestamps() {
+	if [ -n "$1" ]; then
+		echo "With time correction of $1 secs"
 	fi
-	# NOW REACHED if arguments 1 is not provided
-	if [ -n "$2" ]; then
-		echo "With time correction of $2 secs"
-	fi
-	local time_file="$current_servname.$1.timestamp"
-	echo "*** Manual reset timestamp ***"
-	reset_timestamp $time_file $2
-	log_msg "** manual reset of $time_file"
-	if [ -n "$2" ]; then
-		log_msg "* time correction : $2 secs"
+	local time_file="$current_servname.mapcycle.timestamp"
+	echo "*** reset mapcycle timestamp ***"
+	reset_timestamp $time_file $1
+	log_msg "** reset of $time_file"
+	if [ -n "$1" ]; then
+		log_msg "* time correction : $1 secs"
 	fi
 
 	## manual reset of mapcycle timestamp -> quests claim task ##
-	if [ "$1" == "mapcycle" ]; then
-		schedule_task "$current_servname.quests.todo"
-	fi
+	schedule_task "$current_servname.quests.todo"
 }
 
 dialog_reset_timestamps() {
@@ -107,11 +99,9 @@ dialog_reset_timestamps() {
 					# no tweek required
 					ts_diff=""
 				fi
-				manual_reset_timestamps "mapcycle" $ts_diff
+				reset_mapcycle_timestamps $ts_diff
 				continue;;
 			daily ) echo "Choice : $i_reset"
-				#manual_reset_timestamps "daily"
-				#schedule_task "$current_servname.daily.todo"
 				./daily-once.sh reset $current_servname
 				continue;;
 			* ) echo "Invalid choice : $i_reset"
@@ -206,9 +196,10 @@ auto_reset_timestamps() {
 			## auto reset of mapcycle timestamp ##
 			## -> quests claim task ##
 			mapcycle ) echo "* mapcycle reset -> quests claim"
-				reset_timestamp $time_file
-				log_msg "** auto reset of $time_file"
-				schedule_task "$current_servname.quests.todo";;
+				#reset_timestamp $time_file
+				#log_msg "** auto reset of $time_file"
+				#schedule_task "$current_servname.quests.todo";;
+				reset_mapcycle_timestamps;;
 
 			* ) echo "* no task to reschedule for $1";;
 		esac
