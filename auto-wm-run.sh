@@ -37,6 +37,7 @@ mission_ok() {
 	xdotool windowactivate --sync $gamewin_id
 	sleep 1
 	xdotool key Escape
+	sleep 5
 }
 
 liberation_click() {

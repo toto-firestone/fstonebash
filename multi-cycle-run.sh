@@ -279,7 +279,7 @@ handle_fridaycode() {
 	local friday_task="$current_servname.fridaycode.todo"
 	if [ -f "./tmp/$friday_task" ]; then
 		echo "* handling friday code on $current_servname"
-		source "./tmp/$friday_task"
+		reward_code=$(cat ./tmp/$friday_task)
 		go_to_settings
 		move_wait_click $X_more $Y_more 2
 		move_wait_click $X_code $Y_code 2
@@ -458,6 +458,7 @@ while true; do
 		echo
 		echo "***** LAST CHANCE TO CTRL+C BEFORE SERVER SWITCH *****"
 		sleep 10
+		echo "*** TOO LATE ! DO NOT INTERRUPT SERVER SWITCH ***"
 	done
 	log_msg "*** quit firestone ***"
 	safe_quit

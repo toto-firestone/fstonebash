@@ -27,5 +27,5 @@ for i_serv in $serv_list; do
 
 	task_file="$i_serv.fridaycode.todo"
 	schedule_task $task_file
-	echo "reward_code=$reward_code" > ./tmp/$task_file
+	echo "$reward_code" > ./tmp/$task_file
 done
