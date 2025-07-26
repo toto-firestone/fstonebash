@@ -356,7 +356,7 @@ function higher_damage(n_orb,n_guard)
 end
 
 ## Heuristic 6 : look for combinations with damage higher than min_cost ##
-## After some trials, this heuristic should be the goog one ##
+## After some trials, this heuristic should be the good one ##
 
 function better_min_cost(n_orb,n_guard)
 	nn_min_cost = min_cost_each(n_orb,n_guard)
@@ -403,6 +403,58 @@ function optimize_orbs(guards_levels,orb_for_spend)
 	println("*** optimal guardians are given in arbitrary order ***")
 end
 
+## Heuristic 7 : the best combination with all guardian levels higher or
+## equal than the current guardians levels
+
+function better_than_previous(n_orb,nn_previous)
+	n_guard = length(nn_previous)
+
+	# min cost solution will provide the highest number of upgrades
+	nn_min_cost = min_cost_each(n_orb,n_guard)
+	n_up = sum(nn_min_cost)
+
+	println("")
+	println("*** better than previous heuristic ***")
+	println("* previous solution : ",nn_previous)
+	min_dmg = sum(damages(nn_previous))
+	println("* looking for combinations with damage >= $min_dmg")
+	println("* and cost lower than $n_orb")
+	println("* and maximum level per guardian <= $n_up")
+
+	save_max = 0.0
+	save_upgr = init_state(n_guard)
+	for combi in with_replacement_combinations(collect(0:n_up),n_guard)
+		dmg = damages(combi)
+		dmg_f = sum(dmg)
+		tc = total_cost(combi)
+		more_lvl = combi .>= nn_previous
+		if dmg_f >= min_dmg && tc <= n_orb && all(more_lvl)
+			println("")
+			println("** admissible upgrade pattern : ",combi)
+			println("* cost = $tc orbs")
+			println("* total damage = $dmg_f")
+			if dmg_f >= save_max
+				save_max = dmg_f
+				save_upgr = combi
+			end
+		end
+	end
+	println("")
+	println("*** optimal combination : ",save_upgr)
+	println("*** damage = $save_max")
+end
+
+
+## An incremental optimization tool ##
+
+function increment_optimize_orbs(guards_levels,orb_for_spend)
+	n_guards = length(guards_levels)
+	all_orbs = orb_for_spend + total_cost(guards_levels)
+	better_than_previous(all_orbs,guards_levels)
+	println("*** results given for $n_guards guardians")
+	println("*** $orb_for_spend additional orbs to spend ***")
+	println("*** optimal guardians are given in arbitrary order ***")
+end
 
 ## Manual ##
 
@@ -528,6 +580,33 @@ requires an external package :
 
 julia> import Pkg
 julia> Pkg.add("Combinatorics")
+
+VI - Update to incremental method
+
+After a month using the former function, i found out many times not being able
+to perform the recommended upgrade pattern. Sometimes, even the equal upgrade
+pattern is not feasible. Then i figured out that the incremental opimization
+method should also consider less optimal combinations than all equal.
+
+This ends up with the simplest approach, which was not obvious finally.
+We just examine all combinations, keep only the ones we can afford,
+doing more damage than the previous guardian set-up and with no downgrade.
+The maximum holy level of a guardian is still upper bounded according to
+the total upgrades found in mininal cost purchase approach, that maximizes
+the number of purchased holy upgrades.
+
+This command line in Julia session (leading to a non feasible optimum
+using former approach - cannot donwgrade lvl 19 to 15) :
+
+julia> increment_optimize_orbs([10, 11, 19],20741)
+
+will end like this :
+
+*** optimal combination : [10, 13, 19]
+*** damage = 6041.493964476319
+*** results given for 3 guardians
+*** 20741 additional orbs to spend ***
+*** optimal guardians are given in arbitrary order ***
 
 """
 
