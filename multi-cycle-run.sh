@@ -291,7 +291,7 @@ handle_fridaycode() {
 
 handle_auto_accept() {
 	source auto-accept.conf
-	local curr_flag=${flags_H[$current_servname]-false}
+	local curr_flag=${auto_accept_flags_H[$current_servname]-false}
 	if $curr_flag; then
 		echo "auto-accept on for $current_servname"
 		go_to_town
