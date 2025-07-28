@@ -57,6 +57,15 @@ map_idle_notif_pic="./tmp/map-idle-notif.png"
 
 ftree_rew_test_pic="./tmp/ftree-rewind.png"
 
+# guild expedition pics
+declare -A guild_expe_button_pic_H=(
+	["start"]="./tmp/expe-start.png"
+	["claim"]="./tmp/expe-claim.png"
+	["cancel"]="./tmp/expe-cancel.png"
+	# blank image cannot work with ncc test
+	#["none"]="./tmp/expe-none.png"
+)
+
 
 #### ### ### ### ####
 ### VISUAL CHECKS ###
@@ -251,3 +260,48 @@ wait_game_start() {
 	fi
 }
 
+init_guild_button_pic() {
+	if [ -z "$1" ]; then
+		echo "no button name (start cancel claim none) : do nothing"
+		return
+	fi
+
+	# opens expedition window
+	go_to_town
+	move_wait_click $X_guild_portal $Y_guild_portal 2
+	move_wait_only $X_exped $Y_exped 6
+	super_slow_click
+
+	make_ROI $x_guild_expe_but_ul $y_guild_expe_but_ul $x_guild_expe_but_br $y_guild_expe_but_br ${guild_expe_button_pic_H[$1]}
+
+}
+
+get_guild_expe_button() {
+	make_ROI $x_guild_expe_but_ul $y_guild_expe_but_ul $x_guild_expe_but_br $y_guild_expe_but_br "/tmp/current-expe-but.png"
+
+	local ncc_start=$(ncc_similarity /tmp/current-expe-but.png ${guild_expe_button_pic_H["start"]})
+	#echo "* guild expedition button ncc_start=$ncc_start"
+	compare=$(echo "$ncc_start > 0.9" | bc -l)
+	if [ "$compare" == "1" ]; then
+		log_msg "* exped button : ncc=$ncc_start id=start"
+		return
+	fi
+
+	local ncc_cancel=$(ncc_similarity /tmp/current-expe-but.png ${guild_expe_button_pic_H["cancel"]})
+	#echo "* guild expedition button ncc_cancel=$ncc_cancel"
+	compare=$(echo "$ncc_cancel > 0.9" | bc -l)
+	if [ "$compare" == "1" ]; then
+		log_msg "* exped button : ncc=$ncc_cancel id=cancel"
+		return
+	fi
+
+	local ncc_claim=$(ncc_similarity /tmp/current-expe-but.png ${guild_expe_button_pic_H["claim"]})
+	#echo "* guild expedition button ncc_claim=$ncc_claim"
+	compare=$(echo "$ncc_claim > 0.9" | bc -l)
+	if [ "$compare" == "1" ]; then
+		log_msg "* exped button : ncc=$ncc_claim id=claim"
+		return
+	fi
+	# UNKNOWN PIC IF REACHED
+	log_msg "* exped button : ncc=0 id=none"
+}

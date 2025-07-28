@@ -293,7 +293,21 @@ launch_and_claim_expedition() {
 	move_wait_only $X_exped $Y_exped 6
 	super_slow_click
 
-	claim_and_restart $X_exped_but $Y_exped_but 2 2
+	#claim_and_restart $X_exped_but $Y_exped_but 2 2
+	sleep 2
+	get_guild_expe_button
+	local read_log=$(tail -n 1 ./tmp/firestone.log)
+	local but_id=${read_log#*id=}
+	if [ "$but_id" == "claim" ]; then
+		claim_and_restart $X_exped_but $Y_exped_but 2 2
+	elif [ "$but_id" == "start" ]; then
+		move_wait_click $X_exped_but $Y_exped_but 2
+		sleep 2
+	elif [ "$but_id" == "cancel" ]; then
+		echo "* skip cancel expedition"
+	else
+		echo "* nothing to do"
+	fi
 }
 
 launch_and_claim_rituals() {
