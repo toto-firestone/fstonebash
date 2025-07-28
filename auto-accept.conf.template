@@ -1,12 +1,12 @@
 # flags
 # undefined valuess will be set to false
 
-declare -A flags_H
+declare -A auto_accept_flags_H
 
-flags_H["s31"]=false
-flags_H["s14"]=false
-flags_H["s27"]=false
-flags_H["s8"]=false
+auto_accept_flags_H["s31"]=false
+auto_accept_flags_H["s14"]=false
+auto_accept_flags_H["s27"]=true
+auto_accept_flags_H["s8"]=false
 
 
 echo "loaded user defined values for guild auto-accept applications"
