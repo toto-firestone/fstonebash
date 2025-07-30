@@ -119,7 +119,7 @@ fstone_globcoord("guild_portal", "X_guild_portal", "Y_guild_portal", "1048", "28
 fstone_globcoord("exped", "X_exped", "Y_exped", "226", "409", "Guild", "description")
 ;
 # (3) exped_but
-fstone_globcoord("exped_but", "X_exped_but", "Y_exped_but", "944", "389", "Guild", "description")
+fstone_globcoord("exped_but", "X_exped_but", "Y_exped_but", "913", "386", "Guild", "Guild expedition start and claim button")
 ;
 # (4) guild_hall
 fstone_globcoord("guild_hall", "X_guild_hall", "Y_guild_hall", "776", "485", "Guild", "description")

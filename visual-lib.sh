@@ -279,9 +279,11 @@ init_guild_button_pic() {
 get_guild_expe_button() {
 	make_ROI $x_guild_expe_but_ul $y_guild_expe_but_ul $x_guild_expe_but_br $y_guild_expe_but_br "/tmp/current-expe-but.png"
 
+	local compare="0"
 	local ncc_start=$(ncc_similarity /tmp/current-expe-but.png ${guild_expe_button_pic_H["start"]})
 	#echo "* guild expedition button ncc_start=$ncc_start"
-	compare=$(echo "$ncc_start > 0.9" | bc -l)
+	# beware arbitrary small number in scientific notation
+	compare=$(echo "${ncc_start//e/E} > 0.9" | bc -l)
 	if [ "$compare" == "1" ]; then
 		log_msg "* exped button : ncc=$ncc_start id=start"
 		return
@@ -289,7 +291,7 @@ get_guild_expe_button() {
 
 	local ncc_cancel=$(ncc_similarity /tmp/current-expe-but.png ${guild_expe_button_pic_H["cancel"]})
 	#echo "* guild expedition button ncc_cancel=$ncc_cancel"
-	compare=$(echo "$ncc_cancel > 0.9" | bc -l)
+	compare=$(echo "${ncc_cancel//e/E} > 0.9" | bc -l)
 	if [ "$compare" == "1" ]; then
 		log_msg "* exped button : ncc=$ncc_cancel id=cancel"
 		return
@@ -297,7 +299,7 @@ get_guild_expe_button() {
 
 	local ncc_claim=$(ncc_similarity /tmp/current-expe-but.png ${guild_expe_button_pic_H["claim"]})
 	#echo "* guild expedition button ncc_claim=$ncc_claim"
-	compare=$(echo "$ncc_claim > 0.9" | bc -l)
+	compare=$(echo "${ncc_claim//e/E} > 0.9" | bc -l)
 	if [ "$compare" == "1" ]; then
 		log_msg "* exped button : ncc=$ncc_claim id=claim"
 		return
