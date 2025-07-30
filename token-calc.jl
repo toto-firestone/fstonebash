@@ -136,3 +136,18 @@ function all_ptree_node_cost(ptree)
 
 	return s
 end
+
+function get_token_count_filename()
+	serv_str = read(`cat switch.conf`,String)
+	serv_reg = r"^current_servname=(\w+)$"
+	m_serv = match(serv_reg,serv_str)
+
+	serv_name = m_serv.captures[1]
+	serv_file = "./tmp/$(serv_name).token-spend.jl"
+
+	return serv_file
+end
+
+token_spend_file = get_token_count_filename()
+println("*** loading $(token_spend_file)")
+include(token_spend_file)

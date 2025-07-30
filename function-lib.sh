@@ -506,4 +506,47 @@ remove_task() {
 	fi
 }
 
-### ### ### ### ###
+### ### ### ### ### ### ### ### ### ### ###
+## EXPEDITION TOKEN ACCOUNTING FUNCTIONS ##
+### ### ### ### ### ### ### ### ### ### ###
+
+increment_pharaoh_20t() {
+	source switch.conf
+
+	local token_file="./tmp/$current_servname.token-spend.jl"
+	if [ ! -f "$token_file" ]; then
+		echo "* create new token file $token_file"
+		touch $token_file
+	else
+		echo "* found token file $token_file"
+	fi
+	# FILE OK NOW
+
+	local counter_name="${current_servname}_PharaohToken_x20"
+	if [ -n "$(grep $counter_name $token_file)" ]; then
+		echo "* counter variable $counter_name found"
+	else
+		echo "* no counter variable $counter_name"
+		echo "* creating a new one"
+		echo "## GENERATED VARIABLE" >> $token_file
+		echo "$counter_name = 0" >> $token_file
+	fi
+
+	local count_pat="^${counter_name}\s*=\s*\K\d+"
+	local count_val=$(grep -oP "$count_pat" $token_file | tail -n 1)
+	echo "* reading value $counter_name = $count_val"
+	count_val=$((count_val + 1))
+
+	local time_tag="# $(date '+%d/%m/%y %H:%M:%S')"
+	local counter_update="$counter_name = $count_val"
+	echo "* appending : $counter_update with $time_tag"
+	echo "$time_tag" >> $token_file
+	echo "$counter_update" >> $token_file
+
+	echo
+	echo "** don't forget to purchase in game or cancel in file"
+	sleep 2
+	xdotool windowactivate --sync $gamewin_id
+}
+
+### ### ### ### ### ### ### ###
