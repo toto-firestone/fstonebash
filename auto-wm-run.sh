@@ -26,7 +26,15 @@ if [ -z "$2" ]; then
 fi
 N_dung=$2
 
-echo "Runnung with $N_liber liberations and $N_dung dungeons"
+if [ -n "$3" ]; then
+	T_fight_sec=$3
+	echo "* liberation time set to $T_fight_sec secs."
+else
+	T_fight_sec=60
+	echo "* liberation time defaut value is $T_fight_sec secs."
+fi
+
+echo "** Runnung with $N_liber liberations and $N_dung dungeons"
 
 if [[ "$N_liber" -le "0" && "$N_dung" -le "0" ]]; then
 	echo "Nothing to do"
@@ -61,28 +69,28 @@ if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
 	echo "liberation $i"
 	liberation_click $X_liberation_1 $Y_liberation_1 2
-	sleep 60
+	sleep $T_fight_sec
 	mission_ok
 fi
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
 	echo "liberation $i"
 	liberation_click $X_liberation_2 $Y_liberation_2 2
-	sleep 60
+	sleep $T_fight_sec
 	mission_ok
 fi
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
 	echo "liberation $i"
 	liberation_click $X_liberation_3 $Y_liberation_3 2
-	sleep 60
+	sleep $T_fight_sec
 	mission_ok
 fi
 if [ "$i" -lt  "$N_liber" ]; then
 	i=$((i+1))
 	echo "liberation $i"
 	liberation_click $X_liberation_4 $Y_liberation_4 2
-	sleep 60
+	sleep $T_fight_sec
 	mission_ok
 fi
 
@@ -97,7 +105,7 @@ while [ "$i" -lt  "$N_liber" ]; do
 
 	#slow_safe_click
 	liberation_click $X_liberation_4 $Y_liberation_4 2
-	sleep 60
+	sleep $T_fight_sec
 	mission_ok
 	# tempo correction
 	sleep 4
@@ -112,14 +120,14 @@ if [ "$i" -lt  "$N_dung" ]; then
 	i=$((i+1))
 	echo "dungeons $i"
 	liberation_click $X_dungeon_1 $Y_dungeon_1 2
-	sleep 60
+	sleep $T_fight_sec
 	mission_ok
 fi
 if [ "$i" -lt  "$N_dung" ]; then
 	i=$((i+1))
 	echo "dungeons $i"
 	liberation_click $X_dungeon_2 $Y_dungeon_2 2
-	sleep 60
+	sleep $T_fight_sec
 	mission_ok
 fi
 

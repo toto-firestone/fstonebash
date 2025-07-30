@@ -69,9 +69,11 @@ echo "Let's start on $current_servname"
 
 Nlibe=${Nlibe_H[$current_servname]-"0"}
 Ndung=${Ndung_H[$current_servname]-"0"}
+# TFight is optional and can be empty
+TFight=${TFightSec_H[$current_servname]}
 if ${do_libe_H[$current_servname]}; then
 	echo "doing $Nlibe liberations and $Ndung dungeons"
-	./auto-wm-run.sh $Nlibe $Ndung
+	./auto-wm-run.sh $Nlibe $Ndung $TFight
 else
 	echo "skip WM daily missions"
 fi
