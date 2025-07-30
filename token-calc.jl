@@ -10,11 +10,6 @@ struct WarMachine
 	xp_bar
 end
 
-struct PtreeNode
-	name
-	level
-end
-
 function wm_token_value(wm; verbose=true)
 	n_token = 0
 	i_level = 1
@@ -77,6 +72,67 @@ function all_wm_token_value(wm_list)
 		println("* ",w)
 	end
 	println("** total token value = $(s)")
+
+	return s
+end
+
+#### #### ####
+
+function ptree_node_cumcost(n_level; verbose=true)
+	i_level = 0
+	i_cost = 600
+	n_cost = 0
+
+	while i_level < n_level
+		if verbose
+			println("* ptree $(i_level) to $(i_level+1)")
+			println("* cost = $(i_cost)")
+		end
+		n_cost += i_cost
+		i_level += 1
+		i_cost += 100
+	end
+
+	return n_cost
+end
+
+# TO BE COPY PASTED IN DATA FILE
+EMPTY_PTREE_TEMPLATE = Dict{String,Int}(
+	# 8 nodes on center
+	"ptree_Miner" => 0,
+	"ptree_BattleCry" => 0,
+	"ptree_AllMainAttributes" => 0,
+	"ptree_Prestigious" => 0,
+	"ptree_FirestoneEffect" => 0,
+	"ptree_RainingGold" => 0,
+	"ptree_HeroLevelUpCost" => 0,
+	"ptree_GuardianPower" => 0,
+	# 6 nodes on left side
+	"ptree_AttributeDamage" => 0,
+	"ptree_AttributeHealth" => 0,
+	"ptree_AttributeArmor" => 0,
+	"ptree_EnergyHeroes" => 0,
+	"ptree_ManaHeroes" => 0,
+	"ptree_RageHeroes" => 0,
+	# 6 nodes on right side
+	"ptree_FistFight" => 0,
+	"ptree_Precision" => 0,
+	"ptree_MagicSpells" => 0,
+	"ptree_TankSpecialization" => 0,
+	"ptree_DamageSpecialization" => 0,
+	"ptree_HealerSpecialization" => 0,
+);
+
+function all_ptree_node_cost(ptree)
+	costs = [ ptree_node_cumcost(n,verbose=false) for (k,n) in ptree]
+	s = sum(costs)
+
+	println("** Ptree nodes list :")
+	for (k,v) in ptree
+		i_cost = ptree_node_cumcost(v,verbose=false)
+		println("* $(k) level $(v) => $(i_cost) tokens")
+	end
+	println("** Ptree total cost : $(s)")
 
 	return s
 end
