@@ -122,7 +122,7 @@ interactive_session() {
 			Quit ) echo "Choice : $i_todo"
 				break;;
 			Brute-Force ) echo "Choice : $i_todo"
-				./brute-force.sh
+				./brute-force.sh $brute_force_time
 				continue;;
 			Learn-Map ) echo "Choice : $i_todo"
 				./learning.sh
