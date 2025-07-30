@@ -85,7 +85,7 @@ test_freeze() {
 
 	focus_and_back_to_root_screen
 
-	local compare=$(echo "$ncc > 0.5" | bc -l)
+	local compare=$(echo "${ncc//e/E} > 0.5" | bc -l)
 	log_msg "* test freeze $1 : ncc=$ncc freeze=$compare"
 }
 
@@ -116,7 +116,7 @@ find_real_servername() {
 		ncc=$(ncc_similarity /tmp/this-server-pic.png $(server_pic $i_try))
 
 		#echo "* ncc=$ncc"
-		compare=$(echo "$ncc > 0.8" | bc -l)
+		compare=$(echo "${ncc//e/E} > 0.8" | bc -l)
 		#echo "* trying to match with $i_try : $ncc"
 		if [ "$compare" == "1" ]; then
 			answer=$i_try
@@ -145,7 +145,7 @@ check_switch_to_fav_reached() {
 	local ncc=""
 	local compare=""
 	ncc=$(ncc_similarity /tmp/switch-fav.png $switch_fav_pic)
-	compare=$(echo "$ncc > 0.95" | bc -l)
+	compare=$(echo "${ncc//e/E} > 0.95" | bc -l)
 	log_msg "* switch_fav_reached=$compare"
 }
 
@@ -161,7 +161,7 @@ check_map_idle_notif() {
 	local ncc=""
 	local compare=""
 	ncc=$(ncc_similarity /tmp/map-idle-check.png $map_idle_notif_pic)
-	compare=$(echo "$ncc > 0.95" | bc -l)
+	compare=$(echo "${ncc//e/E} > 0.95" | bc -l)
 	log_msg "* map_idle_notif=$compare"
 }
 
@@ -177,7 +177,7 @@ check_ftree_rewind() {
 	local ncc=""
 	local compare=""
 	ncc=$(ncc_similarity /tmp/ftree-rewind-test.png $ftree_rew_test_pic)
-	compare=$(echo "$ncc > 0.6" | bc -l)
+	compare=$(echo "${ncc//e/E} > 0.6" | bc -l)
 	log_msg "* ftree rewind test : ncc=$ncc ftree_rewind=$compare"
 }
 
@@ -194,7 +194,7 @@ safe_quit() {
 	./firestone-quit.sh
 	make_ROI $x_url_ul $y_url_ul $x_url_br $y_url_br /tmp/after_quit.png
 	local ncc=$(ncc_similarity /tmp/before_quit.png /tmp/after_quit.png)
-	local compare=$(echo "$ncc > 0.5" | bc -l)
+	local compare=$(echo "${ncc//e/E} > 0.5" | bc -l)
 	log_msg "* quit attempt $i_try : ncc=$ncc fail=$compare"
 
 	while [ "$compare" != "0" ]; do
@@ -204,7 +204,7 @@ safe_quit() {
 		make_ROI $x_url_ul $y_url_ul $x_url_br $y_url_br /tmp/after_quit.png
 
 		ncc=$(ncc_similarity /tmp/before_quit.png /tmp/after_quit.png)
-		compare=$(echo "$ncc > 0.5" | bc -l)
+		compare=$(echo "${ncc//e/E} > 0.5" | bc -l)
 		log_msg "* quit attempt $i_try : ncc=$ncc fail=$compare"
 	done
 	echo "* quit successful"
@@ -238,7 +238,7 @@ wait_game_start() {
 		make_ROI $x_startref_ul $y_startref_ul $x_startref_br $y_startref_br /tmp/start-check.png
 
 		ncc=$(ncc_similarity /tmp/start-check.png $start_ref_pic)
-		compare=$(echo "$ncc > 0.5" | bc -l)
+		compare=$(echo "${ncc//e/E} > 0.5" | bc -l)
 		if [ "$compare" == "1" ]; then
 			log_msg "* start check $i_check/$n_try : ncc=$ncc success=$compare"
 			return
