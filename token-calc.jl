@@ -68,3 +68,15 @@ function any_wm_value(lvl)
 
 	return wm_token_value(a,verbose=false)
 end
+
+function all_wm_token_value(wm_list)
+	t = [wm_token_value(w,verbose=false) for w in wm_list]
+	s = sum(t)
+	println("** WM list :")
+	for w in wm_list
+		println("* ",w)
+	end
+	println("** total token value = $(s)")
+
+	return s
+end
