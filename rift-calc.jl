@@ -450,7 +450,9 @@ end
 function increment_optimize_orbs(guards_levels,orb_for_spend)
 	n_guards = length(guards_levels)
 	all_orbs = orb_for_spend + total_cost(guards_levels)
-	better_than_previous(all_orbs,guards_levels)
+	# needs to be sorted in order to make vector comparison work
+	lvl_sorted = sort(guards_levels)
+	better_than_previous(all_orbs,lvl_sorted)
 	println("*** results given for $n_guards guardians")
 	println("*** $orb_for_spend additional orbs to spend ***")
 	println("*** optimal guardians are given in arbitrary order ***")
