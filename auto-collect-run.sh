@@ -41,7 +41,6 @@ move_wait_click $X_midas_touch $Y_midas_touch 2
 
 echo "scrolling to the bottom part"
 #sleep 2
-#roll_scroll_down 30
 smooth_drag_and_drop $X_exotic_scroll $Y_exotic_scroll_bottom $X_exotic_scroll $Y_exotic_scroll_top
 sleep 2
 smooth_drag_and_drop $X_exotic_scroll $Y_exotic_scroll_bottom $X_exotic_scroll $Y_exotic_scroll_top

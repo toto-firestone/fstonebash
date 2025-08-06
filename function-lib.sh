@@ -38,7 +38,7 @@ test_and_exit() {
 }
 
 roll_scroll_down() {
-	echo "*** WARNING : UNSAFE FUNCTION ***"
+	# WARNING : UNSAFE FUNCTION
 	local i=0
 	while [ "$i" -lt "$1" ]; do
 		xdotool click 5
@@ -48,11 +48,15 @@ roll_scroll_down() {
 }
 
 roll_scroll_up() {
-	echo "*** WARNING : UNSAFE FUNCTION ***"
+	# WARNING : UNSAFE FUNCTION
 	local i=0
+	local tempo=1
+	if [ -n "$2" ]; then
+		tempo=$2
+	fi
 	while [ "$i" -lt "$1" ]; do
 		xdotool click 4
-		sleep 1
+		sleep $tempo
 		i=$((i+1))
 	done
 }
@@ -88,6 +92,11 @@ smooth_drag_and_drop() {
 		incr_y="-1"
 	fi
 
+	local tempo=".04"
+	if [ -n "$5" ]; then
+		tempo=$5
+	fi
+
 	xdotool click 1
 	sleep 1
 	xdotool mousedown 1
@@ -96,12 +105,12 @@ smooth_drag_and_drop() {
 	while [ "$x1" -ne "$x2" ]; do
 		x1=$((x1+incr_x))
 		xdotool mousemove_relative -- $incr_x 0
-		sleep .04
+		sleep $tempo
 	done
 	while [ "$y1" -ne "$y2" ]; do
 		y1=$((y1+incr_y))
 		xdotool mousemove_relative -- 0 $incr_y
-		sleep .04
+		sleep $tempo
 	done
 
 	sleep 2

@@ -31,21 +31,27 @@ echo "moved to top left"
 # identation makes variables invisible to coordinate manager
 	X_sidebar=$((X_WIN_POS+WIN_WIDTH-30))
 	Y_sidebar=$((WIN_HEIGHT/4))
+
 xdotool mousemove --sync $X_sidebar $Y_sidebar
 sleep 1
-xdotool click --delay 100 --repeat 15 4
+move_wait_only $X_sidebar $Y_sidebar 2
+#xdotool click --delay 100 --repeat 15 4
+roll_scroll_up 15 ".1"
 sleep 1
 
-xdotool mousedown 1
-sleep 1
+#xdotool mousedown 1
+#sleep 1
 echo "hold left button"
-xdotool mousemove_relative --sync 0 112
-sleep 1
+#xdotool mousemove_relative --sync 0 112
 echo "... and drag"
+sleep 1
 
 # adjustment due to gui change on armor games platform
-xdotool mousemove_relative --sync 0 -59
+#xdotool mousemove_relative --sync 0 -59
 
-xdotool mouseup 1
+#xdotool mouseup 1
+
+smooth_drag_and_drop $X_sidebar $Y_sidebar $X_sidebar $((Y_sidebar+112-59)) ".01"
+
 sleep 1
 echo "release left button"
