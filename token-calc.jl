@@ -151,3 +151,37 @@ end
 token_spend_file = get_token_count_filename()
 println("*** loading $(token_spend_file)")
 include(token_spend_file)
+
+#### #### #### #####
+### WM operators ###
+#### #### #### #####
+
+function new_wm(name)
+	n = WarMachine(name,1,0)
+	wm_token_value(n)
+
+	return n
+end
+
+function wm_level_up_once(wm)
+	curr_lev = wm.level
+	curr_xp_bar = wm.xp_bar
+	xp_thresh = 100 + (curr_lev-1)*10
+
+	while curr_xp_bar < xp_thresh
+		curr_xp_bar += 100
+	end
+	curr_xp_bar -= xp_thresh
+	n = WarMachine(wm.name,curr_lev+1,curr_xp_bar)
+
+	return n
+end
+
+function wm_level_up(wm,n_times)
+	nw = wm
+	for i in 1:n_times
+		nw = wm_level_up_once(nw)
+	end
+
+	return nw
+end
