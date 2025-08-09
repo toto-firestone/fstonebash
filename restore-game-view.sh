@@ -51,7 +51,8 @@ sleep 1
 
 #xdotool mouseup 1
 
-smooth_drag_and_drop $X_sidebar $Y_sidebar $X_sidebar $((Y_sidebar+112-59)) ".01"
+DRAG_Y=$((Y_sidebar+WIN_SCROLL_OFFSET))
+smooth_drag_and_drop $X_sidebar $Y_sidebar $X_sidebar $DRAG_Y ".01"
 
 sleep 1
 echo "release left button"
