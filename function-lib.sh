@@ -15,6 +15,10 @@ radish_message_noprompt() {
 	echo "DISCLAIMER : always keep in mind what a happy radish is"
 }
 
+### ### ### ### ### ###
+## MOTION FUNCTIONS  ##
+### ### ### ### ### ###
+
 set_mouse_coordinates() {
 	#sleep 1
 	xdotool windowactivate --sync $termwin_id
@@ -117,10 +121,6 @@ smooth_drag_and_drop() {
 	xdotool mouseup 1
 	sleep 1
 }
-
-### ### ### ### ### ###
-## MOTION FUNCTIONS  ##
-### ### ### ### ### ###
 
 super_slow_click() {
 	sleep .4
