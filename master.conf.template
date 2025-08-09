@@ -7,7 +7,17 @@
 # - server selection
 # - gather global settings
 
-source win_id.conf
-source view.conf
-source switch.conf
-source gameover.conf
+check_file_before_source() {
+	if [ ! -f "$1" ]; then
+		echo "*** Cannot find $1 file : cancel sourcing and exit"
+		exit 1
+	else
+		echo "*** $1 file found : sourcing"
+		source $1
+	fi
+}
+
+check_file_before_source win_id.conf
+check_file_before_source view.conf
+check_file_before_source switch.conf
+check_file_before_source gameover.conf

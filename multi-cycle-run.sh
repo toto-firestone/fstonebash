@@ -11,39 +11,24 @@ source visual-lib.sh
 
 radish_message_noprompt "MULTISERVER RUN SCRIPT FOR CURRENCY FARM CYCLES"
 
-if [ ! -f "win_id.conf" ]; then
-	echo "please provide a window id file with setwin_id.sh"
-	exit 1
-fi
-
 if [ -z "$1" ]; then
 	echo Error : expecting at least 1 server name as argument
 	exit 1
 fi
 
-if [ -f "switch.conf" ]; then
-	echo "Server swich file detected"
+# Basic checks for config files per server
+for i_serv in $@; do
+	server_config="$i_serv.firestone.conf"
+	echo "looking for $server_config"
+	if [ -f "$server_config" ]; then
+		echo "$server_config found"
+	else
+		echo "error $server_config not found"
+		exit 1
+	fi
+done
 
-	for i_serv in $@; do
-		server_config="$i_serv.firestone.conf"
-		echo "looking for $server_config"
-		if [ -f "$server_config" ]; then
-			echo "$server_config found"
-		else
-			echo "error $server_config not found"
-			exit 1
-		fi
-	done
-else
-	echo "error : switch.conf not found"
-	exit 1
-fi
-
-if [ ! -f "auto-accept.conf" ]; then
-	echo "error : missing auto-accept.conf file"
-	exit 1
-fi
-source auto-accept.conf
+check_file_before_source auto-accept.conf
 
 echo "very basic checks performed..."
 

@@ -285,10 +285,6 @@ goto_ftree_node() {
 #load_ftree_from_file $test_file
 #print_ftree_info $test_file
 
-if [ ! -f "switch.conf" ]; then
-	echo "Error : switch.conf not found. Cannot determine server"
-	exit
-fi
 echo "*** doing ftree on server $current_servname ***"
 
 ftree_fullpath="./ftree/${current_servname}.ftree.dat"

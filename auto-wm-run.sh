@@ -8,11 +8,6 @@ source function-lib.sh
 
 radish_message_noprompt "DAILY WM RUN SCRIPT"
 
-if [ ! -f "win_id.conf" ]; then
-	echo "please provide a window id file with setwin_id.sh"
-	exit 1
-fi
-
 if [ -z "$1" ]; then
 	echo "error : argument 1 should be number of liberation missions"
 	exit 1

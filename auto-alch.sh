@@ -51,10 +51,6 @@ claim_alch_experiments() {
 
 ### ### ### ###
 
-if [ ! -f "switch.conf" ]; then
-	echo "Error : switch.conf not found. Cannot determine server"
-	exit
-fi
 echo "*** doing atree on server $current_servname ***"
 
 if [ ! -f "alch.conf" ]; then

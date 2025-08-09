@@ -3,10 +3,7 @@ source glob-coord.conf
 source master.conf
 source function-lib.sh
 
-if [ ! -f "win_id.conf" ]; then
-	echo "Error : expect to find win_id.conf"
-	exit 1
-fi
+radish_message_noprompt "BRUTE FORCE ON WM CAMPAIGN MISSION"
 
 if [ -n "$1" ]; then
 	echo "battle timer provided : $1 sec"
@@ -15,8 +12,6 @@ else
 	echo "default timer : 40 sec"
 	battle_timer=40
 fi
-
-radish_message_noprompt "BRUTE FORCE ON WM CAMPAIGN MISSION"
 
 select map_position in "no-move" "map-bug" "map-bug+north"; do
 	echo "* selected map position option : $map_position"
