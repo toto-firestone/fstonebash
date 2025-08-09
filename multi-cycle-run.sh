@@ -367,7 +367,9 @@ while true; do
 		source $server_config
 		gameover_status=$(game_is_over_on_server $current_servname)
 		if $gameover_status; then
-			echo "***** game is over on this server *****"
+			echo "***** game is over for this server *****"
+		else
+			echo "***** game must go on for this server *****"
 		fi
 
 		read_timestamps "mapcycle" 12
@@ -444,8 +446,9 @@ while true; do
 	safe_quit
 
 	echo
-	echo "*** please let 8 minutes pause for computer cooling down ***"
-	read -t 480 -p "** interrupt with RETURN "
+	echo "*** please let $COOLDOWN_TIME minutes pause for computer cooling down ***"
+
+	read -t $((60*COOLDOWN_TIME)) -p "** interrupt with RETURN "
 	echo
 
 	./firestone-starter.sh
