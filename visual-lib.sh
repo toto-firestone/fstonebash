@@ -129,7 +129,6 @@ find_real_servername() {
 init_switch_to_fav_pic() {
 	go_to_settings
 	source switch.conf
-	source $current_servname
 	move_wait_click $X_server_switch $Y_server_switch 3
 	# this one deserves a triple click
 	move_wait_click $X_fav_servers $Y_fav_servers 3
