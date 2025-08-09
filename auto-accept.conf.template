@@ -1,7 +1,7 @@
 # flags
 # undefined valuess will be set to false
 
-declare -A auto_accept_flags_H
+declare -gA auto_accept_flags_H
 
 auto_accept_flags_H["s31"]=false
 auto_accept_flags_H["s14"]=false

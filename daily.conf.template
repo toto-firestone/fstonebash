@@ -1,9 +1,9 @@
 # flags
 # do not leave undefined values
 
-declare -A auto_daily_H=(
+declare -gA auto_daily_H=(
 	["s1"]=true
-	["s14"]=true
+	["s14"]=false
 	["s27"]=true
 	["s31"]=true
 	["s8"]=false
@@ -11,7 +11,7 @@ declare -A auto_daily_H=(
 )
 
 # time unit is half-hour
-declare -A daily_start_delay_H=(
+declare -gA daily_start_delay_H=(
 	["s1"]="3"
 	["s14"]="0"
 	["s27"]="6"
@@ -20,16 +20,16 @@ declare -A daily_start_delay_H=(
 	["s25"]="0"
 )
 
-declare -A do_libe_H=(
+declare -gA do_libe_H=(
 	["s1"]=true
-	["s14"]=false
-	["s27"]=false
+	["s14"]=true
+	["s27"]=true
 	["s31"]=false
 	["s8"]=false
 	["s25"]=true
 )
 
-declare -A do_collect_H=(
+declare -gA do_collect_H=(
 	["s1"]=true
 	["s14"]=false
 	["s27"]=true
@@ -38,7 +38,7 @@ declare -A do_collect_H=(
 	["s25"]=false
 )
 
-declare -A Nlibe_H=(
+declare -gA Nlibe_H=(
 	["s1"]="9"
 	["s14"]="7"
 	["s27"]="7"
@@ -47,7 +47,7 @@ declare -A Nlibe_H=(
 	["s25"]="3"
 )
 
-declare -A Ndung_H=(
+declare -gA Ndung_H=(
 	["s1"]="2"
 	["s14"]="2"
 	["s27"]="1"
@@ -56,8 +56,9 @@ declare -A Ndung_H=(
 	["s25"]="0"
 )
 
-declare -A TFightSec_H=(
+declare -gA TFightSec_H=(
 	["s1"]="30"
-	["s27"]="20"
+	["s14"]="35"
+	["s27"]="35"
 	["s31"]="45"
 )

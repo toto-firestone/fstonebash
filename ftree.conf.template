@@ -1,24 +1,24 @@
 # slots locations
-declare -a Y_ftree_3_slot=(
+declare -ga Y_ftree_3_slot=(
 	"348"
 	"521"
 	"700"
 )
-declare -a Y_ftree_2_slot=(
+declare -ga Y_ftree_2_slot=(
 	"434"
 	"611"
 )
-declare -a Y_ftree_1_slot=(
+declare -ga Y_ftree_1_slot=(
 	"525"
 )
 
-declare -a X_ftree_page_1=(
+declare -ga X_ftree_page_1=(
 	"178"
 	"503"
 	"831"
 	"1161"
 )
-declare -a X_ftree_page_2=(
+declare -ga X_ftree_page_2=(
 	"167"
 	"495"
 	"822"

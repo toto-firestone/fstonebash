@@ -1,9 +1,9 @@
-declare -A gameover_flag_H=(
+declare -gA gameover_flag_H=(
 	["s31"]=false
 	["s27"]=false
 	["s1"]=false
 	["s14"]=true
-	["s8"]=false
+	["s8"]=true
 	["s25"]=false
 )
 

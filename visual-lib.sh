@@ -58,7 +58,7 @@ map_idle_notif_pic="./tmp/map-idle-notif.png"
 ftree_rew_test_pic="./tmp/ftree-rewind.png"
 
 # guild expedition pics
-declare -A guild_expe_button_pic_H=(
+declare -gA guild_expe_button_pic_H=(
 	["start"]="./tmp/expe-start.png"
 	["claim"]="./tmp/expe-claim.png"
 	["cancel"]="./tmp/expe-cancel.png"

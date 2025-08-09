@@ -6,7 +6,7 @@ CURR_DATAFILE="testing.csv"
 
 # Number of squads
 
-declare -A N_squads_H=(
+declare -gA N_squads_H=(
 	["s31"]="8"
 	["s27"]="13"
 	["s1"]="17"
@@ -25,7 +25,7 @@ declare -A N_squads_H=(
 # Volcanic Treasure Hunt
 # Guardian of Doomfire
 
-declare -a X_HV_map_mission_A=(
+declare -ga X_HV_map_mission_A=(
 # titan
 	"786"
 	"923"
@@ -47,7 +47,7 @@ declare -a X_HV_map_mission_A=(
 	"785"
 	"626"
 )
-declare -a Y_HV_map_mission_A=(
+declare -ga Y_HV_map_mission_A=(
 # titan
 	"177"
 	"177"
@@ -70,7 +70,7 @@ declare -a Y_HV_map_mission_A=(
 	"476"
 )
 
-declare -a X_war_map_mission_A=(
+declare -ga X_war_map_mission_A=(
 	"470"
 	"513"
 	"560"
@@ -91,7 +91,7 @@ declare -a X_war_map_mission_A=(
 	"647"
 )
 
-declare -a Y_war_map_mission_A=(
+declare -ga Y_war_map_mission_A=(
 	"454"
 	"629"
 	"604"
@@ -112,7 +112,7 @@ declare -a Y_war_map_mission_A=(
 	"688"
 )
 
-declare -a X_adv_map_mission_A=(
+declare -ga X_adv_map_mission_A=(
 	"327"
 	"343"
 	"353"
@@ -131,7 +131,7 @@ declare -a X_adv_map_mission_A=(
 	"1051"
 )
 
-declare -a Y_adv_map_mission_A=(
+declare -ga Y_adv_map_mission_A=(
 	"627"
 	"390"
 	"449"
@@ -151,7 +151,7 @@ declare -a Y_adv_map_mission_A=(
 )
 
 
-declare -a X_sco_map_mission_A=(
+declare -ga X_sco_map_mission_A=(
 	"367"
 	"397"
 	"448"
@@ -172,7 +172,7 @@ declare -a X_sco_map_mission_A=(
 	"504"
 )
 
-declare -a Y_sco_map_mission_A=(
+declare -ga Y_sco_map_mission_A=(
 	"290"
 	"504"
 	"401"

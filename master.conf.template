@@ -21,3 +21,41 @@ check_file_before_source win_id.conf
 check_file_before_source view.conf
 check_file_before_source switch.conf
 check_file_before_source gameover.conf
+
+## cooldown time in minutes
+COOLDOWN_TIME=8
+
+## handling config files templates updates
+update_config_files() {
+	# this array is local
+	declare -a config_files_A=(
+		"alch.conf"
+		"auto-accept.conf"
+		"daily.conf"
+		"ftree.conf"
+		"gameover.conf"
+		"glob-coord.conf"
+		"map.conf"
+		"master.conf"
+		"s1.firestone.conf"
+		"switch.conf"
+		"view.conf"
+		"win_id.conf"
+	)
+	for conf_f in "${config_files_A[@]}"; do
+		echo "** processing $conf_f"
+		local templ_f="$conf_f.template"
+		diff "$templ_f" "$conf_f"
+
+		local ans
+		read -p "* update this file ? (y/n) " ans
+		if [ "$ans" == "y" ]; then
+			echo "* copy to $templ_f"
+			cp "$conf_f" "$templ_f"
+		else
+			echo "* skip"
+		fi
+		read -p "* press any key to continue "
+		echo
+	done
+}
