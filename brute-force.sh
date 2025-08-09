@@ -1,12 +1,12 @@
 #!/bin/bash
 source glob-coord.conf
+source master.conf
 source function-lib.sh
 
 if [ ! -f "win_id.conf" ]; then
 	echo "Error : expect to find win_id.conf"
 	exit 1
 fi
-source win_id.conf
 
 if [ -n "$1" ]; then
 	echo "battle timer provided : $1 sec"

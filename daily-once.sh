@@ -4,9 +4,9 @@
 # DO NOT RUN TWICE A DAY
 
 source glob-coord.conf
-source daily.conf
-source switch.conf
+source master.conf
 source function-lib.sh
+source daily.conf
 
 if [ "$1" == "force" ]; then
 	echo "** enforce doing daily now **"

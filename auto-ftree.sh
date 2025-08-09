@@ -45,12 +45,11 @@
 #      we ensured that start is successful
 #
 source glob-coord.conf
+source master.conf
 source function-lib.sh
-source win_id.conf
 source visual-lib.sh
 
 source ftree.conf
-source switch.conf
 
 radish_message_noprompt "AUTOMATIC FTREE TOOL"
 echo "WARNING : START AUTOMATION WITH NO UNCLAIMED RESEARCH SLOTS"

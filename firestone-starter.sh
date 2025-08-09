@@ -1,6 +1,10 @@
 #!/bin/bash
 source glob-coord.conf
+## not master.conf here because win_id.conf is not up to date
 source view.conf
+
+source function-lib.sh
+source visual-lib.sh
 
 termwin_id=$(xdotool getwindowfocus)
 game_url="https://armorgames.com/firestone-idle-rpg-game/18485?tag-referral=idle"
@@ -36,9 +40,6 @@ sleep 10
 xdotool windowactivate --sync $termwin_id
 sleep 1
 ./restore-game-view.sh
-
-source function-lib.sh
-source visual-lib.sh
 
 echo "***** wait for loading before close loot and event windows *****"
 #echo "** interrupt with RETURN if loading finishes before time limit"

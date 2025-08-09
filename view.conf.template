@@ -1,3 +1,6 @@
+# identation makes variables invisible to coordinate manager
+	X_WIN_POS="-26"
+	Y_WIN_POS="2"
 WIN_WIDTH="1430"
 WIN_HEIGHT="947"
 

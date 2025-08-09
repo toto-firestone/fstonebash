@@ -1,0 +1,13 @@
+# A global configuration file
+#
+# usage is : source master.conf at the begining of a script
+#
+# The purposes are :
+# - configuring bot behaviour
+# - server selection
+# - gather global settings
+
+source win_id.conf
+source view.conf
+source switch.conf
+source gameover.conf

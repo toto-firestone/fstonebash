@@ -1,6 +1,9 @@
 #!/bin/bash
 source glob-coord.conf
+source master.conf
 source function-lib.sh
+source visual-lib.sh
+
 
 # THIS IS RADISH AUTOMATION TOOL
 # MULTI SERVER RUN SCRIPT
@@ -12,8 +15,6 @@ if [ ! -f "win_id.conf" ]; then
 	echo "please provide a window id file with setwin_id.sh"
 	exit 1
 fi
-
-source win_id.conf
 
 if [ -z "$1" ]; then
 	echo Error : expecting at least 1 server name as argument
@@ -348,12 +349,6 @@ ctrl_c() {
 }
 # disturbs stdin... not now
 #trap ctrl_c SIGINT
-
-### game over ###
-source gameover.conf
-
-### visual tools ###
-source visual-lib.sh
 
 i=1
 while true; do

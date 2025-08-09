@@ -1,6 +1,6 @@
 #!/bin/bash
 source glob-coord.conf
-source win_id.conf
+source master.conf
 source function-lib.sh
 
 move_wait_click $X_firefox_menu $Y_firefox_menu 2

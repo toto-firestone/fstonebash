@@ -1,13 +1,12 @@
 #!/bin/bash
 source glob-coord.conf
+source master.conf
 source function-lib.sh
 
 if [ ! -f "win_id.conf" ]; then
 	echo "please provide a window id file with setwin_id.sh"
 	exit 1
 fi
-
-source win_id.conf
 
 radish_message_noprompt "FARMING DAILY CURRENCIES"
 

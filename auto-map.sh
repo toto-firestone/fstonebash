@@ -1,14 +1,12 @@
 #!/bin/bash
 source glob-coord.conf
+source master.conf
 source function-lib.sh
-source win_id.conf
-source view.conf
 source visual-lib.sh
 
 radish_message_noprompt "Automated Map tool"
 
 source map.conf
-source switch.conf
 
 if [ -z "$current_servname" ]; then
 	echo "Error : cannot read any server name"
@@ -80,7 +78,6 @@ else
 fi
 
 ### game over ###
-source gameover.conf
 if $(game_is_over_on_server $current_servname); then
 	echo "*** game over : skip war, adventure and scout missions ***"
 	exit

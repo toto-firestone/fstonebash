@@ -1,7 +1,7 @@
 #!/bin/bash
 source glob-coord.conf
+source master.conf
 source function-lib.sh
-source win_id.conf
 
 radish_message "FRIDAY CODE"
 

@@ -1,5 +1,6 @@
 #!/bin/bash
 source glob-coord.conf
+source master.conf
 source function-lib.sh
 source visual-lib.sh
 
@@ -8,11 +9,9 @@ source visual-lib.sh
 echo "MAKE SURE switch.conf IS UP TO DATE WITH YOUR CURRENT SERVER"
 radish_message_noprompt "SERVER SWITCH COMMAND"
 
-source win_id.conf
 echo read id: $gamewin_id
 echo
 
-source switch.conf
 if [ -z "$current_servname" ]; then
 	echo Error : invalid switch.conf
 	exit 1

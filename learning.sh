@@ -1,8 +1,7 @@
 #!/bin/bash
 source glob-coord.conf
+source master.conf
 source function-lib.sh
-source win_id.conf
-source view.conf
 
 radish_message_noprompt "Learning tools for map automation"
 source map.conf
