@@ -1,8 +1,8 @@
 # please check if intersection with mission cancel zone is avoided
 
-CURR_DATAFILE="titan-missions.csv"
+#CURR_DATAFILE="titan-missions.csv"
 #CURR_DATAFILE="data20avril.csv"
-#CURR_DATAFILE="testing.csv"
+CURR_DATAFILE="testing.csv"
 
 # Number of squads
 
@@ -18,6 +18,12 @@ declare -A N_squads_H=(
 # High value missions
 # Monster, Dragon, Naval, etc... (not scout, adventure or war)
 #
+
+### NAMES OF THE 4 TITAN MISSIONS
+# Titan Resonnance
+# Elemental Confrontation
+# Volcanic Treasure Hunt
+# Guardian of Doomfire
 
 declare -a X_HV_map_mission_A=(
 # titan
