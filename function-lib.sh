@@ -263,6 +263,15 @@ go_to_weekly_quests() {
 	move_wait_click $X_weekly_quests $Y_weekly_quests 1
 }
 
+start_load_game() {
+	move_wait_click $X_load $Y_load 1
+	sleep 1
+	slow_safe_click
+	sleep 1
+	slow_safe_click
+	sleep 10
+}
+
 anti_ad() {
 	#click_and_go $X_game_tab $Y_game_tab "anti-ad"
 	# this one is not move_wait_click since it requires

@@ -28,14 +28,7 @@ xdotool windowmove --sync $gamewin_id $X_WIN_POS $Y_WIN_POS
 sleep 10
 echo "ready to load"
 
-xdotool mousemove $X_load $Y_load
-sleep 1
-xdotool click 1
-sleep 1
-xdotool click 1
-sleep 1
-xdotool click 1
-sleep 10
+start_load_game
 
 xdotool windowactivate --sync $termwin_id
 sleep 1

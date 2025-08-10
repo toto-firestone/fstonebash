@@ -66,6 +66,8 @@ declare -gA guild_expe_button_pic_H=(
 	#["none"]="./tmp/expe-none.png"
 )
 
+# trouble shooting on startup failure
+cookie_expired_pic="./tmp/fail_cookie_expired.png"
 
 #### ### ### ### ####
 ### VISUAL CHECKS ###
@@ -180,6 +182,47 @@ check_ftree_rewind() {
 	log_msg "* ftree rewind test : ncc=$ncc ftree_rewind=$compare"
 }
 
+### ### ### ### ### ### ### ### ####
+### Failure detection on startup ###
+### ### ### ### ### ### ### ### ####
+
+init_start_failure_pic() {
+	make_ROI $x_failure_screen_ul $y_failure_screen_ul $x_failure_screen_br $y_failure_screen_br $1
+
+}
+
+check_fail_sequence() {
+	local ok_crit=$(tail -n 1 ./tmp/firestone.log | grep 'success=1')
+	if [ -n "$ok_crit" ]; then
+		echo "** no failure **"
+		return
+	else
+		echo "** failure check sequence starts **"
+	fi
+	# NOT REACHED IF SUCCESS
+
+	make_ROI $x_failure_screen_ul $y_failure_screen_ul $x_failure_screen_br $y_failure_screen_br /tmp/failure-screen.png
+
+	local ncc=""
+	local compare=""
+
+	ncc=$(ncc_similarity /tmp/failure-screen.png $cookie_expired_pic)
+	compare=$(echo "${ncc//e/E} > 0.8" | bc -l)
+	if [ "$compare" == "1" ]; then
+		log_msg "* startup fail test : ncc=$ncc fail=cookie_expired"
+
+		move_wait_click $X_accept_cookies $Y_accept_cookies 10
+		sleep 5
+		start_load_game
+		./restore-game-view.sh
+		return
+	fi
+	# NOT REACHED IF FAIL DETECTED
+
+	# FAIL UNKOWN
+	log_msg "* startup fail test : ncc=$ncc fail=unknown"
+}
+
 
 ### ### ### ### ### ###
 ### ROBUST COMMANDS ###
@@ -247,8 +290,34 @@ wait_game_start() {
 		i_check=$((i_check+1))
 	done
 	# NOT REACHED IF SUCCESS
-	local dummy=""
 	log_msg "* start failed ($i_check/$n_try) : ncc=$ncc success=$compare"
+
+	### SECOND CHANCE WITH FAIL CHECK ###
+	# only for blocking wait case
+	if [ -z "$3" ]; then
+		check_fail_sequence
+		i_check=1
+		while [ "$i_check" -le "$n_try" ]; do
+			sleep $t_interval
+			echo "* check $i_check"
+			make_ROI $x_startref_ul $y_startref_ul $x_startref_br $y_startref_br /tmp/start-check.png
+
+			ncc=$(ncc_similarity /tmp/start-check.png $start_ref_pic)
+			compare=$(echo "${ncc//e/E} > 0.5" | bc -l)
+			if [ "$compare" == "1" ]; then
+				log_msg "* start second chance check $i_check/$n_try : ncc=$ncc success=$compare"
+				return
+			else
+				echo "* wait $t_interval more sec."
+			fi
+			i_check=$((i_check+1))
+		done
+		log_msg "* second chance start failed ($i_check/$n_try) : ncc=$ncc success=$compare"
+
+	fi
+	# NOT REACHED IF SUCCESS
+
+	local dummy=""
 	echo
 	if [ -z "$3" ]; then
 		echo "*** There is a problem : human intervention required ***"
