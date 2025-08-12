@@ -48,5 +48,13 @@ move_wait_click $X_totem_annihil $Y_totem_annihil 2
 echo "claim pickaxes"
 ./claim-pickaxe.sh
 
+
+source tricky-dailies.sh
+
+auto_beer_token_10_pull
+auto_scarab_10_pull_and_vault
+auto_crystal_5_hit
+auto_open_10_max_chests
+
 focus_and_back_to_root_screen
 

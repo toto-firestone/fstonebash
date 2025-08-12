@@ -263,6 +263,11 @@ go_to_weekly_quests() {
 	move_wait_click $X_weekly_quests $Y_weekly_quests 1
 }
 
+open_bag_chests() {
+	focus_and_back_to_root_screen
+	xdotool key b
+}
+
 start_load_game() {
 	move_wait_click $X_load $Y_load 1
 	sleep 1
