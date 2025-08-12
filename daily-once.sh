@@ -13,6 +13,18 @@ if [ "$1" == "force" ]; then
 	read -p "MAKE SURE YOU RUN IT ONCE A DAY. Press return or CTRL+C"
 elif [ "$1" == "reset" ]; then
 	echo "** reset for servers : $2 **"
+	if $WITHOUT_NODRIFT; then
+		nodrift_mode=false
+		echo "** without drift compensation on global setting"
+		## GLOBAL SETTING OVERRIDES FIRST
+	elif [ "$3" == "nodrift" ]; then
+		nodrift_mode=true
+		echo "** enables drift compensation"
+	else
+		nodrift_mode=false
+		echo "** disables drift compensation"
+	fi
+
 	for serv in $2; do
 		if [ ! -f "$serv.firestone.conf" ]; then
 			echo "* server $serv not set : skip"
@@ -22,7 +34,16 @@ elif [ "$1" == "reset" ]; then
 		fi
 		# NOT REACHED IF INVALID SERVER
 		time_file="$serv.daily.timestamp"
-		reset_timestamp $time_file
+
+		if $nodrift_mode; then
+			t_drift_abs=$(get_elapsed_sec $time_file)
+			t_24h=$((60*60*24))
+			t_drift=$((t_drift_abs % t_24h))
+			echo "* drift on server $serv : $t_drift sec"
+		else
+			t_drift=""
+		fi
+		reset_timestamp $time_file $t_drift
 		log_msg "** reset of $time_file"
 		schedule_task "$serv.daily.todo"
 	done

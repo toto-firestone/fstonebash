@@ -174,7 +174,8 @@ auto_reset_timestamps() {
 		case $1 in
 			daily ) echo "* reschedule task : $1"
 				#schedule_task "$current_servname.daily.todo";;
-				./daily-once.sh reset $current_servname;;
+				# auto reset of daily with drift compensation
+				./daily-once.sh reset $current_servname nodrift;;
 
 			## auto reset of mapcycle timestamp ##
 			## -> quests claim task ##

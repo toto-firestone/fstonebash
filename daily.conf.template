@@ -20,6 +20,8 @@ declare -gA daily_start_delay_H=(
 	["s25"]="0"
 )
 
+WITHOUT_NODRIFT=true
+
 declare -gA do_libe_H=(
 	["s1"]=true
 	["s14"]=true
@@ -50,7 +52,7 @@ declare -gA Nlibe_H=(
 declare -gA Ndung_H=(
 	["s1"]="2"
 	["s14"]="2"
-	["s27"]="1"
+	["s27"]="2"
 	["s31"]="1"
 	["s8"]="1"
 	["s25"]="0"
