@@ -60,6 +60,7 @@ else
 		echo "* auto daily disabled on $current_servname : exit"
 		exit
 	fi
+	# NOT REACHED IF AUTO DAILY DISABLED
 
 	todo_file="./tmp/$current_servname.daily.todo"
 	if [ -f "$todo_file" ]; then
@@ -68,6 +69,7 @@ else
 		echo "* daily task not scheduled : exit"
 		exit
 	fi
+	# NOT REACHED IF SCHEDULE FILE NOT CREATED BY RESET
 
 	todo_time=$(stat -c '%Y' $todo_file)
 	now_time=$(date +%s)
@@ -83,6 +85,7 @@ else
 		echo "* need to wait more on $current_servname : exit"
 		exit
 	fi
+	# NOT REACHED IF BELOW DELAY AFTER ACTUAL RESET
 fi
 # NOT REACHED IF CANCELED FOR ANY REASON
 
@@ -105,6 +108,7 @@ else
 	echo "skip daily collect"
 fi
 
+# TASK FILE HAS TO REMOVED ON CALLING CONTEXT IF force OPTION IS USED #
 if [ "$1" != "force" ]; then
 	remove_task "$current_servname.daily.todo"
 fi

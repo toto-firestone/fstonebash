@@ -3,7 +3,7 @@
 
 declare -gA auto_daily_H=(
 	["s1"]=true
-	["s14"]=false
+	["s14"]=true
 	["s27"]=true
 	["s31"]=true
 	["s8"]=false
@@ -24,7 +24,7 @@ WITHOUT_NODRIFT=true
 
 declare -gA do_libe_H=(
 	["s1"]=true
-	["s14"]=true
+	["s14"]=false
 	["s27"]=true
 	["s31"]=false
 	["s8"]=false
@@ -33,7 +33,7 @@ declare -gA do_libe_H=(
 
 declare -gA do_collect_H=(
 	["s1"]=true
-	["s14"]=false
+	["s14"]=true
 	["s27"]=true
 	["s31"]=true
 	["s8"]=true
