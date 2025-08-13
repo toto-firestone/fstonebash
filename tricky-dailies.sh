@@ -42,6 +42,12 @@ auto_beer_token_10_pull() {
 	move_wait_click $X_beer_tavern_card $Y_beer_tavern_card 4
 	sleep 20
 
+	# try artifact craft
+	#go_to_town
+	#move_wait_click $X_tavern_main $Y_tavern_main 2
+	#move_wait_click $X_tavern_beer $Y_tavern_beer 4
+	#sleep 4
+
 	focus_and_back_to_root_screen
 }
 
@@ -70,6 +76,12 @@ auto_scarab_10_pull_and_vault() {
 	move_wait_click $X_scarab_vault_open $Y_scarab_vault_open 2
 	sleep 20
 
+	# try release beast
+	#go_to_town
+	#move_wait_click $X_tavern_main $Y_tavern_main 2
+	#move_wait_click $X_tavern_scarab $Y_tavern_scarab 4
+	#sleep 7
+
 	focus_and_back_to_root_screen
 }
 
@@ -97,6 +109,27 @@ auto_open_10_max_chests() {
 	sleep 1
 	move_wait_click $X_chest_open_10_max $Y_chest_open_10_max 2
 	sleep 15
+
+	focus_and_back_to_root_screen
+}
+
+flush_daily_mail() {
+	echo "*** auto flush 10 mails"
+	focus_and_back_to_root_screen
+	move_wait_click $X_mail_open $Y_mail_open 2
+	sleep 1
+
+	move_wait_click $X_mail_delete $Y_mail_delete 2
+	sleep 1
+	xdotool key Escape
+	local i=0
+	while [ "$i" -lt "9" ]; do
+		sleep 1
+		slow_safe_click
+		sleep 1
+		xdotool key Escape
+		i=$((i+1))
+	done
 
 	focus_and_back_to_root_screen
 }

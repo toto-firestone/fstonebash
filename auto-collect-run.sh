@@ -55,6 +55,7 @@ auto_beer_token_10_pull
 auto_scarab_10_pull_and_vault
 auto_crystal_5_hit
 auto_open_10_max_chests
+flush_daily_mail
 
 focus_and_back_to_root_screen
 
