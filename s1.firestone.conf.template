@@ -1,2 +1,12 @@
 i_guardian_slot=2
 brute_force_time=25
+
+ENABLE_AUTO_RIFT=false
+
+declare -ga guardian_holy_cycle_A=(
+	"3"
+	"2"
+	"1"
+)
+
+N_HOLY_UPGRADE_CYCLES=3

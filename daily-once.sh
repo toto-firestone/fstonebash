@@ -108,6 +108,21 @@ else
 	echo "skip daily collect"
 fi
 
+### ### ### ### ### ### ##
+### Handling auto rift ###
+### ### ### ### ### ### ##
+
+source tricky-dailies.sh
+
+source $current_servname.firestone.conf
+if $ENABLE_AUTO_RIFT; then
+	echo "*** Auto Rift enabled on $current_servname ***"
+	auto_guardian_holy_upgrade $current_servname
+	auto_chaos_rift_play $current_servname
+else
+	echo "*** Auto Rift disabled on $current_servname ***"
+fi
+
 # TASK FILE HAS TO REMOVED ON CALLING CONTEXT IF force OPTION IS USED #
 if [ "$1" != "force" ]; then
 	remove_task "$current_servname.daily.todo"
