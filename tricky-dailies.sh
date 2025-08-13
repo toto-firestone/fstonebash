@@ -77,10 +77,12 @@ auto_scarab_10_pull_and_vault() {
 	sleep 20
 
 	# try release beast
-	#go_to_town
-	#move_wait_click $X_tavern_main $Y_tavern_main 2
-	#move_wait_click $X_tavern_scarab $Y_tavern_scarab 4
-	#sleep 7
+	go_to_town
+	move_wait_click $X_tavern_main $Y_tavern_main 2
+	move_wait_click $X_tavern_scarab $Y_tavern_scarab 4
+	sleep 7
+	move_wait_click $X_release_beast $Y_release_beast 2
+	sleep 15
 
 	focus_and_back_to_root_screen
 }
