@@ -165,9 +165,9 @@ auto_reset_timestamps() {
 	fi
 	# NOW REACHED if arguments 1 and 2 are not provided
 	local time_file="$current_servname.$1.timestamp"
+	echo
 	echo "* auto reset for $time_file"
 	local elapsed=$(get_elapsed $time_file)
-	echo
 	#echo "Elapsed $1 Time since reset : $elapsed / $2 half hours"
 	if [ "$elapsed" -ge "$2" ]; then
 		echo "*** Auto reset timestamp ***"
@@ -354,8 +354,7 @@ while true; do
 		fi
 
 		./switch-server.sh $i_serv
-		source win_id.conf
-		source switch.conf
+		source master.conf
 		# LAST USAGE OF i_serv ON THE ITERATION
 		if [ "$i_serv" != "$current_servname" ]; then
 			echo "* server switch in wrong server"
@@ -376,7 +375,16 @@ while true; do
 		read_timestamps "mapcycle" 12
 		auto_reset_timestamps "mapcycle" 12
 		read_timestamps "daily" 48
-		auto_reset_timestamps "daily" 48
+		if $STOP_AUTO_DAILY_RESET; then
+			echo "* auto reset timestamps on dailies is disabled *"
+			echo "* enables manual reset with shell command"
+			echo "* or interactive menu"
+			## Schedule file is not created ##
+			# Then daily-once.sh script should exit
+			# without doing anything
+		else
+			auto_reset_timestamps "daily" 48
+		fi
 		echo
 
 		xdotool windowminimize --sync $gamewin_id

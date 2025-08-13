@@ -22,8 +22,11 @@ check_file_before_source view.conf
 check_file_before_source switch.conf
 check_file_before_source gameover.conf
 
-## cooldown time in minutes
+## cooldown time in minutes for CPU (not magic spells)
 COOLDOWN_TIME=8
+
+## stop auto reset of daily timestamps for all servers
+STOP_AUTO_DAILY_RESET=false
 
 ## handling config files templates updates
 update_config_files() {
