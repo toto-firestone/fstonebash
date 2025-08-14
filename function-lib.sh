@@ -572,4 +572,15 @@ increment_pharaoh_20t() {
 	xdotool windowactivate --sync $gamewin_id
 }
 
+rift_calc_optim() {
+	local jul="julia -e"
+	local in_f="rift-calc.jl"
+	local f_op="increment_optimize_orbs"
+
+	local ans=$($jul "include(\"${in_f}\");${f_op}($1,$2)" | grep "optimal combi" | tail -n 1)
+
+	local ans_filtered=${ans#*:}
+	echo ${ans_filtered// /}
+}
+
 ### ### ### ### ### ### ### ###
