@@ -13,14 +13,17 @@ declare -gA auto_daily_H=(
 # time unit is half-hour
 declare -gA daily_start_delay_H=(
 	["s1"]="3"
-	["s14"]="0"
+	["s14"]="9"
 	["s27"]="6"
 	["s31"]="0"
 	["s8"]="0"
 	["s25"]="0"
 )
 
-WITHOUT_NODRIFT=true
+## This parameter can override command line driving
+# Only releveant in case of testing
+# Leave it at false
+WITHOUT_NODRIFT=false
 
 declare -gA do_libe_H=(
 	["s1"]=true
@@ -36,7 +39,7 @@ declare -gA do_collect_H=(
 	["s14"]=true
 	["s27"]=true
 	["s31"]=true
-	["s8"]=true
+	["s8"]=false
 	["s25"]=false
 )
 
