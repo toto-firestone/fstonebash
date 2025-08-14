@@ -1,7 +1,5 @@
 # fstonebash
-
 Automation and tools for Firestone idle RGP using Bash, xdotool and Julia
-=
 
 The code has been implemented on Linux PC, with Firestone running on Armor Games and Firefox.
 
