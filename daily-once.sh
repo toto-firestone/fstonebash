@@ -6,6 +6,8 @@
 source glob-coord.conf
 source master.conf
 source function-lib.sh
+source visual-lib.sh
+
 source daily.conf
 
 if [ "$1" == "force" ]; then
@@ -89,23 +91,32 @@ else
 fi
 # NOT REACHED IF CANCELED FOR ANY REASON
 
-echo "Let's start on $current_servname"
+echo "** Let's start auto dailies on $current_servname"
 
 Nlibe=${Nlibe_H[$current_servname]-"0"}
 Ndung=${Ndung_H[$current_servname]-"0"}
 # TFight is optional and can be empty
 TFight=${TFightSec_H[$current_servname]}
 if ${do_libe_H[$current_servname]}; then
-	echo "doing $Nlibe liberations and $Ndung dungeons"
+	echo "* expedition check before liberation"
+	launch_and_claim_expedition
+
+	echo "* doing $Nlibe liberations and $Ndung dungeons"
 	./auto-wm-run.sh $Nlibe $Ndung $TFight
 else
-	echo "skip WM daily missions"
+	echo "* skip WM daily missions"
 fi
 if ${do_collect_H[$current_servname]}; then
-	echo "doing auto daily collect"
+	echo "* expedition check before daily collect"
+	launch_and_claim_expedition
+
+	echo "* doing auto daily collect"
 	./auto-collect-run.sh
+
+	echo "* map check after daily collect"
+	./auto-map.sh
 else
-	echo "skip daily collect"
+	echo "* skip daily collect"
 fi
 
 ### ### ### ### ### ### ##
