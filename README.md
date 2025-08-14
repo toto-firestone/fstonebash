@@ -1,15 +1,14 @@
 # fstonebash
 
-=========================================================================
 Automation and tools for Firestone idle RGP using Bash, xdotool and Julia
-=========================================================================
+=
 
 The code has been implemented on Linux PC, with Firestone running on Armor Games and Firefox.
 
 DISCLAIMER :
 No doc, no tuto, no support... Help yourself and brew your own.
-- Using this program will require skills in Bash Shell Programming Language.
-- Reading it may provide ideas for your own bot, for your system & platform.
+* Using this program will require skills in Bash Shell Programming Language.
+* Reading it may provide ideas for your own bot, for your device, system and platform.
 
 The best I can do right now is a description of all features
 
@@ -36,7 +35,7 @@ The best I can do right now is a description of all features
 * Screen sampling using ImageMagick
 * Robustess and failsafe
 * Basic example for guild expeditions only (basic-exped.sh)
-* Non commercial license
+* Non-commercial license
 
 Author's Note :
 Writing my own automation bot and tools provided me as much fun as playing the game itself, and even more actually.
