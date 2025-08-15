@@ -129,18 +129,18 @@ auto_open_10_max_chests() {
 flush_daily_mail() {
 	echo "*** auto flush 10 mails"
 	focus_and_back_to_root_screen
-	move_wait_click $X_mail_open $Y_mail_open 2
-	sleep 1
-
-	move_wait_click $X_mail_delete $Y_mail_delete 2
-	sleep 1
-	xdotool key Escape
 	local i=0
-	while [ "$i" -lt "9" ]; do
+	while [ "$i" -lt "10" ]; do
+		move_wait_click $X_mail_open $Y_mail_open 2
 		sleep 1
-		slow_safe_click
+		move_wait_click $X_mail_delete $Y_mail_delete 2
 		sleep 1
+		# this one is for claim goods or close mail if no goods
 		xdotool key Escape
+		sleep 1
+		# this one is for close mail or nothing
+		xdotool key Escape
+		sleep 1
 		i=$((i+1))
 	done
 
