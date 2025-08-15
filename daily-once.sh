@@ -47,7 +47,26 @@ elif [ "$1" == "reset" ]; then
 		fi
 		reset_timestamp $time_file $t_drift
 		log_msg "** reset of $time_file"
+		# remove is necessary because of non empty task file
+		remove_task "$serv.daily.todo"
 		schedule_task "$serv.daily.todo"
+
+		### write split tasks ###
+		f_task="./tmp/$serv.daily.todo"
+		if ${do_libe_H[$serv]}; then
+			echo "libe_dung" >> $f_task
+		fi
+		if ${do_collect_H[$serv]}; then
+			echo "gift_exotic" >> $f_task
+			echo "pickaxe_crystal" >> $f_task
+			echo "beer" >> $f_task
+			echo "scarab" >> $f_task
+			echo "chest_mail" >> $f_task
+		fi
+		source $serv.firestone.conf
+		if $ENABLE_AUTO_RIFT; then
+			echo "holy_rift" >> $f_task
+		fi
 	done
 
 	exit
@@ -92,6 +111,28 @@ fi
 # NOT REACHED IF CANCELED FOR ANY REASON
 
 echo "** Let's start auto dailies on $current_servname"
+source $current_servname.firestone.conf
+
+### ### ### ### ### ##
+### SPLIT WORKLOAD ###
+### ### ### ### ### ##
+
+## force option disables split workload
+if $ENABLE_SPLIT_DAILY && [ "$1" != "force" ]; then
+	echo "** workload split enabled **"
+	./split-dailies.sh
+	exit
+fi
+
+### ### ### ### ### ##
+### ### ### ### ### ##
+# NOT REACHED IF WORKLOAD SPLIT IS ENABLED AND force OPTION IS OFF
+
+# So the following part is executed if workload split is DISABLED
+# OR force option is ON
+
+# actually force option does not matter when workload split is off
+# workload split option does not count when force option on
 
 Nlibe=${Nlibe_H[$current_servname]-"0"}
 Ndung=${Ndung_H[$current_servname]-"0"}
@@ -125,7 +166,6 @@ fi
 
 source tricky-dailies.sh
 
-source $current_servname.firestone.conf
 if $ENABLE_AUTO_RIFT; then
 	echo "*** Auto Rift enabled on $current_servname ***"
 	auto_guardian_holy_upgrade $current_servname
@@ -134,7 +174,9 @@ else
 	echo "*** Auto Rift disabled on $current_servname ***"
 fi
 
-# TASK FILE HAS TO REMOVED ON CALLING CONTEXT IF force OPTION IS USED #
+# TASK FILE HAS TO BE REMOVED ON CALLING CONTEXT IF force OPTION IS USED #
+# last instruction is executed when workload split is DISABLED
+# AND force option is OFF
 if [ "$1" != "force" ]; then
 	remove_task "$current_servname.daily.todo"
 fi

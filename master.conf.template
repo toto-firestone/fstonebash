@@ -28,6 +28,9 @@ COOLDOWN_TIME=8
 ## stop auto reset of daily timestamps for all servers
 STOP_AUTO_DAILY_RESET=false
 
+## enables split execution of dailies
+ENABLE_SPLIT_DAILY=true
+
 ## handling config files templates updates
 update_config_files() {
 	# this array is local
