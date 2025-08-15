@@ -228,3 +228,160 @@ auto_chaos_rift_play() {
 
 	focus_and_back_to_root_screen
 }
+
+#### functions just for liberation misions ###
+
+mission_ok() {
+	xdotool windowactivate --sync $gamewin_id
+	sleep 1
+	xdotool key Escape
+	sleep 5
+}
+
+liberation_click() {
+	move_wait_only $1 $2 $3
+	super_slow_click
+}
+
+##### #### #### #### #### #### #### #### #####
+
+auto_liberation_dungeon() {
+	echo "*** auto liberation and dungeon"
+	go_to_map
+	move_wait_click $X_camp_map $Y_camp_map 4
+	move_wait_click $X_mission_button $Y_mission_button 6
+
+	move_wait_click $X_liberations $Y_liberations 4
+	sleep 4
+	local n_liber=$1
+	local n_dung=$2
+	local t_fight_sec=$3
+	local i=0
+	if [ "$i" -lt  "$n_liber" ]; then
+		i=$((i+1))
+		echo "liberation $i"
+		liberation_click $X_liberation_1 $Y_liberation_1 2
+		sleep $t_fight_sec
+		mission_ok
+	fi
+	if [ "$i" -lt  "$n_liber" ]; then
+		i=$((i+1))
+		echo "liberation $i"
+		liberation_click $X_liberation_2 $Y_liberation_2 2
+		sleep $t_fight_sec
+		mission_ok
+	fi
+	if [ "$i" -lt  "$n_liber" ]; then
+		i=$((i+1))
+		echo "liberation $i"
+		liberation_click $X_liberation_3 $Y_liberation_3 2
+		sleep $t_fight_sec
+		mission_ok
+	fi
+	if [ "$i" -lt  "$n_liber" ]; then
+		i=$((i+1))
+		echo "liberation $i"
+		liberation_click $X_liberation_4 $Y_liberation_4 2
+		sleep $t_fight_sec
+		mission_ok
+	fi
+
+	# scrolled part
+	echo "DON'T MOVE MOUSE NOW"
+	xdotool mousemove $X_liberation_4 $Y_liberation_4
+	sleep 4
+	while [ "$i" -lt  "$n_liber" ]; do
+		i=$((i+1))
+		echo "let's scroll to liberation $i"
+		smooth_drag_and_drop $X_liber_scroll_right $Y_liber_scroll $X_liber_scroll_left $Y_liber_scroll
+
+		#slow_safe_click
+		liberation_click $X_liberation_4 $Y_liberation_4 2
+		sleep $t_fight_sec
+		mission_ok
+		# tempo correction
+		sleep 4
+	done
+
+	mission_ok
+	move_wait_click $X_dungeons $Y_dungeons 6
+	i=0
+	if [ "$i" -lt  "$n_dung" ]; then
+		i=$((i+1))
+		echo "dungeons $i"
+		liberation_click $X_dungeon_1 $Y_dungeon_1 2
+		sleep $t_fight_sec
+		mission_ok
+	fi
+	if [ "$i" -lt  "$n_dung" ]; then
+		i=$((i+1))
+		echo "dungeons $i"
+		liberation_click $X_dungeon_2 $Y_dungeon_2 2
+		sleep $t_fight_sec
+		mission_ok
+	fi
+
+	focus_and_back_to_root_screen
+}
+
+auto_claim_gifts() {
+	echo "*** auto oracle and shop gifts"
+	go_to_oracle
+	move_wait_click $X_oracle_shop $Y_oracle_shop 2
+	move_wait_click $X_oracle_gift $Y_oracle_gift 2
+
+	go_to_town
+	move_wait_click $X_main_shop $Y_main_shop 2
+	move_wait_click $X_free_box $Y_free_box 3
+	sleep 1
+	move_wait_click $X_checkin_tab $Y_checkin_tab 2
+	echo "Warning : check-in button may change place when special offer occurs"
+	echo "a wrong check-in coordinate is not harmful"
+	move_wait_click $X_checkin_but $Y_checkin_but 2
+	echo "try alternative position..."
+	move_wait_click $X_checkin_but $((Y_checkin_but+46)) 2
+
+	focus_and_back_to_root_screen
+}
+
+auto_exotic_sales() {
+	echo "*** auto sale crap in exotic shop"
+	go_to_exotic
+	# toggle to X50
+	move_wait_click $X_exo_toggle $Y_exo_toggle 2
+	move_wait_click $X_exo_toggle $Y_exo_toggle 3
+	sleep 1
+
+	move_wait_click $X_speed_scroll $Y_speed_scroll 2
+	move_wait_click $X_damage_scroll $Y_damage_scroll 2
+	move_wait_click $X_health_scroll $Y_health_scroll 2
+	move_wait_click $X_midas_touch $Y_midas_touch 2
+
+	echo "scrolling to the bottom part"
+	#sleep 2
+	smooth_drag_and_drop $X_exotic_scroll $Y_exotic_scroll_bottom $X_exotic_scroll $Y_exotic_scroll_top
+	sleep 2
+	smooth_drag_and_drop $X_exotic_scroll $Y_exotic_scroll_bottom $X_exotic_scroll $Y_exotic_scroll_top
+
+	move_wait_click $X_drum_war $Y_drum_war 2
+	move_wait_click $X_dragon_armor $Y_dragon_armor 2
+	move_wait_click $X_guardian_rune $Y_guardian_rune 2
+	move_wait_click $X_totem_agony $Y_totem_agony 2
+	move_wait_click $X_totem_annihil $Y_totem_annihil 2
+
+	focus_and_back_to_root_screen
+}
+
+auto_claim_pickaxes() {
+	echo "*** auto and safe claim of pickaxes"
+	go_to_town
+	move_wait_click $X_guild_portal $Y_guild_portal 2
+
+	move_wait_click $X_guild_shop $Y_guild_shop 7
+	move_wait_click $X_guild_supplies $Y_guild_supplies 3
+	move_wait_click $X_guild_supplies $Y_guild_supplies 2
+	move_wait_click $X_guild_supplies $Y_guild_supplies 1
+	move_wait_click $X_claim_pickaxe $Y_claim_pickaxe 3
+
+	focus_and_back_to_root_screen
+}
