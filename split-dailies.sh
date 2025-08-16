@@ -23,27 +23,40 @@ fi
 # NOT REACHED IF TASK FILE ISSUE
 # NOW TASK FILE EXISTS AND NON EMPTY
 
+Nlibe=${Nlibe_H[$current_servname]-"0"}
+Ndung=${Ndung_H[$current_servname]-"0"}
+TFight=${TFightSec_H[$current_servname]-"60"}
+
 daily_cmd=$(head -n 1 $f_task)
 sed -i '1d' $f_task
 
 case $daily_cmd in
 	"libe_dung") echo "* command read : $daily_cmd"
-		echo "* expedition check before liberation"
+		echo "* expedition check before all liberations and dungeons"
 		launch_and_claim_expedition
 
-		Nlibe=${Nlibe_H[$current_servname]-"0"}
-		Ndung=${Ndung_H[$current_servname]-"0"}
-		TFight=${TFightSec_H[$current_servname]}
-		if [ "$Nlibe" -gt "0" ] || [ "$Ndung" -gt "0" ]; then
-			echo "* doing $Nlibe liberations and $Ndung dungeons"
-			echo "* timeout at $TFight sec"
-			auto_liberation_dungeon $Nlibe $Ndung $TFight
-		else
-			echo "* actually $Nlibe and $Ndung mission - skip"
-		fi
+		echo "* doing $Nlibe liberations and $Ndung dungeons"
+		echo "* timeout at $TFight sec"
+		auto_liberation_dungeon $Nlibe $Ndung $TFight
 
-		echo "* map check after liberation"
-		./auto-map.sh
+		### not yet : don't do that incase of map position bug ###
+		#echo "* map check after liberation"
+		#./auto-map.sh
+		echo;;
+	"libe_1to4") echo "* command read : $daily_cmd"
+		echo "* doing $Nlibe / 4 liberations"
+		echo "* timeout at $TFight sec"
+		auto_liberation_1to4 $Nlibe $TFight
+		echo;;
+	"libe_5more") echo "* command read : $daily_cmd"
+		echo "* doing $Nlibe liberations at 5+"
+		echo "* timeout at $TFight sec"
+		auto_liberation_5more $Nlibe $TFight
+		echo;;
+	"dung") echo "* command read : $daily_cmd"
+		echo "* doing $Ndung dungeons"
+		echo "* timeout at $TFight sec"
+		auto_dungeon $Ndung $TFight
 		echo;;
 	"gift_exotic") echo "* command read : $daily_cmd"
 		auto_claim_gifts
