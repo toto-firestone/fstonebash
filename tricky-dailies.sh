@@ -245,17 +245,26 @@ liberation_click() {
 
 ##### #### #### #### #### #### #### #### #####
 
-auto_liberation_dungeon() {
-	echo "*** auto liberation and dungeon"
+auto_liberation_1to4() {
+	echo "** auto liberation for missions 1 to 4"
+	local n_liber=$1
+	local t_fight_sec=$2
+	if [ "$n_liber" -le "0" ]; then
+		echo "* $n_liber liberation mission - skip"
+		return
+	fi
+	if [ "$t_fight_sec" -lt "10" ]; then
+		echo "* $t_fight_sec sec timeout is too short - skip"
+		return
+	fi
+	# NOT REACHED IF NO LIBERATION OR IRRELEVANT TIMEOUT
+
 	go_to_map
 	move_wait_click $X_camp_map $Y_camp_map 4
 	move_wait_click $X_mission_button $Y_mission_button 6
 
 	move_wait_click $X_liberations $Y_liberations 4
 	sleep 4
-	local n_liber=$1
-	local n_dung=$2
-	local t_fight_sec=$3
 	local i=0
 	if [ "$i" -lt  "$n_liber" ]; then
 		i=$((i+1))
@@ -286,10 +295,33 @@ auto_liberation_dungeon() {
 		mission_ok
 	fi
 
+	focus_and_back_to_root_screen
+}
+
+auto_liberation_5more() {
+	echo "** auto liberation for missions 5 and more"
+	local n_liber=$1
+	local t_fight_sec=$2
+	if [ "$n_liber" -le "4" ]; then
+		echo "* $n_liber liberation mission - skip"
+		return
+	fi
+	if [ "$t_fight_sec" -lt "10" ]; then
+		echo "* $t_fight_sec sec timeout is too short - skip"
+		return
+	fi
+	# NOT REACHED IF NO LIBERATION OR IRRELEVANT TIMEOUT
+
+	go_to_map
+	move_wait_click $X_camp_map $Y_camp_map 4
+	move_wait_click $X_mission_button $Y_mission_button 6
+
+	move_wait_click $X_liberations $Y_liberations 4
 	# scrolled part
 	echo "DON'T MOVE MOUSE NOW"
 	xdotool mousemove $X_liberation_4 $Y_liberation_4
 	sleep 4
+	local i=4
 	while [ "$i" -lt  "$n_liber" ]; do
 		i=$((i+1))
 		echo "let's scroll to liberation $i"
@@ -303,9 +335,29 @@ auto_liberation_dungeon() {
 		sleep 4
 	done
 
-	mission_ok
+	focus_and_back_to_root_screen
+}
+
+auto_dungeon() {
+	echo "** auto dungeon"
+	local n_dung=$1
+	local t_fight_sec=$2
+	if [ "$n_dung" -le "0" ]; then
+		echo "* $n_dung dungeon mission - skip"
+		return
+	fi
+	if [ "$t_fight_sec" -lt "10" ]; then
+		echo "* $t_fight_sec sec timeout is too short - skip"
+		return
+	fi
+	# NOT REACHED IF NO LIBERATION OR IRRELEVANT TIMEOUT
+
+	go_to_map
+	move_wait_click $X_camp_map $Y_camp_map 4
+	move_wait_click $X_mission_button $Y_mission_button 6
+
 	move_wait_click $X_dungeons $Y_dungeons 6
-	i=0
+	local i=0
 	if [ "$i" -lt  "$n_dung" ]; then
 		i=$((i+1))
 		echo "dungeons $i"
@@ -322,6 +374,14 @@ auto_liberation_dungeon() {
 	fi
 
 	focus_and_back_to_root_screen
+}
+
+auto_liberation_dungeon() {
+	echo "*** auto liberation and dungeon ***"
+	anti_ad
+	auto_liberation_1to4 $1 $3
+	auto_liberation_5more $1 $3
+	auto_dungeon $2 $3
 }
 
 auto_claim_gifts() {
