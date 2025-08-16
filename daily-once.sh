@@ -7,6 +7,7 @@ source glob-coord.conf
 source master.conf
 source function-lib.sh
 source visual-lib.sh
+source tricky-dailies.sh
 
 source daily.conf
 
@@ -54,7 +55,10 @@ elif [ "$1" == "reset" ]; then
 		### write split tasks ###
 		f_task="./tmp/$serv.daily.todo"
 		if ${do_libe_H[$serv]}; then
-			echo "libe_dung" >> $f_task
+			#echo "libe_dung" >> $f_task
+			echo "libe_1to4" >> $f_task
+			echo "libe_5more" >> $f_task
+			echo "dung" >> $f_task
 		fi
 		if ${do_collect_H[$serv]}; then
 			echo "gift_exotic" >> $f_task
@@ -92,7 +96,10 @@ else
 	fi
 	# NOT REACHED IF SCHEDULE FILE NOT CREATED BY RESET
 
-	todo_time=$(stat -c '%Y' $todo_file)
+	## the creation time of todo file is same as last modification
+	## time of timestamp file (creation time not available with stat)
+	time_file="./tmp/$current_servname.daily.timestamp"
+	todo_time=$(stat -c '%Y' $time_file)
 	now_time=$(date +%s)
 	actual_delay=$((now_time-todo_time))
 	echo "* $actual_delay seconds since task scheduling"
@@ -136,14 +143,14 @@ fi
 
 Nlibe=${Nlibe_H[$current_servname]-"0"}
 Ndung=${Ndung_H[$current_servname]-"0"}
-# TFight is optional and can be empty
-TFight=${TFightSec_H[$current_servname]}
+TFight=${TFightSec_H[$current_servname]-"60"}
 if ${do_libe_H[$current_servname]}; then
 	echo "* expedition check before liberation"
 	launch_and_claim_expedition
 
 	echo "* doing $Nlibe liberations and $Ndung dungeons"
-	./auto-wm-run.sh $Nlibe $Ndung $TFight
+	#./auto-wm-run.sh $Nlibe $Ndung $TFight
+	auto_liberation_dungeon $Nlibe $Ndung $TFight
 else
 	echo "* skip WM daily missions"
 fi
@@ -154,8 +161,8 @@ if ${do_collect_H[$current_servname]}; then
 	echo "* doing auto daily collect"
 	./auto-collect-run.sh
 
-	echo "* map check after daily collect"
-	./auto-map.sh
+	#echo "* map check after daily collect"
+	#./auto-map.sh
 else
 	echo "* skip daily collect"
 fi
@@ -163,8 +170,6 @@ fi
 ### ### ### ### ### ### ##
 ### Handling auto rift ###
 ### ### ### ### ### ### ##
-
-source tricky-dailies.sh
 
 if $ENABLE_AUTO_RIFT; then
 	echo "*** Auto Rift enabled on $current_servname ***"
