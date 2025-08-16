@@ -149,7 +149,6 @@ if ${do_libe_H[$current_servname]}; then
 	launch_and_claim_expedition
 
 	echo "* doing $Nlibe liberations and $Ndung dungeons"
-	#./auto-wm-run.sh $Nlibe $Ndung $TFight
 	auto_liberation_dungeon $Nlibe $Ndung $TFight
 else
 	echo "* skip WM daily missions"
