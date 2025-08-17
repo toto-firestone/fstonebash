@@ -65,43 +65,43 @@ fstone_globcoord("quests_claim", "X_quests_claim", "Y_quests_claim", "1116", "36
 
 ### Exotic ###
 # (1) exo_toggle
-fstone_globcoord("exo_toggle", "X_exo_toggle", "Y_exo_toggle", "1246", "330", "Exotic", "description")
+fstone_globcoord("exo_toggle", "X_exo_toggle", "Y_exo_toggle", "1246", "330", "Exotic", "toggle to x10 s50 items for sale")
 ;
 # (2) speed_scroll
-fstone_globcoord("speed_scroll", "X_speed_scroll", "Y_speed_scroll", "673", "580", "Exotic", "description")
+fstone_globcoord("speed_scroll", "X_speed_scroll", "Y_speed_scroll", "673", "580", "Exotic", "sell speed scroll")
 ;
 # (3) damage_scroll
-fstone_globcoord("damage_scroll", "X_damage_scroll", "Y_damage_scroll", "909", "581", "Exotic", "description")
+fstone_globcoord("damage_scroll", "X_damage_scroll", "Y_damage_scroll", "909", "581", "Exotic", "sell damage scroll")
 ;
 # (4) health_scroll
-fstone_globcoord("health_scroll", "X_health_scroll", "Y_health_scroll", "1144", "580", "Exotic", "description")
+fstone_globcoord("health_scroll", "X_health_scroll", "Y_health_scroll", "1144", "580", "Exotic", "sell health scroll")
 ;
 # (5) midas_touch
-fstone_globcoord("midas_touch", "X_midas_touch", "Y_midas_touch", "695", "808", "Exotic", "description")
+fstone_globcoord("midas_touch", "X_midas_touch", "Y_midas_touch", "695", "808", "Exotic", "sell midas touch")
 ;
 # (6) drum_war
-fstone_globcoord("drum_war", "X_drum_war", "Y_drum_war", "1153", "374", "Exotic", "description")
+fstone_globcoord("drum_war", "X_drum_war", "Y_drum_war", "1153", "374", "Exotic", "sell drum of war")
 ;
 # (7) dragon_armor
-fstone_globcoord("dragon_armor", "X_dragon_armor", "Y_dragon_armor", "686", "588", "Exotic", "description")
+fstone_globcoord("dragon_armor", "X_dragon_armor", "Y_dragon_armor", "686", "588", "Exotic", "sell dragon armor")
 ;
 # (8) guardian_rune
-fstone_globcoord("guardian_rune", "X_guardian_rune", "Y_guardian_rune", "923", "589", "Exotic", "description")
+fstone_globcoord("guardian_rune", "X_guardian_rune", "Y_guardian_rune", "923", "589", "Exotic", "sell guardian rune")
 ;
 # (9) totem_agony
-fstone_globcoord("totem_agony", "X_totem_agony", "Y_totem_agony", "1136", "583", "Exotic", "description")
+fstone_globcoord("totem_agony", "X_totem_agony", "Y_totem_agony", "1136", "583", "Exotic", "sell totem of agony")
 ;
 # (10) totem_annihil
-fstone_globcoord("totem_annihil", "X_totem_annihil", "Y_totem_annihil", "678", "812", "Exotic", "description")
+fstone_globcoord("totem_annihil", "X_totem_annihil", "Y_totem_annihil", "678", "812", "Exotic", "sell totem of annihilation")
 ;
 # (11) exotic_scroll
-fstone_globcoord("exotic_scroll", "X_exotic_scroll", "SOLO_VAR", "559", "0", "Exotic", "description")
+fstone_globcoord("exotic_scroll", "X_exotic_scroll", "SOLO_VAR", "559", "0", "Exotic", "X coordinate for item view drag down, on left side of item list")
 ;
 # (12) exotic_scroll_bottom
-fstone_globcoord("exotic_scroll_bottom", "Y_exotic_scroll_bottom", "SOLO_VAR", "844", "0", "Exotic", "description")
+fstone_globcoord("exotic_scroll_bottom", "Y_exotic_scroll_bottom", "SOLO_VAR", "844", "0", "Exotic", "Y coordinate for item view drag down, on bottom left side of item list")
 ;
 # (13) exotic_scroll_top
-fstone_globcoord("exotic_scroll_top", "Y_exotic_scroll_top", "SOLO_VAR", "388", "0", "Exotic", "description")
+fstone_globcoord("exotic_scroll_top", "Y_exotic_scroll_top", "SOLO_VAR", "388", "0", "Exotic", "Y coordinate for item view drag down, on upper left side of item list")
 ;
 
 
