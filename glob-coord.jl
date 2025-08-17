@@ -8,19 +8,19 @@ GLOB_COORD_DB = [
 
 ### Alchemy ###
 # (1) alch_blood_exp
-fstone_globcoord("alch_blood_exp", "X_alch_blood_exp", "SOLO_VAR", "670", "0", "Alchemy", "description")
+fstone_globcoord("alch_blood_exp", "X_alch_blood_exp", "SOLO_VAR", "670", "0", "Alchemy", "start dragon blood alchemy experiment")
 ;
 # (2) alch_dust_exp
-fstone_globcoord("alch_dust_exp", "X_alch_dust_exp", "SOLO_VAR", "923", "0", "Alchemy", "description")
+fstone_globcoord("alch_dust_exp", "X_alch_dust_exp", "SOLO_VAR", "923", "0", "Alchemy", "start dust alchemy experiment")
 ;
 # (3) alch_coin_exp
-fstone_globcoord("alch_coin_exp", "X_alch_coin_exp", "SOLO_VAR", "1180", "0", "Alchemy", "description")
+fstone_globcoord("alch_coin_exp", "X_alch_coin_exp", "SOLO_VAR", "1180", "0", "Alchemy", "exotic coin alchemy experiment")
 ;
 # (4) alch_experiments
-fstone_globcoord("alch_experiments", "Y_alch_experiments", "SOLO_VAR", "709", "0", "Alchemy", "description")
+fstone_globcoord("alch_experiments", "Y_alch_experiments", "SOLO_VAR", "709", "0", "Alchemy", "common Y coordinate for all alchemy experiments")
 ;
 # (5) alch_close_gem
-fstone_globcoord("alch_close_gem", "X_alch_close_gem", "Y_alch_close_gem", "943", "354", "Alchemy", "description")
+fstone_globcoord("alch_close_gem", "X_alch_close_gem", "Y_alch_close_gem", "943", "354", "Alchemy", "close gems spending dialog in alchemy when misclicking on experiment spped-up")
 ;
 
 
