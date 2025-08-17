@@ -104,7 +104,7 @@ auto_crystal_5_hit() {
 	move_wait_click $X_guild_portal $Y_guild_portal 2
 	sleep 6
 	move_wait_click $X_arcane_crystal $Y_arcane_crystal 2
-	sleep 1
+	sleep 4
 
 	# 5 hits on crystal
 	move_wait_click $X_crystal_hit_toggle $Y_crystal_hit_toggle 2
