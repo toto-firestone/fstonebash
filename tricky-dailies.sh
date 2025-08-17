@@ -445,3 +445,23 @@ auto_claim_pickaxes() {
 
 	focus_and_back_to_root_screen
 }
+
+print_daily_todo() {
+	if [ -z "$1" ]; then
+		echo "* Error : provide a server name as argument"
+		return
+	fi
+	source daily.conf
+	if ! ${auto_daily_H[$1]-false}; then
+		echo "* Warning : auto daily disabled for $1"
+		return
+	fi
+
+	echo "** daily todo list on $1"
+	local f_todo="./tmp/$1.daily.todo"
+	if [ ! -f "$f_todo" ]; then
+		echo "empty"
+	else
+		cat $f_todo
+	fi
+}
