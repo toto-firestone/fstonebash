@@ -107,7 +107,7 @@ fstone_globcoord("exotic_scroll_top", "Y_exotic_scroll_top", "SOLO_VAR", "388", 
 
 ### Guardian ###
 # (1) guard_train
-fstone_globcoord("guard_train", "X_guard_train", "Y_guard_train", "812", "708", "Guardian", "description")
+fstone_globcoord("guard_train", "X_guard_train", "Y_guard_train", "812", "708", "Guardian", "train guardian button")
 ;
 # (2) guard_slot_1
 fstone_globcoord("guard_slot_1", "X_guard_slot_1", "SOLO_VAR", "533", "0", "Guardian", "first guardian slot starting from left")
@@ -134,31 +134,31 @@ fstone_globcoord("guard_holy_upgrade", "X_guard_holy_upgrade", "Y_guard_holy_upg
 
 ### Guild ###
 # (1) guild_portal
-fstone_globcoord("guild_portal", "X_guild_portal", "Y_guild_portal", "1048", "285", "Guild", "description")
+fstone_globcoord("guild_portal", "X_guild_portal", "Y_guild_portal", "1048", "285", "Guild", "guild portal in town")
 ;
 # (2) exped
-fstone_globcoord("exped", "X_exped", "Y_exped", "226", "409", "Guild", "description")
+fstone_globcoord("exped", "X_exped", "Y_exped", "226", "409", "Guild", "guild expedition building")
 ;
 # (3) exped_but
 fstone_globcoord("exped_but", "X_exped_but", "Y_exped_but", "913", "386", "Guild", "Guild expedition start and claim button")
 ;
 # (4) guild_hall
-fstone_globcoord("guild_hall", "X_guild_hall", "Y_guild_hall", "776", "485", "Guild", "description")
+fstone_globcoord("guild_hall", "X_guild_hall", "Y_guild_hall", "776", "485", "Guild", "guild hall building")
 ;
 # (5) applications
-fstone_globcoord("applications", "X_applications", "Y_applications", "657", "850", "Guild", "description")
+fstone_globcoord("applications", "X_applications", "Y_applications", "657", "850", "Guild", "open guild applications window")
 ;
 # (6) accept_player
-fstone_globcoord("accept_player", "X_accept_player", "Y_accept_player", "854", "317", "Guild", "description")
+fstone_globcoord("accept_player", "X_accept_player", "Y_accept_player", "854", "317", "Guild", "accept first player")
 ;
 # (7) guild_shop
-fstone_globcoord("guild_shop", "X_guild_shop", "Y_guild_shop", "464", "337", "Guild", "description")
+fstone_globcoord("guild_shop", "X_guild_shop", "Y_guild_shop", "464", "337", "Guild", "guild shop")
 ;
 # (8) guild_supplies
-fstone_globcoord("guild_supplies", "X_guild_supplies", "Y_guild_supplies", "159", "689", "Guild", "description")
+fstone_globcoord("guild_supplies", "X_guild_supplies", "Y_guild_supplies", "159", "689", "Guild", "guild suuplies tab in shop")
 ;
 # (9) claim_pickaxe
-fstone_globcoord("claim_pickaxe", "X_claim_pickaxe", "Y_claim_pickaxe", "510", "466", "Guild", "description")
+fstone_globcoord("claim_pickaxe", "X_claim_pickaxe", "Y_claim_pickaxe", "510", "466", "Guild", "claim free pickaxes")
 ;
 # (10) guild_expe_but_ul
 fstone_globcoord("guild_expe_but_ul", "x_guild_expe_but_ul", "y_guild_expe_but_ul", "841", "364", "Guild", "upper left corner of guild expedition button")
