@@ -41,25 +41,25 @@ fstone_globcoord("mail_delete", "X_mail_delete", "Y_mail_delete", "1119", "828",
 
 ### CheckIn ###
 # (1) main_shop
-fstone_globcoord("main_shop", "X_main_shop", "Y_main_shop", "922", "432", "CheckIn", "description")
+fstone_globcoord("main_shop", "X_main_shop", "Y_main_shop", "922", "432", "CheckIn", "main gem shop")
 ;
 # (2) free_box
-fstone_globcoord("free_box", "X_free_box", "Y_free_box", "469", "631", "CheckIn", "description")
+fstone_globcoord("free_box", "X_free_box", "Y_free_box", "469", "631", "CheckIn", "free daily mystery box")
 ;
 # (3) checkin_tab
-fstone_globcoord("checkin_tab", "X_checkin_tab", "Y_checkin_tab", "989", "239", "CheckIn", "description")
+fstone_globcoord("checkin_tab", "X_checkin_tab", "Y_checkin_tab", "989", "239", "CheckIn", "daily check-in tab")
 ;
 # (4) checkin_but
-fstone_globcoord("checkin_but", "X_checkin_but", "Y_checkin_but", "960", "744", "CheckIn", "description")
+fstone_globcoord("checkin_but", "X_checkin_but", "Y_checkin_but", "960", "744", "CheckIn", "daily check-in button when there is no special x2 offer")
 ;
 # (5) daily_quests
-fstone_globcoord("daily_quests", "X_daily_quests", "Y_daily_quests", "552", "258", "CheckIn", "description")
+fstone_globcoord("daily_quests", "X_daily_quests", "Y_daily_quests", "552", "258", "CheckIn", "daily quests selector in quest window")
 ;
 # (6) weekly_quests
-fstone_globcoord("weekly_quests", "X_weekly_quests", "Y_weekly_quests", "828", "257", "CheckIn", "description")
+fstone_globcoord("weekly_quests", "X_weekly_quests", "Y_weekly_quests", "828", "257", "CheckIn", "weekly quests selector in quest window")
 ;
 # (7) quests_claim
-fstone_globcoord("quests_claim", "X_quests_claim", "Y_quests_claim", "1116", "368", "CheckIn", "description")
+fstone_globcoord("quests_claim", "X_quests_claim", "Y_quests_claim", "1116", "368", "CheckIn", "daily/weekly quest claim button")
 ;
 
 
