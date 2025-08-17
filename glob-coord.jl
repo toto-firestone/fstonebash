@@ -188,40 +188,40 @@ fstone_globcoord("chaos_rift_hit", "X_chaos_rift_hit", "Y_chaos_rift_hit", "691"
 
 ### Map ###
 # (1) map_mission_start
-fstone_globcoord("map_mission_start", "X_map_mission_start", "Y_map_mission_start", "696", "792", "Map", "description")
+fstone_globcoord("map_mission_start", "X_map_mission_start", "Y_map_mission_start", "696", "792", "Map", "start button on map mission pop up - pick a location on bottom letf of button area in order to avoid clash with cancel button")
 ;
 # (2) map_mission_claim
-fstone_globcoord("map_mission_claim", "X_map_mission_claim", "Y_map_mission_claim", "156", "385", "Map", "description")
+fstone_globcoord("map_mission_claim", "X_map_mission_claim", "Y_map_mission_claim", "156", "385", "Map", "claim button of the top map mission in queue")
 ;
 # (3) map_idle_notif_ul
-fstone_globcoord("map_idle_notif_ul", "x_map_idle_notif_ul", "y_map_idle_notif_ul", "344", "854", "Map", "description")
+fstone_globcoord("map_idle_notif_ul", "x_map_idle_notif_ul", "y_map_idle_notif_ul", "344", "854", "Map", "upper left corner of idle squad notification banner")
 ;
 # (4) map_idle_notif_br
-fstone_globcoord("map_idle_notif_br", "x_map_idle_notif_br", "y_map_idle_notif_br", "853", "876", "Map", "description")
+fstone_globcoord("map_idle_notif_br", "x_map_idle_notif_br", "y_map_idle_notif_br", "853", "876", "Map", "bottom right corner of idle squad notification banner")
 ;
 
 
 ### Oracle ###
 # (1) ritual
-fstone_globcoord("ritual", "X_ritual", "Y_ritual", "593", "457", "Oracle", "description")
+fstone_globcoord("ritual", "X_ritual", "Y_ritual", "593", "457", "Oracle", "ritual tab in oracle")
 ;
 # (2) ritual_1
-fstone_globcoord("ritual_1", "X_ritual_1", "Y_ritual_1", "835", "750", "Oracle", "description")
+fstone_globcoord("ritual_1", "X_ritual_1", "Y_ritual_1", "835", "750", "Oracle", "start/claim button of ritual 1")
 ;
 # (3) ritual_2
-fstone_globcoord("ritual_2", "X_ritual_2", "Y_ritual_2", "1133", "510", "Oracle", "description")
+fstone_globcoord("ritual_2", "X_ritual_2", "Y_ritual_2", "1133", "510", "Oracle", "start/claim button of ritual 2")
 ;
 # (4) ritual_3
-fstone_globcoord("ritual_3", "X_ritual_3", "Y_ritual_3", "838", "513", "Oracle", "description")
+fstone_globcoord("ritual_3", "X_ritual_3", "Y_ritual_3", "838", "513", "Oracle", "start/claim button of ritual 3")
 ;
 # (5) ritual_4
-fstone_globcoord("ritual_4", "X_ritual_4", "Y_ritual_4", "1124", "758", "Oracle", "description")
+fstone_globcoord("ritual_4", "X_ritual_4", "Y_ritual_4", "1124", "758", "Oracle", "start/claim button of ritual 4")
 ;
 # (6) oracle_shop
-fstone_globcoord("oracle_shop", "X_oracle_shop", "Y_oracle_shop", "587", "703", "Oracle", "description")
+fstone_globcoord("oracle_shop", "X_oracle_shop", "Y_oracle_shop", "587", "703", "Oracle", "oracle shop tab")
 ;
 # (7) oracle_gift
-fstone_globcoord("oracle_gift", "X_oracle_gift", "Y_oracle_gift", "476", "569", "Oracle", "description")
+fstone_globcoord("oracle_gift", "X_oracle_gift", "Y_oracle_gift", "476", "569", "Oracle", "free daily oracle gift in shop")
 ;
 
 
