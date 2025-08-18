@@ -185,3 +185,10 @@ function wm_level_up(wm,n_times)
 
 	return nw
 end
+
+function wm_display_info(wm)
+	println("** WM name : ",wm.name)
+	println("* level : ",wm.level)
+	println("* xp bar : ",wm.xp_bar," / ",100 + (wm.level-1)*10)
+	println("*")
+end
