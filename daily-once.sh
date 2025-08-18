@@ -54,22 +54,38 @@ elif [ "$1" == "reset" ]; then
 
 		### write split tasks ###
 		f_task="./tmp/$serv.daily.todo"
-		if ${do_libe_H[$serv]}; then
-			#echo "libe_dung" >> $f_task
-			echo "libe_1to4" >> $f_task
-			echo "libe_5more" >> $f_task
-			echo "dung" >> $f_task
-		fi
-		if ${do_collect_H[$serv]}; then
-			echo "gift_exotic" >> $f_task
-			echo "pickaxe_crystal" >> $f_task
-			echo "beer" >> $f_task
-			echo "scarab" >> $f_task
-			echo "chest_mail" >> $f_task
-		fi
 		source $serv.firestone.conf
-		if $ENABLE_AUTO_RIFT; then
-			echo "holy_rift" >> $f_task
+
+		if $(game_is_over_on_server $serv); then
+			if ${do_libe_H[$serv]}; then
+				echo "* game over : no liberation / dungeon"
+			fi
+			if ${do_collect_H[$serv]}; then
+				echo "gift" >> $f_task
+				echo "pickaxe" >> $f_task
+				echo "scarab" >> $f_task
+				echo "mail" >> $f_task
+			fi
+			if $ENABLE_AUTO_RIFT; then
+				echo "holy_rift" >> $f_task
+			fi
+		else
+			if ${do_libe_H[$serv]}; then
+				#echo "libe_dung" >> $f_task
+				echo "libe_1to4" >> $f_task
+				echo "libe_5more" >> $f_task
+				echo "dung" >> $f_task
+			fi
+			if ${do_collect_H[$serv]}; then
+				echo "gift_exotic" >> $f_task
+				echo "pickaxe_crystal" >> $f_task
+				echo "beer" >> $f_task
+				echo "scarab" >> $f_task
+				echo "chest_mail" >> $f_task
+			fi
+			if $ENABLE_AUTO_RIFT; then
+				echo "holy_rift" >> $f_task
+			fi
 		fi
 	done
 

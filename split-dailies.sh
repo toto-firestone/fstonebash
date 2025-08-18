@@ -62,9 +62,15 @@ case $daily_cmd in
 		auto_claim_gifts
 		auto_exotic_sales
 		echo;;
+	"gift") echo "* command read : $daily_cmd"
+		auto_claim_gifts
+		echo;;
 	"pickaxe_crystal") echo "* command read : $daily_cmd"
 		auto_claim_pickaxes
 		auto_crystal_5_hit
+		echo;;
+	"pickaxe") echo "* command read : $daily_cmd"
+		auto_claim_pickaxes
 		echo;;
 	"beer") echo "* command read : $daily_cmd"
 		auto_beer_token_10_pull
@@ -74,6 +80,9 @@ case $daily_cmd in
 		echo;;
 	"chest_mail") echo "* command read : $daily_cmd"
 		auto_open_10_max_chests
+		flush_daily_mail
+		echo;;
+	"mail") echo "* command read : $daily_cmd"
 		flush_daily_mail
 		echo;;
 	"holy_rift") echo "* command read : $daily_cmd"
