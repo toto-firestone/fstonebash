@@ -227,61 +227,61 @@ fstone_globcoord("oracle_gift", "X_oracle_gift", "Y_oracle_gift", "476", "569", 
 
 ### Research ###
 # (1) ftree_tab
-fstone_globcoord("ftree_tab", "X_ftree_tab", "Y_ftree_tab", "1256", "594", "Research", "description")
+fstone_globcoord("ftree_tab", "X_ftree_tab", "Y_ftree_tab", "1256", "594", "Research", "Ftree tab in library")
 ;
 # (2) ftree_start
-fstone_globcoord("ftree_start", "X_ftree_start", "Y_ftree_start", "571", "691", "Research", "description")
+fstone_globcoord("ftree_start", "X_ftree_start", "Y_ftree_start", "571", "691", "Research", "Start button for a Ftree research - open the node window first")
 ;
 # (3) ftree_claim
-fstone_globcoord("ftree_claim", "X_ftree_claim", "Y_ftree_claim", "429", "828", "Research", "description")
+fstone_globcoord("ftree_claim", "X_ftree_claim", "Y_ftree_claim", "429", "828", "Research", "left claim button of Ftree research")
 ;
 # (4) ftree_scroll
-fstone_globcoord("ftree_scroll", "Y_ftree_scroll", "SOLO_VAR", "276", "0", "Research", "description")
+fstone_globcoord("ftree_scroll", "Y_ftree_scroll", "SOLO_VAR", "276", "0", "Research", "Y coordinate for drag and drop one step - mouse sould be above Ftree during scrolling")
 ;
 # (5) ftree_scroll_right
-fstone_globcoord("ftree_scroll_right", "X_ftree_scroll_right", "SOLO_VAR", "697", "0", "Research", "description")
+fstone_globcoord("ftree_scroll_right", "X_ftree_scroll_right", "SOLO_VAR", "697", "0", "Research", "X coordinate for Ftree scrolling starting at right side for a right to left drag and drop - one step of scrolling is horizontal length of a Ftree node")
 ;
 # (6) ftree_scroll_left
-fstone_globcoord("ftree_scroll_left", "X_ftree_scroll_left", "SOLO_VAR", "355", "0", "Research", "description")
+fstone_globcoord("ftree_scroll_left", "X_ftree_scroll_left", "SOLO_VAR", "355", "0", "Research", "X coordinate for drop click at the left end side of Ftree scrolling - one step of scrolling is horizontal length of a Ftree node")
 ;
 # (7) ftree_rew_test_ul
-fstone_globcoord("ftree_rew_test_ul", "x_ftree_rew_test_ul", "y_ftree_rew_test_ul", "55", "371", "Research", "description")
+fstone_globcoord("ftree_rew_test_ul", "x_ftree_rew_test_ul", "y_ftree_rew_test_ul", "55", "371", "Research", "upper left corner of testing zone for rewind check - select a blue background on left side of rewinded Ftree")
 ;
 # (8) ftree_rew_test_br
-fstone_globcoord("ftree_rew_test_br", "x_ftree_rew_test_br", "y_ftree_rew_test_br", "154", "669", "Research", "description")
+fstone_globcoord("ftree_rew_test_br", "x_ftree_rew_test_br", "y_ftree_rew_test_br", "154", "669", "Research", "bottom right corner of testing zone for rewind check - select a blue background on left side of rewinded Ftre")
 ;
 
 
 ### Settings ###
 # (1) server_switch
-fstone_globcoord("server_switch", "X_server_switch", "Y_server_switch", "1046", "593", "Settings", "description")
+fstone_globcoord("server_switch", "X_server_switch", "Y_server_switch", "1046", "593", "Settings", "server switch button in settings menu")
 ;
 # (2) fav_servers
-fstone_globcoord("fav_servers", "X_fav_servers", "Y_fav_servers", "906", "285", "Settings", "description")
+fstone_globcoord("fav_servers", "X_fav_servers", "Y_fav_servers", "906", "285", "Settings", "favorite server tab")
 ;
 # (3) serv_confirm
-fstone_globcoord("serv_confirm", "X_serv_confirm", "Y_serv_confirm", "784", "652", "Settings", "description")
+fstone_globcoord("serv_confirm", "X_serv_confirm", "Y_serv_confirm", "784", "652", "Settings", "confirm server switch button")
 ;
 # (4) more
-fstone_globcoord("more", "X_more", "Y_more", "977", "209", "Settings", "description")
+fstone_globcoord("more", "X_more", "Y_more", "977", "209", "Settings", "more tab in settings menu")
 ;
 # (5) code
-fstone_globcoord("code", "X_code", "Y_code", "456", "588", "Settings", "description")
+fstone_globcoord("code", "X_code", "Y_code", "456", "588", "Settings", "gift code input form")
 ;
 # (6) submit
-fstone_globcoord("submit", "X_submit", "Y_submit", "848", "592", "Settings", "description")
+fstone_globcoord("submit", "X_submit", "Y_submit", "848", "592", "Settings", "gift code submit button")
 ;
 # (7) servname_ul
-fstone_globcoord("servname_ul", "x_servname_ul", "y_servname_ul", "877", "442", "Settings", "description")
+fstone_globcoord("servname_ul", "x_servname_ul", "y_servname_ul", "877", "442", "Settings", "upper left corner of server name zone")
 ;
 # (8) servname_br
-fstone_globcoord("servname_br", "x_servname_br", "y_servname_br", "1210", "555", "Settings", "description")
+fstone_globcoord("servname_br", "x_servname_br", "y_servname_br", "1210", "555", "Settings", "bottom right corner of server name zone")
 ;
 # (9) switch_fav_ul
-fstone_globcoord("switch_fav_ul", "x_switch_fav_ul", "y_switch_fav_ul", "352", "211", "Settings", "description")
+fstone_globcoord("switch_fav_ul", "x_switch_fav_ul", "y_switch_fav_ul", "352", "211", "Settings", "upper left corner of a zone containing both 3 server selection filter tabs, for robustness control - checks if favorite server is selected")
 ;
 # (10) switch_fav_br
-fstone_globcoord("switch_fav_br", "x_switch_fav_br", "y_switch_fav_br", "1023", "320", "Settings", "description")
+fstone_globcoord("switch_fav_br", "x_switch_fav_br", "y_switch_fav_br", "1023", "320", "Settings", "upper left corner of a zone containing both 3 server selection filter tabs, for robustness control - checks if favorite server is selected")
 ;
 # (11) server_s1
 fstone_globcoord("server_s1", "X_server_s1", "Y_server_s1", "898", "616", "Settings", "server switch button to s1 (6 favorites)")
