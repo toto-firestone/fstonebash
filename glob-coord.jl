@@ -305,37 +305,37 @@ fstone_globcoord("server_s25", "X_server_s25", "Y_server_s25", "406", "503", "Se
 
 ### StartQuit ###
 # (1) WIN_POS
-fstone_globcoord("WIN_POS", "X_WIN_POS", "Y_WIN_POS", "-26", "2", "StartQuit", "description")
+fstone_globcoord("WIN_POS", "X_WIN_POS", "Y_WIN_POS", "-26", "2", "StartQuit", "firefox window position - this one has to be initialized with xdotool")
 ;
 # (2) firefox_menu
-fstone_globcoord("firefox_menu", "X_firefox_menu", "Y_firefox_menu", "1357", "93", "StartQuit", "description")
+fstone_globcoord("firefox_menu", "X_firefox_menu", "Y_firefox_menu", "1357", "93", "StartQuit", "menu icon of firefox on upper right side")
 ;
 # (3) firefox_quit
-fstone_globcoord("firefox_quit", "X_firefox_quit", "Y_firefox_quit", "1298", "772", "StartQuit", "description")
+fstone_globcoord("firefox_quit", "X_firefox_quit", "Y_firefox_quit", "1298", "772", "StartQuit", "quit firefox item in menu")
 ;
 # (4) load
-fstone_globcoord("load", "X_load", "Y_load", "678", "565", "StartQuit", "description")
+fstone_globcoord("load", "X_load", "Y_load", "678", "565", "StartQuit", "load game button (play icon) on firestone page of armor games")
 ;
 # (5) avatar
-fstone_globcoord("avatar", "X_avatar", "Y_avatar", "105", "233", "StartQuit", "description")
+fstone_globcoord("avatar", "X_avatar", "Y_avatar", "105", "233", "StartQuit", "avatar icon on top left")
 ;
 # (6) irongard_ul
-fstone_globcoord("irongard_ul", "x_irongard_ul", "y_irongard_ul", "501", "176", "StartQuit", "description")
+fstone_globcoord("irongard_ul", "x_irongard_ul", "y_irongard_ul", "501", "176", "StartQuit", "upper left corner of town irongard banner - for freeze detection")
 ;
 # (7) irongard_br
-fstone_globcoord("irongard_br", "x_irongard_br", "y_irongard_br", "881", "215", "StartQuit", "description")
+fstone_globcoord("irongard_br", "x_irongard_br", "y_irongard_br", "881", "215", "StartQuit", "bottom right corner of town irongard banner - for freeze detection")
 ;
 # (8) url_ul
-fstone_globcoord("url_ul", "x_url_ul", "y_url_ul", "258", "73", "StartQuit", "description")
+fstone_globcoord("url_ul", "x_url_ul", "y_url_ul", "258", "73", "StartQuit", "upper left corner of url zone - firefox quit detection")
 ;
 # (9) url_br
-fstone_globcoord("url_br", "x_url_br", "y_url_br", "1123", "103", "StartQuit", "description")
+fstone_globcoord("url_br", "x_url_br", "y_url_br", "1123", "103", "StartQuit", "bottom right corner of url zone - forefox quit detection")
 ;
 # (10) startref_ul
-fstone_globcoord("startref_ul", "x_startref_ul", "y_startref_ul", "72", "699", "StartQuit", "description")
+fstone_globcoord("startref_ul", "x_startref_ul", "y_startref_ul", "72", "699", "StartQuit", "upper left corner of mail icon in battlefield - for game start detection")
 ;
 # (11) startref_br
-fstone_globcoord("startref_br", "x_startref_br", "y_startref_br", "109", "732", "StartQuit", "description")
+fstone_globcoord("startref_br", "x_startref_br", "y_startref_br", "109", "732", "StartQuit", "bottom right corner of mail icon in battlefield - for game start detection")
 ;
 # (12) failure_screen_ul
 fstone_globcoord("failure_screen_ul", "x_failure_screen_ul", "y_failure_screen_ul", "200", "114", "StartQuit", "upper left corner of game view for faillure detection")
