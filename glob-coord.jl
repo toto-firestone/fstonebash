@@ -398,63 +398,63 @@ fstone_globcoord("craft_artifact", "X_craft_artifact", "Y_craft_artifact", "204"
 
 ### WM ###
 # (1) campaign_loot
-fstone_globcoord("campaign_loot", "X_campaign_loot", "Y_campaign_loot", "150", "841", "WM", "description")
+fstone_globcoord("campaign_loot", "X_campaign_loot", "Y_campaign_loot", "150", "841", "WM", "claim campaign loot on wm map")
 ;
 # (2) engi
-fstone_globcoord("engi", "X_engi", "Y_engi", "906", "745", "WM", "description")
+fstone_globcoord("engi", "X_engi", "Y_engi", "906", "745", "WM", "engineer building in town")
 ;
 # (3) engi_shop
-fstone_globcoord("engi_shop", "X_engi_shop", "Y_engi_shop", "454", "561", "WM", "description")
+fstone_globcoord("engi_shop", "X_engi_shop", "Y_engi_shop", "454", "561", "WM", "engineer workshop in building")
 ;
 # (4) toolclaim
-fstone_globcoord("toolclaim", "X_toolclaim", "Y_toolclaim", "1125", "656", "WM", "description")
+fstone_globcoord("toolclaim", "X_toolclaim", "Y_toolclaim", "1125", "656", "WM", "claim tools in engineer workshop")
 ;
 # (5) camp_map
-fstone_globcoord("camp_map", "X_camp_map", "Y_camp_map", "1271", "582", "WM", "description")
+fstone_globcoord("camp_map", "X_camp_map", "Y_camp_map", "1271", "582", "WM", "wm campaign tab on map screen")
 ;
 # (6) mission_button
-fstone_globcoord("mission_button", "X_mission_button", "Y_mission_button", "1228", "857", "WM", "description")
+fstone_globcoord("mission_button", "X_mission_button", "Y_mission_button", "1228", "857", "WM", "daily missions button on wm map")
 ;
 # (7) liberations
-fstone_globcoord("liberations", "X_liberations", "Y_liberations", "501", "724", "WM", "description")
+fstone_globcoord("liberations", "X_liberations", "Y_liberations", "501", "724", "WM", "select liberation missions")
 ;
 # (8) dungeons
-fstone_globcoord("dungeons", "X_dungeons", "Y_dungeons", "874", "720", "WM", "description")
+fstone_globcoord("dungeons", "X_dungeons", "Y_dungeons", "874", "720", "WM", "select dungeon missions")
 ;
 # (9) dungeon_1
-fstone_globcoord("dungeon_1", "X_dungeon_1", "Y_dungeon_1", "544", "697", "WM", "description")
+fstone_globcoord("dungeon_1", "X_dungeon_1", "Y_dungeon_1", "544", "697", "WM", "dungeon mission 1 - left side")
 ;
 # (10) dungeon_2
-fstone_globcoord("dungeon_2", "X_dungeon_2", "Y_dungeon_2", "827", "699", "WM", "description")
+fstone_globcoord("dungeon_2", "X_dungeon_2", "Y_dungeon_2", "827", "699", "WM", "dungeon mission 2 - right side")
 ;
 # (11) liberation_1
-fstone_globcoord("liberation_1", "X_liberation_1", "Y_liberation_1", "234", "697", "WM", "description")
+fstone_globcoord("liberation_1", "X_liberation_1", "Y_liberation_1", "234", "697", "WM", "liberation mission 1 - from left to right")
 ;
 # (12) liberation_2
-fstone_globcoord("liberation_2", "X_liberation_2", "Y_liberation_2", "516", "697", "WM", "description")
+fstone_globcoord("liberation_2", "X_liberation_2", "Y_liberation_2", "516", "697", "WM", "liberation mission 2 - from left to right")
 ;
 # (13) liberation_3
-fstone_globcoord("liberation_3", "X_liberation_3", "Y_liberation_3", "794", "695", "WM", "description")
+fstone_globcoord("liberation_3", "X_liberation_3", "Y_liberation_3", "794", "695", "WM", "liberation mission 3 - from left to right")
 ;
 # (14) liberation_4
-fstone_globcoord("liberation_4", "X_liberation_4", "Y_liberation_4", "1047", "695", "WM", "description")
+fstone_globcoord("liberation_4", "X_liberation_4", "Y_liberation_4", "1047", "695", "WM", "liberation mission 4 - from left to right")
 ;
 # (15) liber_scroll_right
-fstone_globcoord("liber_scroll_right", "X_liber_scroll_right", "SOLO_VAR", "1035", "0", "WM", "description")
+fstone_globcoord("liber_scroll_right", "X_liber_scroll_right", "SOLO_VAR", "1035", "0", "WM", "X coordinate of right mouse position for drag and drop - opening 5 and more liberation missions - scroll from right to left")
 ;
 # (16) liber_scroll_left
-fstone_globcoord("liber_scroll_left", "X_liber_scroll_left", "SOLO_VAR", "750", "0", "WM", "description")
+fstone_globcoord("liber_scroll_left", "X_liber_scroll_left", "SOLO_VAR", "750", "0", "WM", "X coordinate of left mouse position for drag and drop - opening 5 and more liberation missions - scroll from right to left - the scroll step is 1 liberation mission card width")
 ;
 # (17) liber_scroll
-fstone_globcoord("liber_scroll", "Y_liber_scroll", "SOLO_VAR", "631", "0", "WM", "description")
+fstone_globcoord("liber_scroll", "Y_liber_scroll", "SOLO_VAR", "631", "0", "WM", "Y coordinate for liberation mission drag and drop - opening 5 and more liberations - the position is above start mission button")
 ;
 # (18) north_island
-fstone_globcoord("north_island", "X_north_island", "Y_north_island", "315", "811", "WM", "description")
+fstone_globcoord("north_island", "X_north_island", "Y_north_island", "315", "811", "WM", "DEPRECATED")
 ;
 # (19) battle_building
-fstone_globcoord("battle_building", "X_battle_building", "Y_battle_building", "250", "296", "WM", "description")
+fstone_globcoord("battle_building", "X_battle_building", "Y_battle_building", "250", "296", "WM", "battle building in town for an access to campaign map without moving map bug")
 ;
 # (20) campaign_access
-fstone_globcoord("campaign_access", "X_campaign_access", "Y_campaign_access", "562", "529", "WM", "description")
+fstone_globcoord("campaign_access", "X_campaign_access", "Y_campaign_access", "562", "529", "WM", "select campaign in battle building")
 ;
 ]
