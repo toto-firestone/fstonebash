@@ -321,6 +321,7 @@ wait_game_start() {
 	echo
 	if [ -z "$3" ]; then
 		echo "*** There is a problem : human intervention required ***"
+		log_msg "* failed to auto-restart game : bot stalled"
 		read -p "stop with CTRL+C or continue with RETURN " dummy
 		log_msg "* human intervention now"
 	else
