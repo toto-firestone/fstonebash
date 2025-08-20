@@ -3,6 +3,7 @@ source glob-coord.conf
 source master.conf
 source function-lib.sh
 source visual-lib.sh
+source remote-tools.sh
 
 
 # THIS IS RADISH AUTOMATION TOOL
@@ -195,7 +196,7 @@ auto_reset_timestamps() {
 }
 
 check_scheduled_tasks() {
-	local ls_todo=$(ls ./tmp/$current_servname.*.todo)
+	local ls_todo=$(ls ./tmp/$current_servname.*.todo 2> /dev/null)
 	local i_file
 
 	echo "*** sceduled todo list ***"
@@ -217,49 +218,39 @@ check_before_doit() {
 }
 
 interactive_scheduled() {
-	local ls_todo=$(ls ./tmp/$current_servname.*.todo)
-	local actions="Quit"
-	local i_file i_choice
-
-	xdotool windowactivate --sync $gamewin_id
 	sleep 2
-	xdotool windowactivate --sync $termwin_id
-	for i_file in $ls_todo; do
-		# remove directory
-		local i_task=${i_file##*/}
-		# remove server name
-		i_task=${i_task#*.}
-		# remove todo word
-		i_task=${i_task%.*}
-		# Only adds valid task to action list
-		if [ "$i_task" == "daily" ]; then
-			actions="$actions $i_task"
+	echo
+	echo "** interruption management with lock file"
+
+	local t_unit=20
+	local i_try=0
+	# 3 t_unit is 1 minute
+	local n_try=$((3*5))
+
+	if [ -f "$PAUSE_LOCK" ]; then
+		echo "** pause lock detected **"
+		log_msg "** pause lock detected **"
+	else
+		echo "** no pause lock **"
+		log_msg "** no pause lock **"
+		return
+	fi
+	# NOT REACHED IF NO PAUSE_LOCK AT STARTUP
+
+	while [ "$i_try" -lt "$n_try" ]; do
+		if [ ! -f "$PAUSE_LOCK" ]; then
+			break
 		fi
+		sleep $t_unit
+		i_try=$((i_try+1))
 	done
-
-	echo "**** check if server is $current_servname and timer is ok before accepting ****"
-
-	select i_choice in $actions; do
-		case $i_choice in
-			Quit ) echo "Choice : $i_choice"
-				break;;
-			daily ) echo "Choice : $i_choice"
-				if [ $(check_before_doit) == "do" ]; then
-					echo "doing it"
-					./daily-once.sh "force"
-					log_msg "* doing daily on $current_servname"
-
-				else
-					echo "canceling it"
-					log_msg "* canceling daily on $current_servname"
-
-				fi
-				remove_task "$current_servname.daily.todo"
-				break;;
-			* ) echo "Invalid choice : $i_choice"
-				continue;;
-		esac
-	done
+	if [ "$i_try" -eq "$n_try" ]; then
+		echo "** pause timeout at $i_try x $t_unit secs. **"
+		log_msg "** pause timeout at $i_try x $t_unit secs. **"
+	else
+		echo "** pause lock removed before timeout **"
+		log_msg "** pause lock removed before timeout **"
+	fi
 }
 
 handle_fridaycode() {
@@ -389,32 +380,32 @@ while true; do
 
 		xdotool windowminimize --sync $gamewin_id
 		echo "screen and cpu saving"
-		sleep 2
-		xdotool windowactivate --sync $termwin_id
+		check_scheduled_tasks
 		echo
-		echo "interrupt with CTRL+C"
-		echo "type any non space key + RETURN for manual mode"
-		read -t 40 -p "or hit only RETURN to speed-up > " user_input1
+		if $DETACHED_BOT; then
+			echo "no stdin interaction"
+			user_input1=""
+		else
+			xdotool windowactivate --sync $termwin_id
+			sleep 2
+			echo "interrupt with CTRL+C"
+			echo "type any non space key + RETURN for manual mode"
+			read -t 40 -p "or hit only RETURN to speed-up > " user_input1
+		fi
 		echo
 		if [ -n "$user_input1" ]; then
 			interactive_session
 		fi
 
-		check_scheduled_tasks
-		echo "interrupt with CTRL+C"
-		echo "type any non space key + RETURN for manual mode"
-		read -t 20 -p "or hit only RETURN to speed-up > " user_input2
-		echo
-		if [ -n "$user_input2" ]; then
-			interactive_scheduled
-		fi
+		## lock file interaction
+		interactive_scheduled
 
 		read_timestamps "mapcycle" 12
 		auto_reset_timestamps "mapcycle" 12
 
 		xdotool windowactivate --sync $gamewin_id
 		echo
-		if [ -n "$user_input1" ] || [ -n "$user_input2" ]; then
+		if [ -n "$user_input1" ]; then
 			echo "WARNING : manual intervention detected"
 			echo "10 seconds before SKIP AUTO-MAP"
 			sleep 10
@@ -443,13 +434,18 @@ while true; do
 
 		handle_auto_accept
 
-		xdotool windowactivate --sync $termwin_id
 		read_timestamps "mapcycle" 12
 		auto_reset_timestamps "mapcycle" 12
-		echo
-		echo "***** LAST CHANCE TO CTRL+C BEFORE SERVER SWITCH *****"
-		sleep 10
-		echo "*** TOO LATE ! DO NOT INTERRUPT SERVER SWITCH ***"
+		if $DETACHED_BOT; then
+			echo "*** NO WAY TO INTERRUPT SERVER SWITCH ***"
+		else
+			xdotool windowactivate --sync $termwin_id
+			echo
+			echo "***** LAST CHANCE TO CTRL+C BEFORE SERVER SWITCH *****"
+
+			sleep 10
+			echo "*** TOO LATE ! DO NOT INTERRUPT SERVER SWITCH ***"
+		fi
 	done
 	log_msg "*** quit firestone ***"
 	safe_quit
