@@ -9,4 +9,5 @@ source master.conf
 source function-lib.sh 
 source visual-lib.sh 
 source tricky-dailies.sh
+source remote-tools.sh
 
