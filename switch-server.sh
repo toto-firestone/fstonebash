@@ -84,7 +84,9 @@ else
 	#echo "current_servname=${1}" > switch.conf
 	#cat switch.conf
 
-	xdotool windowactivate --sync $termwin_id
+	if ! $DETACHED_BOT; then
+		xdotool windowactivate --sync $termwin_id
+	fi
 	#sleep 20
 	wait_game_start 8 20 "non-blocking"
 	fail_crit=$(tail -n 1 ./tmp/firestone.log | grep 'success=0')
