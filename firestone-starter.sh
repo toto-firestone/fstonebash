@@ -5,11 +5,15 @@ source view.conf
 
 source function-lib.sh
 source visual-lib.sh
+source remote-tools.sh
 
 termwin_id=$(xdotool getwindowfocus)
 game_url="https://armorgames.com/firestone-idle-rpg-game/18485?tag-referral=idle"
 
-firefox $game_url &
+#firefox $game_url &
+# firefox can be launched with remote method
+detached_cmd_line_launcher firefox "$game_url" ./tmp/firefox.out ./tmp/firefox.pid
+
 echo
 sleep 18
 gamewin_id=$(xdotool getwindowfocus)
@@ -30,7 +34,6 @@ echo "ready to load"
 
 start_load_game
 
-xdotool windowactivate --sync $termwin_id
 sleep 1
 ./restore-game-view.sh
 
