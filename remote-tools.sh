@@ -8,13 +8,12 @@ enable_remote_ssh() {
 }
 
 detached_launcher() {
-	if [ -n "$1" ] && [ -n "$2" ] && [ -n "$3" ]; then
+	if [ -n "$1" ] && [ -n "$2" ]; then
 		local cmd=$1
 		local out_f=$2
-		local pid_f=$3
 	else
 		echo "not enough arguments provided"
-		echo "detached_launcher <command> <stdout_file> <pid_file>"
+		echo "detached_launcher <command> <stdout_file>"
 		echo "all arguments are non optional"
 		return
 	fi
@@ -30,27 +29,23 @@ detached_launcher() {
 	# NOT REACHED IF RUN COMMAND CHECK FAILS
 
 	echo "stdout_file=$out_f"
-	echo "pid_file=$pid_f"
 
 	enable_remote_ssh
 	nohup $cmd > $out_f 2>&1 &
-	local pp=$!
 	disown
-	echo "$pp" > $pid_f
 }
 
 detached_cmd_line_launcher() {
-	if [ -n "$1" ] && [ -n "$2" ] && [ -n "$3" ] && [ -n "$4" ]; then
+	if [ -n "$1" ] && [ -n "$2" ] && [ -n "$3" ]; then
 		local cmd=$1
 
 		## WARNING : argument 2 may contain spaces
 		local args="$2"
 
 		local out_f=$3
-		local pid_f=$4
 	else
 		echo "not enough arguments provided"
-		echo "detached_cmd_line_launcher <command> <\"arguments\"> <stdout_file> <pid_file>"
+		echo "detached_cmd_line_launcher <command> <\"arguments\"> <stdout_file>"
 
 		echo "all arguments are non optional"
 		return
@@ -68,13 +63,10 @@ detached_cmd_line_launcher() {
 
 	echo "arguments=\"$args\""
 	echo "stdout_file=$out_f"
-	echo "pid_file=$pid_f"
 
 	enable_remote_ssh
 	nohup $cmd "$args" > $out_f 2>&1 &
-	local pp=$!
 	disown
-	echo "$pp" > $pid_f
 }
 
 remote_screenshot() {
@@ -85,15 +77,23 @@ remote_screenshot() {
 clear_locks() {
 	remove_task ${PAUSE_LOCK##*/}
 	remove_task ${STOP_LOCK##*/}
+	remove_task ${SLEEP_LOCK##*/}
+}
+
+search_bot_pid() {
+	local filter_ps_a=$(ps -a | grep -v grep | grep multi-cycle-run)
+	local trim_ps_a=${filter_ps_a/# /}
+	local n_pid=${trim_ps_a%% *}
+	echo $n_pid
 }
 
 killall_bots() {
-	local search_bot_pid=$(ps -a | grep -v grep | grep multi-cycle-run | cut -d ' ' -f 1)
+	local bot_pid=$(search_bot_pid)
 
-	while [ -n "$search_bot_pid" ]; do
-		echo "* found instance of multi-cycle-run.sh : $search_bot_pid"
-		kill $search_bot_pid
-		search_bot_pid=$(ps -a | grep -v grep | grep multi-cycle-run | cut -d ' ' -f 1)
+	while [ -n "$bot_pid" ]; do
+		echo "* found instance of multi-cycle-run.sh : $bot_pid"
+		kill $bot_pid
+		bot_pid=$(search_bot_pid)
 
 	done
 	clear_locks
@@ -132,7 +132,7 @@ remote_auto_firestone_start() {
 
 	local server_cycle=$(get_server_cycle $1)
 
-	detached_cmd_line_launcher ./multi-cycle-run.sh "$server_cycle" ./tmp/cycle-run.out ./tmp/cycle-run.pid
+	detached_cmd_line_launcher ./multi-cycle-run.sh "$server_cycle" ./tmp/cycle-run.out
 
 	echo "*** bot started ***"
 }
@@ -154,9 +154,6 @@ local_auto_firestone_start() {
 	local server_cycle=$(get_server_cycle $1)
 
 	echo "*** starting bot ***"
-	if [ -f "./tmp/cycle-run.pid" ]; then
-		rm "./tmp/cycle-run.pid"
-	fi
 	./multi-cycle-run.sh "$server_cycle"
 }
 
@@ -170,22 +167,10 @@ local_only_bot_start() {
 	local server_cycle=$(get_server_cycle $1)
 
 	echo "*** starting bot ***"
-	if [ -f "./tmp/cycle-run.pid" ]; then
-		rm "./tmp/cycle-run.pid"
-	fi
 	./multi-cycle-run.sh "$server_cycle"
 }
 
-killthis_bot() {
-	kill $(cat ./tmp/cycle-run.pid)
-	clear_locks
-}
-
-killthis_window() {
-	kill $(cat ./tmp/firefox.pid)
-}
-
-# a real global variable
+# LOCK 1
 PAUSE_LOCK="./tmp/pause.todo"
 # Right now, use ${PAUSE_LOCK##*/} to remove path
 #
@@ -198,11 +183,18 @@ continue_firestone_bot() {
 	remove_task ${PAUSE_LOCK##*/}
 }
 
-# another global variable
+# LOCK 2
 STOP_LOCK="./tmp/stop.todo"
 
 # non cancelable
 stop_firestone_bot() {
 	schedule_task ${PAUSE_LOCK##*/}
 	schedule_task ${STOP_LOCK##*/}
+}
+
+# LOCK 3
+SLEEP_LOCK="./tmp/sleep.todo"
+
+sleep_end_cycle() {
+	schedule_task ${SLEEP_LOCK##*/}
 }
