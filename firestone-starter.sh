@@ -12,9 +12,19 @@ game_url="https://armorgames.com/firestone-idle-rpg-game/18485?tag-referral=idle
 
 #firefox $game_url &
 # firefox can be launched with remote method
-detached_cmd_line_launcher firefox "$game_url" ./tmp/firefox.out ./tmp/firefox.pid
+#detached_cmd_line_launcher firefox "$game_url" ./tmp/firefox.out ./tmp/firefox.pid
 
-echo
+## launch firefox with non xterm method - avoids layout differences
+## between local and ssh X11 settings
+sleep 1
+move_wait_click $X_window_manager_start $Y_window_manager_start 2
+xdotool type --delay 200 "firefox"
+xdotool key --delay 200 Return
+sleep 10
+xdotool type --delay 200 "$game_url"
+xdotool key --delay 200 Return
+
+echo "*** load armor games ***"
 sleep 18
 gamewin_id=$(xdotool getwindowfocus)
 
