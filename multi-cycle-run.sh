@@ -237,6 +237,18 @@ interactive_scheduled() {
 	fi
 	# NOT REACHED IF NO PAUSE_LOCK AT STARTUP
 
+	if [ -f "$STOP_LOCK" ]; then
+		echo "** stop lock detected **"
+		log_msg "** stop lock detected **"
+		clear_locks
+		xdotool windowactivate --sync $gamewin_id
+		sleep 2
+		echo "** exit auto cycle bot **"
+		log_msg "** exit auto cycle bot **"
+		exit
+	fi
+	# NOT REACHED IF STOP LOCK DETECTED
+
 	while [ "$i_try" -lt "$n_try" ]; do
 		if [ ! -f "$PAUSE_LOCK" ]; then
 			break
