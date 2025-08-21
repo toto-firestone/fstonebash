@@ -462,6 +462,14 @@ while true; do
 	log_msg "*** quit firestone ***"
 	safe_quit
 
+	if [ -f "$SLEEP_LOCK" ]; then
+		echo
+		echo "*** sleep lock detected ***"
+		log_msg "*** sleep lock detected ***"
+		remove_task ${SLEEP_LOCK##*/}
+		break
+	fi
+
 	echo
 	echo "*** please let $COOLDOWN_TIME minutes pause for computer cooling down ***"
 
@@ -474,3 +482,7 @@ while true; do
 
 	i=$((i+1))
 done
+
+echo
+echo "* bot reached normal end"
+log_msg "* bot reached normal end"
