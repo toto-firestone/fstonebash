@@ -6,11 +6,12 @@ The code has been implemented on Linux PC, with Firestone running on Armor Games
 ### DISCLAIMER :
 No doc, no tuto, no support... Help yourself and brew your own.
 * Using this program will require skills in Bash Shell Programming Language.
-* Reading it may provide ideas for your own bot, for your device, system and platform.
+* Reading it may provide ideas for your own bot, adapted to your playstyle, device, system and platform.
 
 The best I can do right now is a description of all features
 
 * Native single platform and multi server architecture
+* Enable remote control of bot with SSH and Unix command line
 * Alchemy experiments
 * Accept guild applications
 * Daily/Weekly quests
