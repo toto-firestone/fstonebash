@@ -485,3 +485,16 @@ edit_daily_todo() {
 		vi $f_todo
 	fi
 }
+
+auto_arena_fight() {
+	echo "*** auto arena fight"
+	focus_and_back_to_root_screen
+	xdotool key k
+	sleep 6
+	move_wait_click $X_arena_fight_slot_3 $Y_arena_fight_slot_3 2
+	sleep 4
+	move_wait_click $X_arena_fight_start $Y_arena_fight_start 2
+	sleep 140
+
+	focus_and_back_to_root_screen
+}
