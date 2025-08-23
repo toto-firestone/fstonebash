@@ -389,8 +389,12 @@ while true; do
 		fi
 		echo
 
-		xdotool windowminimize --sync $gamewin_id
-		echo "screen and cpu saving"
+		if $DETACHED_BOT; then
+			echo "not minimizing game window in detached mode"
+		else
+			xdotool windowminimize --sync $gamewin_id
+			echo "screen and cpu saving"
+		fi
 		check_scheduled_tasks
 		echo
 		if $DETACHED_BOT; then
