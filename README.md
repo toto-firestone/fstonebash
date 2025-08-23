@@ -17,7 +17,7 @@ The best I can do right now is a description of all features
 * Daily/Weekly quests
 * Research tree
 * Map missions
-* WM Liberation missions
+* WM Liberation and dungeon missions, arena fight
 * Math tool that shows optimal blueprint spending for WM defense improvement
 * Brute force WM mission (try again and again)
 * Claim lot of free stuffs (pickaxes, tools, campaign loots, ...)

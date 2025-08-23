@@ -69,6 +69,7 @@ elif [ "$1" == "reset" ]; then
 			if $ENABLE_AUTO_RIFT; then
 				echo "holy_rift" >> $f_task
 			fi
+			## no auto arena for game over
 		else
 			if ${do_libe_H[$serv]}; then
 				#echo "libe_dung" >> $f_task
@@ -85,6 +86,11 @@ elif [ "$1" == "reset" ]; then
 			fi
 			if $ENABLE_AUTO_RIFT; then
 				echo "holy_rift" >> $f_task
+			fi
+			if ${auto_arena_H[$serv]}; then
+				## only 2 attempts
+				echo "arena" >> $f_task
+				echo "arena" >> $f_task
 			fi
 		fi
 	done

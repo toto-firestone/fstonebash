@@ -89,6 +89,9 @@ case $daily_cmd in
 		auto_guardian_holy_upgrade $current_servname
 		auto_chaos_rift_play $current_servname
 		echo;;
+	"arena") echo "* command read : $daily_cmd"
+		auto_arena_fight
+		echo;;
 	*) echo "* command unknown : $daily_cmd - skip";;
 esac
 

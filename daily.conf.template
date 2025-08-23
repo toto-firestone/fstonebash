@@ -12,9 +12,9 @@ declare -gA auto_daily_H=(
 
 # time unit is half-hour
 declare -gA daily_start_delay_H=(
-	["s1"]="3"
-	["s14"]="9"
-	["s27"]="6"
+	["s1"]="2"
+	["s14"]="6"
+	["s27"]="4"
 	["s31"]="0"
 	["s8"]="0"
 	["s25"]="0"
@@ -36,7 +36,7 @@ declare -gA do_libe_H=(
 
 declare -gA do_collect_H=(
 	["s1"]=true
-	["s14"]=true
+	["s14"]=false
 	["s27"]=true
 	["s31"]=true
 	["s8"]=false
@@ -66,4 +66,13 @@ declare -gA TFightSec_H=(
 	["s14"]="35"
 	["s27"]="35"
 	["s31"]="45"
+)
+
+declare -gA auto_arena_H=(
+	["s1"]=true
+	["s14"]=false
+	["s27"]=true
+	["s31"]=false
+	["s8"]=false
+	["s25"]=false
 )
