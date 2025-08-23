@@ -20,7 +20,7 @@ sleep 1
 move_wait_click $X_window_manager_start $Y_window_manager_start 2
 xdotool type --delay 200 "firefox"
 xdotool key --delay 200 Return
-sleep 20
+sleep 30
 xdotool type --delay 200 "$game_url"
 xdotool key --delay 200 Return
 
