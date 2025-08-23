@@ -12,7 +12,9 @@ check_file_before_source() {
 		echo "*** Cannot find $1 file : cancel sourcing and exit"
 		exit 1
 	else
-		echo "*** $1 file found : sourcing"
+		if [ "$2" == "verbose" ]; then
+			echo "*** $1 file found : sourcing"
+		fi
 		source $1
 	fi
 }
@@ -23,7 +25,8 @@ check_file_before_source switch.conf
 check_file_before_source gameover.conf
 
 ## cooldown time in minutes for CPU (not magic spells)
-COOLDOWN_TIME=8
+# 8 minutes recommended during hot summer
+COOLDOWN_TIME=6
 
 ## stop auto reset of daily timestamps for all servers
 STOP_AUTO_DAILY_RESET=false

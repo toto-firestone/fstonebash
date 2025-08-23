@@ -535,6 +535,7 @@ remove_task() {
 
 increment_pharaoh_20t() {
 	source switch.conf
+	source win_id.conf
 
 	local token_file="./tmp/$current_servname.token-spend.jl"
 	if [ ! -f "$token_file" ]; then
