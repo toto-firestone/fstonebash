@@ -218,7 +218,6 @@ check_before_doit() {
 }
 
 interactive_scheduled() {
-	sleep 2
 	echo
 	echo "** interruption management with lock file"
 
