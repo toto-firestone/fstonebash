@@ -16,13 +16,13 @@ game_url="https://armorgames.com/firestone-idle-rpg-game/18485?tag-referral=idle
 
 ## launch firefox with non xterm method - avoids layout differences
 ## between local and ssh X11 settings
-move_wait_click $X_window_manager_start $Y_window_manager_start 2
-sleep 8
-xdotool type --delay 200 "firefox"
-xdotool key --delay 200 Return
+move_wait_click $X_window_manager_start $Y_window_manager_start 3
+sleep 6
+xdotool type --delay 300 "firefox"
+xdotool key --delay 300 Return
 sleep 30
-xdotool type --delay 200 "$game_url"
-xdotool key --delay 200 Return
+xdotool type --delay 300 "$game_url"
+xdotool key --delay 300 Return
 
 echo "*** load armor games ***"
 sleep 18
