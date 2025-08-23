@@ -26,13 +26,17 @@ check_file_before_source gameover.conf
 
 ## cooldown time in minutes for CPU (not magic spells)
 # 8 minutes recommended during hot summer
-COOLDOWN_TIME=6
+COOLDOWN_TIME=4
 
 ## stop auto reset of daily timestamps for all servers
 STOP_AUTO_DAILY_RESET=false
 
 ## enables split execution of dailies
 ENABLE_SPLIT_DAILY=true
+
+## maximum fight time is 20 rounds where nobody dies
+MAX_WM_FIGHT_TIME=90
+
 
 ## handling config files templates updates
 update_config_files() {

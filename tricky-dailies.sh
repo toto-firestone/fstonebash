@@ -494,7 +494,7 @@ auto_arena_fight() {
 	move_wait_click $X_arena_fight_slot_3 $Y_arena_fight_slot_3 2
 	sleep 4
 	move_wait_click $X_arena_fight_start $Y_arena_fight_start 2
-	sleep 140
+	sleep $MAX_WM_FIGHT_TIME
 
 	focus_and_back_to_root_screen
 }
