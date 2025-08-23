@@ -16,8 +16,8 @@ game_url="https://armorgames.com/firestone-idle-rpg-game/18485?tag-referral=idle
 
 ## launch firefox with non xterm method - avoids layout differences
 ## between local and ssh X11 settings
-sleep 1
 move_wait_click $X_window_manager_start $Y_window_manager_start 2
+sleep 8
 xdotool type --delay 200 "firefox"
 xdotool key --delay 200 Return
 sleep 30
