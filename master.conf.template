@@ -19,6 +19,10 @@ check_file_before_source() {
 	fi
 }
 
+## win_id.conf exception : touch -a changes access time
+# or creates file if not exists
+touch -a win_id.conf
+
 check_file_before_source win_id.conf
 check_file_before_source view.conf
 check_file_before_source switch.conf
