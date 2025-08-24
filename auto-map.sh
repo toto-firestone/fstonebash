@@ -20,7 +20,7 @@ elapsed=$(get_elapsed $time_file)
 echo "*** $elapsed half-hours since mapcycle start on $current_servname ***"
 
 go_to_map
-
+sleep 10
 n_squad=${N_squads_H[$current_servname]}
 echo "* claiming $n_squad map missions"
 

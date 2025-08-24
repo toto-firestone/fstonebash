@@ -434,8 +434,6 @@ while true; do
 			echo "10 seconds before SKIP AUTO-MAP"
 			sleep 10
 		else
-			echo "10 seconds before AUTO-MAP"
-			sleep 10
 			./auto-map.sh
 		fi
 
