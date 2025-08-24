@@ -176,7 +176,20 @@ PAUSE_LOCK="./tmp/pause.todo"
 #
 
 pause_firestone_bot() {
+	local t_pause=$1
+	local minutes
+	# restrict the range of possible pause time
+	# for the sake of robustness : s, m, l, xl, xxl, defaults to s
+	case $t_pause in
+		"s") minutes="5";;
+		"m") minutes="10";;
+		"l") minutes="15";;
+		"xl") minutes="20";;
+		"xxl") minutes="25";;
+		*) minutes="5";;
+	esac
 	schedule_task ${PAUSE_LOCK##*/}
+	echo "$minutes" >> $PAUSE_LOCK
 }
 
 continue_firestone_bot() {

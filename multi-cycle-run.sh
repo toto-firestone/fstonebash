@@ -221,14 +221,17 @@ interactive_scheduled() {
 	echo
 	echo "** interruption management with lock file"
 
-	local t_unit=20
-	local i_try=0
-	# 3 t_unit is 1 minute
-	local n_try=$((3*5))
+	local pause_minute="0"
 
 	if [ -f "$PAUSE_LOCK" ]; then
-		echo "** pause lock detected **"
-		log_msg "** pause lock detected **"
+		pause_minute=$(tail -n 1 $PAUSE_LOCK)
+		if [ -z "$pause_minute" ]; then
+			pause_minute="5"
+			echo "* pause time read error : set to 5 minutes"
+			log_msg "* pause time read error : set to 5 minutes"
+		fi
+		echo "** pause lock detected : $pause_minute minutes **"
+		log_msg "** pause lock detected : $pause_minute minutes **"
 	else
 		echo "** no pause lock **"
 		log_msg "** no pause lock **"
@@ -247,6 +250,12 @@ interactive_scheduled() {
 		exit
 	fi
 	# NOT REACHED IF STOP LOCK DETECTED
+
+	# recheck pause lock every 20 seconds
+	local t_unit=20
+	local i_try=0
+	# (3 * t_unit) is 1 minute
+	local n_try=$((3*pause_minute))
 
 	while [ "$i_try" -lt "$n_try" ]; do
 		if [ ! -f "$PAUSE_LOCK" ]; then
