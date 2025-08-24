@@ -409,6 +409,8 @@ while true; do
 		if $DETACHED_BOT; then
 			echo "no stdin interaction"
 			user_input1=""
+			## a signal for ready to play when there is no tty
+			xdotool key u
 		else
 			xdotool windowactivate --sync $termwin_id
 			sleep 2
