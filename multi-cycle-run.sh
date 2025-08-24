@@ -485,8 +485,14 @@ while true; do
 	echo
 	echo "*** please let $COOLDOWN_TIME minutes pause for computer cooling down ***"
 
-	read -t $((60*COOLDOWN_TIME)) -p "** interrupt with RETURN "
-	echo
+	if $DETACHED_BOT; then
+		echo "*** NO WAY TO INTERRUPT CPU COOLDOWN ***"
+		log_msg "** cooldown : $COOLDOWN_TIME minutes"
+		sleep $((60*COOLDOWN_TIME))
+	else
+		read -t $((60*COOLDOWN_TIME)) -p "** interrupt with RETURN "
+		echo
+	fi
 
 	./firestone-starter.sh
 	log_msg "*** firestone restarted ***"
