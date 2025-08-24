@@ -127,10 +127,11 @@ auto_open_10_max_chests() {
 }
 
 flush_daily_mail() {
-	echo "*** auto flush 10 mails"
+	local n_mail=${1:-"5"}
+	echo "*** auto flush $n_mail mails"
 	focus_and_back_to_root_screen
 	local i=0
-	while [ "$i" -lt "10" ]; do
+	while [ "$i" -lt "$n_mail" ]; do
 		move_wait_click $X_mail_open $Y_mail_open 2
 		sleep 1
 		move_wait_click $X_mail_delete $Y_mail_delete 2
