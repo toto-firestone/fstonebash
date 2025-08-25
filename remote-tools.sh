@@ -7,6 +7,18 @@ enable_remote_ssh() {
 	export XAUTHORITY=$HOME/.Xauthority
 }
 
+env_for_remote_or_local() {
+	if [ -n "$SSH_CONNECTION" ]; then
+		echo "* remote environment setup *"
+		enable_remote_ssh
+		export DETACHED_BOT=true
+	else
+		echo "* local environment setup *"
+		export DETACHED_BOT=false
+	fi
+	## DETACHED_BOT needs to be defined as often and as soon as possible
+}
+
 detached_launcher() {
 	if [ -n "$1" ] && [ -n "$2" ]; then
 		local cmd=$1
@@ -163,6 +175,14 @@ local_only_bot_start() {
 
 	## kill all instances of multi-cycle-run.sh
 	killall_bots
+
+	## overwrite former value of termwin_id
+	# this operation is performed in firestone-start.sh
+	# need to compensate because of :
+	# restarting locally after the end of a remote session
+	# without firestone quit
+	termwin_id=$(xdotool getwindowfocus)
+	echo "termwin_id=${termwin_id}" >> win_id.conf
 
 	local server_cycle=$(get_server_cycle $1)
 
