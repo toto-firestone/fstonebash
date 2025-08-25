@@ -31,6 +31,11 @@ done
 
 check_file_before_source auto-accept.conf
 
+if [ -z "$DETACHED_BOT" ]; then
+	echo "* Warning : DETACHED_BOT undefined,setup now"
+	env_for_remote_or_local
+fi
+
 echo "very basic checks performed..."
 
 ### ADDITIONAL VARIABLES THAT WILL BE MOVED... LATER ###

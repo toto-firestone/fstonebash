@@ -3,6 +3,7 @@ source glob-coord.conf
 source master.conf
 source function-lib.sh
 source visual-lib.sh
+source remote-tools.sh
 
 # THIS IS RADISH AUTOMATION TOOL
 # SERVER SWITCH COMMAND
@@ -21,12 +22,19 @@ if [ -z "$1" ]; then
 	echo Error : expecting 1 server name as argument
 	exit 1
 fi
+
 if [ ! -f "$1.firestone.conf" ]; then
 	echo Error : expecting $1 is a configured server
 	exit 1
 fi
 eval "X_serv_i=\$X_server_$1"
 eval "Y_serv_i=\$Y_server_$1"
+
+
+if [ -z "$DETACHED_BOT" ]; then
+	echo "* Warning : DETACHED_BOT undefined,setup now"
+	env_for_remote_or_local
+fi
 
 try_reach_fav_servers() {
 	anti_ad
