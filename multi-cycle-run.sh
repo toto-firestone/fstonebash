@@ -52,7 +52,9 @@ reset_mapcycle_timestamps() {
 	fi
 
 	## manual reset of mapcycle timestamp -> quests claim task ##
-	schedule_task "$current_servname.quests.todo"
+	if ! $(game_is_over_on_server $current_servname); then
+		schedule_task "$current_servname.quests.todo"
+	fi
 }
 
 dialog_reset_timestamps() {
