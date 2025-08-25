@@ -224,7 +224,7 @@ check_before_doit() {
 	done
 }
 
-interactive_scheduled() {
+interruption_schedule() {
 	echo
 	echo "** interruption management with lock file"
 
@@ -431,7 +431,7 @@ while true; do
 		fi
 
 		## lock file interaction
-		interactive_scheduled
+		interruption_schedule
 
 		read_timestamps "mapcycle" 12
 		auto_reset_timestamps "mapcycle" 12
