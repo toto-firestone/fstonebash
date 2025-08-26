@@ -529,6 +529,37 @@ remove_task() {
 	fi
 }
 
+reduction_from_stack() {
+	local red_factors="${@:2}"
+	local p_i expr_i
+	local stack_expr="$1*3600"
+	# double quotes are not required for list argument
+	for p_i in $red_factors; do
+		expr_i="(1-$p_i/100)"
+		stack_expr="${stack_expr}*${expr_i}"
+	done
+	local final_time=$(echo ${stack_expr} | bc -l)
+	local rounded_time=${final_time%.*}
+	# add 1 minute
+	echo $((rounded_time+60))
+}
+
+secs_to_hhmm() {
+	local t_s=$1
+	local t_0=$(date -d "00:00" +%s)
+	local t_f=$((t_0+t_s))
+	date -d "@$t_f" +%H:%M
+}
+
+alch_base_hours() {
+	local tree_lvl=$1
+	if [ "$tree_lvl" -gt "1" ]; then
+		echo "$((3+tree_lvl))"
+	else
+		echo "3"
+	fi
+}
+
 ### ### ### ### ### ### ### ### ### ### ###
 ## EXPEDITION TOKEN ACCOUNTING FUNCTIONS ##
 ### ### ### ### ### ### ### ### ### ### ###

@@ -46,7 +46,6 @@ MAX_WM_FIGHT_TIME=90
 update_config_files() {
 	# this array is local
 	declare -a config_files_A=(
-		"alch.conf"
 		"auto-accept.conf"
 		"daily.conf"
 		"ftree.conf"

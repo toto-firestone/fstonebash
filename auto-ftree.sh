@@ -294,6 +294,22 @@ if [ ! -f "$ftree_fullpath" ]; then
 fi
 # don't go further if server has not been configured for auto ftree
 
+# server configured as favorite is optional for accurate time calculation
+# if not available, rough legacy approximation in ftree.dat will be used
+serv_conf="${current_servname}.firestone.conf"
+
+FtreeAccur_secs=""
+if [ -f "$serv_conf" ]; then
+	source $serv_conf
+	if [ -n "$ftree_base_hours" ] && [ -n "$ftree_reduce_stack" ]; then
+		FtreeAccur_secs=$(reduction_from_stack $ftree_base_hours $ftree_reduce_stack)
+
+		echo "* enable accurate timer : $FtreeAccur_secs secs"
+		t_f_hm=$(secs_to_hhmm $FtreeAccur_secs)
+		echo "* ftree node duration : $t_f_hm"
+	fi
+fi
+
 ###### ##### ##### ##### ##### ##### ##### #####
 # PROCESSING CASES WITH COMMAND LINE ARGUMENTS #
 ###### ##### ##### ##### ##### ##### ##### #####
@@ -511,8 +527,11 @@ schedule_task ${wait_fullpath#./tmp/}
 now_timestamp=$(date +%s)
 echo "now timestamp = $now_timestamp"
 
-wait_expire=$((now_timestamp+1800*$FtreeGlob_time))
-#wait_expire=$((now_timestamp+60))
+if [ -n "$FtreeAccur_secs" ]; then
+	wait_expire=$((now_timestamp+$FtreeAccur_secs))
+else
+	wait_expire=$((now_timestamp+1800*$FtreeGlob_time))
+fi
 echo $wait_expire >> $wait_fullpath
 echo "* wait directive scheduled *"
 cat $wait_fullpath

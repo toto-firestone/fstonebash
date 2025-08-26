@@ -53,24 +53,29 @@ claim_alch_experiments() {
 
 echo "*** doing atree on server $current_servname ***"
 
-if [ ! -f "alch.conf" ]; then
-	echo "Error : cannot find config file alch.conf"
+conf_file="$current_servname.firestone.conf"
+if [ ! -f "$conf_file" ]; then
+	echo "Error : cannot find config file $conf_file"
 	exit
 fi
 # don't go further if no config file
-source alch.conf
-alch_flag=${alch_flag_H[$current_servname]-false}
-if $alch_flag; then
+source $conf_file
+
+if [ -n "$atree_level" ] && [ -n "$atree_reduce_stack" ]; then
 	echo "*** go for alchemy ***"
 else
 	echo "*** skip alchemy ***"
 	exit
 fi
 
-alch_timer=${alch_timer_H[$current_servname]}
+alch_h=$(alch_base_hours $atree_level)
+alch_timer=$(reduction_from_stack $alch_h $atree_reduce_stack)
 if [ -z "$alch_timer" ]; then
 	echo "Error : timer undefined"
 	exit
+else
+	echo "** alchemy experiment wait is $alch_timer secs"
+	echo "* timer is $(secs_to_hhmm $alch_timer)"
 fi
 
 wait_fullpath="./tmp/${current_servname}.alchwait.todo"
@@ -181,12 +186,11 @@ if [ "${atree_cmd:2:1}" == "1" ]; then
 	alchemy_special_click
 fi
 
-echo "* schedule a wait of $alch_timer half hours"
+echo "* schedule a wait of $alch_timer seconds"
 schedule_task ${wait_fullpath#./tmp/}
 now_timestamp=$(date +%s)
 echo "now timestamp = $now_timestamp"
-wait_expire=$((now_timestamp+1800*$alch_timer))
-#wait_expire=$((now_timestamp+30))
+wait_expire=$((now_timestamp+alch_timer))
 echo "${wait_expire}/${atree_cmd}" >> $wait_fullpath
 echo "* wait directive scheduled *"
 cat $wait_fullpath
