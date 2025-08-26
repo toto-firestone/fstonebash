@@ -1,7 +1,7 @@
 i_guardian_slot=2
 brute_force_time=25
 
-ENABLE_AUTO_RIFT=false
+ENABLE_AUTO_RIFT=true
 
 declare -ga guardian_holy_cycle_A=(
 	"3"
@@ -10,3 +10,33 @@ declare -ga guardian_holy_cycle_A=(
 )
 
 N_HOLY_UPGRADE_CYCLES=3
+
+# accurate Ftree timer estimate
+ftree_base_hours="12"
+# init time reducers stack with talent tree values and amulet
+ftree_reduce_stack="25 25"
+# then...
+# campaign perks
+ftree_reduce_stack="$ftree_reduce_stack 24.5"
+# guild perks and tree
+ftree_reduce_stack="$ftree_reduce_stack 36.5 34"
+# artifacts
+ftree_reduce_stack="$ftree_reduce_stack "
+# beasts
+ftree_reduce_stack="$ftree_reduce_stack 4.2"
+# do not include rift league bonus which is non constant
+
+# accurate Atree timer estimate
+atree_level="5"
+# init time reducers stack with talent tree values and amulet
+atree_reduce_stack="25 25"
+# then...
+# campaign perks
+atree_reduce_stack="$atree_reduce_stack 19.5"
+# guild perks and tree
+atree_reduce_stack="$atree_reduce_stack 34.5 34"
+# artifacts
+atree_reduce_stack="$atree_reduce_stack 5.5 5.5 5.5 5.5 5.5 5.5"
+# beasts
+atree_reduce_stack="$atree_reduce_stack 4"
+# do not include rift league bonus which is non constant
