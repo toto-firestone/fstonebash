@@ -62,6 +62,7 @@ reset_mapcycle_timestamps() {
 	fi
 }
 
+### DEPRECATED ###
 dialog_reset_timestamps() {
 	local actions="Quit mapcycle daily"
 	local i_reset map_time ts_6h ts_map ts_diff
@@ -105,8 +106,9 @@ dialog_reset_timestamps() {
 }
 
 interactive_session() {
-	local actions="Quit Brute-Force Learn-Map Reset-Timestamps"
+	local actions="Quit Brute-Force Learn-Map Reset-Mapcycle"
 	local i_todo
+	local map_time ts_6h ts_map ts_diff
 
 	xdotool windowactivate --sync $gamewin_id
 	sleep 2
@@ -121,8 +123,33 @@ interactive_session() {
 			Learn-Map ) echo "Choice : $i_todo"
 				./learning.sh
 				continue;;
-			Reset-Timestamps ) echo "Choice : $i_todo"
-				dialog_reset_timestamps
+			Reset-Mapcycle ) echo "Choice : $i_todo"
+				### DEPRECATED function call ###
+				#dialog_reset_timestamps
+				echo "*** input remaining map time for correct clock ***"
+				echo "* no input = reset to 6:00 hours *"
+
+				read -p "type [ hh:mm or nothing ] + RETURN > " map_time
+
+				if [ -n "$map_time" ]; then
+					ts_6h=$(date -d "06:00" +%s)
+					ts_map=$(date -d "$map_time" +%s)
+					if [ -z "$ts_map" ]; then
+						# bad format
+						ts_diff=""
+					elif [ "$ts_map" -ge "$ts_6h" ]; then
+						# another issue...
+						# better avoid negative
+						ts_diff=""
+					else
+						# all good
+						ts_diff=$((ts_6h-ts_map))
+					fi
+				else
+					# no tweek required
+					ts_diff=""
+				fi
+				reset_mapcycle_timestamps $ts_diff
 				continue;;
 			* ) echo "Invalid choice : $i_todo"
 				continue;;
