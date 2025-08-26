@@ -62,49 +62,6 @@ reset_mapcycle_timestamps() {
 	fi
 }
 
-### DEPRECATED ###
-dialog_reset_timestamps() {
-	local actions="Quit mapcycle daily"
-	local i_reset map_time ts_6h ts_map ts_diff
-
-	select i_reset in $actions; do
-		case $i_reset in
-			Quit ) echo "Choice : $i_reset"
-				break;;
-			mapcycle ) echo "Choice : $i_reset"
-				echo "*** input remaining map time for correct clock ***"
-
-				read -p "type [ hh:mm or nothing ] + RETURN > " map_time
-
-				if [ -n "$map_time" ]; then
-					ts_6h=$(date -d "06:00" +%s)
-					ts_map=$(date -d "$map_time" +%s)
-					if [ -z "$ts_map" ]; then
-						# bad format
-						ts_diff=""
-					elif [ "$ts_map" -ge "$ts_6h" ]; then
-						# another issue...
-						# better avoid negative
-						ts_diff=""
-					else
-						# all good
-						ts_diff=$((ts_6h-ts_map))
-					fi
-				else
-					# no tweek required
-					ts_diff=""
-				fi
-				reset_mapcycle_timestamps $ts_diff
-				continue;;
-			daily ) echo "Choice : $i_reset"
-				./daily-once.sh reset $current_servname
-				continue;;
-			* ) echo "Invalid choice : $i_reset"
-				continue;;
-		esac
-	done
-}
-
 interactive_session() {
 	local actions="Quit Brute-Force Learn-Map Reset-Mapcycle"
 	local i_todo
@@ -124,8 +81,6 @@ interactive_session() {
 				./learning.sh
 				continue;;
 			Reset-Mapcycle ) echo "Choice : $i_todo"
-				### DEPRECATED function call ###
-				#dialog_reset_timestamps
 				echo "*** input remaining map time for correct clock ***"
 				echo "* no input = reset to 6:00 hours *"
 
