@@ -31,6 +31,10 @@ tst_case_prof = [3, 2, 1, 1, 2, 2, 2, 3];
 tst_case_id = 2;
 tst_case_max = [20, 50, 40, 15, 15, 30, 30, 50, 15, 50, 15, 50, 50, 30, 30, 30];
 tst_case_unlock = [(6,4,4), (5,5,5), (6,6,6), (4,4,4), (5,5,5), (6,5,0), (10,10,10)];
+
+t = init_ftree(tst_case_prof,tst_case_id,tst_case_max,tst_case_unlock);
+q,l = fill_ftree_queues(tst_info)
+print_complete_node_info(tst_info,l)
 """
 
 function check_profile(prof)
@@ -147,3 +151,236 @@ end
 
 println("*** Input syntax example :")
 println(TEST_CASE_SYNTAX)
+
+function select_nodes_eq_column(node_info,n_col)
+	i_col = n_col - 1
+	s = filter(z->(z.i_col==i_col),node_info)
+	return s
+end
+
+function select_nodes_le_column(node_info,n_col)
+	i_col = n_col - 1
+	s = filter(z->(z.i_col<=i_col),node_info)
+	return s
+end
+
+function init_ftree_queue()
+	ftree_q = Any[]
+	for i in 1:9
+		single_q = Int[]
+		push!(ftree_q,single_q)
+	end
+
+	return ftree_q
+end
+
+function add_to_queue_unlock!(ftree_q,levels,node_info,n_node; solo_pad_col=0)
+	## Error checks
+	if n_node < 1 || n_node > 16
+		# out of range
+		return 1
+	end
+
+	curr_lvl = levels[n_node]
+	curr_node = node_info[n_node]
+	if curr_lvl >= curr_node.max_lvl
+		# max level reached
+		return 2
+	end
+
+	n_col = curr_node.i_col + 1
+	if n_col < 1 || n_col > 7
+		# unlock stage can only fill columns 1 to 7
+		return 3
+	end
+
+	if solo_pad_col < 0 || solo_pad_col > 7
+		# solo padding in unlock stage cannot be at column 8+
+		return 4
+	end
+
+	# NOT REACHED IF ERROR FOUND
+	if solo_pad_col == 0
+		push!(ftree_q[n_col],n_node)
+	else
+		push!(ftree_q[solo_pad_col],n_node)
+	end
+	levels[n_node] += 1
+
+	return 0
+end
+
+### testing data initialization here
+#tst_info = init_ftree(tst_case_prof,tst_case_id,tst_case_max,tst_case_unlock);
+#tst_q = init_ftree_queue();
+#tst_levels = zeros(Int,16);
+
+function check_column_requirement(node_subset,levels)
+	for nn in node_subset
+		n_node = nn.n_node
+		if levels[n_node] < nn.unlock_lvl
+			return false
+		end
+	end
+
+	return true
+end
+
+### tricky test case
+trick_case_prof = [1, 3, 2, 1, 1, 2, 3, 3];
+trick_case_id = 0;
+trick_case_max = [5, 7, 6, 7, 6, 6, 30, 30, 50, 15, 50, 15, 50, 50, 30, 30];
+trick_case_unlock = [(4,4,4), (6,4,4), (6,5,5), (25,6,6), (4,4,4), (6,5,5), (6,5,4)];
+
+function filter_upgradeble_node_subset(node_pool,levels)
+	r = FtreeNode[]
+	for z in node_pool
+		i_node = z.n_node
+		lvl_limit = z.max_lvl
+		lvl = levels[i_node]
+		if lvl < lvl_limit
+			push!(r,z)
+		end
+	end
+
+	return r
+end
+
+function argmin_level_in_node_subset(node_pool,levels)
+	node_pool_r = filter_upgradeble_node_subset(node_pool,levels)
+
+	if isempty(node_pool_r)
+		i_node_min = 0
+	else
+		i_node_min = node_pool_r[1].n_node
+		lvl_min = levels[i_node_min]
+		for z in node_pool_r
+			i_node = z.n_node
+			lvl = levels[i_node]
+			if lvl < lvl_min
+				i_node_min = i_node
+				lvl_min = lvl
+			end
+		end
+	end
+
+	return i_node_min
+end
+
+function fill_ftree_queues(node_info)
+	ftree_q = init_ftree_queue()
+	levels = zeros(Int,16)
+
+	# unlock each column from 1 to 7
+	for n_col in 1:7
+		cc = select_nodes_eq_column(node_info,n_col)
+		if length(cc) > 1
+			##
+			## 2 or more nodes per column
+			##
+			cycle_len = length(cc)
+			n_add = 0
+			while ! check_column_requirement(cc,levels)
+				i_cycle = (n_add % cycle_len) +1
+				up_node = cc[i_cycle]
+				up_node_n = up_node.n_node
+
+				ierr = add_to_queue_unlock!(ftree_q,levels,
+					node_info,up_node_n)
+
+				if ierr != 0
+					error("add_to_queue_unlock! failed with error $ierr")
+				end
+				n_add += 1
+			end
+			println("* upgraded $n_add nodes in column $n_col")
+			if (n_add % 2) != 0
+				println("* 1 parity padding required")
+				i_cycle = (n_add % cycle_len) +1
+				up_node = cc[i_cycle]
+				up_node_n = up_node.n_node
+
+				ierr = add_to_queue_unlock!(ftree_q,levels,
+					node_info,up_node_n)
+
+				if ierr != 0
+					error("add_to_queue_unlock! failed with error $ierr")
+				end
+				n_add += 1
+			else
+				println("* no parity padding required")
+			end
+			##
+			##
+			##
+		elseif length(cc) == 1
+			##
+			## only 1 node per column
+			##
+			pool = select_nodes_le_column(node_info,n_col-1)
+
+			solo_node = cc[1]
+			solo_n = solo_node.n_node
+			n_req = solo_node.unlock_lvl
+
+			for i_up in 1:n_req
+				ierr = add_to_queue_unlock!(ftree_q,levels,
+					node_info,solo_n)
+
+				if ierr != 0
+					error("add_to_queue_unlock! failed with error $ierr")
+				end
+
+				pad_node = argmin_level_in_node_subset(pool,
+					levels)
+				println("* padding solo node $solo_n with $pad_node")
+
+				solo_n_col = solo_node.i_col +1
+				if pad_node == 0
+					push!(ftree_q[solo_n_col],0)
+				else
+					ierr = add_to_queue_unlock!(ftree_q,
+						levels,node_info,pad_node,
+						solo_pad_col=solo_n_col)
+
+					if ierr != 0
+						error("add_to_queue_unlock! failed with error $ierr")
+					end
+				end
+			end
+			##
+			##
+			##
+		else
+			error("cannot fill an empty column")
+		end
+	end
+
+	# handle column 8
+
+	# fill till the end + parity padding
+
+	return ftree_q, levels
+end
+
+function print_complete_node_info(node_info,levels)
+	for n_col in 1:8
+		i_col = n_col - 1
+		jj = findall(z->(z.i_col==i_col),node_info)
+		for j in jj
+			z = node_info[j]
+			lvl = levels[j]
+			i_str = "$(z.n_node) : "
+			i_str = i_str * "lvl $(lvl)/$(z.max_lvl) "
+			i_str = i_str * "(req. $(z.unlock_lvl)) "
+			i_str = i_str * "n_page=$(z.n_page) "
+			i_str = i_str * "i_col=$(z.i_col) "
+			i_str = i_str * "n_slot=$(z.n_slot) "
+			i_str = i_str * "i_slot=$(z.i_slot)"
+			println(i_str)
+		end
+		if n_col < 8
+			println("**")
+		end
+	end
+end
