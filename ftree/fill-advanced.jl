@@ -1,3 +1,6 @@
+function remove_full_nodes!(node_subset,levels)
+	filter!(z -> (levels[z.n_node] < z.max_lvl),node_subset)
+end
 
 function gen_padding_once(node_info,ftree_q,levels,n_col,excl_node)
 	# perform a padding on the n_col -th queue of ftree_q
@@ -11,10 +14,7 @@ function gen_padding_once(node_info,ftree_q,levels,n_col,excl_node)
 		# no more room, no choice
 		push!(ftree_q[n_col],0)
 	else
-		up_node = alt[pad_node]
-		up_node_n = up_node.n_node
-
-		ierr = add_to_queue_std!(ftree_q,levels,node_info,up_node_n,
+		ierr = add_to_queue_std!(ftree_q,levels,node_info,pad_node,
 			solo_pad_col=n_col)
 
 		if ierr != 0
@@ -37,87 +37,78 @@ function advanced_fill_ftree_queues(node_info)
 	for n_col in 1:7
 		println("\n** filling column $n_col")
 		cc = select_nodes_eq_column(node_info,n_col)
-		if length(cc) > 1
-			##
-			## 2 or more nodes per column
-			##
-			cycle_len = length(cc)
-			n_add = 0
-			cycle_count = 0
-			last_node = 0
-			while ! check_column_requirement(cc,levels)
-				i_cycle = (cycle_count % cycle_len) +1
-				cycle_count += 1
-				up_node = cc[i_cycle]
+######################################################################
+		n_add = 0
+		last_node = 0
+		while ! check_column_requirement(cc,levels)
+			nodes_in_set = length(cc)
+
+			if nodes_in_set > 1
+				lvl_vals = [ levels[z.n_node] for z in cc ]
+				i_select = argmin(lvl_vals)
+
+				up_node = cc[i_select]
 				up_node_n = up_node.n_node
 
 				ierr = add_to_queue_std!(ftree_q,levels,
 					node_info,up_node_n)
 
 				if ierr == 2
-					# column requirement not satisfied
-					# should try next without adding
-					println("* ierr=2 caught on node $up_node_n")
-					continue
+					error("* ierr=2 caught on node $up_node_n")
+					# should not happen because
+					# full nodes are removed
 				elseif ierr != 0
 					error("add_to_queue_std! failed with error $ierr")
 				else
 					n_add += 1
 					last_node = up_node_n
 				end
-			end
-			## at this point double node in 2 consecutive
-			## spots in queue are possible
-			## this issue will be solved later
-			## directly on queue
-			println("* upgraded $n_add nodes in column $n_col")
+			elseif nodes_in_set == 1
+				solo_node = cc[1]
+				solo_n = solo_node.n_node
 
-			if (n_add % 2) != 0
-				println("* 1 parity padding required")
-				println("* not giving priority to current column")
-				pad_node = gen_padding_once(node_info,ftree_q,
-					levels,n_col,last_node)
-
-				if pad_node == 0
-					println("* parity padding not found anywhere")
-					println("* forced to do padding with zero on column $n_col")
-				else
-					println("* parity padding with node $pad_node")
-					n_add += 1
-				end
-			else
-				println("* no parity padding required")
-			end
-			##
-			##
-			##
-		elseif length(cc) == 1
-			##
-			## only 1 node per column
-			##
-
-			solo_node = cc[1]
-			solo_n = solo_node.n_node
-
-			while ! check_column_requirement(cc,levels)
 				ierr = add_to_queue_std!(ftree_q,levels,
 					node_info,solo_n)
 
 				if ierr != 0
 					error("add_to_queue_std! failed with error $ierr during solo column processing")
 				end
+				n_add += 1
 
 				pad_node = gen_padding_once(node_info,ftree_q,
 					levels,n_col,solo_n)
 				println("* padding solo node $solo_n with $pad_node")
-
+			else
+				error("* should not have empty set here")
 			end
-			##
-			##
-			##
-		else
-			error("cannot fill an empty column")
+
+			remove_full_nodes!(cc,levels)
+			after = length(cc)
+			if after < nodes_in_set
+				println("* removed maxed nodes : length $nodes_in_set -> $after")
+			end
+			if (nodes_in_set==2) && (after==1)
+				println("* column $n_col switching to solo")
+				if (n_add % 2) != 0
+					println("* 1 parity padding required")
+					println("* not giving priority to current column")
+					pad_node = gen_padding_once(node_info,
+						ftree_q,levels,n_col,last_node)
+
+					if pad_node == 0
+						println("* parity padding not found anywhere")
+						println("* forced to do padding with zero on column $n_col")
+					else
+						println("* parity padding with node $pad_node")
+						n_add += 1
+					end
+				else
+					println("* no parity padding required")
+				end
+			end
 		end
+######################################################################
+######################################################################
 	end
 
 	# ############################################################# #
