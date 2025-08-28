@@ -202,42 +202,6 @@ function init_ftree_queue()
 	return ftree_q
 end
 
-function add_to_queue_unlock!(ftree_q,levels,node_info,n_node; solo_pad_col=0)
-	## Error checks
-	if n_node < 1 || n_node > 16
-		# out of range
-		return 1
-	end
-
-	curr_lvl = levels[n_node]
-	curr_node = node_info[n_node]
-	if curr_lvl >= curr_node.max_lvl
-		# max level reached
-		return 2
-	end
-
-	n_col = curr_node.i_col + 1
-	if n_col < 1 || n_col > 7
-		# unlock stage can only fill columns 1 to 7
-		return 3
-	end
-
-	if solo_pad_col < 0 || solo_pad_col > 7
-		# solo padding in unlock stage cannot be at column 8+
-		return 4
-	end
-
-	# NOT REACHED IF ERROR FOUND
-	if solo_pad_col == 0
-		push!(ftree_q[n_col],n_node)
-	else
-		push!(ftree_q[solo_pad_col],n_node)
-	end
-	levels[n_node] += 1
-
-	return 0
-end
-
 function add_to_queue_std!(ftree_q,levels,node_info,n_node; solo_pad_col=0)
 	## Error checks
 	if n_node < 1 || n_node > 16
@@ -253,6 +217,11 @@ function add_to_queue_std!(ftree_q,levels,node_info,n_node; solo_pad_col=0)
 	end
 
 	n_col = curr_node.i_col + 1
+	if n_col < 1 || n_col > 8
+		# column out of range
+		return 3
+	end
+
 
 	if solo_pad_col < 0 || solo_pad_col > 9
 		# solo padding column out of range (0 is no padding)
@@ -375,7 +344,7 @@ function fill_ftree_queues(node_info)
 				up_node = cc[i_cycle]
 				up_node_n = up_node.n_node
 
-				ierr = add_to_queue_unlock!(ftree_q,levels,
+				ierr = add_to_queue_std!(ftree_q,levels,
 					node_info,up_node_n)
 
 				if ierr == 2
@@ -384,7 +353,7 @@ function fill_ftree_queues(node_info)
 					println("* ierr=2 caught on node $up_node_n")
 					continue
 				elseif ierr != 0
-					error("add_to_queue_unlock! failed with error $ierr")
+					error("add_to_queue_std! failed with error $ierr")
 				else
 					n_add += 1
 					last_node = up_node_n
@@ -415,12 +384,12 @@ function fill_ftree_queues(node_info)
 					up_node = alt[pad_node]
 					up_node_n = up_node.n_node
 
-					ierr = add_to_queue_unlock!(ftree_q,
+					ierr = add_to_queue_std!(ftree_q,
 						levels,node_info,up_node_n,
 						solo_pad_col=n_col)
 
 					if ierr != 0
-						error("add_to_queue_unlock! failed with error $ierr during parity padding")
+						error("add_to_queue_std! failed with error $ierr during parity padding")
 					end
 					n_add += 1
 				end
@@ -441,11 +410,11 @@ function fill_ftree_queues(node_info)
 			n_req = solo_node.unlock_lvl
 
 			for i_up in 1:n_req
-				ierr = add_to_queue_unlock!(ftree_q,levels,
+				ierr = add_to_queue_std!(ftree_q,levels,
 					node_info,solo_n)
 
 				if ierr != 0
-					error("add_to_queue_unlock! failed with error $ierr during solo column processing")
+					error("add_to_queue_std! failed with error $ierr during solo column processing")
 				end
 
 				pad_node = argmin_level_in_node_subset(pool,
@@ -455,12 +424,12 @@ function fill_ftree_queues(node_info)
 				if pad_node == 0
 					push!(ftree_q[n_col],0)
 				else
-					ierr = add_to_queue_unlock!(ftree_q,
+					ierr = add_to_queue_std!(ftree_q,
 						levels,node_info,pad_node,
 						solo_pad_col=n_col)
 
 					if ierr != 0
-						error("add_to_queue_unlock! failed with error $ierr during solo column padding")
+						error("add_to_queue_std! failed with error $ierr during solo column padding")
 					end
 				end
 			end
@@ -739,6 +708,9 @@ function fill_ftree_queues(node_info)
 
 	return ftree_q, levels
 end
+
+# require another file for improving that huge function
+include("fill-advanced.jl")
 
 function print_complete_node_info(node_info,levels)
 	for n_col in 1:8
