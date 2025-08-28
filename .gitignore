@@ -3,6 +3,7 @@
 *.conf
 *.swp
 *.dat
+*.todo
 #
 # map lab : ignore all right now but it may change in the future
 #

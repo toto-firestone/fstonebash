@@ -26,15 +26,41 @@ tst_case_id = 2;
 tst_case_max = [20, 50, 40, 15, 15, 30, 30, 50, 15, 50, 15, 50, 50, 30, 30, 30];
 tst_case_unlock = [(6,4,4), (5,5,5), (6,6,6), (4,4,4), (5,5,5), (6,5,0), (10,10,10)];
 
-TEST_CASE_SYNTAX="""
+TEST_CASE_SYNTAX = """
+1 - How to write Ftree input
+
+Numbers of node per column
+#
 tst_case_prof = [3, 2, 1, 1, 2, 2, 2, 3];
+####
+
+Tree number, just for naming
+#
 tst_case_id = 2;
+####
+
+Max levels for each node
+#
 tst_case_max = [20, 50, 40, 15, 15, 30, 30, 50, 15, 50, 15, 50, 50, 30, 30, 30];
+####
+
+Use triplets for unlock equirement. Extra values are not used.
+For instance, when wiki says all nodes in column N must have level 4,
+it doesn't say how many. Then we always provide 3 values.
+When it says 6/5, we know there are only 2 nodes. Third value can be 0.
+When it says 6/4/4, the is no ambiguity.
+#
 tst_case_unlock = [(6,4,4), (5,5,5), (6,6,6), (4,4,4), (5,5,5), (6,5,0), (10,10,10)];
+####
+
+
+2 - How to do testing in case of bugs
 
 t = init_ftree(tst_case_prof,tst_case_id,tst_case_max,tst_case_unlock);
 q,l = fill_ftree_queues(tst_info)
 print_complete_node_info(tst_info,l)
+
+
 """
 
 function check_profile(prof)
@@ -106,6 +132,9 @@ function init_with_max_and_unlocks(st_info,m_levels,u_levels)
 		end
 		u_lvl = u_3[k_slot]
 
+		if u_lvl > m_lvl
+			error("* unlock level > max at node $n_node")
+		end
 		z = FtreeNode(n_node,u_lvl,m_lvl,n_page,i_col,n_slot,i_slot)
 		node_info[n_node] = z
 	end
@@ -149,7 +178,6 @@ function init_ftree(prof,ftree_id,m_levels,u_levels)
 	return node_info
 end
 
-println("*** Input syntax example :")
 println(TEST_CASE_SYNTAX)
 
 function select_nodes_eq_column(node_info,n_col)
@@ -260,10 +288,13 @@ function check_column_requirement(node_subset,levels)
 end
 
 ### tricky test case
-trick_case_prof = [1, 3, 2, 1, 1, 3, 3, 2];
+trick_case_prof = [1, 3, 2, 1, 1, 3, 2, 3];
 trick_case_id = 0;
 trick_case_max = [5, 7, 6, 7, 6, 6, 30, 30, 50, 15, 50, 15, 50, 52, 30, 30];
-trick_case_unlock = [(4,4,4), (6,4,4), (6,5,5), (25,6,6), (4,4,4), (6,5,5), (6,5,4)];
+###############     #       #     #  #  #        #     #
+trick_case_max = [5, 5, 6, 9, 6, 7, 6, 5, 7, 7, 7, 5, 8, 5, 5, 5];
+####################   1          2       3       4         5        6       7
+trick_case_unlock = [(4,4,4), (3,4,7), (6,7,5), (5,6,6), (4,4,4), (3,5,7), (5,6,4)];
 
 function filter_upgradeble_node_subset(node_pool,levels)
 	r = FtreeNode[]
@@ -309,6 +340,9 @@ function detect_last_solo_node(node_info,levels)
 end
 
 function last_solo_node_n(node_info,levels)
+	if ! detect_last_solo_node(node_info,levels)
+		error("* cannot use last_solo_node_n without caution")
+	end
 	max_levels = [ z.max_lvl for z in node_info ]
 	rooms = max_levels - levels
 
@@ -325,6 +359,7 @@ function fill_ftree_queues(node_info)
 	#
 	# ############################################################# #
 	for n_col in 1:7
+		println("\n** filling column $n_col")
 		cc = select_nodes_eq_column(node_info,n_col)
 		if length(cc) > 1
 			##
@@ -332,33 +367,63 @@ function fill_ftree_queues(node_info)
 			##
 			cycle_len = length(cc)
 			n_add = 0
+			cycle_count = 0
+			last_node = 0
 			while ! check_column_requirement(cc,levels)
-				i_cycle = (n_add % cycle_len) +1
+				i_cycle = (cycle_count % cycle_len) +1
+				cycle_count += 1
 				up_node = cc[i_cycle]
 				up_node_n = up_node.n_node
 
 				ierr = add_to_queue_unlock!(ftree_q,levels,
 					node_info,up_node_n)
 
-				if ierr != 0
+				if ierr == 2
+					# column requirement not satisfied
+					# should try next without adding
+					println("* ierr=2 caught on node $up_node_n")
+					continue
+				elseif ierr != 0
 					error("add_to_queue_unlock! failed with error $ierr")
+				else
+					n_add += 1
+					last_node = up_node_n
 				end
-				n_add += 1
 			end
+			## at this point double node in 2 consecutive
+			## spots in queue are possible
+			## this issue will be solved later
+			## directly on queue
 			println("* upgraded $n_add nodes in column $n_col")
+
 			if (n_add % 2) != 0
 				println("* 1 parity padding required")
-				i_cycle = (n_add % cycle_len) +1
-				up_node = cc[i_cycle]
-				up_node_n = up_node.n_node
+				println("* not giving priority to current column")
+				alt = select_nodes_le_column(node_info,n_col)
+				# exclude last queued node
+				filter!(z->(z.n_node!=last_node),alt)
+				pad_node = argmin_level_in_node_subset(alt,
+					levels)
 
-				ierr = add_to_queue_unlock!(ftree_q,levels,
-					node_info,up_node_n)
+				if pad_node == 0
+					println("* parity padding not found anywhere")
+					# no more room, no choice
+					println("* forced to do padding with zero on column $n_col")
+					push!(ftree_q[n_col],0)
+				else
+					println("* parity padding with node $pad_node")
+					up_node = alt[pad_node]
+					up_node_n = up_node.n_node
 
-				if ierr != 0
-					error("add_to_queue_unlock! failed with error $ierr during parity padding")
+					ierr = add_to_queue_unlock!(ftree_q,
+						levels,node_info,up_node_n,
+						solo_pad_col=n_col)
+
+					if ierr != 0
+						error("add_to_queue_unlock! failed with error $ierr during parity padding")
+					end
+					n_add += 1
 				end
-				n_add += 1
 			else
 				println("* no parity padding required")
 			end
@@ -387,13 +452,12 @@ function fill_ftree_queues(node_info)
 					levels)
 				println("* padding solo node $solo_n with $pad_node")
 
-				solo_n_col = solo_node.i_col +1
 				if pad_node == 0
-					push!(ftree_q[solo_n_col],0)
+					push!(ftree_q[n_col],0)
 				else
 					ierr = add_to_queue_unlock!(ftree_q,
 						levels,node_info,pad_node,
-						solo_pad_col=solo_n_col)
+						solo_pad_col=n_col)
 
 					if ierr != 0
 						error("add_to_queue_unlock! failed with error $ierr during solo column padding")
@@ -413,6 +477,7 @@ function fill_ftree_queues(node_info)
 	# handle column 8
 	#
 	# ############################################################# #
+	println("\n** filling column 8")
 	cc = select_nodes_eq_column(node_info,8)
 	pool = select_nodes_le_column(node_info,7)
 	min_node = argmin_level_in_node_subset(pool,levels)
@@ -428,6 +493,7 @@ function fill_ftree_queues(node_info)
 	if min_node == 0
 		println("* no more room in columns 1 to 7")
 		println("* only column 8 has room")
+		println("* skip to final fill stage")
 	else
 		v_lvl = [ z.max_lvl for z in cc ]
 		push!(v_lvl,levels[min_node])
@@ -439,11 +505,23 @@ function fill_ftree_queues(node_info)
 
 		# distribute ref_lvl to both nodes of column 8
 		n_lvl_up_min = ref_lvl * length(cc)
+
+		# check room in column 8
+		total_node_col8 = sum([ z.max_lvl for z in cc ])
+
+		println("* going to queue $n_lvl_up_min nodes for column 8")
+		println("* total room in column 8 is $total_node_col8")
+		if n_lvl_up_min > total_node_col8
+			error("* not enough room in column 8")
+		end
 		##
 		## if length(cc) > 1 : guaranteed
 		## 2 or more nodes per column
 		##
+		## n_lvl_up_min <= total_node_col8 : guaranteed
+		##
 		n_add = 0
+		last_q = 0
 		cycle_len = length(cc)
 		while n_add < n_lvl_up_min
 			i_cycle = (n_add % cycle_len) +1
@@ -453,25 +531,43 @@ function fill_ftree_queues(node_info)
 			ierr = add_to_queue_std!(ftree_q,levels,
 				node_info,up_node_n)
 
+			## there is no unlock constraint here
+			## all is guaranteed to be feasible
+			## there is no point in catching ierr=2
+			## no need to skip any non feasible
 			if ierr != 0
 				error("add_to_queue_std! failed with error $ierr")
 			end
 			n_add += 1
+			last_q = up_node_n
 		end
 		println("* upgraded $n_add nodes in column 8")
+
 		if (n_add % 2) != 0
 			println("* 1 parity padding required")
-			i_cycle = (n_add % cycle_len) +1
-			up_node = cc[i_cycle]
-			up_node_n = up_node.n_node
+			println("* not giving priority to current column")
+			# using whole set as pool but remove last queued
+			alt = filter(z->(z.n_node!=last_q),node_info)
+			pad_node = argmin_level_in_node_subset(alt,levels)
 
-			ierr = add_to_queue_std!(ftree_q,levels,
-				node_info,up_node_n)
+			if pad_node == 0
+				println("* parity padding not found anywhere")
+				# no more room, no choice
+				println("* forced to do padding with zero on column $n_col")
+				push!(ftree_q[8],0)
+			else
+				up_node = alt[pad_node]
+				up_node_n = up_node.n_node
 
-			if ierr != 0
-				error("add_to_queue_std! failed with error $ierr during parity padding")
+				ierr = add_to_queue_std!(ftree_q,levels,
+					node_info,up_node_n,solo_pad_col=8)
+
+				if ierr != 0
+					error("add_to_queue_std! failed with error $ierr during parity padding")
+				end
+				println("* parity padding with $up_node_n")
+				n_add += 1
 			end
-			n_add += 1
 		else
 			println("* no parity padding required")
 		end
@@ -487,7 +583,7 @@ function fill_ftree_queues(node_info)
 	# ############################################################# #
 	q_sizes = [ length(q) for q in ftree_q ]
 	n_node_q = sum(q_sizes)
-	println("*** $n_node_q nodes in queues at the end of unlock stage")
+	println("\n\n*** $n_node_q nodes in queues at the end of unlock stage")
 
 	if (n_node_q % 2) != 0
 		error("* parity check failed after unlock stage")
@@ -521,6 +617,7 @@ function fill_ftree_queues(node_info)
 	# fill till the end + parity padding
 	#
 	# ############################################################# #
+	println("\n** filling all remaining")
 	if n_remain <= 0
 		println("** nothing to do")
 	elseif n_remain == 1
@@ -532,6 +629,10 @@ function fill_ftree_queues(node_info)
 			end
 		end
 		# only 1 node is ok for the last command
+		###################################
+		# THIS WILL BREAK PARITY ON QUEUE #
+		###################################
+		# only queue 9 can be odd
 	else
 		# n_remain >= 2
 		n_add = 0
@@ -579,10 +680,62 @@ function fill_ftree_queues(node_info)
 		###
 		### Final rush : solo node and 0 padding
 		###
+		println("\n** final rush on last solo node $solo_n")
 		while n_add < n_remain
+			ierr = add_to_queue_std!(ftree_q,levels,
+				node_info,solo_n,solo_pad_col=9)
+			if ierr != 0
+				error("* add_to_queue_std! failed : last solo node must have room during final fill")
+			end
 			n_add += 1
+
+			push!(ftree_q[9],0)
+			# padding with 0 does no count
 		end
 	end
+
+	# ############################################################# #
+	#
+	# final check
+	#
+	# ############################################################# #
+	q_sizes = [ length(q) for q in ftree_q ]
+	n_node_q = sum(q_sizes)
+	println("*** $n_node_q nodes in queues at the end of fill stage")
+
+	q_n_zeros = sum([ length(filter(x->(x==0),q)) for q in ftree_q ])
+	println("* found $q_n_zeros zeros in queues")
+	q_n_nonzeros = n_node_q - q_n_zeros
+
+	total_nodes = sum([ z.max_lvl for z in node_info ])
+	total_done = sum(levels)
+
+	if total_done != q_n_nonzeros
+		error("* non zeros in queues ($q_n_nonzeros) does not matches number of nodes done ($total_done) after fill stage")
+
+	else
+		println("* non zeros in queue check passed after unlock stage")
+	end
+
+	println("** $total_done / $total_nodes non zero nodes queued")
+	n_remain = total_nodes - total_done
+	if n_remain != 0
+		error("* there are $n_remain remaining nodes at the end")
+	else
+		println("* $n_remain remaining nodes at the end")
+	end
+
+	println("** check queue values for each node 1...16")
+	for n in 1:16
+		q_n = sum([ length(filter(x->(x==n),q)) for q in ftree_q ])
+		c_n = node_info[n].max_lvl
+		if q_n == c_n
+			println("* node $n check : $q_n / $c_n")
+		else
+			error("* node $n mismatch : $q_n / $c_n")
+		end
+	end
+	println("** all nodes in queue match all max levels")
 
 	return ftree_q, levels
 end
@@ -608,3 +761,56 @@ function print_complete_node_info(node_info,levels)
 		end
 	end
 end
+
+function write_ftree_and_queues(profile,id,max_levels,unlock_levels)
+	node_info = init_ftree(profile,id,max_levels,unlock_levels)
+	ftree_q, levels_chk = fill_ftree_queues(node_info)
+	print_complete_node_info(node_info,levels_chk)
+
+	# debug purpose only
+	for i_q in 1:9
+		println(i_q," : ",ftree_q[i_q])
+	end
+
+	q_unlock_out = "out.queue-unlock.todo"
+	q_fill_out = "out.queue-fill.todo"
+
+	open(q_unlock_out,"w") do q_fd
+		for n in 1:8
+			if isempty(ftree_q[n])
+				continue
+			end
+			q_str = join(ftree_q[n],"\n")*"\n"
+			write(q_fd,q_str)
+		end
+	end
+	if isempty(ftree_q[9])
+		println("* filling not required. already filled after unlock")
+	else
+		open(q_fill_out,"w") do q_fd
+			q_str = join(ftree_q[9],"\n")*"\n"
+			write(q_fd,q_str)
+		end
+	end
+end
+
+FINAL_USAGE_TXT = """
+3 - Final usage
+
+Use this function
+#
+write_ftree_and_queues(profile,id,max_levels,unlock_levels)
+###
+
+Output files are in same directory
+
+- out.ftree-maker.dat : contains the ftree descriptor.
+Rename it to s*.ftree.dat so that auto-ftree.sh script can find it
+
+- out.queue-unlock.todo : contains queue for unlocking all columns
+- out.queue-fill.todo : contains the queue for filling until the end
+Rename the to s*.ftreestart.todo so that auto-ftree.sh script can find them
+It's possible to merge the 2 files with cat command
+"""
+
+println(FINAL_USAGE_TXT)
