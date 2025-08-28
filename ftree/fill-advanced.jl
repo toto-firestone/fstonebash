@@ -102,6 +102,8 @@ function advanced_fill_ftree_queues(node_info)
 			## filled
 			## parity padding before rushing to last solo node
 			## for unlock requirement
+			## In a solo rush, the non padding element must
+			## be the first of each chunk of 2
 			if (nodes_in_set==2) && (after==1)
 				println("* column $n_col switching to solo")
 				if (n_add % 2) != 0
@@ -320,6 +322,8 @@ function advanced_fill_ftree_queues(node_info)
 
 		###
 		### Final rush : solo node and 0 padding
+		### The non padding node will always be the first
+		### in each chunk of 2
 		###
 		println("\n** final rush on last solo node $solo_n")
 		while n_add < n_remain
@@ -387,6 +391,16 @@ function advanced_fill_ftree_queues(node_info)
 		end
 	end
 	println("** all nodes in queue match all max levels")
+
+	println("** check syntax on each queue **")
+	for i_q in 1:9
+		error_i = syntax_check_on_q(ftree_q[i_q])
+		if error_i == 0
+			println("* queue $i_q : valid")
+		else
+			error("* queue $i_q : error at position $error_i")
+		end
+	end
 
 	return ftree_q, levels
 end

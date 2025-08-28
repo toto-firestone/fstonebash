@@ -318,6 +318,20 @@ function last_solo_node_n(node_info,levels)
 	return findfirst(x -> x > 0,rooms)
 end
 
+function syntax_check_on_q(one_q)
+	q_size = length(one_q)
+	n_chunk = div(q_size,2)
+	for i in 1:n_chunk
+		j = (i-1)*2 +1
+		cmd_1 = one_q[j]
+		cmd_2 = one_q[j+1]
+		if (cmd_1 == cmd_2) || (cmd_1 == 0)
+			return j
+		end
+	end
+	return 0
+end
+
 # require another file for not editing that huge deprecated function
 include("fill-old.jl")
 
