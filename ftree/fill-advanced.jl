@@ -1,4 +1,30 @@
 
+function gen_padding_once(node_info,ftree_q,levels,n_col,excl_node)
+	# perform a padding on the n_col -th queue of ftree_q
+
+	alt = select_nodes_le_column(node_info,n_col)
+	# exclude last queued node
+	filter!(z->(z.n_node!=excl_node),alt)
+	pad_node = argmin_level_in_node_subset(alt,levels)
+
+	if pad_node == 0
+		# no more room, no choice
+		push!(ftree_q[n_col],0)
+	else
+		up_node = alt[pad_node]
+		up_node_n = up_node.n_node
+
+		ierr = add_to_queue_std!(ftree_q,levels,node_info,up_node_n,
+			solo_pad_col=n_col)
+
+		if ierr != 0
+			error("add_to_queue_std! failed with error $ierr during padding")
+		end
+	end
+
+	return pad_node
+end
+
 function advanced_fill_ftree_queues(node_info)
 	ftree_q = init_ftree_queue()
 	levels = zeros(Int,16)
@@ -49,29 +75,14 @@ function advanced_fill_ftree_queues(node_info)
 			if (n_add % 2) != 0
 				println("* 1 parity padding required")
 				println("* not giving priority to current column")
-				alt = select_nodes_le_column(node_info,n_col)
-				# exclude last queued node
-				filter!(z->(z.n_node!=last_node),alt)
-				pad_node = argmin_level_in_node_subset(alt,
-					levels)
+				pad_node = gen_padding_once(node_info,ftree_q,
+					levels,n_col,last_node)
 
 				if pad_node == 0
 					println("* parity padding not found anywhere")
-					# no more room, no choice
 					println("* forced to do padding with zero on column $n_col")
-					push!(ftree_q[n_col],0)
 				else
 					println("* parity padding with node $pad_node")
-					up_node = alt[pad_node]
-					up_node_n = up_node.n_node
-
-					ierr = add_to_queue_std!(ftree_q,
-						levels,node_info,up_node_n,
-						solo_pad_col=n_col)
-
-					if ierr != 0
-						error("add_to_queue_std! failed with error $ierr during parity padding")
-					end
 					n_add += 1
 				end
 			else
@@ -84,13 +95,11 @@ function advanced_fill_ftree_queues(node_info)
 			##
 			## only 1 node per column
 			##
-			pool = select_nodes_le_column(node_info,n_col-1)
 
 			solo_node = cc[1]
 			solo_n = solo_node.n_node
-			n_req = solo_node.unlock_lvl
 
-			for i_up in 1:n_req
+			while ! check_column_requirement(cc,levels)
 				ierr = add_to_queue_std!(ftree_q,levels,
 					node_info,solo_n)
 
@@ -98,21 +107,10 @@ function advanced_fill_ftree_queues(node_info)
 					error("add_to_queue_std! failed with error $ierr during solo column processing")
 				end
 
-				pad_node = argmin_level_in_node_subset(pool,
-					levels)
+				pad_node = gen_padding_once(node_info,ftree_q,
+					levels,n_col,solo_n)
 				println("* padding solo node $solo_n with $pad_node")
 
-				if pad_node == 0
-					push!(ftree_q[n_col],0)
-				else
-					ierr = add_to_queue_std!(ftree_q,
-						levels,node_info,pad_node,
-						solo_pad_col=n_col)
-
-					if ierr != 0
-						error("add_to_queue_std! failed with error $ierr during solo column padding")
-					end
-				end
 			end
 			##
 			##
@@ -196,26 +194,15 @@ function advanced_fill_ftree_queues(node_info)
 		if (n_add % 2) != 0
 			println("* 1 parity padding required")
 			println("* not giving priority to current column")
-			# using whole set as pool but remove last queued
-			alt = filter(z->(z.n_node!=last_q),node_info)
-			pad_node = argmin_level_in_node_subset(alt,levels)
+
+			pad_node = gen_padding_once(node_info,ftree_q,
+				levels,8,last_q)
 
 			if pad_node == 0
 				println("* parity padding not found anywhere")
-				# no more room, no choice
-				println("* forced to do padding with zero on column $n_col")
-				push!(ftree_q[8],0)
+				println("* forced to do padding with zero on column 8")
 			else
-				up_node = alt[pad_node]
-				up_node_n = up_node.n_node
-
-				ierr = add_to_queue_std!(ftree_q,levels,
-					node_info,up_node_n,solo_pad_col=8)
-
-				if ierr != 0
-					error("add_to_queue_std! failed with error $ierr during parity padding")
-				end
-				println("* parity padding with $up_node_n")
+				println("* parity padding with node $pad_node")
 				n_add += 1
 			end
 		else
