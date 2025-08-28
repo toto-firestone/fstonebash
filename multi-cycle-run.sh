@@ -197,6 +197,18 @@ check_scheduled_tasks() {
 		done
 	fi
 	echo "*** *** ***"
+
+	local alch_h=$(alch_base_hours $atree_level)
+	local alch_timer=$(reduction_from_stack $alch_h $atree_reduce_stack)
+	echo "* alchemy timer : $(secs_to_hhmm $alch_timer)"
+
+	if [ -n "$ftree_base_hours" ] && [ -n "$ftree_reduce_stack" ]; then
+		local FtreeAccur_secs=$(reduction_from_stack $ftree_base_hours $ftree_reduce_stack)
+
+		echo "* library timer : $(secs_to_hhmm $FtreeAccur_secs)"
+	else
+		echo "* no library timer estimation"
+	fi
 }
 
 check_before_doit() {
@@ -246,9 +258,13 @@ interruption_schedule() {
 	# (3 * t_unit) is 1 minute
 	local n_try=$((3*pause_minute))
 
+	echo "* pause starts at $(date +%H:%M)"
 	while [ "$i_try" -lt "$n_try" ]; do
 		if [ ! -f "$PAUSE_LOCK" ]; then
 			break
+		fi
+		if [ "$i_try" -eq "$((n_try-1))" ]; then
+			echo "** pause ends in $t_unit seconds **"
 		fi
 		sleep $t_unit
 		i_try=$((i_try+1))
