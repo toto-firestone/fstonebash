@@ -72,11 +72,11 @@ function advanced_fill_ftree_queues(node_info)
 				if ierr != 0
 					error("add_to_queue_std! failed with error $ierr during solo column processing")
 				end
-				n_add += 1
 
 				pad_node = gen_padding_once(node_info,ftree_q,
 					levels,n_col,solo_n)
 				println("* padding solo node $solo_n with $pad_node")
+				n_add += 2
 			else
 				error("* should not have empty set here")
 			end
@@ -88,6 +88,7 @@ function advanced_fill_ftree_queues(node_info)
 			if after < nodes_in_set
 				println("* removed maxed nodes : length $nodes_in_set -> $after")
 			end
+
 			## Detects switching to solo column
 			## The available spot on the other node has just been
 			## filled
@@ -106,12 +107,30 @@ function advanced_fill_ftree_queues(node_info)
 						println("* forced to do padding with zero on column $n_col")
 					else
 						println("* parity padding with node $pad_node")
-						n_add += 1
 					end
+					n_add += 1
 				else
 					println("* no parity padding required")
 				end
 			end
+		end
+		## Last parity check and padding
+		println("* last parity check on column $n_col")
+		if (n_add % 2) != 0
+			println("* 1 parity padding required")
+			println("* not giving priority to current column")
+			pad_node = gen_padding_once(node_info,
+				ftree_q,levels,n_col,last_node)
+
+			if pad_node == 0
+				println("* parity padding not found anywhere")
+				println("* forced to do padding with zero on column $n_col")
+			else
+				println("* parity padding with node $pad_node")
+			end
+			n_add += 1
+		else
+			println("* no parity padding required")
 		end
 	end
 
@@ -216,6 +235,7 @@ function advanced_fill_ftree_queues(node_info)
 	q_sizes = [ length(q) for q in ftree_q ]
 	n_node_q = sum(q_sizes)
 	println("\n\n*** $n_node_q nodes in queues at the end of unlock stage")
+	println(q_sizes)
 
 	if (n_node_q % 2) != 0
 		error("* parity check failed after unlock stage")
