@@ -25,7 +25,7 @@ function advanced_fill_ftree_queues(node_info)
 				up_node = cc[i_cycle]
 				up_node_n = up_node.n_node
 
-				ierr = add_to_queue_unlock!(ftree_q,levels,
+				ierr = add_to_queue_std!(ftree_q,levels,
 					node_info,up_node_n)
 
 				if ierr == 2
@@ -34,7 +34,7 @@ function advanced_fill_ftree_queues(node_info)
 					println("* ierr=2 caught on node $up_node_n")
 					continue
 				elseif ierr != 0
-					error("add_to_queue_unlock! failed with error $ierr")
+					error("add_to_queue_std! failed with error $ierr")
 				else
 					n_add += 1
 					last_node = up_node_n
@@ -65,12 +65,12 @@ function advanced_fill_ftree_queues(node_info)
 					up_node = alt[pad_node]
 					up_node_n = up_node.n_node
 
-					ierr = add_to_queue_unlock!(ftree_q,
+					ierr = add_to_queue_std!(ftree_q,
 						levels,node_info,up_node_n,
 						solo_pad_col=n_col)
 
 					if ierr != 0
-						error("add_to_queue_unlock! failed with error $ierr during parity padding")
+						error("add_to_queue_std! failed with error $ierr during parity padding")
 					end
 					n_add += 1
 				end
@@ -91,11 +91,11 @@ function advanced_fill_ftree_queues(node_info)
 			n_req = solo_node.unlock_lvl
 
 			for i_up in 1:n_req
-				ierr = add_to_queue_unlock!(ftree_q,levels,
+				ierr = add_to_queue_std!(ftree_q,levels,
 					node_info,solo_n)
 
 				if ierr != 0
-					error("add_to_queue_unlock! failed with error $ierr during solo column processing")
+					error("add_to_queue_std! failed with error $ierr during solo column processing")
 				end
 
 				pad_node = argmin_level_in_node_subset(pool,
@@ -105,12 +105,12 @@ function advanced_fill_ftree_queues(node_info)
 				if pad_node == 0
 					push!(ftree_q[n_col],0)
 				else
-					ierr = add_to_queue_unlock!(ftree_q,
+					ierr = add_to_queue_std!(ftree_q,
 						levels,node_info,pad_node,
 						solo_pad_col=n_col)
 
 					if ierr != 0
-						error("add_to_queue_unlock! failed with error $ierr during solo column padding")
+						error("add_to_queue_std! failed with error $ierr during solo column padding")
 					end
 				end
 			end

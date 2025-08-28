@@ -766,6 +766,38 @@ function write_ftree_and_queues(profile,id,max_levels,unlock_levels)
 	end
 end
 
+function write_ftree_and_queues_V2(profile,id,max_levels,unlock_levels)
+	node_info = init_ftree(profile,id,max_levels,unlock_levels)
+	ftree_q, levels_chk = advanced_fill_ftree_queues(node_info)
+	print_complete_node_info(node_info,levels_chk)
+
+	# debug purpose only
+	for i_q in 1:9
+		println(i_q," : ",ftree_q[i_q])
+	end
+
+	q_unlock_out = "out.queue-unlock.todo"
+	q_fill_out = "out.queue-fill.todo"
+
+	open(q_unlock_out,"w") do q_fd
+		for n in 1:8
+			if isempty(ftree_q[n])
+				continue
+			end
+			q_str = join(ftree_q[n],"\n")*"\n"
+			write(q_fd,q_str)
+		end
+	end
+	if isempty(ftree_q[9])
+		println("* filling not required. already filled after unlock")
+	else
+		open(q_fill_out,"w") do q_fd
+			q_str = join(ftree_q[9],"\n")*"\n"
+			write(q_fd,q_str)
+		end
+	end
+end
+
 FINAL_USAGE_TXT = """
 3 - Final usage
 
