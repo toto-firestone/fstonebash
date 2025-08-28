@@ -318,7 +318,7 @@ function last_solo_node_n(node_info,levels)
 	return findfirst(x -> x > 0,rooms)
 end
 
-function fill_ftree_queues(node_info)
+function old_fill_ftree_queues(node_info)
 	ftree_q = init_ftree_queue()
 	levels = zeros(Int,16)
 
@@ -734,9 +734,10 @@ function print_complete_node_info(node_info,levels)
 	end
 end
 
-function write_ftree_and_queues(profile,id,max_levels,unlock_levels)
+function write_ftree_and_queues_OLD(profile,id,max_levels,unlock_levels)
+	println("** using OLD version of fill function **")
 	node_info = init_ftree(profile,id,max_levels,unlock_levels)
-	ftree_q, levels_chk = fill_ftree_queues(node_info)
+	ftree_q, levels_chk = old_fill_ftree_queues(node_info)
 	print_complete_node_info(node_info,levels_chk)
 
 	# debug purpose only
@@ -766,7 +767,8 @@ function write_ftree_and_queues(profile,id,max_levels,unlock_levels)
 	end
 end
 
-function write_ftree_and_queues_V2(profile,id,max_levels,unlock_levels)
+function write_ftree_and_queues(profile,id,max_levels,unlock_levels)
+	println("** using advanced version of fill function **")
 	node_info = init_ftree(profile,id,max_levels,unlock_levels)
 	ftree_q, levels_chk = advanced_fill_ftree_queues(node_info)
 	print_complete_node_info(node_info,levels_chk)

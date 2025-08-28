@@ -37,7 +37,6 @@ function advanced_fill_ftree_queues(node_info)
 	for n_col in 1:7
 		println("\n** filling column $n_col")
 		cc = select_nodes_eq_column(node_info,n_col)
-######################################################################
 		n_add = 0
 		last_node = 0
 		while ! check_column_requirement(cc,levels)
@@ -83,10 +82,17 @@ function advanced_fill_ftree_queues(node_info)
 			end
 
 			remove_full_nodes!(cc,levels)
+			## Reducing columns, remove opportunities to meet
+			## full nodes further
 			after = length(cc)
 			if after < nodes_in_set
 				println("* removed maxed nodes : length $nodes_in_set -> $after")
 			end
+			## Detects switching to solo column
+			## The available spot on the other node has just been
+			## filled
+			## parity padding before rushing to last solo node
+			## for unlock requirement
 			if (nodes_in_set==2) && (after==1)
 				println("* column $n_col switching to solo")
 				if (n_add % 2) != 0
@@ -107,8 +113,6 @@ function advanced_fill_ftree_queues(node_info)
 				end
 			end
 		end
-######################################################################
-######################################################################
 	end
 
 	# ############################################################# #
