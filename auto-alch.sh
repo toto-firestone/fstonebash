@@ -67,6 +67,7 @@ else
 	echo "*** skip alchemy ***"
 	exit
 fi
+# don't go further if no variables
 
 alch_h=$(alch_base_hours $atree_level)
 alch_timer=$(reduction_from_stack $alch_h $atree_reduce_stack)
