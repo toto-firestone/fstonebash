@@ -381,7 +381,7 @@ function fill_ftree_queues(node_info)
 					push!(ftree_q[n_col],0)
 				else
 					println("* parity padding with node $pad_node")
-					up_node = alt[pad_node]
+					up_node = node_info[pad_node]
 					up_node_n = up_node.n_node
 
 					ierr = add_to_queue_std!(ftree_q,
@@ -525,7 +525,7 @@ function fill_ftree_queues(node_info)
 				println("* forced to do padding with zero on column $n_col")
 				push!(ftree_q[8],0)
 			else
-				up_node = alt[pad_node]
+				up_node = node_info[pad_node]
 				up_node_n = up_node.n_node
 
 				ierr = add_to_queue_std!(ftree_q,levels,
