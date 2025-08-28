@@ -22,6 +22,13 @@ function gen_padding_once(node_info,ftree_q,levels,n_col,excl_node)
 		end
 	end
 
+	if pad_node == 0
+		println("* padding node not found anywhere")
+		println("* forced to do padding with zero on column $n_col")
+	else
+		println("* parity padding with node $pad_node")
+	end
+
 	return pad_node
 end
 
@@ -73,9 +80,10 @@ function advanced_fill_ftree_queues(node_info)
 					error("add_to_queue_std! failed with error $ierr during solo column processing")
 				end
 
+				println("* padding solo node $solo_n")
 				pad_node = gen_padding_once(node_info,ftree_q,
 					levels,n_col,solo_n)
-				println("* padding solo node $solo_n with $pad_node")
+				last_node = pad_node
 				n_add += 2
 			else
 				error("* should not have empty set here")
@@ -101,13 +109,7 @@ function advanced_fill_ftree_queues(node_info)
 					println("* not giving priority to current column")
 					pad_node = gen_padding_once(node_info,
 						ftree_q,levels,n_col,last_node)
-
-					if pad_node == 0
-						println("* parity padding not found anywhere")
-						println("* forced to do padding with zero on column $n_col")
-					else
-						println("* parity padding with node $pad_node")
-					end
+					last_node = pad_node
 					n_add += 1
 				else
 					println("* no parity padding required")
@@ -121,13 +123,7 @@ function advanced_fill_ftree_queues(node_info)
 			println("* not giving priority to current column")
 			pad_node = gen_padding_once(node_info,
 				ftree_q,levels,n_col,last_node)
-
-			if pad_node == 0
-				println("* parity padding not found anywhere")
-				println("* forced to do padding with zero on column $n_col")
-			else
-				println("* parity padding with node $pad_node")
-			end
+			last_node = pad_node
 			n_add += 1
 		else
 			println("* no parity padding required")
@@ -211,14 +207,7 @@ function advanced_fill_ftree_queues(node_info)
 
 			pad_node = gen_padding_once(node_info,ftree_q,
 				levels,8,last_q)
-
-			if pad_node == 0
-				println("* parity padding not found anywhere")
-				println("* forced to do padding with zero on column 8")
-			else
-				println("* parity padding with node $pad_node")
-				n_add += 1
-			end
+			n_add += 1
 		else
 			println("* no parity padding required")
 		end
