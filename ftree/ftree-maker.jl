@@ -173,7 +173,7 @@ function init_ftree(prof,ftree_id,m_levels,u_levels)
 	open(ftree_out,"w") do ft_fd
 		write(ft_fd,ftree_str)
 	end
-	println("** Ftree writen in $ftree_out **")
+	println("**** Ftree descriptor writen in $ftree_out ****")
 
 	return node_info
 end
@@ -416,6 +416,7 @@ function write_ftree_and_queues(profile,id,max_levels,unlock_levels)
 			write(q_fd,q_str)
 		end
 	end
+	println("**** Ftree unlock queue writen in $q_unlock_out ****")
 	if isempty(ftree_q[9])
 		println("* filling not required. already filled after unlock")
 	else
@@ -424,6 +425,7 @@ function write_ftree_and_queues(profile,id,max_levels,unlock_levels)
 			write(q_fd,q_str)
 		end
 	end
+	println("**** Ftree fill queue writen in $q_fill_out ****")
 end
 
 FINAL_USAGE_TXT = """
