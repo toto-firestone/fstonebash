@@ -340,6 +340,16 @@ function advanced_fill_ftree_queues(node_info)
 	# final check
 	#
 	# ############################################################# #
+	println("\n\n*** final parity check on unlock ***")
+	q_sizes_u = [ length(q) for q in ftree_q[1:8] ]
+	println(q_sizes_u)
+	p_check = all([ (x%2) == 0 for x in q_sizes_u ])
+	if p_check
+		println("* parity ok for unlock stage")
+	else
+		error("* parity failed for unlock stage")
+	end
+
 	q_sizes = [ length(q) for q in ftree_q ]
 	n_node_q = sum(q_sizes)
 	println("*** $n_node_q nodes in queues at the end of fill stage")
