@@ -210,6 +210,39 @@ function add_to_queue_unlock!(ftree_q,levels,node_info,n_node; solo_pad_col=0)
 	return 0
 end
 
+function add_to_queue_std!(ftree_q,levels,node_info,n_node; solo_pad_col=0)
+	## Error checks
+	if n_node < 1 || n_node > 16
+		# out of range
+		return 1
+	end
+
+	curr_lvl = levels[n_node]
+	curr_node = node_info[n_node]
+	if curr_lvl >= curr_node.max_lvl
+		# max level reached
+		return 2
+	end
+
+	n_col = curr_node.i_col + 1
+
+	if solo_pad_col < 0 || solo_pad_col > 9
+		# solo padding column out of range (0 is no padding)
+		# value 9 is for ftree finish
+		return 4
+	end
+
+	# NOT REACHED IF ERROR FOUND
+	if solo_pad_col == 0
+		push!(ftree_q[n_col],n_node)
+	else
+		push!(ftree_q[solo_pad_col],n_node)
+	end
+	levels[n_node] += 1
+
+	return 0
+end
+
 ### testing data initialization here
 #tst_info = init_ftree(tst_case_prof,tst_case_id,tst_case_max,tst_case_unlock);
 #tst_q = init_ftree_queue();
@@ -227,9 +260,9 @@ function check_column_requirement(node_subset,levels)
 end
 
 ### tricky test case
-trick_case_prof = [1, 3, 2, 1, 1, 2, 3, 3];
+trick_case_prof = [1, 3, 2, 1, 1, 3, 3, 2];
 trick_case_id = 0;
-trick_case_max = [5, 7, 6, 7, 6, 6, 30, 30, 50, 15, 50, 15, 50, 50, 30, 30];
+trick_case_max = [5, 7, 6, 7, 6, 6, 30, 30, 50, 15, 50, 15, 50, 52, 30, 30];
 trick_case_unlock = [(4,4,4), (6,4,4), (6,5,5), (25,6,6), (4,4,4), (6,5,5), (6,5,4)];
 
 function filter_upgradeble_node_subset(node_pool,levels)
@@ -265,6 +298,21 @@ function argmin_level_in_node_subset(node_pool,levels)
 	end
 
 	return i_node_min
+end
+
+function detect_last_solo_node(node_info,levels)
+	max_levels = [ z.max_lvl for z in node_info ]
+	rooms = max_levels - levels
+	filter!(x -> x > 0,rooms)
+
+	return length(rooms) == 1
+end
+
+function last_solo_node_n(node_info,levels)
+	max_levels = [ z.max_lvl for z in node_info ]
+	rooms = max_levels - levels
+
+	return findfirst(x -> x > 0,rooms)
 end
 
 function fill_ftree_queues(node_info)
@@ -304,7 +352,7 @@ function fill_ftree_queues(node_info)
 					node_info,up_node_n)
 
 				if ierr != 0
-					error("add_to_queue_unlock! failed with error $ierr")
+					error("add_to_queue_unlock! failed with error $ierr during parity padding")
 				end
 				n_add += 1
 			else
@@ -328,7 +376,7 @@ function fill_ftree_queues(node_info)
 					node_info,solo_n)
 
 				if ierr != 0
-					error("add_to_queue_unlock! failed with error $ierr")
+					error("add_to_queue_unlock! failed with error $ierr during solo column processing")
 				end
 
 				pad_node = argmin_level_in_node_subset(pool,
@@ -344,7 +392,7 @@ function fill_ftree_queues(node_info)
 						solo_pad_col=solo_n_col)
 
 					if ierr != 0
-						error("add_to_queue_unlock! failed with error $ierr")
+						error("add_to_queue_unlock! failed with error $ierr during solo column padding")
 					end
 				end
 			end
@@ -356,9 +404,154 @@ function fill_ftree_queues(node_info)
 		end
 	end
 
+	#
 	# handle column 8
+	#
+	cc = select_nodes_eq_column(node_info,8)
+	pool = select_nodes_le_column(node_info,7)
+	min_node = argmin_level_in_node_subset(pool,levels)
+
+	if min_node == 0
+		println("* no more room in columns 1 to 7")
+		println("* only column 8 has room")
+	else
+		v_lvl = [ z.max_lvl for z in cc ]
+		push!(v_lvl,levels[min_node])
+		# smallest max level of column 8
+		# vs smallest level of columns 1 to 7
+		ref_lvl = minimum(v_lvl)
+		# the smallest of those values is reachable on whole column 8
+		println("* select $ref_lvl in ",v_lvl)
+
+		# distribute ref_lvl to both nodes of column 8
+		n_lvl_up_min = ref_lvl * length(cc)
+		if length(cc) > 1
+			##
+			## 2 or more nodes per column
+			##
+			n_add = 0
+			cycle_len = length(cc)
+			while n_add < n_lvl_up_min
+				i_cycle = (n_add % cycle_len) +1
+				up_node = cc[i_cycle]
+				up_node_n = up_node.n_node
+
+				ierr = add_to_queue_std!(ftree_q,levels,
+					node_info,up_node_n)
+
+				if ierr != 0
+					error("add_to_queue_std! failed with error $ierr")
+				end
+				n_add += 1
+			end
+			println("* upgraded $n_add nodes in column 8")
+			if (n_add % 2) != 0
+				println("* 1 parity padding required")
+				i_cycle = (n_add % cycle_len) +1
+				up_node = cc[i_cycle]
+				up_node_n = up_node.n_node
+
+				ierr = add_to_queue_std!(ftree_q,levels,
+					node_info,up_node_n)
+
+				if ierr != 0
+					error("add_to_queue_std! failed with error $ierr during parity padding")
+				end
+				n_add += 1
+			else
+				println("* no parity padding required")
+			end
+			##
+			##
+			##
+		else
+			## Last column is a solo
+			## will not handle this case
+			## never happens
+			println("* solo column 8 not handled")
+		end
+	end
+
+	# intermediate check
+	q_sizes = [ length(q) for q in ftree_q ]
+	n_node_q = sum(q_sizes)
+	println("*** $n_node_q nodes in queues at the end of unlock stage")
+	if (n_node_q % 2) != 0
+		error("* parity check failed after unlock stage")
+	else
+		println("* parity check passed after unlock stage")
+	end
 
 	# fill till the end + parity padding
+	max_levels = [ z.max_lvl for z in node_info ]
+	total_nodes = sum(max_levels)
+	#
+	# WARNING : queue contains 0 that do no count as node
+	#
+	total_done = sum(levels)
+	println("** $total_done / $total_nodes non zero nodes queued")
+	n_remain = total_nodes - total_done
+	println("** finish the $n_remain remaining nodes")
+
+	if n_remain <= 0
+		println("** nothing to do")
+	elseif n_remain == 1
+		for i_try in 1:16
+			ierr = add_to_queue_std!(ftree_q,levels,
+				node_info,i_try,solo_pad_col=9)
+			if ierr == 0
+				println("* last node is $i_try")
+			end
+		end
+		# only 1 node is ok for the last command
+	else
+		# n_remain >= 2
+		n_add = 0
+		i_count = 0
+		last_q = 0
+
+		while ! detect_last_solo_node(node_info,levels)
+			i_cycle = i_count % 16
+			n_try = i_cycle +1
+
+			ierr = add_to_queue_std!(ftree_q,levels,
+				node_info,n_try,solo_pad_col=9)
+			if ierr == 0
+				n_add += 1
+				last_q = n_try
+				# if the next doable node is the same...
+				# then all nodes in between are full
+				# so last solo node detection makes sense
+			end
+			i_count += 1
+		end
+
+		solo_n = last_solo_node_n(node_info,levels)
+		println("* last solo node is $solo_n")
+		if solo_n != last_q
+			# add one before parity check
+			println("* add a solo node before parity check")
+			ierr = add_to_queue_std!(ftree_q,levels,
+				node_info,solo_n,solo_pad_col=9)
+			if ierr != 0
+				error("* add_to_queue_std! failed : last solo node must have room")
+			end
+			n_add += 1
+
+		end
+
+		# need to check parity before adding more
+		if n_add % 2 != 0
+			println("* need parity padding before rushing to the end of last solo node")
+
+			push!(ftree_q[9],0)
+			# padding with 0 does no count
+		end
+
+		while n_add < n_remain
+			n_add += 1
+		end
+	end
 
 	return ftree_q, levels
 end
