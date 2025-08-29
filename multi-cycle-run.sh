@@ -4,6 +4,7 @@ source master.conf
 source function-lib.sh
 source visual-lib.sh
 source remote-tools.sh
+source tricky-dailies.sh
 
 
 # THIS IS RADISH AUTOMATION TOOL
@@ -209,6 +210,9 @@ check_scheduled_tasks() {
 	else
 		echo "* no library timer estimation"
 	fi
+
+	echo
+	print_daily_todo $current_servname
 }
 
 check_before_doit() {
