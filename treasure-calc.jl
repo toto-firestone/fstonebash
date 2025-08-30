@@ -62,7 +62,12 @@ print_key_map(map_col_j,column_keys)
 # 1 additional line is required on the bottom for checksums
 
 
-function init_spreadsheet(key_map,symbols,dmg_dict,tavern,dust,contract,tome)
+function init_spreadsheet(key_map,symbols,dmg_dict,rew_dict)
+	tavern = rew_dict["tavern"]
+	dust = rew_dict["dust"]
+	contract = rew_dict["contract"]
+	tome = rew_dict["tome"]
+
 	n = 2 + length(dmg_dict) + 1
 	m = length(symbols)
 	dat = Matrix{Union{Int, String, Float64}}(undef,n,m)
@@ -230,18 +235,20 @@ damage_2025_07 = OrderedDict(
 	"Tig" => 0.,
 )
 
-tavern_reward = 140
-dust_reward = 7000
-contract_reward = 1400
-tome_reward = 210
+reward_2025_07 = Dict(
+	"tavern" => 140,
+	"dust" => 7000,
+	"contract" => 1400,
+	"tome" => 210,
+)
 
 println("*** damage percent ***")
 for (player,dmg_percent) in damage_2025_07
 	println("* $player => $dmg_percent %")
 end
 
-sheet_2025_07 = init_spreadsheet(map_col_j,column_keys,damage_2025_07,
-	tavern_reward,dust_reward,contract_reward,tome_reward)
+sheet_2025_07 = init_spreadsheet(map_col_j,column_keys,
+	damage_2025_07,reward_2025_07)
 
 view_by_reward(sheet_2025_07,map_col_j,"tavern")
 view_by_reward(sheet_2025_07,map_col_j,"dust")
