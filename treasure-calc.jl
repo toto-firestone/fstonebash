@@ -310,9 +310,10 @@ test_reward_2025_07 = Dict(
 #end
 ########### ########## ##########
 
-test_sheet_2025_07 = init_spreadsheet(test_damage_2025_07,test_reward_2025_07)
-
 ########### manual is here ##########
+#include("test_file.jl")
+#test_sheet_2025_07 = init_spreadsheet(test_damage_2025_07,test_reward_2025_07)
+
 #view_by_reward(test_sheet_2025_07,"tavern")
 #view_by_reward(test_sheet_2025_07,"dust")
 #view_by_reward(test_sheet_2025_07,"contract")
