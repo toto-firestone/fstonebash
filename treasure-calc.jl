@@ -83,7 +83,10 @@ function init_spreadsheet(dmg_dict,rew_dict,
 	dat[2,key_map["tome_reward"]] = tome
 	dat[end,key_map["player_id"]] = "checksum"
 
-	dat[3:end-1,key_map["player_id"]] = [ k for k in keys(dmg_dict) ]
+	raw_players = [ k for k in keys(dmg_dict) ]
+	player_with_i = [ raw_players[i]*" [i=$i]"
+				for i in 1:length(raw_players) ]
+	dat[3:end-1,key_map["player_id"]] = player_with_i
 
 	distrib_dmg = [ k for k in values(dmg_dict) ]
 	dat[3:end-1,key_map["dmg_percent"]] = distrib_dmg
@@ -201,6 +204,29 @@ function view_by_reward(dat,r_str,
 	pad = ceil(Int,(80 - length(title))/2)
 	println(repeat(" ",pad),title)
 	println(view_str)
+
+	return nothing
+end
+
+
+function tweek_distribution(dat,r_str,player_i,increment,
+				key_map=MAP_COL_J)
+	i = 2 + player_i
+	j = key_map["$(r_str)_distrib"]
+	new_val = dat[i,j] + increment
+	dat[i,j] = round(Int,new_val)
+	dist_new = dat[3:end-1,key_map["$(r_str)_distrib"]]
+	chk = sum(dist_new)
+	dat[end,key_map["$(r_str)_distrib"]] = chk
+
+	rew = dat[2,key_map["$(r_str)_reward"]]
+	rew_percent = 100/rew * dist_new
+	chk = sum(rew_percent)
+	dat[end,key_map["$(r_str)_percent"]] = chk
+
+	view_by_reward(dat,r_str)
+
+	return nothing
 end
 
 
@@ -216,7 +242,9 @@ using DataStructures
 # Sample test / example data #
 # ########################## #
 
-damage_2025_07 = OrderedDict(
+# these input data have to be in text files
+
+test_damage_2025_07 = OrderedDict(
 	"theFaint" => 53.3,
 	"Fayath" => 6.6,
 	"Punk" => 5.5,
@@ -237,22 +265,38 @@ damage_2025_07 = OrderedDict(
 	"Tig" => 0.,
 )
 
-reward_2025_07 = Dict(
+test_reward_2025_07 = Dict(
 	"tavern" => 140,
 	"dust" => 7000,
 	"contract" => 1400,
 	"tome" => 210,
 )
 
-println("*** damage percent ***")
-for (player,dmg_percent) in damage_2025_07
-	println("* $player => $dmg_percent %")
-end
+# ########################## #
+# ########################## #
 
-sheet_2025_07 = init_spreadsheet(damage_2025_07,reward_2025_07)
 
-view_by_reward(sheet_2025_07,"tavern")
-view_by_reward(sheet_2025_07,"dust")
-view_by_reward(sheet_2025_07,"contract")
-view_by_reward(sheet_2025_07,"tome")
+
+########### just check ##########
+#println("*** damage percent ***")
+#for (player,dmg_percent) in damage_2025_07
+	#println("* $player => $dmg_percent %")
+#end
+########### ########## ##########
+
+test_sheet_2025_07 = init_spreadsheet(test_damage_2025_07,test_reward_2025_07)
+
+########### manual is here ##########
+#view_by_reward(test_sheet_2025_07,"tavern")
+#view_by_reward(test_sheet_2025_07,"dust")
+#view_by_reward(test_sheet_2025_07,"contract")
+#view_by_reward(test_sheet_2025_07,"tome")
+
+#backup = copy(test_sheet_2025_07)
+
+#tweek_distribution(test_sheet_2025_07,"dust",5,100)
+
+# and restore
+#test_sheet_2025_07 = copy(backup)
+########### ############## ##########
 
