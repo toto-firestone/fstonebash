@@ -8,7 +8,7 @@
 # ######### #
 
 
-column_keys = [
+COLUMN_KEYS = [
 	"player_id";
 	"dmg_percent";
 	"tavern_reward";
@@ -47,10 +47,10 @@ end
 ### ######################### ###
 
 
-map_col_j = key_mapping(column_keys)
+MAP_COL_J = key_mapping(COLUMN_KEYS)
 
 println("*** keys to column index mapping ***")
-print_key_map(map_col_j,column_keys)
+print_key_map(MAP_COL_J,COLUMN_KEYS)
 
 
 ## Creating the empty array for data ##
@@ -62,7 +62,8 @@ print_key_map(map_col_j,column_keys)
 # 1 additional line is required on the bottom for checksums
 
 
-function init_spreadsheet(key_map,symbols,dmg_dict,rew_dict)
+function init_spreadsheet(dmg_dict,rew_dict,
+			key_map=MAP_COL_J,symbols=COLUMN_KEYS)
 	tavern = rew_dict["tavern"]
 	dust = rew_dict["dust"]
 	contract = rew_dict["contract"]
@@ -122,7 +123,8 @@ function str_pad(s,col_len)
 end
 
 
-function view_by_reward(dat,key_map,r_str)
+function view_by_reward(dat,r_str,
+			key_map=MAP_COL_J)
 	numcol_len = 12
 	col_len = 80 - 4 * numcol_len
 	view_str = ""
@@ -247,11 +249,10 @@ for (player,dmg_percent) in damage_2025_07
 	println("* $player => $dmg_percent %")
 end
 
-sheet_2025_07 = init_spreadsheet(map_col_j,column_keys,
-	damage_2025_07,reward_2025_07)
+sheet_2025_07 = init_spreadsheet(damage_2025_07,reward_2025_07)
 
-view_by_reward(sheet_2025_07,map_col_j,"tavern")
-view_by_reward(sheet_2025_07,map_col_j,"dust")
-view_by_reward(sheet_2025_07,map_col_j,"contract")
-view_by_reward(sheet_2025_07,map_col_j,"tome")
+view_by_reward(sheet_2025_07,"tavern")
+view_by_reward(sheet_2025_07,"dust")
+view_by_reward(sheet_2025_07,"contract")
+view_by_reward(sheet_2025_07,"tome")
 
