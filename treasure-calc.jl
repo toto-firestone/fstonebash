@@ -230,6 +230,32 @@ function tweek_distribution(dat,r_str,player_i,increment,
 end
 
 
+function generate_report(dat,out_file,
+			key_map=MAP_COL_J)
+	play_i = 3:(size(dat,1)-1)
+	play_j = key_map["player_id"]
+	rewards = [ "tavern", "dust", "contract", "tome" ]
+
+	open(out_file,"w") do fd
+		for i in play_i
+			player_str = dat[i,play_j]
+			n_pad = 70 - length(player_str)
+			println(fd,"*** ",player_str,repeat("*",n_pad))
+
+			for r in rewards
+				rew_j = key_map["$(r)_distrib"]
+				println(fd,"* $r = ",dat[i,rew_j])
+			end
+
+			println(fd,"* check status : \n\n\n\n")
+		end
+	end
+
+	println("*** report written to $out_file ***")
+
+	return nothing
+end
+
 ## Loading external package for ordered dictionary ##
 
 # import Pkg
@@ -298,5 +324,7 @@ test_sheet_2025_07 = init_spreadsheet(test_damage_2025_07,test_reward_2025_07)
 
 # and restore
 #test_sheet_2025_07 = copy(backup)
+
+#generate_report(test_sheet_2025_07,"tmp/test_treasure.txt")
 ########### ############## ##########
 
