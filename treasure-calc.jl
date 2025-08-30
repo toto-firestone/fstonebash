@@ -106,6 +106,97 @@ function init_spreadsheet(key_map,symbols,dmg_dict,tavern,dust,contract,tome)
 end
 
 
+function str_pad(s,col_len)
+	n = length(s)
+	if n >= col_len
+		pad_s = s
+	else
+		pad_s = repeat(" ",col_len - n) * s
+	end
+	return pad_s
+end
+
+
+function view_by_reward(dat,key_map,r_str)
+	numcol_len = 12
+	col_len = 80 - 4 * numcol_len
+	view_str = ""
+
+	i = 1
+		player_str = string(dat[i,key_map["player_id"]])*" ,"
+		line_str = str_pad(player_str,col_len)
+
+		r_val = "dmg_%"
+		dmg_str = string(r_val)*" ,"
+		line_str = line_str * str_pad(dmg_str,numcol_len)
+
+		r_val = "$(r_str)"
+		reward_str = string(r_val)*" ,"
+		line_str = line_str * str_pad(reward_str,numcol_len)
+
+		i_val = "distrib"
+		distrib_str = string(i_val)*" ,"
+		line_str = line_str * str_pad(distrib_str,numcol_len)
+
+		r_val = "percent"
+		percent_str = string(r_val)*" \n"
+		line_str = line_str * str_pad(percent_str,numcol_len)
+
+		view_str = view_str * line_str
+
+	i = 2
+		player_str = string(dat[i,key_map["player_id"]])*" ,"
+		line_str = str_pad(player_str,col_len)
+
+		r_val = dat[i,key_map["dmg_percent"]]
+		dmg_str = string(r_val)*" ,"
+		line_str = line_str * str_pad(dmg_str,numcol_len)
+
+		r_val = dat[i,key_map["$(r_str)_reward"]]
+		reward_str = string(r_val)*" ,"
+		line_str = line_str * str_pad(reward_str,numcol_len)
+
+		i_val = dat[i,key_map["$(r_str)_distrib"]]
+		distrib_str = string(i_val)*" ,"
+		line_str = line_str * str_pad(distrib_str,numcol_len)
+
+		r_val = dat[i,key_map["$(r_str)_percent"]]
+		percent_str = string(r_val)*" \n"
+		line_str = line_str * str_pad(percent_str,numcol_len)
+
+		view_str = view_str * line_str
+
+	for i in 3:size(dat,1)
+		player_str = string(dat[i,key_map["player_id"]])*" ,"
+		line_str = str_pad(player_str,col_len)
+
+		r_val = round(dat[i,key_map["dmg_percent"]],digits=3)
+		dmg_str = string(r_val)*" ,"
+		line_str = line_str * str_pad(dmg_str,numcol_len)
+
+		r_val = round(dat[i,key_map["$(r_str)_reward"]],digits=3)
+		reward_str = string(r_val)*" ,"
+		line_str = line_str * str_pad(reward_str,numcol_len)
+
+		i_val = dat[i,key_map["$(r_str)_distrib"]]
+		distrib_str = string(i_val)*" ,"
+		line_str = line_str * str_pad(distrib_str,numcol_len)
+
+		r_val = round(dat[i,key_map["$(r_str)_percent"]],digits=3)
+		percent_str = string(r_val)*" \n"
+		line_str = line_str * str_pad(percent_str,numcol_len)
+
+		view_str = view_str * line_str
+	end
+
+	println("")
+	title = "*** view by $(r_str) ***"
+	pad = ceil(Int,(80 - length(title))/2)
+	println(repeat(" ",pad),title)
+	println(view_str)
+end
+
+
 ## Loading external package for ordered dictionary ##
 
 # import Pkg
@@ -152,7 +243,8 @@ end
 sheet_2025_07 = init_spreadsheet(map_col_j,column_keys,damage_2025_07,
 	tavern_reward,dust_reward,contract_reward,tome_reward)
 
-for i in 1:size(sheet_2025_07,1)
-	println(sheet_2025_07[i,:])
-end
+view_by_reward(sheet_2025_07,map_col_j,"tavern")
+view_by_reward(sheet_2025_07,map_col_j,"dust")
+view_by_reward(sheet_2025_07,map_col_j,"contract")
+view_by_reward(sheet_2025_07,map_col_j,"tome")
 
