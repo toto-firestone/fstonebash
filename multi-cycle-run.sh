@@ -203,7 +203,8 @@ check_scheduled_tasks() {
 	local alch_timer=$(reduction_from_stack $alch_h $atree_reduce_stack)
 	echo "* alchemy timer : $(secs_to_hhmm $alch_timer)"
 
-	if [ -n "$ftree_base_hours" ] && [ -n "$ftree_reduce_stack" ]; then
+	if [ -n "$ftree_level" ] && [ -n "$ftree_reduce_stack" ]; then
+		ftree_base_hours=$(library_base_hours $ftree_level)
 		local FtreeAccur_secs=$(reduction_from_stack $ftree_base_hours $ftree_reduce_stack)
 
 		echo "* library timer : $(secs_to_hhmm $FtreeAccur_secs)"

@@ -12,7 +12,7 @@ declare -ga guardian_holy_cycle_A=(
 N_HOLY_UPGRADE_CYCLES=3
 
 # accurate Ftree timer estimate
-ftree_base_hours="12"
+ftree_level="6"
 # init time reducers stack with talent tree values and amulet
 ftree_reduce_stack="25 25"
 # then...

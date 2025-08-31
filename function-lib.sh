@@ -560,6 +560,23 @@ alch_base_hours() {
 	fi
 }
 
+library_base_hours() {
+	local tree_lvl=$1
+	if [ "$tree_lvl" -eq "1" ]; then
+		echo "3"
+	elif [ "$tree_lvl" -eq "2" ]; then
+		echo "5"
+	elif [ "$tree_lvl" -eq "3" ]; then
+		echo "7"
+	elif [ "$tree_lvl" -eq "4" ]; then
+		echo "10"
+	elif [ "$tree_lvl" -ge "5" ]; then
+		echo "$((6+tree_lvl))"
+	else
+		echo "1"
+	fi
+}
+
 ### ### ### ### ### ### ### ### ### ### ###
 ## EXPEDITION TOKEN ACCOUNTING FUNCTIONS ##
 ### ### ### ### ### ### ### ### ### ### ###

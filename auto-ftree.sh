@@ -301,7 +301,8 @@ serv_conf="${current_servname}.firestone.conf"
 FtreeAccur_secs=""
 if [ -f "$serv_conf" ]; then
 	source $serv_conf
-	if [ -n "$ftree_base_hours" ] && [ -n "$ftree_reduce_stack" ]; then
+	if [ -n "$ftree_level" ] && [ -n "$ftree_reduce_stack" ]; then
+		ftree_base_hours=$(library_base_hours $ftree_level)
 		FtreeAccur_secs=$(reduction_from_stack $ftree_base_hours $ftree_reduce_stack)
 
 		echo "* enable accurate timer : $FtreeAccur_secs secs"
