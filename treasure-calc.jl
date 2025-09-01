@@ -221,6 +221,7 @@ function tweek_distribution(dat,r_str,player_i,increment,
 
 	rew = dat[2,key_map["$(r_str)_reward"]]
 	rew_percent = 100/rew * dist_new
+	dat[3:end-1,key_map["$(r_str)_percent"]] = rew_percent
 	chk = sum(rew_percent)
 	dat[end,key_map["$(r_str)_percent"]] = chk
 
