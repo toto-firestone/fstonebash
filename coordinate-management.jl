@@ -511,6 +511,8 @@ Some examples of command sequences in interactive Julia session.
 	julia> save_globcoord_db(a)
 
 	julia> rewrite_globcoord_conf()
+
+	julia> show_tuto()
 """
 
 	println(TUTORIAL)

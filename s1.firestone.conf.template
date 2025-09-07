@@ -12,7 +12,7 @@ declare -ga guardian_holy_cycle_A=(
 N_HOLY_UPGRADE_CYCLES=3
 
 # accurate Ftree timer estimate
-ftree_level="6"
+ftree_level="7"
 # init time reducers stack with talent tree values and amulet
 ftree_reduce_stack="25 25"
 # then...
@@ -27,7 +27,7 @@ ftree_reduce_stack="$ftree_reduce_stack 4.2"
 # do not include rift league bonus which is non constant
 
 # accurate Atree timer estimate
-atree_level="5"
+atree_level="6"
 # init time reducers stack with talent tree values and amulet
 atree_reduce_stack="25 25"
 # then...
@@ -38,5 +38,7 @@ atree_reduce_stack="$atree_reduce_stack 34.5 34"
 # artifacts
 atree_reduce_stack="$atree_reduce_stack 5.5 5.5 5.5 5.5 5.5 5.5"
 # beasts
-atree_reduce_stack="$atree_reduce_stack 4"
+atree_reduce_stack="$atree_reduce_stack 4 4"
 # do not include rift league bonus which is non constant
+
+GUARDIAN_CLIMB=false

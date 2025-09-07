@@ -68,8 +68,6 @@ interactive_session() {
 	local i_todo
 	local map_time ts_6h ts_map ts_diff
 
-	xdotool windowactivate --sync $gamewin_id
-	sleep 2
 	xdotool windowactivate --sync $termwin_id
 	select i_todo in $actions; do
 		case $i_todo in
@@ -347,6 +345,12 @@ handle_quests_claim() {
 	remove_task $current_servname.quests.todo
 }
 
+handle_guardian_climb() {
+	if ${GUARDIAN_CLIMB:-false}; then
+		auto_guardian_climb $current_servname
+	fi
+}
+
 ### ### ### ###
 log_msg "***** multi server script starts *****"
 ctrl_c() {
@@ -408,12 +412,6 @@ while true; do
 		fi
 		echo
 
-		if $DETACHED_BOT; then
-			echo "not minimizing game window in detached mode"
-		else
-			xdotool windowminimize --sync $gamewin_id
-			echo "screen and cpu saving"
-		fi
 		check_scheduled_tasks
 		echo
 		if $DETACHED_BOT; then
@@ -426,7 +424,7 @@ while true; do
 			sleep 2
 			echo "interrupt with CTRL+C"
 			echo "type any non space key + RETURN for manual mode"
-			read -t 40 -p "or hit only RETURN to speed-up > " user_input1
+			read -t 20 -p "or hit only RETURN to speed-up > " user_input1
 		fi
 		echo
 		if [ -n "$user_input1" ]; then
@@ -448,6 +446,7 @@ while true; do
 		else
 			./auto-map.sh
 		fi
+		handle_guardian_climb
 
 		./daily-once.sh
 
@@ -456,15 +455,19 @@ while true; do
 
 		echo "... then auto alchemy"
 		./auto-alch.sh
+		handle_guardian_climb
 
 		echo "... then auto ftree"
 		./auto-ftree.sh
 
 		handle_fridaycode
+		handle_guardian_climb
 
 		launch_claim_all_timer_income $gameover_status
+		handle_guardian_climb
 
 		handle_quests_claim
+		handle_guardian_climb
 
 		handle_auto_accept
 

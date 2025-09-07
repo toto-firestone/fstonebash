@@ -499,3 +499,42 @@ auto_arena_fight() {
 
 	focus_and_back_to_root_screen
 }
+
+set_guardian_hits() {
+	local serv=$1 n_hits=$2
+	local hit_file="./tmp/$serv.guardian.hit"
+
+	if [ ! -f "$serv.firestone.conf" ]; then
+		echo "* cannot set guardian hits on unknown server $serv"
+	elif [[ ! $n_hits =~ ^[0-9]+$ ]]; then
+		echo "* cannot set non numeric guardian hits on server $serv"
+	elif [ "$n_hits" -le "0" ]; then
+		echo "* cannot set negative guardian hits on server $serv"
+	else
+		echo "$n_hits" > $hit_file
+		echo "* set $n_hits guardian hits in $hit_file"
+	fi
+}
+
+auto_guardian_climb() {
+	local serv=$1
+	local hit_file="./tmp/$serv.guardian.hit"
+
+	if [ -f "$hit_file" ]; then
+		local n_hits=$(cat $hit_file)
+		n_hits=$((n_hits - 1))
+		if [ "$n_hits" -gt "0" ]; then
+			echo "$n_hits" > $hit_file
+		else
+			rm $hit_file
+		fi
+		focus_and_back_to_root_screen
+		move_wait_click $X_fight_boss $Y_fight_boss 1
+		sleep 2
+		xdotool key space
+		sleep .5
+	else
+		echo "* WARNING : no more guardian hits on $serv"
+	fi
+}
+
