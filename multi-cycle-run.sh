@@ -212,6 +212,15 @@ check_scheduled_tasks() {
 
 	echo
 	print_daily_todo $current_servname
+
+	echo
+	if ${GUARDIAN_CLIMB:-false}; then
+		echo "*** auto guardian climb is on ***"
+		local hit_file="./tmp/$current_servname.guardian.hit"
+		echo "* $(cat $hit_file) hits left"
+	else
+		echo "*** auto guardian climb is off ***"
+	fi
 }
 
 check_before_doit() {
