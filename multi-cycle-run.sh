@@ -337,7 +337,7 @@ handle_quests_claim() {
 		i_claim=$((i_claim+1))
 	done
 
-	local week_crit=$(date +%A | grep -E 'dimanche|lundi|mardi')
+	local week_crit=$(date +%A | grep -E 'dimanche|lundi')
 	if [ -n "$week_crit" ]; then
 		go_to_weekly_quests
 		echo "* claim weekly"
