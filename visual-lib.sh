@@ -68,6 +68,7 @@ declare -gA guild_expe_button_pic_H=(
 
 # trouble shooting on startup failure
 cookie_expired_pic="./tmp/fail_cookie_expired.png"
+cache_error_pic="./tmp/fail_cache_error.png"
 
 #### ### ### ### ####
 ### VISUAL CHECKS ###
@@ -191,6 +192,20 @@ init_start_failure_pic() {
 
 }
 
+clear_firefox_cache_reload() {
+	xdotool windowactivate --sync $gamewin_id
+	move_wait_click $X_firefox_menu $Y_firefox_menu 5
+	sleep 5
+	move_wait_click $X_firefox_history $Y_firefox_history 5
+	sleep 5
+	move_wait_click $X_firefox_erase_history $Y_firefox_erase_history 5
+	sleep 5
+	move_wait_click $X_erase_confirm $Y_erase_confirm 5
+	sleep 5
+	move_wait_click $X_firefox_reload_page $Y_firefox_reload_page 5
+	sleep 5
+}
+
 check_fail_sequence() {
 	local ok_crit=$(tail -n 1 ./tmp/firestone.log | grep 'success=1')
 	if [ -n "$ok_crit" ]; then
@@ -213,6 +228,22 @@ check_fail_sequence() {
 
 		move_wait_click $X_accept_cookies $Y_accept_cookies 10
 		sleep 5
+		start_load_game
+		./restore-game-view.sh
+		return
+	fi
+
+	ncc=$(ncc_similarity /tmp/failure-screen.png $cache_error_pic)
+	compare=$(echo "${ncc//e/E} > 0.6" | bc -l)
+	if [ "$compare" == "1" ]; then
+		log_msg "* startup fail test : ncc=$ncc fail=cache_error"
+
+		clear_firefox_cache_reload
+		sleep 5
+		# reload page does not reset game view
+		# clicking in any spot inside firestone square in armor game
+		# will actually start loading
+		# no need to click exactly on play button
 		start_load_game
 		./restore-game-view.sh
 		return
