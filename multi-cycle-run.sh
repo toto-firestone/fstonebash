@@ -217,7 +217,11 @@ check_scheduled_tasks() {
 	if ${GUARDIAN_CLIMB:-false}; then
 		echo "*** auto guardian climb is on ***"
 		local hit_file="./tmp/$current_servname.guardian.hit"
-		echo "* $(cat $hit_file) hits left"
+		if [ -f "$hit_file" ]; then
+			echo "* $(cat $hit_file) hits left"
+		else
+			echo "* no hits left"
+		fi
 	else
 		echo "*** auto guardian climb is off ***"
 	fi

@@ -41,6 +41,8 @@ ENABLE_SPLIT_DAILY=true
 ## maximum fight time is 20 rounds where nobody dies
 MAX_WM_FIGHT_TIME=90
 
+## number of clicks to ensure flushing all mails
+N_FLUSH_MAILS=16
 
 ## handling config files templates updates
 update_config_files() {

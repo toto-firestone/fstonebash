@@ -127,21 +127,22 @@ auto_open_10_max_chests() {
 }
 
 flush_daily_mail() {
-	local n_mail=${1:-"5"}
-	echo "*** auto flush $n_mail mails"
+	local n_mail=${1:-"12"}
+	echo "*** auto flush mails - click $n_mail times on delete"
 	focus_and_back_to_root_screen
 	local i=0
+	move_wait_click $X_mail_open $Y_mail_open 2
+	sleep 1
+	move_wait_only $X_mail_delete $Y_mail_delete 2
 	while [ "$i" -lt "$n_mail" ]; do
-		move_wait_click $X_mail_open $Y_mail_open 2
-		sleep 1
-		move_wait_click $X_mail_delete $Y_mail_delete 2
+		slow_safe_click
 		sleep 1
 		# this one is for claim goods or close mail if no goods
-		xdotool key Escape
-		sleep 1
+		#xdotool key Escape
+		#sleep 1
 		# this one is for close mail or nothing
-		xdotool key Escape
-		sleep 1
+		#xdotool key Escape
+		#sleep 1
 		i=$((i+1))
 	done
 

@@ -80,10 +80,10 @@ case $daily_cmd in
 		echo;;
 	"chest_mail") echo "* command read : $daily_cmd"
 		auto_open_10_max_chests
-		flush_daily_mail
+		flush_daily_mail $N_FLUSH_MAILS
 		echo;;
 	"mail") echo "* command read : $daily_cmd"
-		flush_daily_mail
+		flush_daily_mail $N_FLUSH_MAILS
 		echo;;
 	"holy_rift") echo "* command read : $daily_cmd"
 		auto_guardian_holy_upgrade $current_servname
