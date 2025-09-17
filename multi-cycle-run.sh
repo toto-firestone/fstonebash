@@ -454,8 +454,7 @@ while true; do
 		echo
 		if [ -n "$user_input1" ]; then
 			echo "WARNING : manual intervention detected"
-			echo "10 seconds before SKIP AUTO-MAP"
-			sleep 10
+			echo "SKIP AUTO-MAP"
 		else
 			./auto-map.sh
 		fi

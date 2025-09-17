@@ -539,3 +539,12 @@ auto_guardian_climb() {
 	fi
 }
 
+speedup_ftree() {
+	local serv=$1
+	local wait_task="$serv.ftreewait.todo"
+
+	echo "* WARNING : about to remove $wait_task and claim ftree slots"
+	read -p "press return key to accept... or CTRL+C to cancel :)"
+	remove_task $wait_task
+	./auto-ftree.sh claim
+}
