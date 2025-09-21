@@ -509,7 +509,7 @@ set_guardian_hits() {
 		echo "* cannot set guardian hits on unknown server $serv"
 	elif [[ ! $n_hits =~ ^[0-9]+$ ]]; then
 		echo "* cannot set non numeric guardian hits on server $serv"
-	elif [ "$n_hits" -le "0" ]; then
+	elif [ "$n_hits" -lt "0" ]; then
 		echo "* cannot set negative guardian hits on server $serv"
 	else
 		echo "$n_hits" > $hit_file
