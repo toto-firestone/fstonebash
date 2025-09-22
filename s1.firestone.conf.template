@@ -14,7 +14,7 @@ N_HOLY_UPGRADE_CYCLES=3
 # accurate Ftree timer estimate
 ftree_level="7"
 # init time reducers stack with talent tree values and amulet
-ftree_reduce_stack="25 25"
+ftree_reduce_stack="25 25 10"
 # then...
 # campaign perks
 ftree_reduce_stack="$ftree_reduce_stack 24.5"
@@ -23,7 +23,7 @@ ftree_reduce_stack="$ftree_reduce_stack 36.5 34"
 # artifacts
 ftree_reduce_stack="$ftree_reduce_stack "
 # beasts
-ftree_reduce_stack="$ftree_reduce_stack 4.2"
+ftree_reduce_stack="$ftree_reduce_stack 4.2 4.2"
 # do not include rift league bonus which is non constant
 
 # accurate Atree timer estimate
@@ -34,11 +34,13 @@ atree_reduce_stack="25 25"
 # campaign perks
 atree_reduce_stack="$atree_reduce_stack 19.5"
 # guild perks and tree
-atree_reduce_stack="$atree_reduce_stack 34.5 34"
+atree_reduce_stack="$atree_reduce_stack 34.5 34.5"
 # artifacts
 atree_reduce_stack="$atree_reduce_stack 5.5 5.5 5.5 5.5 5.5 5.5"
 # beasts
 atree_reduce_stack="$atree_reduce_stack 4 4"
 # do not include rift league bonus which is non constant
 
-GUARDIAN_CLIMB=false
+GUARDIAN_CLIMB=true
+
+X1_SCARAB_SPIN=false

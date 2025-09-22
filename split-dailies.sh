@@ -76,7 +76,7 @@ case $daily_cmd in
 		auto_beer_token_10_pull
 		echo;;
 	"scarab") echo "* command read : $daily_cmd"
-		auto_scarab_10_pull_and_vault
+		auto_scarab_10_pull_and_vault $X1_SCARAB_SPIN
 		echo;;
 	"chest_mail") echo "* command read : $daily_cmd"
 		auto_open_10_max_chests

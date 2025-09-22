@@ -70,12 +70,25 @@ auto_scarab_10_pull_and_vault() {
 	sleep 7
 
 	# 10 noble's tokens
-	move_wait_click $X_scarab_tavern_toggl $Y_scarab_tavern_toggl 3
-	sleep 2
-	slow_safe_click
-	sleep 1
-	move_wait_click $X_scarab_tavern_play $Y_scarab_tavern_play 2
-	sleep 10
+	local x1_mode=${1:-false}
+	if $x1_mode; then
+		echo "* 10 spins x1"
+		local i=0
+		move_wait_only $X_scarab_tavern_play $Y_scarab_tavern_play 3
+		while [ "$i" -lt "10" ]; do
+			slow_safe_click
+			sleep 9
+			i=$((i+1))
+		done
+	else
+		echo "* 1 spin x10"
+		move_wait_click $X_scarab_tavern_toggl $Y_scarab_tavern_toggl 3
+		sleep 2
+		slow_safe_click
+		sleep 1
+		move_wait_click $X_scarab_tavern_play $Y_scarab_tavern_play 2
+		sleep 10
+	fi
 
 	# 50 vaults open
 	move_wait_click $X_scarab_vault_tab $Y_scarab_vault_tab 2
