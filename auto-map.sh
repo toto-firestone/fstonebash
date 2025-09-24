@@ -44,7 +44,7 @@ fast_return_to_map() {
 }
 
 fast_return_to_map
-sleep 3
+sleep 6
 check_map_idle_notif
 no_idle_test=$(tail -n 1 ./tmp/firestone.log | grep 'map_idle_notif=0')
 if [ -n "$no_idle_test" ]; then
