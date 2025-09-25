@@ -313,7 +313,7 @@ launch_and_claim_expedition() {
 	super_slow_click
 
 	#claim_and_restart $X_exped_but $Y_exped_but 2 2
-	sleep 2
+	sleep 3
 	get_guild_expe_button
 	local read_log=$(tail -n 1 ./tmp/firestone.log)
 	local but_id=${read_log#*id=}
