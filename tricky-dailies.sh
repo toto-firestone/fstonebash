@@ -278,7 +278,7 @@ auto_liberation_1to4() {
 	move_wait_click $X_camp_map $Y_camp_map 4
 	move_wait_click $X_mission_button $Y_mission_button 6
 
-	move_wait_click $X_liberations $Y_liberations 4
+	move_wait_click $X_liberations $Y_liberations 6
 	sleep 4
 	local i=0
 	if [ "$i" -lt  "$n_liber" ]; then
@@ -331,7 +331,7 @@ auto_liberation_5more() {
 	move_wait_click $X_camp_map $Y_camp_map 4
 	move_wait_click $X_mission_button $Y_mission_button 6
 
-	move_wait_click $X_liberations $Y_liberations 4
+	move_wait_click $X_liberations $Y_liberations 6
 	# scrolled part
 	echo "DON'T MOVE MOUSE NOW"
 	xdotool mousemove $X_liberation_4 $Y_liberation_4
