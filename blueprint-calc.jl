@@ -404,6 +404,12 @@ optimizer("9.15e8","6.52e6",23,1,40,38)
 Be careful to enclose health and armor values in double quotes. Scientific
 notation is a requirement. it means that an armor of 90 needs to be written
 like "9e1". The presence of e is always required.
+
+And for basic usage, just calculating the bp cost for filling up a few stats :
+
+summation_bp_cost(n,k)
+
+where n is current level, k is the number of additional level ups.
 """
 
 function manual()
