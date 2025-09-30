@@ -56,7 +56,7 @@ else
 	echo "switch to $1"
 	i_try=0
 	reach_crit=""
-	n_try=3
+	n_try=6
 	while [ "$i_try" -lt "$n_try" ]; do
 		try_reach_fav_servers
 		check_switch_to_fav_reached
@@ -70,8 +70,8 @@ else
 		if [ "$i_try" -lt "$n_try" ]; then
 			echo "* WARNING : favorite servers not reached at $i_try/$n_try attempts"
 
-			echo "* 60 secs. before retry"
-			sleep 60
+			echo "* 30 secs. before retry"
+			sleep 30
 		fi
 	done
 	if [ -n "$reach_crit" ]; then
