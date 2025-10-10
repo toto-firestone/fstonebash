@@ -69,6 +69,7 @@ declare -gA guild_expe_button_pic_H=(
 # trouble shooting on startup failure
 cookie_expired_pic="./tmp/fail_cookie_expired.png"
 cache_error_pic="./tmp/fail_cache_error.png"
+restart_from_begin="./tmp/fail_restart_begin_error.png"
 
 #### ### ### ### ####
 ### VISUAL CHECKS ###
@@ -254,6 +255,25 @@ check_fail_sequence() {
 
 		clear_firefox_cache_reload
 		sleep 5
+		# reload page does not reset game view
+		# clicking in any spot inside firestone square in armor game
+		# will actually start loading
+		# no need to click exactly on play button
+		start_load_game
+		./restore-game-view.sh
+		return
+	fi
+
+	ncc=$(ncc_similarity /tmp/failure-screen.png $restart_from_begin)
+	## this case is handled but solution has not been tested successfully
+	compare=$(echo "${ncc//e/E} > 0.6" | bc -l)
+	if [ "$compare" == "1" ]; then
+		log_msg "* startup fail test : ncc=$ncc fail=restart_begin"
+
+		xdotool windowactivate --sync $gamewin_id
+		sleep 5
+		move_wait_click $X_firefox_reload_page $Y_firefox_reload_page 5
+		sleep 10
 		# reload page does not reset game view
 		# clicking in any spot inside firestone square in armor game
 		# will actually start loading
