@@ -30,6 +30,11 @@ fi
 eval "X_serv_i=\$X_server_$1"
 eval "Y_serv_i=\$Y_server_$1"
 
+# default value of n_try for reach fav servers is 6
+n_try=${2:-6}
+if [ "$n_try" == "1" ]; then
+	echo "*** WARNING : n_try == 1 detected : no quit restart if fails"
+fi
 
 if [ -z "$DETACHED_BOT" ]; then
 	echo "* Warning : DETACHED_BOT undefined,setup now"
@@ -56,7 +61,7 @@ else
 	echo "switch to $1"
 	i_try=0
 	reach_crit=""
-	n_try=6
+	#n_try=6
 	while [ "$i_try" -lt "$n_try" ]; do
 		try_reach_fav_servers
 		check_switch_to_fav_reached
@@ -100,14 +105,16 @@ else
 	fail_crit=$(tail -n 1 ./tmp/firestone.log | grep 'success=0')
 	if [ -n "$fail_crit" ]; then
 		echo "* game did non restarted after server switch"
-		echo "* try to quit and restart once"
-		#read -p "stop with CTRL+C or continue with RETURN " dummy
-		# the blocking read statement is in firestone starter
-		log_msg "*** quit firestone ***"
-		safe_quit
-		./firestone-starter.sh
-		log_msg "*** firestone restarted ***"
-		source win_id.conf
+		if [ "$n_try" == "1" ]; then
+			echo "* will not try to quit and restart once"
+		else
+			echo "* try to quit and restart once"
+			log_msg "*** quit firestone ***"
+			safe_quit
+			./firestone-starter.sh
+			log_msg "*** firestone restarted ***"
+			source win_id.conf
+		fi
 	else
 		echo "* game restarted without error after server switch"
 	fi

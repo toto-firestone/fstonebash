@@ -221,6 +221,31 @@ clear_firefox_cache_reload() {
 	sleep 5
 }
 
+escape_intro_sequence() {
+	xdotool windowactivate --sync $gamewin_id
+	sleep 5
+	move_wait_click $X_skip_intro_dialog $Y_skip_intro_dialog 5
+	sleep 5
+	move_wait_click $X_skip_intro_dialog $Y_skip_intro_dialog 5
+	sleep 5
+	# all hotkeys are disabled in that introduction sequence situation
+	move_wait_click $X_setting_cogs $Y_setting_cogs 5
+	sleep 5
+	source switch.conf
+	# current_servname contains former valid server value
+	# check value of current_servname
+	if [ "$current_servname" == "unknown" ]; then
+		# just in case switch file is really corrupted
+		current_servname="s31"
+	fi
+	# then overwrite switch file with unknown server name
+	# in order to enforce real switch
+	echo "current_servname=unknown" > switch.conf
+
+	# only one try for favorite server reach
+	./switch-server.sh $current_servname 1
+}
+
 check_fail_sequence() {
 	local ok_crit=$(tail -n 1 ./tmp/firestone.log | grep 'success=1')
 	if [ -n "$ok_crit" ]; then
@@ -265,13 +290,41 @@ check_fail_sequence() {
 	fi
 
 	ncc=$(ncc_similarity /tmp/failure-screen.png $restart_from_begin)
-	## this case is handled but solution has not been tested successfully
 	compare=$(echo "${ncc//e/E} > 0.6" | bc -l)
 	if [ "$compare" == "1" ]; then
 		log_msg "* startup fail test : ncc=$ncc fail=restart_begin"
 
+		escape_intro_sequence
+		# switch server will try one game restart in case of failure
+		# this is a potentially infinite recursion case
+		# then we need to introduce a mechanics preventing that
+		# based on the 1 try case for favorite reach detection
+
+		# in addition, server-switch script has a retry mechanics
+		# on favorite server selection, based on escape hotkey
+		# since hotkeys are disabled
+		# this may lead to a worse corruption
+		# that's why there is only 1 try for reaching fav servers
+
+		# when fav reach fails, switch server exits
+		# infite recursion may occur if fav is reached but
+		# failure happens after
+
+		# then no quit restart with firestone-starter if switch fails
+		# a robust procedure is out of scope now
+		# since we are already in troubleshooting situation
+
+		## at the moment, 1 favorite server switch has been attempted
+		## the value of switch.conf will tell about success status
+		## further retry can be implemented according to the former
+		## observations
+
+		# soft reload the game just in case...
+		# when this error occurs, server access is stuck
+		# a reload is necessary : we do it anyway
+		# TODO : may require some improvements
 		xdotool windowactivate --sync $gamewin_id
-		sleep 5
+		sleep 10
 		move_wait_click $X_firefox_reload_page $Y_firefox_reload_page 5
 		sleep 10
 		# reload page does not reset game view
