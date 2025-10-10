@@ -617,6 +617,15 @@ increment_pharaoh_20t() {
 	xdotool windowactivate --sync $gamewin_id
 }
 
+### ### ### ### ### ### ### ###
+
+count_ftree_remain_node() {
+	local serv=$1
+	local i_node=$2
+	local c_node=$(grep "^${i_node}$" tmp/${serv}.ftreestart.todo | wc -l)
+	echo $c_node
+}
+
 rift_calc_optim() {
 	local jul="julia -e"
 	local in_f="rift-calc.jl"

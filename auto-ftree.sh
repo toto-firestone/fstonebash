@@ -63,6 +63,9 @@ echo
 echo "for check mode, use :"
 echo "./auto-ftree check"
 echo
+echo "for count mode, use :"
+echo "./auto-ftree count"
+echo
 
 scroll_up_ftree_1_step() {
 	smooth_drag_and_drop $X_ftree_scroll_left $Y_ftree_scroll $X_ftree_scroll_right $Y_ftree_scroll
@@ -338,9 +341,10 @@ if [ "$1" == "check" ]; then
 	done
 	exit
 fi
+# NOT REACHED IF CHECK IS CHOSEN
 
 ## manual setting of node coordinates ##
-
+# useful on first setting up
 if [ "$1" == "config" ]; then
 	load_ftree_from_file $ftree_fullpath
 	echo "**** manual configuration ****"
@@ -351,6 +355,33 @@ if [ "$1" == "config" ]; then
 	exit
 fi
 # NOT REACHED IF CONFIGURATION IS CHOSEN
+
+
+## count remaining nodes and done nodes ##
+if [ "$1" == "count" ]; then
+	echo "*** counting nodes in queue on $current_servname ***"
+	source $ftree_fullpath
+	n_node=1
+	q_count=0
+	while [ "$n_node" -le "16" ]; do
+		curr_maxlev=$(get_node_attribute "$n_node" "levelMax")
+		curr_rem=$(count_ftree_remain_node $current_servname $n_node)
+
+		if [ -n "$curr_maxlev" ]; then
+			estim_rem=$((curr_maxlev-curr_rem))
+			echo "* node $n_node : $estim_rem / $curr_maxlev - $curr_rem in queue"
+		else
+			echo "* node $n_node : $curr_rem in queue"
+		fi
+		q_count=$((q_count+curr_rem))
+		n_node=$((n_node+1))
+	done
+	queue_len=$(wc -l tmp/${current_servname}.ftreestart.todo)
+	echo "** queue total lengh = ${queue_len%% *}"
+	echo "** valid nodes in queue = $q_count"
+	exit
+fi
+# NOT REACHED IF COUNTING IS CHOSEN
 
 ###### ###### ###### ###### ###### ###### #########
 ####  always require schedule file of waiting  ####
