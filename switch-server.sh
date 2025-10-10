@@ -115,6 +115,7 @@ else
 	# hard restart (download timeout) or soft restart (no download lag)
 	# NOT REACHED IF HARD RESTART FAILS (BLOCKING WAIT)
 
+	# TODO : replace next block by enforce_real_servername_to_switch
 	find_real_servername
 	find_result=$(tail -n 1 ./tmp/firestone.log)
 	echo "$find_result"

@@ -59,5 +59,8 @@ move_wait_click $X_avatar $Y_avatar 2
 move_wait_click $X_avatar $Y_avatar 2
 focus_and_back_to_root_screen
 sleep 10
+
+enforce_real_servername_to_switch
+
 echo
 echo "***** ready to grind *****"

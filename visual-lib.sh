@@ -129,6 +129,20 @@ find_real_servername() {
 	log_msg "* real_servername=$answer"
 }
 
+enforce_real_servername_to_switch() {
+	local find_result real_servername
+	# performs a server name check
+	find_real_servername
+	find_result=$(tail -n 1 ./tmp/firestone.log)
+	echo "$find_result"
+	real_servername=$(echo "$find_result" | grep -oP 'real_servername=\K[^[:space:]]+$')
+
+	# and enforce switch.conf value with real server name on startup
+	echo "overwriting $real_servername to switch file"
+	echo "current_servname=$real_servername" > switch.conf
+	cat switch.conf
+}
+
 init_switch_to_fav_pic() {
 	go_to_settings
 	source switch.conf
