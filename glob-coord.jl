@@ -335,10 +335,10 @@ fstone_globcoord("url_ul", "x_url_ul", "y_url_ul", "258", "73", "StartQuit", "up
 fstone_globcoord("url_br", "x_url_br", "y_url_br", "1123", "103", "StartQuit", "bottom right corner of url zone - forefox quit detection")
 ;
 # (10) startref_ul
-fstone_globcoord("startref_ul", "x_startref_ul", "y_startref_ul", "72", "699", "StartQuit", "upper left corner of mail icon in battlefield - for game start detection")
+fstone_globcoord("startref_ul", "x_startref_ul", "y_startref_ul", "71", "700", "StartQuit", "upper left corner of mail icon in battlefield - for game start detection")
 ;
 # (11) startref_br
-fstone_globcoord("startref_br", "x_startref_br", "y_startref_br", "109", "732", "StartQuit", "bottom right corner of mail icon in battlefield - for game start detection")
+fstone_globcoord("startref_br", "x_startref_br", "y_startref_br", "101", "732", "StartQuit", "bottom right corner of mail icon in battlefield - for game start detection")
 ;
 # (12) failure_screen_ul
 fstone_globcoord("failure_screen_ul", "x_failure_screen_ul", "y_failure_screen_ul", "200", "114", "StartQuit", "upper left corner of game view for faillure detection")
