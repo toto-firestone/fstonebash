@@ -46,7 +46,7 @@ ncc_similarity() {
 
 start_ref_pic="./tmp/start-ref.png"
 
-fav_server_list="s1 s27 s31 s8 s14"
+fav_server_list="s1 s27 s31 s8 s14 s25"
 server_pic() {
 	echo "./tmp/${1}-server-pic.png"
 }
@@ -98,9 +98,11 @@ init_server_pic() {
 	for i_serv in $fav_server_list; do
 		./switch-server.sh $i_serv
 		go_to_settings
-		source switch.conf
-		echo "** initializing server picture for $current_servname"
-		make_ROI $x_servname_ul $y_servname_ul $x_servname_br $y_servname_br $(server_pic $current_servname)
+		#source switch.conf
+		## AT THIS STAGE, ALL SERVERS ARE UNKNOWN
+		## CANNOT USE switch.conf
+		echo "** initializing server picture for $i_serv"
+		make_ROI $x_servname_ul $y_servname_ul $x_servname_br $y_servname_br $(server_pic $i_serv)
 
 	done
 }
