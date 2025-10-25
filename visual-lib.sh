@@ -442,7 +442,12 @@ wait_game_start() {
 	if [ -z "$3" ]; then
 		echo "*** There is a problem : human intervention required ***"
 		log_msg "* failed to auto-restart game : bot stalled"
-		read -p "stop with CTRL+C or continue with RETURN " dummy
+		if ! $DETACHED_BOT; then
+			read -p "stop with CTRL+C or continue with RETURN " dummy
+		else
+			log_msg "* detached mode : exit now"
+			exit
+		fi
 		log_msg "* human intervention now"
 	else
 		echo "*** There is a problem : further action is required ***"

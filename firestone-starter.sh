@@ -7,6 +7,11 @@ source function-lib.sh
 source visual-lib.sh
 source remote-tools.sh
 
+if [ -z "$DETACHED_BOT" ]; then
+	echo "* Warning : DETACHED_BOT undefined,setup now"
+	env_for_remote_or_local
+fi
+
 termwin_id=$(xdotool getwindowfocus)
 game_url="https://armorgames.com/firestone-idle-rpg-game/18485?tag-referral=idle"
 
