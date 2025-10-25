@@ -446,6 +446,7 @@ wait_game_start() {
 			read -p "stop with CTRL+C or continue with RETURN " dummy
 		else
 			log_msg "* detached mode : exit now"
+			safe_quit
 			exit
 		fi
 		log_msg "* human intervention now"
