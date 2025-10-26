@@ -542,9 +542,10 @@ reduction_from_stack() {
 
 secs_to_hhmm() {
 	local t_s=$1
-	local t_0=$(date -d "00:00" +%s)
-	local t_f=$((t_0+t_s))
-	date -d "@$t_f" +%H:%M
+	local hh=$((t_s / 3600))
+	local rs=$((t_s % 3600))
+	local mm=$((rs / 60))
+	date -d "$hh:$mm" +%H:%M
 }
 
 alch_base_hours() {

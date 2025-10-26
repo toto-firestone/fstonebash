@@ -134,10 +134,9 @@ read_timestamps() {
 	if [ "$remain" -lt "0" ]; then
 		remain=0
 	fi
-	local zero_t=$(date -d "00:00" +%s)
-	remain=$((zero_t + remain))
+	local remain_hhmm=$(secs_to_hhmm $remain)
 	echo "Elapsed $1 Time since reset : $elapsed / $2 half hours"
-	echo "$1 countdown = $(date -d @$remain +%H:%M)"
+	echo "$1 countdown = $remain_hhmm"
 }
 
 auto_reset_timestamps() {
