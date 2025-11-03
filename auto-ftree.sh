@@ -66,6 +66,9 @@ echo
 echo "for count mode, use :"
 echo "./auto-ftree count"
 echo
+echo "for speedup mode, use :"
+echo "./auto-ftree speedup"
+echo
 
 scroll_up_ftree_1_step() {
 	smooth_drag_and_drop $X_ftree_scroll_left $Y_ftree_scroll $X_ftree_scroll_right $Y_ftree_scroll
@@ -382,6 +385,13 @@ if [ "$1" == "count" ]; then
 	exit
 fi
 # NOT REACHED IF COUNTING IS CHOSEN
+
+## integrating speedup function ##
+if [ "$1" == "speedup" ]; then
+	source tricky-dailies.sh
+	speedup_ftree $current_servname
+fi
+##### WARNING : SCRIPT CONTINUES IF SPEEDUP IS CHOSEN #####
 
 ###### ###### ###### ###### ###### ###### #########
 ####  always require schedule file of waiting  ####
