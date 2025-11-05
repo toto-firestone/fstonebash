@@ -341,6 +341,13 @@ check_fail_sequence() {
 
 	# FAIL UNKOWN
 	log_msg "* startup fail test : ncc=$ncc fail=unknown"
+	## DEFAULT ACTION IS RELOAD PAGE AND RESTORE GAME VIEW
+	xdotool windowactivate --sync $gamewin_id
+	sleep 10
+	move_wait_click $X_firefox_reload_page $Y_firefox_reload_page 5
+	sleep 10
+	start_load_game
+	./restore-game-view.sh
 }
 
 
