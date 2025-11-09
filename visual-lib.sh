@@ -44,32 +44,33 @@ ncc_similarity() {
 
 # Should not be here, but right now it's OK
 
-start_ref_pic="./tmp/start-ref.png"
+PICDIR="./tmp"
+start_ref_pic="$PICDIR/start-ref.png"
 
 fav_server_list="s1 s27 s31 s8 s14 s25"
 server_pic() {
-	echo "./tmp/${1}-server-pic.png"
+	echo "$PICDIR/${1}-server-pic.png"
 }
 
-switch_fav_pic="./tmp/switch-fav-ref.png"
+switch_fav_pic="$PICDIR/switch-fav-ref.png"
 
-map_idle_notif_pic="./tmp/map-idle-notif.png"
+map_idle_notif_pic="$PICDIR/map-idle-notif.png"
 
-ftree_rew_test_pic="./tmp/ftree-rewind.png"
+ftree_rew_test_pic="$PICDIR/ftree-rewind.png"
 
 # guild expedition pics
 declare -gA guild_expe_button_pic_H=(
-	["start"]="./tmp/expe-start.png"
-	["claim"]="./tmp/expe-claim.png"
-	["cancel"]="./tmp/expe-cancel.png"
+	["start"]="$PICDIR/expe-start.png"
+	["claim"]="$PICDIR/expe-claim.png"
+	["cancel"]="$PICDIR/expe-cancel.png"
 	# blank image cannot work with ncc test
-	#["none"]="./tmp/expe-none.png"
+	#["none"]="$PICDIR/expe-none.png"
 )
 
 # trouble shooting on startup failure
-cookie_expired_pic="./tmp/fail_cookie_expired.png"
-cache_error_pic="./tmp/fail_cache_error.png"
-restart_from_begin="./tmp/fail_restart_begin_error.png"
+cookie_expired_pic="$PICDIR/fail_cookie_expired.png"
+cache_error_pic="$PICDIR/fail_cache_error.png"
+restart_from_begin="$PICDIR/fail_restart_begin_error.png"
 
 #### ### ### ### ####
 ### VISUAL CHECKS ###
@@ -464,7 +465,7 @@ wait_game_start() {
 
 init_guild_button_pic() {
 	if [ -z "$1" ]; then
-		echo "no button name (start cancel claim none) : do nothing"
+		echo "no button name (start cancel claim) : do nothing"
 		return
 	fi
 
