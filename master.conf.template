@@ -56,13 +56,18 @@ update_config_files() {
 		"map.conf"
 		"master.conf"
 		"s1.firestone.conf"
+		"s27.firestone.conf"
+		"s31.firestone.conf"
+		"s14.firestone.conf"
+		"s25.firestone.conf"
+		"s8.firestone.conf"
 		"switch.conf"
 		"view.conf"
 		"win_id.conf"
 	)
 	for conf_f in "${config_files_A[@]}"; do
 		echo "** processing $conf_f"
-		local templ_f="$conf_f.template"
+		local templ_f="$templates/conf_f"
 		diff "$templ_f" "$conf_f"
 
 		local ans
