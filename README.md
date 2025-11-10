@@ -1,5 +1,5 @@
 # fstonebash
-## Automation and tools for Firestone idle RGP using Bash, xdotool and Julia
+## Automation and tools for Firestone idle RGP using Bash, xdotool, imagemagick 6 and Julia
 
 The code has been implemented on Linux PC, with Firestone running on Armor Games and Firefox.
 
@@ -42,3 +42,20 @@ Writing my own automation bot and tools provided me as much fun as playing the g
 Another reason to encourage players to build their own softwares is the maintenance issues.
 Tools have to be updated each time a major change occurs in the game.
 Furthermore, firestone tools can't survive long time after their authors quit the game.
+
+### imagemagick6 build Notes :
+Imagemagick 7 will not work. Imagemagick 6 is no more supported in some ubuntu repositories, including mine actually. Recompile it from source requires delegate libraries :
+* libx11 dev package
+* libpng dev package
+* libfftw3 dev package and force ./configure --with-fftw=yes
+* appending --enable-hdri may help but not enough
+* libperl dev package (no effect on ./configure output)
+* libtld dev package and appending --enable-shared --with-modules
+* libjpeg and libtiff dev packages
+* libxml dev package
+* libomp dev package... but ./configure still has error message about it so we append --disable-openmp
+* libghc-bzlib dev package
+* libdjvu dev package
+* make dynamic libraries available with sudo ldconfig /usr/local/lib
+* after all those attempts, ncc metric is still broken on ImageMagick 6.9.13-34 (Beta). Now rolling back to 6.9.10-23 which was the version that worked
+* git checkout 6.9.10-23 worked for NCC bugfix. x11, png look like mandatory. All the rest may be optional. Next compile attempt will be easier with these informations.
