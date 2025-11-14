@@ -64,4 +64,5 @@ Imagemagick 7 will not work. Imagemagick 6 is no more supported in some ubuntu r
 Firestone on web browser is just unplayable without a decent Ad blocker. But Ad blocker may cause serious issues for automation.
 * Ad blockers are extension that update themselves and raise notifications that will impact layout and break down everything.
 * Ad blockers may behave too agressively and block essential authentification mechanics on game platform.
+
 Currently, AdBlocker Ultimate is the most tested extension. No Armor Games logout has been observed so far. In addition, its update notification consist in opening a new tab, which is a solved layout issue.
