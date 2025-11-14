@@ -59,3 +59,9 @@ Imagemagick 7 will not work. Imagemagick 6 is no more supported in some ubuntu r
 * make dynamic libraries available with sudo ldconfig /usr/local/lib
 * after all those attempts, ncc metric is still broken on ImageMagick 6.9.13-34 (Beta). Now rolling back to 6.9.10-23 which was the version that worked
 * git checkout 6.9.10-23 worked for NCC bugfix. x11, png look like mandatory. All the rest may be optional. Next compile attempt will be easier with these informations.
+
+### Ad blocker instructions :
+Firestone on web browser is just unplayable without a decent Ad blocker. But Ad blocker may cause serious issues for automation.
+* Ad blockers are extension that update themselves and raise notifications that will impact layout and break down everything.
+* Ad blockers may behave too agressively and block essential authentification mechanics on game platform.
+Currently, AdBlocker Ultimate is the most tested extension. No Armor Games logout has been observed so far. In addition, its update notification consist in opening a new tab, which is a solved layout issue.
