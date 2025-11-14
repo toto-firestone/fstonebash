@@ -19,7 +19,6 @@ The best I can do right now is a description of all features
 * Map missions
 * Slow climb back with guardian
 * WM Liberation and dungeon missions, arena fight
-* Math tool that shows optimal blueprint spending for WM defense improvement
 * Brute force WM mission (try again and again)
 * Claim lot of free stuffs (pickaxes, tools, campaign loots, ...)
 * Simple database for coordinates management
@@ -30,11 +29,13 @@ The best I can do right now is a description of all features
 * Map mission coordinates management tools
 * Enable interactive command line usage
 * Standard view setting
-* Holy damage maximization tool
-* Keep track of expedtion tokens invested in WM, ptree and scarab game
 * Screen sampling using ImageMagick
 * Robustess and failsafe
 * Basic example for guild expeditions only (basic-exped.sh)
+* Math tool that shows optimal blueprint spending for WM defense improvement
+* Holy damage maximization tool
+* Keep track of expedtion tokens invested in WM, ptree and scarab game
+* Accounting tool for chaos rift guild reward distribution
 * Non-commercial license
 
 ### Author's Note :
@@ -59,3 +60,10 @@ Imagemagick 7 will not work. Imagemagick 6 is no more supported in some ubuntu r
 * make dynamic libraries available with sudo ldconfig /usr/local/lib
 * after all those attempts, ncc metric is still broken on ImageMagick 6.9.13-34 (Beta). Now rolling back to 6.9.10-23 which was the version that worked
 * git checkout 6.9.10-23 worked for NCC bugfix. x11, png look like mandatory. All the rest may be optional. Next compile attempt will be easier with these informations.
+
+### Ad blocker instructions :
+Firestone on web browser is just unplayable without a decent Ad blocker. But Ad blocker may cause serious issues for automation.
+* Ad blockers are extension that update themselves and raise notifications that will impact layout and break down everything.
+* Ad blockers may behave too agressively and block essential authentification mechanics on game platform.
+
+Currently, AdBlocker Ultimate is the most tested extension. No Armor Games logout has been observed so far. In addition, its update notification consist in opening a new tab, which is a solved layout issue.
