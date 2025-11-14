@@ -367,10 +367,17 @@ safe_quit() {
 	local compare=$(echo "${ncc//e/E} > 0.5" | bc -l)
 	log_msg "* quit attempt $i_try : ncc=$ncc fail=$compare"
 
+	### THAT LOOP IS INTENDED TO BE INFINITE
+	# In case of quit faillure, it's a real problem, so we stop right now
 	while [ "$compare" != "0" ]; do
 		i_try=$((i_try+1))
 		echo "* quit - attempt $i_try"
-		./firestone-quit.sh
+		if [ "$i_try" -le "3" ]; then
+			./firestone-quit.sh
+		else
+			echo "* menu layout may have changed : close window"
+			./firestone-quit.sh force
+		fi
 		make_ROI $x_url_ul $y_url_ul $x_url_br $y_url_br /tmp/after_quit.png
 
 		ncc=$(ncc_similarity /tmp/before_quit.png /tmp/after_quit.png)
