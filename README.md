@@ -19,7 +19,6 @@ The best I can do right now is a description of all features
 * Map missions
 * Slow climb back with guardian
 * WM Liberation and dungeon missions, arena fight
-* Math tool that shows optimal blueprint spending for WM defense improvement
 * Brute force WM mission (try again and again)
 * Claim lot of free stuffs (pickaxes, tools, campaign loots, ...)
 * Simple database for coordinates management
@@ -30,11 +29,13 @@ The best I can do right now is a description of all features
 * Map mission coordinates management tools
 * Enable interactive command line usage
 * Standard view setting
-* Holy damage maximization tool
-* Keep track of expedtion tokens invested in WM, ptree and scarab game
 * Screen sampling using ImageMagick
 * Robustess and failsafe
 * Basic example for guild expeditions only (basic-exped.sh)
+* Math tool that shows optimal blueprint spending for WM defense improvement
+* Holy damage maximization tool
+* Keep track of expedtion tokens invested in WM, ptree and scarab game
+* Accounting tool for chaos rift guild reward distribution
 * Non-commercial license
 
 ### Author's Note :
