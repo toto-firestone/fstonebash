@@ -47,6 +47,20 @@ xdotool windowmove --sync $gamewin_id $X_WIN_POS $Y_WIN_POS
 sleep 10
 echo "ready to load"
 
+echo "*** check armor games login status before loading"
+check_armor_games_nologin
+logout_crit=$(tail -n 1 ./tmp/firestone.log | grep 'armor_logout=1')
+if [ -n "$logout_crit" ]; then
+	echo "** auto logout from armor games detected"
+	move_wait_click $X_go_armor_login_screen $Y_go_armor_login_screen 5
+	sleep 5
+	move_wait_click $X_armor_login_button $Y_armor_login_button 5
+	sleep 5
+	echo "* auto login done"
+else
+	echo "* login status OK"
+fi
+
 start_load_game
 
 sleep 1

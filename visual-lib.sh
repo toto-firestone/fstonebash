@@ -68,9 +68,13 @@ declare -gA guild_expe_button_pic_H=(
 )
 
 # trouble shooting on startup failure
+# using that function for initialization : init_start_failure_pic()
 cookie_expired_pic="$PICDIR/fail_cookie_expired.png"
 cache_error_pic="$PICDIR/fail_cache_error.png"
 restart_from_begin="$PICDIR/fail_restart_begin_error.png"
+
+# check this on firefox start
+armor_nologin_pic="$PICDIR/armor_nologin.png"
 
 #### ### ### ### ####
 ### VISUAL CHECKS ###
@@ -199,6 +203,22 @@ check_ftree_rewind() {
 	ncc=$(ncc_similarity /tmp/ftree-rewind-test.png $ftree_rew_test_pic)
 	compare=$(echo "${ncc//e/E} > 0.6" | bc -l)
 	log_msg "* ftree rewind test : ncc=$ncc ftree_rewind=$compare"
+}
+
+init_armor_games_nologin_pic() {
+	echo "** start firefox, logout from armor games"
+	read -p "press RETURN to take screenshot > "
+	make_ROI $x_check_armor_login_ul $y_check_armor_login_ul $x_check_armor_login_br $y_check_armor_login_br $armor_nologin_pic
+}
+
+check_armor_games_nologin() {
+	make_ROI $x_check_armor_login_ul $y_check_armor_login_ul $x_check_armor_login_br $y_check_armor_login_br /tmp/armor-login-check.png
+
+	local ncc=""
+	local compare=""
+	ncc=$(ncc_similarity /tmp/armor-login-check.png $armor_nologin_pic)
+	compare=$(echo "${ncc//e/E} > 0.9" | bc -l)
+	log_msg "* armor games logout test : ncc=$ncc armor_logout=$compare"
 }
 
 ### ### ### ### ### ### ### ### ####
