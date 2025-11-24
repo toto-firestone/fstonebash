@@ -1,0 +1,190 @@
+*** TheFaint [i=1]********************************************************
+* tavern = 23
+* dust = 1167
+* contract = 234
+* tome = 36
+* check status : done
+
+
+
+
+*** Fayath [i=2]**********************************************************
+* tavern = 6
+* dust = 285
+* contract = 57
+* tome = 9
+* check status : done
+
+
+
+
+*** Emil [i=3]************************************************************
+* tavern = 4
+* dust = 186
+* contract = 37
+* tome = 5
+* check status : done
+
+
+
+
+*** toto [i=4]************************************************************
+* tavern = 0
+* dust = 0
+* contract = 0
+* tome = 0
+* check status : 
+
+
+
+
+*** Renseiga [i=5]********************************************************
+* tavern = 2
+* dust = 132
+* contract = 27
+* tome = 4
+* check status : done
+
+
+
+
+*** Punk [i=6]************************************************************
+* tavern = 2
+* dust = 105
+* contract = 21
+* tome = 3
+* check status : done
+
+
+
+
+*** Knuck [i=7]***********************************************************
+* tavern = 2
+* dust = 105
+* contract = 21
+* tome = 3
+* check status : done
+
+
+
+
+*** nadole33 [i=8]********************************************************
+* tavern = 2
+* dust = 101
+* contract = 21
+* tome = 3
+* check status : done
+
+
+
+
+*** Nardole [i=9]*********************************************************
+* tavern = 2
+* dust = 101
+* contract = 21
+* tome = 3
+* check status : done
+
+
+
+
+*** Abulafia [i=10]*******************************************************
+* tavern = 2
+* dust = 98
+* contract = 20
+* tome = 3
+* check status : done
+
+
+
+
+*** Stjornhok [i=11]******************************************************
+* tavern = 2
+* dust = 95
+* contract = 19
+* tome = 3
+* check status : done
+
+
+
+
+*** BassTCrunch [i=12]****************************************************
+* tavern = 2
+* dust = 95
+* contract = 19
+* tome = 3
+* check status : done
+
+
+
+
+*** Lea [i=13]************************************************************
+* tavern = 2
+* dust = 95
+* contract = 19
+* tome = 3
+* check status : done
+
+
+
+
+*** PlinkHash [i=14]******************************************************
+* tavern = 2
+* dust = 95
+* contract = 19
+* tome = 3
+* check status : done
+
+
+
+
+*** KeiMex [i=15]*********************************************************
+* tavern = 2
+* dust = 92
+* contract = 18
+* tome = 3
+* check status : done
+
+
+
+
+*** Morrigan [i=16]*******************************************************
+* tavern = 2
+* dust = 89
+* contract = 17
+* tome = 2
+* check status : done
+
+
+
+
+*** Jahpriaime [i=17]*****************************************************
+* tavern = 1
+* dust = 80
+* contract = 15
+* tome = 2
+* check status : done
+
+
+
+
+*** Athena [i=18]*********************************************************
+* tavern = 1
+* dust = 53
+* contract = 10
+* tome = 1
+* check status : done
+
+
+
+
+*** Tig [i=19]************************************************************
+* tavern = 1
+* dust = 26
+* contract = 5
+* tome = 1
+* check status : done
+
+
+
+

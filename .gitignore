@@ -16,3 +16,5 @@
 map-lab/
 tmp/
 tmp.old/
+# sample tmp directory (only need to include todo files)
+!sample-tmp/*.todo
