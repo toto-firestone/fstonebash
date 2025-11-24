@@ -52,3 +52,12 @@ update_config_files() {
 		echo
 	done
 }
+
+### backup for tmp directory
+save_tmp_dir() {
+	cp tmp/*.timestamp sample-tmp/
+	cp tmp/*.todo sample-tmp/
+	cp tmp/*.jl sample-tmp/
+	cp tmp/*.hit sample-tmp/
+	cp tmp/*.txt sample-tmp/
+}
