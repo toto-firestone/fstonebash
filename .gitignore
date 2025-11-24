@@ -5,6 +5,10 @@
 *.swp
 *.dat
 *.todo
+# add ftree data files and queue files in order to provide more examples
+!ftree/ftree*.dat
+!ftree/ftree*.unlock.todo
+!ftree/ftree*.fill.todo
 #
 # map lab : ignore all right now but it may change in the future
 #
