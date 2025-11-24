@@ -1,0 +1,451 @@
+# This file describes the shape of the tree
+# and the unlock requirement of each node
+# It is also used like a save file which remembers the ftree state
+# This is why each node descriptor cannot be an array, nor a hashtable
+# because overwriting it would be uselessly difficult
+# Data structure is set according to naming conventions
+# on basic scalar variables
+
+# This template can be used for a fresh new ftree as well as an old one
+
+### GLOBAL DATA ###
+
+# string
+FtreeGlob_name="Ftree II"
+#
+# integer >= 0 (time unit is half-hours)
+FtreeGlob_time=7
+#
+# integer = 1,2
+FtreeGlob_currPage=1
+
+### NODE 1 ###
+
+# string
+FtreeNode_1_name=
+#
+# integer >= 1
+FtreeNode_1_levelMax=
+#
+# integer >= 0
+FtreeNode_1_levelCurr=
+#
+# integer >= 0
+FtreeNode_1_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_1_pageNumber=1
+#
+# integer in range 0...7
+FtreeNode_1_columnIndex=0
+#
+# integer in range 1...3
+FtreeNode_1_slotKind=3
+#
+# integer in range 0..2
+FtreeNode_1_slotIndex=0
+
+
+### NODE 2 ###
+
+# string
+FtreeNode_2_name=
+#
+# integer >= 1
+FtreeNode_2_levelMax=
+#
+# integer >= 0
+FtreeNode_2_levelCurr=
+#
+# integer >= 0
+FtreeNode_2_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_2_pageNumber=1
+#
+# integer in range 0...7
+FtreeNode_2_columnIndex=0
+#
+# integer in range 1...3
+FtreeNode_2_slotKind=3
+#
+# integer in range 0..2
+FtreeNode_2_slotIndex=1
+
+
+### NODE 3 ###
+
+# string
+FtreeNode_3_name=
+#
+# integer >= 1
+FtreeNode_3_levelMax=
+#
+# integer >= 0
+FtreeNode_3_levelCurr=
+#
+# integer >= 0
+FtreeNode_3_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_3_pageNumber=1
+#
+# integer in range 0...7
+FtreeNode_3_columnIndex=0
+#
+# integer in range 1...3
+FtreeNode_3_slotKind=3
+#
+# integer in range 0..2
+FtreeNode_3_slotIndex=2
+
+
+### NODE 4 ###
+
+# string
+FtreeNode_4_name=
+#
+# integer >= 1
+FtreeNode_4_levelMax=
+#
+# integer >= 0
+FtreeNode_4_levelCurr=
+#
+# integer >= 0
+FtreeNode_4_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_4_pageNumber=1
+#
+# integer in range 0...7
+FtreeNode_4_columnIndex=1
+#
+# integer in range 1...3
+FtreeNode_4_slotKind=2
+#
+# integer in range 0..2
+FtreeNode_4_slotIndex=0
+
+
+### NODE 5 ###
+
+# string
+FtreeNode_5_name=
+#
+# integer >= 1
+FtreeNode_5_levelMax=
+#
+# integer >= 0
+FtreeNode_5_levelCurr=
+#
+# integer >= 0
+FtreeNode_5_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_5_pageNumber=1
+#
+# integer in range 0...7
+FtreeNode_5_columnIndex=1
+#
+# integer in range 1...3
+FtreeNode_5_slotKind=2
+#
+# integer in range 0..2
+FtreeNode_5_slotIndex=1
+
+
+### NODE 6 ###
+
+# string
+FtreeNode_6_name=
+#
+# integer >= 1
+FtreeNode_6_levelMax=
+#
+# integer >= 0
+FtreeNode_6_levelCurr=
+#
+# integer >= 0
+FtreeNode_6_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_6_pageNumber=1
+#
+# integer in range 0...7
+FtreeNode_6_columnIndex=2
+#
+# integer in range 1...3
+FtreeNode_6_slotKind=1
+#
+# integer in range 0..2
+FtreeNode_6_slotIndex=0
+
+
+### NODE 7 ###
+
+# string
+FtreeNode_7_name=
+#
+# integer >= 1
+FtreeNode_7_levelMax=
+#
+# integer >= 0
+FtreeNode_7_levelCurr=
+#
+# integer >= 0
+FtreeNode_7_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_7_pageNumber=1
+#
+# integer in range 0...7
+FtreeNode_7_columnIndex=3
+#
+# integer in range 1...3
+FtreeNode_7_slotKind=1
+#
+# integer in range 0..2
+FtreeNode_7_slotIndex=0
+
+
+### NODE 8 ###
+
+# string
+FtreeNode_8_name=
+#
+# integer >= 1
+FtreeNode_8_levelMax=
+#
+# integer >= 0
+FtreeNode_8_levelCurr=
+#
+# integer >= 0
+FtreeNode_8_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_8_pageNumber=2
+#
+# integer in range 0...7
+FtreeNode_8_columnIndex=4
+#
+# integer in range 1...3
+FtreeNode_8_slotKind=2
+#
+# integer in range 0..2
+FtreeNode_8_slotIndex=0
+
+
+### NODE 9 ###
+
+# string
+FtreeNode_9_name=
+#
+# integer >= 1
+FtreeNode_9_levelMax=
+#
+# integer >= 0
+FtreeNode_9_levelCurr=
+#
+# integer >= 0
+FtreeNode_9_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_9_pageNumber=2
+#
+# integer in range 0...7
+FtreeNode_9_columnIndex=4
+#
+# integer in range 1...3
+FtreeNode_9_slotKind=2
+#
+# integer in range 0..2
+FtreeNode_9_slotIndex=1
+
+
+### NODE 10 ###
+
+# string
+FtreeNode_10_name=
+#
+# integer >= 1
+FtreeNode_10_levelMax=
+#
+# integer >= 0
+FtreeNode_10_levelCurr=
+#
+# integer >= 0
+FtreeNode_10_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_10_pageNumber=2
+#
+# integer in range 0...7
+FtreeNode_10_columnIndex=5
+#
+# integer in range 1...3
+FtreeNode_10_slotKind=2
+#
+# integer in range 0..2
+FtreeNode_10_slotIndex=0
+
+
+### NODE 11 ###
+
+# string
+FtreeNode_11_name=
+#
+# integer >= 1
+FtreeNode_11_levelMax=
+#
+# integer >= 0
+FtreeNode_11_levelCurr=
+#
+# integer >= 0
+FtreeNode_11_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_11_pageNumber=2
+#
+# integer in range 0...7
+FtreeNode_11_columnIndex=5
+#
+# integer in range 1...3
+FtreeNode_11_slotKind=2
+#
+# integer in range 0..2
+FtreeNode_11_slotIndex=1
+
+
+### NODE 12 ###
+
+# string
+FtreeNode_12_name=
+#
+# integer >= 1
+FtreeNode_12_levelMax=
+#
+# integer >= 0
+FtreeNode_12_levelCurr=
+#
+# integer >= 0
+FtreeNode_12_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_12_pageNumber=2
+#
+# integer in range 0...7
+FtreeNode_12_columnIndex=6
+#
+# integer in range 1...3
+FtreeNode_12_slotKind=2
+#
+# integer in range 0..2
+FtreeNode_12_slotIndex=0
+
+
+### NODE 13 ###
+
+# string
+FtreeNode_13_name=
+#
+# integer >= 1
+FtreeNode_13_levelMax=
+#
+# integer >= 0
+FtreeNode_13_levelCurr=
+#
+# integer >= 0
+FtreeNode_13_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_13_pageNumber=2
+#
+# integer in range 0...7
+FtreeNode_13_columnIndex=6
+#
+# integer in range 1...3
+FtreeNode_13_slotKind=2
+#
+# integer in range 0..2
+FtreeNode_13_slotIndex=1
+
+
+### NODE 14 ###
+
+# string
+FtreeNode_14_name=
+#
+# integer >= 1
+FtreeNode_14_levelMax=
+#
+# integer >= 0
+FtreeNode_14_levelCurr=
+#
+# integer >= 0
+FtreeNode_14_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_14_pageNumber=2
+#
+# integer in range 0...7
+FtreeNode_14_columnIndex=7
+#
+# integer in range 1...3
+FtreeNode_14_slotKind=3
+#
+# integer in range 0..2
+FtreeNode_14_slotIndex=0
+
+
+### NODE 15 ###
+
+# string
+FtreeNode_15_name=
+#
+# integer >= 1
+FtreeNode_15_levelMax=
+#
+# integer >= 0
+FtreeNode_15_levelCurr=
+#
+# integer >= 0
+FtreeNode_15_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_15_pageNumber=2
+#
+# integer in range 0...7
+FtreeNode_15_columnIndex=7
+#
+# integer in range 1...3
+FtreeNode_15_slotKind=3
+#
+# integer in range 0..2
+FtreeNode_15_slotIndex=1
+
+
+### NODE 16 ###
+
+# string
+FtreeNode_16_name=
+#
+# integer >= 1
+FtreeNode_16_levelMax=
+#
+# integer >= 0
+FtreeNode_16_levelCurr=
+#
+# integer >= 0
+FtreeNode_16_unlockReq=
+#
+# integer in range 1...2
+FtreeNode_16_pageNumber=2
+#
+# integer in range 0...7
+FtreeNode_16_columnIndex=7
+#
+# integer in range 1...3
+FtreeNode_16_slotKind=3
+#
+# integer in range 0..2
+FtreeNode_16_slotIndex=2
