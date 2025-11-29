@@ -297,3 +297,9 @@ hotkey() {
 	local k=${1:-"Escape"}
 	xdotool key $k
 }
+
+inspect_alchemy() {
+	go_to_alchemy
+	sleep 10
+	move_wait_click $X_alch_current_tree $Y_alch_current_tree 2
+}
