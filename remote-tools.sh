@@ -263,3 +263,37 @@ SLEEP_LOCK="./tmp/sleep.todo"
 sleep_end_cycle() {
 	schedule_task ${SLEEP_LOCK##*/}
 }
+
+### #### ### ### ### ### ### ### ### ### ### #### ###
+### Functions for remote interactive intervention ###
+### #### ### ### ### ### ### ### ### ### ### #### ###
+
+mouse_center() {
+	xdotool windowactivate --sync $gamewin_id
+	xdotool mousemove --window $gamewin_id 630 450
+}
+
+mouse_up() {
+	local offset=${1:-"5"}
+	xdotool mousemove_relative -- 0 -$offset
+}
+
+mouse_down() {
+	local offset=${1:-"5"}
+	xdotool mousemove_relative -- 0 $offset
+}
+
+mouse_left() {
+	local offset=${1:-"5"}
+	xdotool mousemove_relative -- -$offset 0
+}
+
+mouse_right() {
+	local offset=${1:-"5"}
+	xdotool mousemove_relative -- $offset 0
+}
+
+hotkey() {
+	local k=${1:-"Escape"}
+	xdotool key $k
+}
