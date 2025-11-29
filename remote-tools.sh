@@ -125,6 +125,19 @@ get_server_cycle() {
 	echo $server_cycle
 }
 
+restricted_server_cycle() {
+	local start_server=$1
+	local server_cycle
+	if [ "$start_server" == "s1" ]; then
+		server_cycle="s1 s1 s1 s1 s1 s1 s1"
+	elif [ "$start_server" == "s27" ]; then
+		server_cycle="s27 s27 s27 s27 s27 s27 s27"
+	else
+		server_cycle="s31 s31 s31 s31 s31 s31 s31"
+	fi
+	echo $server_cycle
+}
+
 remote_auto_firestone_start() {
 	## always make sure that DISPLAY and XAUTHORITY are set
 	enable_remote_ssh
@@ -143,6 +156,7 @@ remote_auto_firestone_start() {
 	echo "*** firestone started ***"
 
 	local server_cycle=$(get_server_cycle $1)
+	#local server_cycle=$(restricted_server_cycle $1)
 
 	detached_cmd_line_launcher ./multi-cycle-run.sh "$server_cycle" ./tmp/cycle-run.out
 
@@ -167,6 +181,24 @@ local_auto_firestone_start() {
 
 	echo "*** starting bot ***"
 	./multi-cycle-run.sh "$server_cycle"
+}
+
+remote_only_bot_start() {
+	## always make sure that DISPLAY and XAUTHORITY are set
+	enable_remote_ssh
+
+	## helps detecting detached process
+	export DETACHED_BOT=true
+
+	## kill all instances of multi-cycle-run.sh
+	killall_bots
+
+	local server_cycle=$(get_server_cycle $1)
+	#local server_cycle=$(restricted_server_cycle $1)
+
+	detached_cmd_line_launcher ./multi-cycle-run.sh "$server_cycle" ./tmp/cycle-run.out
+
+	echo "*** bot started ***"
 }
 
 local_only_bot_start() {
