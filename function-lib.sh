@@ -101,7 +101,8 @@ smooth_drag_and_drop() {
 		tempo=$5
 	fi
 
-	xdotool click 1
+	#xdotool click 1
+	slow_safe_click
 	sleep 1
 	xdotool mousedown 1
 	sleep 2
