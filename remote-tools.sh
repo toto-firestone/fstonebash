@@ -358,3 +358,58 @@ dragdrop_down() {
 
 	smooth_drag_and_drop $x_curr $y_curr $x_dest $y_dest ".01"
 }
+
+### ### ### ### ### ### ### ### ### ### ### ### ### ###
+### Extra remote tools for mini event loot claiming ###
+### ### ### ### ### ### ### ### ### ### ### ### ### ###
+
+open_event_window() {
+	focus_and_back_to_root_screen
+	move_wait_click $X_events_window_open $Y_events_window_open 2
+}
+
+choose_event() {
+	local ev_choice=$1
+	if [ -z "$ev_choice" ]; then
+		echo "* no event choice (1,2,3) given. skip"
+		return
+	elif [[ ! "$ev_choice" =~ ^[0-9]+$ ]]; then
+		echo "* argument 1 is not a positive int : $ev_choice. skip"
+		return
+	elif [ "$ev_choice" -lt "1" ] || [ "$ev_choice" -gt "3" ]; then
+		echo "* event number not in range (1,2,3) : $ev_choice. skip"
+		return
+	else
+		echo "* select event $ev_choice"
+	fi
+	# NOT REACHED IF NO VALID ARGUMENT FOR EVENT CHOICE
+	local xx_ev yy_ev
+	eval "xx_ev=\$X_event_slot_$ev_choice"
+	eval "yy_ev=\$Y_event_slot_$ev_choice"
+	move_wait_click $xx_ev $yy_ev 2
+}
+
+event_challenge_tab() {
+	move_wait_click $X_event_challenge_tab $Y_event_challenge_tab 2
+}
+
+claim_event_loot() {
+	local i_quest=$1
+	if [ -z "$i_quest" ]; then
+		echo "* no quest choice (1,2,3) given. skip"
+		return
+	elif [[ ! "$i_quest" =~ ^[0-9]+$ ]]; then
+		echo "* argument 1 is not a positive int : $i_quest. skip"
+		return
+	elif [ "$i_quest" -lt "1" ] || [ "$i_quest" -gt "3" ]; then
+		echo "* quest number not in range (1,2,3) : $i_quest. skip"
+		return
+	else
+		echo "* select quest $i_quest"
+	fi
+	# NOT REACHED IF NO VALID ARGUMENT FOR QUEST CHOICE
+	local xx_qu yy_qu
+	eval "xx_qu=\$X_claim_event_loot_$i_quest"
+	eval "yy_qu=\$Y_claim_event_loot_$i_quest"
+	move_wait_click $xx_qu $yy_qu 2
+}
