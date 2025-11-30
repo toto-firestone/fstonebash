@@ -413,3 +413,45 @@ claim_event_loot() {
 	eval "yy_qu=\$Y_claim_event_loot_$i_quest"
 	move_wait_click $xx_qu $yy_qu 2
 }
+
+### ### ### ### ### ### ### ## ###
+### Map-cycle timestamp change ###
+### ### ### ### ### ### ### ## ###
+
+fix_mapcycle_timestamp() {
+	local map_time ts_6h ts_map ts_diff
+	map_time=$1
+	if [ -n "$map_time" ]; then
+		echo "* user provided map-cycle reset time is : $map_time"
+
+		ts_6h=$(date -d "06:00" +%s)
+		ts_map=$(date -d "$map_time" +%s)
+		if [ -z "$ts_map" ]; then
+			# bad format
+			ts_diff=""
+		elif [ "$ts_map" -ge "$ts_6h" ]; then
+			# another issue...
+			# better avoid negative
+			ts_diff=""
+		else
+			# all good
+			ts_diff=$((ts_6h-ts_map))
+		fi
+	else
+		echo "* default value of map-cycle reset time is 06:00"
+		# no tweek required
+		ts_diff=""
+	fi
+
+	if [ -n "$ts_diff" ]; then
+		echo "With time correction of $ts_diff secs"
+	fi
+	source switch.conf
+	local time_file="$current_servname.mapcycle.timestamp"
+	echo "*** reset mapcycle timestamp ***"
+	reset_timestamp $time_file $ts_diff
+	log_msg "** reset of $time_file"
+	if [ -n "$ts_diff" ]; then
+		log_msg "* time correction : $ts_diff secs"
+	fi
+}
