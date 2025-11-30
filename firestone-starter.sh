@@ -26,6 +26,9 @@ sleep 6
 xdotool type --delay 300 "firefox"
 xdotool key --delay 300 Return
 sleep 30
+move_wait_click $X_firefox_home_page $Y_firefox_home_page 3
+sleep 5
+## clicking on home should enable typing in url field
 xdotool type --delay 300 "$game_url"
 xdotool key --delay 300 Return
 
