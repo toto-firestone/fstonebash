@@ -274,22 +274,22 @@ mouse_center() {
 }
 
 mouse_up() {
-	local offset=${1:-"5"}
+	local offset=${1:-"20"}
 	xdotool mousemove_relative -- 0 -$offset
 }
 
 mouse_down() {
-	local offset=${1:-"5"}
+	local offset=${1:-"20"}
 	xdotool mousemove_relative -- 0 $offset
 }
 
 mouse_left() {
-	local offset=${1:-"5"}
+	local offset=${1:-"20"}
 	xdotool mousemove_relative -- -$offset 0
 }
 
 mouse_right() {
-	local offset=${1:-"5"}
+	local offset=${1:-"20"}
 	xdotool mousemove_relative -- $offset 0
 }
 
@@ -302,4 +302,59 @@ inspect_alchemy() {
 	go_to_alchemy
 	sleep 10
 	move_wait_click $X_alch_current_tree $Y_alch_current_tree 2
+}
+
+mouse_location() {
+	local mouseloc=$(xdotool getmouselocation)
+	local xx=$(echo "$mouseloc" | grep -oP 'x:\K\d+')
+	local yy=$(echo "$mouseloc" | grep -oP 'y:\K\d+')
+	echo "$xx,$yy"
+}
+
+dragdrop_left() {
+	local offset=${1:-"80"}
+	local xy=$(mouse_location)
+	local x_curr=${xy%,*}
+	local y_curr=${xy#*,}
+
+	local x_dest=$((x_curr - offset))
+	local y_dest=$y_curr
+
+	smooth_drag_and_drop $x_curr $y_curr $x_dest $y_dest ".01"
+}
+
+dragdrop_right() {
+	local offset=${1:-"80"}
+	local xy=$(mouse_location)
+	local x_curr=${xy%,*}
+	local y_curr=${xy#*,}
+
+	local x_dest=$((x_curr + offset))
+	local y_dest=$y_curr
+
+	smooth_drag_and_drop $x_curr $y_curr $x_dest $y_dest ".01"
+}
+
+dragdrop_up() {
+	local offset=${1:-"80"}
+	local xy=$(mouse_location)
+	local x_curr=${xy%,*}
+	local y_curr=${xy#*,}
+
+	local x_dest=$x_curr
+	local y_dest=$((y_curr - offset))
+
+	smooth_drag_and_drop $x_curr $y_curr $x_dest $y_dest ".01"
+}
+
+dragdrop_down() {
+	local offset=${1:-"80"}
+	local xy=$(mouse_location)
+	local x_curr=${xy%,*}
+	local y_curr=${xy#*,}
+
+	local x_dest=$x_curr
+	local y_dest=$((y_curr + offset))
+
+	smooth_drag_and_drop $x_curr $y_curr $x_dest $y_dest ".01"
 }
