@@ -404,8 +404,7 @@ safe_quit() {
 		log_msg "* quit attempt $i_try : ncc=$ncc fail=$compare"
 	done
 	# a kill is necessary in case of crash on exit
-	killall firefox
-	sleep 5
+	killall crashreporter
 	# this kill has no effect if firefox exits normally
 	# it is intended to close the crash report prompt
 	echo "* quit successful"
