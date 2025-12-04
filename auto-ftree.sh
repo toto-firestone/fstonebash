@@ -420,7 +420,9 @@ if [ "$1" == "claim" ]; then
 
 	go_to_ftree
 	# no cancel chance at 2 secs.
-	read -t 2 -p "last chance to cancel claim = NON SPACE + RETURN > " do_cancel
+	if ! $DETACHED_BOT; then
+		read -t 2 -p "last chance to cancel claim = NON SPACE + RETURN > " do_cancel
+	fi
 
 	echo
 	if [ -n "$do_cancel" ]; then
