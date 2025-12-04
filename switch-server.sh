@@ -57,6 +57,12 @@ xdotool windowactivate --sync $gamewin_id
 if [ "$current_servname" == "$1" ]; then
 	echo "server switch not required"
 	anti_ad
+	# in case of crash, bot may continue to run and believe server id is OK
+	# the bad situation is current_servname value corrupted and
+	# try to switch if a server with matching value but
+	# the game actually restarts on a different server
+	# that situation needs detection
+	enforce_real_servername_to_switch
 else
 	echo "switch to $1"
 	i_try=0
@@ -122,15 +128,7 @@ else
 	# hard restart (download timeout) or soft restart (no download lag)
 	# NOT REACHED IF HARD RESTART FAILS (BLOCKING WAIT)
 
-	# TODO : replace next block by enforce_real_servername_to_switch
-	find_real_servername
-	find_result=$(tail -n 1 ./tmp/firestone.log)
-	echo "$find_result"
-	real_servername=$(echo "$find_result" | grep -oP 'real_servername=\K[^[:space:]]+$')
-
-	echo "overwriting $real_servername to switch file"
-	echo "current_servname=$real_servername" > switch.conf
-	cat switch.conf
+	enforce_real_servername_to_switch
 
 	# if current_servname does not match wanted server
 	# it will be handled outside here
