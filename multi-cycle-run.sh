@@ -390,7 +390,7 @@ while true; do
 			echo "*** no freeze before switch to $i_serv"
 		fi
 
-		./switch-server.sh $i_serv
+		./switch-server.sh $i_serv 4
 		source master.conf
 		# LAST USAGE OF i_serv ON THE ITERATION
 		if [ "$i_serv" != "$current_servname" ]; then
