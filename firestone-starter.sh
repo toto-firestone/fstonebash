@@ -74,7 +74,7 @@ echo "***** wait for loading before close loot and event windows *****"
 #read -t 180 -p " > " dummy
 
 # n_try x 20 secs.
-wait_game_start 16 20
+wait_game_start 12 20
 
 xdotool windowactivate --sync $gamewin_id
 move_wait_click $X_avatar $Y_avatar 2
