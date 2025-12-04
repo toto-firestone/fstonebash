@@ -566,14 +566,15 @@ else
 	move_wait_click $X_ftree_start $Y_ftree_start 3
 fi
 
-echo "* schedule a wait of $FtreeGlob_time half hours"
 schedule_task ${wait_fullpath#./tmp/}
 now_timestamp=$(date +%s)
 echo "now timestamp = $now_timestamp"
 
 if [ -n "$FtreeAccur_secs" ]; then
+	echo "* schedule a wait of $(secs_to_hhmm $FtreeAccur_secs)"
 	wait_expire=$((now_timestamp+$FtreeAccur_secs))
 else
+	echo "* schedule a wait of $FtreeGlob_time half hours"
 	wait_expire=$((now_timestamp+1800*$FtreeGlob_time))
 fi
 echo $wait_expire >> $wait_fullpath
