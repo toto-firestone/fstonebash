@@ -12,12 +12,11 @@ if [ -z "$DETACHED_BOT" ]; then
 	env_for_remote_or_local
 fi
 
+echo "*** DO NOT QUIT FIREFOX BEFORE win_id.conf IS SET ***"
+### Otherwise, invalid gamewin_id will be window manager
+
 termwin_id=$(xdotool getwindowfocus)
 game_url="https://armorgames.com/firestone-idle-rpg-game/18485?tag-referral=idle"
-
-#firefox $game_url &
-# firefox can be launched with remote method
-#detached_cmd_line_launcher firefox "$game_url" ./tmp/firefox.out ./tmp/firefox.pid
 
 ## launch firefox with non xterm method - avoids layout differences
 ## between local and ssh X11 settings
@@ -32,14 +31,15 @@ sleep 5
 xdotool type --delay 300 "$game_url"
 xdotool key --delay 300 Return
 
-echo "*** load armor games ***"
-sleep 18
 gamewin_id=$(xdotool getwindowfocus)
 
 echo "gamewin_id: $gamewin_id, termwin_id: $termwin_id"
 echo "gamewin_id=${gamewin_id}" > win_id.conf
 echo "termwin_id=${termwin_id}" >> win_id.conf
-echo "win_id.conf written"
+echo "*** win_id.conf written ***"
+
+echo "*** load armor games ***"
+sleep 18
 
 xdotool windowactivate --sync $gamewin_id
 sleep 1
