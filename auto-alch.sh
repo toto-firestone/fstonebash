@@ -190,7 +190,7 @@ if [ "${atree_cmd:2:1}" == "1" ]; then
 	alchemy_special_click
 fi
 
-echo "* schedule a wait of $alch_timer seconds"
+echo "* schedule a wait of $(secs_to_hhmm $alch_timer)"
 schedule_task ${wait_fullpath#./tmp/}
 now_timestamp=$(date +%s)
 echo "now timestamp = $now_timestamp"
