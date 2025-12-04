@@ -380,22 +380,20 @@ safe_quit() {
 
 	local i_try=1
 	echo "* quit - attempt $i_try"
-	./firestone-quit.sh
+	basic_quit_firefox
 	make_ROI $x_url_ul $y_url_ul $x_url_br $y_url_br /tmp/after_quit.png
 	local ncc=$(ncc_similarity /tmp/before_quit.png /tmp/after_quit.png)
 	local compare=$(echo "${ncc//e/E} > 0.5" | bc -l)
 	log_msg "* quit attempt $i_try : ncc=$ncc fail=$compare"
 
-	### THAT LOOP IS INTENDED TO BE INFINITE
-	# In case of quit faillure, it's a real problem, so we stop right now
-	while [ "$compare" != "0" ]; do
+	while [ "$compare" != "0" ] && [ "$i_try" -lt "6" ]; do
 		i_try=$((i_try+1))
 		echo "* quit - attempt $i_try"
 		if [ "$i_try" -le "3" ]; then
-			./firestone-quit.sh
+			basic_quit_firefox
 		else
 			echo "* menu layout may have changed : close window"
-			./firestone-quit.sh force
+			basic_quit_firefox force
 		fi
 		make_ROI $x_url_ul $y_url_ul $x_url_br $y_url_br /tmp/after_quit.png
 
@@ -403,7 +401,10 @@ safe_quit() {
 		compare=$(echo "${ncc//e/E} > 0.5" | bc -l)
 		log_msg "* quit attempt $i_try : ncc=$ncc fail=$compare"
 	done
-	# a kill is necessary in case of crash on exit
+	# a last resort kill is necessary in case of crash on exit
+	# or game crash before firefox quit process
+	# image comparison could fail infinitely
+	killall firefox
 	killall crashreporter
 	# this kill has no effect if firefox exits normally
 	# it is intended to close the crash report prompt
@@ -485,7 +486,10 @@ wait_game_start() {
 		else
 			log_msg "* detached mode : exit now"
 			safe_quit
-			exit
+			# ensure everything is off
+			# safe_quit always killall firefox
+			killall_bots
+			exit 1
 		fi
 		log_msg "* human intervention now"
 	else
