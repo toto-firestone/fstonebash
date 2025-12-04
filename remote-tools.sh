@@ -93,9 +93,25 @@ clear_locks() {
 }
 
 search_bot_pid() {
-	local filter_ps_a=$(ps -a | grep -v grep | grep multi-cycle-run)
-	local trim_ps_a=${filter_ps_a/# /}
-	local n_pid=${trim_ps_a%% *}
+	echo "-- search bot pid critical debug --" 1>&2
+
+	local filter_ps_a=$(ps -ax | grep -v grep | grep -v vi | grep multi-cycle-run)
+
+	echo "- filtered ps ax results" 1>&2
+	echo "$filter_ps_a" 1>&2
+
+	local tok n_pid
+	for tok in $filter_ps_a; do
+		echo "- token $tok" 1>&2
+		# pid is first token separated by built-in separator
+		n_pid=$tok
+		break
+	done
+	echo "- check if n_pid variable is empty : n_pid=$n_pid" 1>&2
+	if [ -z "$n_pid" ]; then
+		echo "- really empty" 1>&2
+	fi
+
 	echo $n_pid
 }
 
