@@ -25,11 +25,6 @@ sleep 6
 xdotool type --delay 300 "firefox"
 xdotool key --delay 300 Return
 sleep 30
-move_wait_click $X_firefox_home_page $Y_firefox_home_page 3
-sleep 5
-## clicking on home should enable typing in url field
-xdotool type --delay 300 "$game_url"
-xdotool key --delay 300 Return
 
 gamewin_id=$(xdotool getwindowfocus)
 
@@ -38,17 +33,24 @@ echo "gamewin_id=${gamewin_id}" > win_id.conf
 echo "termwin_id=${termwin_id}" >> win_id.conf
 echo "*** win_id.conf written ***"
 
-echo "*** load armor games ***"
-sleep 18
-
 xdotool windowactivate --sync $gamewin_id
 sleep 1
-echo "selected game window"
+echo "* selected game window"
 xdotool windowsize --sync $gamewin_id $WIN_WIDTH $WIN_HEIGHT
 sleep 1
 xdotool windowmove --sync $gamewin_id $X_WIN_POS $Y_WIN_POS
-sleep 10
-echo "ready to load"
+sleep 3
+echo "* ready to click home, type url and load"
+
+### this click requires firefox has correct position ###
+move_wait_click $X_firefox_home_page $Y_firefox_home_page 3
+sleep 5
+## clicking on home should enable typing in url field
+xdotool type --delay 300 "$game_url"
+xdotool key --delay 300 Return
+
+echo "*** load armor games ***"
+sleep 25
 
 echo "*** check armor games login status before loading"
 check_armor_games_nologin
