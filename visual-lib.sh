@@ -485,15 +485,22 @@ wait_game_start() {
 			read -p "stop with CTRL+C or continue with RETURN " dummy
 		else
 			log_msg "* detached mode : exit now"
+			screenshot
+			mv /tmp/shot.png tmp/crashed-screen.png
+			log_msg "* screenshot tmp/crashed-screen.png done"
 			safe_quit
 			# ensure everything is off
 			# safe_quit always killall firefox
 			killall_bots
+			## scheduling respawn ##
+			detached_cmd_line_launcher ./firestone-respawn.sh 60 /dev/null
+			## ##
 			exit 1
 		fi
 		log_msg "* human intervention now"
 	else
 		echo "*** There is a problem : further action is required ***"
+		log_msg "* failed to auto-restart game on non blocking wait"
 	fi
 }
 
