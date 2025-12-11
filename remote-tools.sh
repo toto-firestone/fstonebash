@@ -169,7 +169,16 @@ remote_auto_firestone_start() {
 	killall_bots
 
 	./firestone-starter.sh
-	echo "*** firestone started ***"
+	starter_err=$?
+	if [ "$starter_err" == "0" ]; then
+		echo "*** firestone started ***"
+		log_msg "*** firestone started before bot launch ***"
+	else
+		echo "*** firestone start failed ***"
+		log_msg "*** firestone start failed before bot launch ***"
+		return
+	fi
+	# NOT REACHED IF GAME START FAILS
 
 	local server_cycle=$(get_server_cycle $1)
 	#local server_cycle=$(restricted_server_cycle $1)
@@ -191,7 +200,14 @@ local_auto_firestone_start() {
 	killall_bots
 
 	./firestone-starter.sh
-	echo "*** firestone started ***"
+	starter_err=$?
+	if [ "$starter_err" == "0" ]; then
+		echo "*** firestone started ***"
+	else
+		echo "*** firestone start failed ***"
+		return
+	fi
+	# NOT REACHED IF GAME START FAILS
 
 	local server_cycle=$(get_server_cycle $1)
 

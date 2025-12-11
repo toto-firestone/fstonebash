@@ -118,7 +118,12 @@ else
 			log_msg "*** quit firestone ***"
 			safe_quit
 			./firestone-starter.sh
-			log_msg "*** firestone restarted ***"
+			starter_err=$?
+			if [ "$starter_err" == "0" ]; then
+				log_msg "*** firestone restarted during server switch ***"
+			else
+				log_msg "*** firestone restart failed during server switch ***"
+			fi
 			source win_id.conf
 		fi
 	else

@@ -519,7 +519,12 @@ while true; do
 	fi
 
 	./firestone-starter.sh
-	log_msg "*** firestone restarted ***"
+	starter_err=$?
+	if [ "$starter_err" == "0" ]; then
+		log_msg "*** firestone restarted at end of macro cycle ***"
+	else
+		log_msg "*** firestone restart failed at end of macro cycle ***"
+	fi
 	source win_id.conf
 
 	i=$((i+1))
