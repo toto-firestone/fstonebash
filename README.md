@@ -12,6 +12,7 @@ The best I can do right now is a description of all features
 
 * Native single platform and multi server architecture
 * Enable remote control of bot with SSH and Unix command line
+* Auto respawn attempts
 * Auto login on armor games
 * Alchemy experiments
 * Accept guild applications
