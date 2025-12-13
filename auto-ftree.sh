@@ -363,10 +363,34 @@ fi
 ## count remaining nodes and done nodes ##
 if [ "$1" == "count" ]; then
 	echo "*** counting nodes in queue on $current_servname ***"
+	echo
+	echo "** node i : estimated level / max level - accurately counted i in queue file"
+	echo "** level estimation = max - count"
+	echo "** visual check node level estimation"
+	echo "** difference with real level require tweek queue file"
+	echo "** real level is lower : add some node in queue"
+	echo "** real level is greater : remove some node in queue"
+
 	source $ftree_fullpath
+
+	# column and page formatting
+	prev_col="0"
+	prev_page="1"
+
 	n_node=1
 	q_count=0
+	echo
 	while [ "$n_node" -le "16" ]; do
+		# column and page formatting
+		curr_col=$(get_node_attribute "$n_node" "columnIndex")
+		curr_page=$(get_node_attribute "$n_node" "pageNumber")
+		if [ "$curr_col" -gt "$prev_col" ]; then
+			echo "--- --- --- --- --- ---"
+		fi
+		if [ "$curr_page" -gt "$prev_page" ]; then
+			echo "--- --- --- --- --- ---"
+		fi
+
 		curr_maxlev=$(get_node_attribute "$n_node" "levelMax")
 		curr_rem=$(count_ftree_remain_node $current_servname $n_node)
 
@@ -378,10 +402,15 @@ if [ "$1" == "count" ]; then
 		fi
 		q_count=$((q_count+curr_rem))
 		n_node=$((n_node+1))
+
+		# column and page formatting
+		prev_col=$curr_col
+		prev_page=$curr_page
 	done
+	echo
 	queue_len=$(wc -l tmp/${current_servname}.ftreestart.todo)
-	echo "** queue total lengh = ${queue_len%% *}"
 	echo "** valid nodes in queue = $q_count"
+	echo "** queue total lengh (including padding) = ${queue_len%% *}"
 	exit
 fi
 # NOT REACHED IF COUNTING IS CHOSEN
