@@ -487,3 +487,16 @@ fix_mapcycle_timestamp() {
 		log_msg "* time correction : $ts_diff secs"
 	fi
 }
+
+### #### ### #### ###
+### Log shortcuts ###
+### #### ### #### ###
+
+shortcut_log() {
+	case $1 in
+		"cycle") tail -n 60 tmp/cycle-run.out;;
+		"switch") tail -n 100 tmp/firestone.log | grep "switch from";;
+		"crash") tail -n 20000 tmp/firestone.log | grep "crash";;
+		*) echo "** usage : shortcut_log cycle|switch|crash";;
+	esac
+}
