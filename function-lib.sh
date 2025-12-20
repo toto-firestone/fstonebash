@@ -355,6 +355,11 @@ launch_and_claim_rituals() {
 	claim_and_restart $X_ritual_2 $Y_ritual_2 2 2
 	claim_and_restart $X_ritual_3 $Y_ritual_3 2 2
 	claim_and_restart $X_ritual_4 $Y_ritual_4 2 2
+	# need another turn to ensure somethings is always started
+	move_wait_click $X_ritual_1 $Y_ritual_1 1
+	move_wait_click $X_ritual_2 $Y_ritual_2 1
+	move_wait_click $X_ritual_3 $Y_ritual_3 1
+	move_wait_click $X_ritual_4 $Y_ritual_4 1
 }
 
 train_guardian() {
