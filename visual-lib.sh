@@ -491,10 +491,13 @@ wait_game_start() {
 			safe_quit
 			# ensure everything is off
 			# safe_quit always killall firefox
-			killall_bots
+
 			## scheduling respawn ##
 			detached_cmd_line_launcher ./firestone-respawn.sh 60 /dev/null
 			## ##
+
+			# safer to kill bots after respawn
+			killall_bots
 			exit 1
 		fi
 		log_msg "* human intervention now"
