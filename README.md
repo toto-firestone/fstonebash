@@ -10,10 +10,9 @@ No doc, no tuto, no support... Help yourself and brew your own.
 
 The best I can do right now is a description of all features
 
-* Native single platform and multi server architecture
+* For Armor Games platform only
+* Native multi server architecture
 * Enable remote control of bot with SSH and Unix command line
-* Auto respawn attempts
-* Auto login on armor games
 * Alchemy experiments
 * Accept guild applications
 * Daily/Weekly quests
@@ -33,6 +32,7 @@ The best I can do right now is a description of all features
 * Standard view setting
 * Screen sampling using ImageMagick
 * Robustess and failsafe
+* Auto relogin and respawn attempts
 * Basic example for guild expeditions only (basic-exped.sh)
 * Math tool that shows optimal blueprint spending for WM defense improvement
 * Holy damage maximization tool
