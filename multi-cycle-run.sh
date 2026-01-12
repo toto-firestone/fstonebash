@@ -64,14 +64,15 @@ reset_mapcycle_timestamps() {
 }
 
 interactive_session() {
-	local actions="Quit Brute-Force Learn-Map Reset-Mapcycle"
+	local actions="Auto Brute-Force Learn-Map Reset-Mapcycle"
 	local i_todo
 	local map_time ts_6h ts_map ts_diff
 
 	xdotool windowactivate --sync $termwin_id
+	echo "** Quit with CTRL-C"
 	select i_todo in $actions; do
 		case $i_todo in
-			Quit ) echo "Choice : $i_todo"
+			Auto ) echo "Choice : $i_todo"
 				break;;
 			Brute-Force ) echo "Choice : $i_todo"
 				./brute-force.sh $brute_force_time
