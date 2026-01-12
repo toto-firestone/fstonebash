@@ -62,6 +62,30 @@ auto_beer_token_10_pull() {
 	focus_and_back_to_root_screen
 }
 
+auto_beer_token_5_pull() {
+	echo "*** auto buy 5 tokens with beer and play 5 pulls"
+	go_to_town
+	move_wait_click $X_tavern_main $Y_tavern_main 2
+	move_wait_click $X_tavern_beer $Y_tavern_beer 4
+	sleep 7
+	move_wait_click $X_beer_shop $Y_beer_shop 3
+
+	# spend x1 1500 beers
+	move_wait_click $X_beer_to_token $Y_beer_to_token 4
+	sleep 2
+	xdotool key Escape
+	sleep 2
+
+	# pull 5 cards with x10 button
+	move_wait_click $X_beer_tavern_toggl $Y_beer_tavern_toggl 3
+	move_wait_click $X_beer_tavern_play $Y_beer_tavern_play 2
+	move_wait_click $X_beer_tavern_card $Y_beer_tavern_card 4
+	sleep 20
+
+	# no artifact craft
+	focus_and_back_to_root_screen
+}
+
 auto_scarab_10_pull_and_vault() {
 	echo "*** auto play 10 scarab pulls and open vaults"
 	go_to_town
@@ -120,6 +144,25 @@ auto_crystal_5_hit() {
 	sleep 4
 
 	# 5 hits on crystal
+	move_wait_click $X_crystal_hit_toggle $Y_crystal_hit_toggle 2
+	sleep 1
+	move_wait_click $X_hit_arcane_crystal $Y_hit_arcane_crystal 2
+	sleep 1
+
+	focus_and_back_to_root_screen
+}
+
+auto_crystal_10_hit() {
+	echo "*** auto hit arcane crystal with 10 pickaxes"
+	go_to_town
+	move_wait_click $X_guild_portal $Y_guild_portal 2
+	sleep 6
+	move_wait_click $X_arcane_crystal $Y_arcane_crystal 2
+	sleep 4
+
+	# 10 hits on crystal
+	move_wait_click $X_crystal_hit_toggle $Y_crystal_hit_toggle 2
+	sleep 1
 	move_wait_click $X_crystal_hit_toggle $Y_crystal_hit_toggle 2
 	sleep 1
 	move_wait_click $X_hit_arcane_crystal $Y_hit_arcane_crystal 2
@@ -561,3 +604,15 @@ speedup_ftree() {
 	remove_task $wait_task
 	./auto-ftree.sh claim
 }
+
+enlight_guardian_x3() {
+	go_to_guardian
+	eval "X_guard=\$X_guard_slot_${i_guardian_slot-1}"
+	move_wait_click $X_guard $Y_guard_slot 5
+	move_wait_click $X_guard_enlight $Y_guard_enlight 2
+	sleep 1
+	move_wait_click $X_guard_enlight $Y_guard_enlight 2
+	sleep 1
+	move_wait_click $X_guard_enlight $Y_guard_enlight 2
+}
+

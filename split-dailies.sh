@@ -92,6 +92,15 @@ case $daily_cmd in
 	"arena") echo "* command read : $daily_cmd"
 		auto_arena_fight
 		echo;;
+	"DH_guardian") echo "* command read : $daily_cmd"
+		enlight_guardian_x3
+		echo;;
+	"DH_crystal") echo "* command read : $daily_cmd"
+		auto_crystal_10_hit
+		echo;;
+	"DH_beer") echo "* command read : $daily_cmd"
+		auto_beer_token_5_pull
+		echo;;
 	*) echo "* command unknown : $daily_cmd - skip";;
 esac
 

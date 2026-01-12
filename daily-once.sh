@@ -70,6 +70,13 @@ elif [ "$1" == "reset" ]; then
 				echo "holy_rift" >> $f_task
 			fi
 			## no auto arena for game over
+
+			## decorated heroes here for testing purpose
+			if ${auto_decorated_heroes_H[$serv]}; then
+				echo "DH_guardian" >> $f_task
+				echo "DH_crystal" >> $f_task
+				echo "DH_beer" >> $f_task
+			fi
 		else
 			if ${do_libe_H[$serv]}; then
 				#echo "libe_dung" >> $f_task
@@ -91,6 +98,11 @@ elif [ "$1" == "reset" ]; then
 				## only 2 attempts
 				echo "arena" >> $f_task
 				echo "arena" >> $f_task
+			fi
+			if ${auto_decorated_heroes_H[$serv]}; then
+				echo "DH_guardian" >> $f_task
+				echo "DH_crystal" >> $f_task
+				echo "DH_beer" >> $f_task
 			fi
 		fi
 	done
