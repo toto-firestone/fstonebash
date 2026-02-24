@@ -82,3 +82,9 @@ s31_PharaohToken_x20 = 20
 s31_PharaohToken_x20 = 21
 # 21/11/25 17:06:30
 s31_PharaohToken_x20 = 22
+# 24/11/25 22:03:44
+s31_PharaohToken_x20 = 23
+# 01/12/25 21:20:08
+s31_PharaohToken_x20 = 24
+# 05/12/25 18:24:12
+s31_PharaohToken_x20 = 25
