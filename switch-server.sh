@@ -115,7 +115,8 @@ else
 			echo "* will not try to quit and restart once"
 		else
 			echo "* try to quit and restart once"
-			log_msg "*** quit firestone ***"
+			log_msg "*** quit firestone on server switch ***"
+			clear_firefox_cache_only
 			safe_quit
 			./firestone-starter.sh
 			starter_err=$?

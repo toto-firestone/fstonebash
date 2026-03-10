@@ -244,6 +244,18 @@ clear_firefox_cache_reload() {
 	sleep 5
 }
 
+clear_firefox_cache_only() {
+	xdotool windowactivate --sync $gamewin_id
+	move_wait_click $X_firefox_menu $Y_firefox_menu 5
+	sleep 5
+	move_wait_click $X_firefox_history $Y_firefox_history 5
+	sleep 5
+	move_wait_click $X_firefox_erase_history $Y_firefox_erase_history 5
+	sleep 5
+	move_wait_click $X_erase_confirm $Y_erase_confirm 5
+	sleep 5
+}
+
 escape_intro_sequence() {
 	xdotool windowactivate --sync $gamewin_id
 	sleep 5
@@ -503,7 +515,7 @@ wait_game_start() {
 		log_msg "* human intervention now"
 	else
 		echo "*** There is a problem : further action is required ***"
-		log_msg "* failed to auto-restart game on non blocking wait"
+		echo "* failed to auto-restart game on non blocking wait"
 	fi
 }
 
