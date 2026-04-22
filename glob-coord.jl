@@ -266,7 +266,7 @@ fstone_globcoord("oracle_gift", "X_oracle_gift", "Y_oracle_gift", "476", "569", 
 fstone_globcoord("ftree_tab", "X_ftree_tab", "Y_ftree_tab", "1256", "594", "Research", "Ftree tab in library")
 ;
 # (2) ftree_start
-fstone_globcoord("ftree_start", "X_ftree_start", "Y_ftree_start", "571", "691", "Research", "Start button for a Ftree research - open the node window first")
+fstone_globcoord("ftree_start", "X_ftree_start", "Y_ftree_start", "572", "653", "Research", "Start button for a Ftree research - open the node window first")
 ;
 # (3) ftree_claim
 fstone_globcoord("ftree_claim", "X_ftree_claim", "Y_ftree_claim", "429", "828", "Research", "left claim button of Ftree research")
@@ -437,7 +437,7 @@ fstone_globcoord("tavern_scarab", "X_tavern_scarab", "Y_tavern_scarab", "817", "
 fstone_globcoord("beer_shop", "X_beer_shop", "Y_beer_shop", "1260", "652", "Tavern", "shop for spending beers")
 ;
 # (5) beer_to_token
-fstone_globcoord("beer_to_token", "X_beer_to_token", "Y_beer_to_token", "383", "540", "Tavern", "converts 1500 beers into 5 tokens")
+fstone_globcoord("beer_to_token", "X_beer_to_token", "Y_beer_to_token", "375", "602", "Tavern", "converts 1500 beers into 5 tokens")
 ;
 # (6) beer_tavern_toggl
 fstone_globcoord("beer_tavern_toggl", "X_beer_tavern_toggl", "Y_beer_tavern_toggl", "1219", "803", "Tavern", "toggle for x1 x10 x50 pulls in beer tavern")

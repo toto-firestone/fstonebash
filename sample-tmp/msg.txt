@@ -1,0 +1,11 @@
+hello, i have just finished the math analysis of balanced upgrades in guild tree.
+
+it's something i have been trying for almost 1 year on s31, following an old intuition. it works and now i have accurate analysis about why.
+
+never giving up any node leads to a non negigible xp gain, which has the order of magnitude of the root square of guild coins that have not been invested in forgotten nodes.
+
+it's not something bounded that becomes negligible when guild coin amout skyrockets. my manuscript is available. ping me on discord if interrested to read.
+
+our strategy works. if we keep on maximizing at most 5 nodes and keep all the rest equal, our guild actually gets levels faster than guilds where some nodes remain not upgraded.
+
+then we get the guild perks (timer, ressources, +player) faster, while maintianing crystal upgrades.
