@@ -257,7 +257,7 @@ fstone_globcoord("ritual_4", "X_ritual_4", "Y_ritual_4", "1124", "758", "Oracle"
 fstone_globcoord("oracle_shop", "X_oracle_shop", "Y_oracle_shop", "587", "703", "Oracle", "oracle shop tab")
 ;
 # (7) oracle_gift
-fstone_globcoord("oracle_gift", "X_oracle_gift", "Y_oracle_gift", "476", "569", "Oracle", "free daily oracle gift in shop")
+fstone_globcoord("oracle_gift", "X_oracle_gift", "Y_oracle_gift", "487", "715", "Oracle", "free daily oracle gift in shop")
 ;
 
 
