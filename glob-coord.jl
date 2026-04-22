@@ -47,7 +47,7 @@ fstone_globcoord("mail_delete", "X_mail_delete", "Y_mail_delete", "1119", "828",
 fstone_globcoord("main_shop", "X_main_shop", "Y_main_shop", "922", "432", "CheckIn", "main gem shop")
 ;
 # (2) free_box
-fstone_globcoord("free_box", "X_free_box", "Y_free_box", "469", "631", "CheckIn", "free daily mystery box")
+fstone_globcoord("free_box", "X_free_box", "Y_free_box", "477", "774", "CheckIn", "free daily mystery box")
 ;
 # (3) checkin_tab
 fstone_globcoord("checkin_tab", "X_checkin_tab", "Y_checkin_tab", "989", "239", "CheckIn", "daily check-in tab")
