@@ -327,6 +327,10 @@ test_reward_2025_07 = Dict(
 # and restore
 #test_sheet_2025_07 = copy(backup)
 
+# reminder for creating an array without a specific element
+# within a given number range
+# g = filter(i->(i!=toto_i),collect(1:24))
+
 #generate_report(test_sheet_2025_07,"tmp/test_treasure.txt")
 ########### ############## ##########
 

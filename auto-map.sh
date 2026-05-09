@@ -60,6 +60,30 @@ fi
 
 if [ "$elapsed" -le "3" ]; then
 	echo "** doing high value missions before 4 half-hours"
+
+	curr_60B_flag=${tier_60B_H[$current_servname]:-false}
+	if $curr_60B_flag; then
+		echo "* 60B tier unlocked on $current_servname"
+		for i_m in ${!X_60B_map_mission_A[@]}; do
+			X_mission=${X_60B_map_mission_A[$i_m]}
+			Y_mission=${Y_60B_map_mission_A[$i_m]}
+			echo "* try $i_m : mission X=$X_mission Y=$Y_mission (60B)"
+
+			if [ -z "$Y_mission" ]; then
+				echo "* missing Y for X=$X_mission"
+				continue;
+			fi
+			# NOT REACHED if coordinates are incomplete
+			move_wait_click $X_mission $Y_mission 3
+			move_wait_click $X_map_mission_start $Y_map_mission_start 1
+
+			fast_return_to_map
+		done
+	else
+		echo "* skip 60B tier on $current_servname"
+	fi
+
+	echo "** other high value missions (<= 5B tier)"
 	for i_m in ${!X_HV_map_mission_A[@]}; do
 		X_mission=${X_HV_map_mission_A[$i_m]}
 		Y_mission=${Y_HV_map_mission_A[$i_m]}
