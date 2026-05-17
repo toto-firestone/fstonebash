@@ -616,3 +616,10 @@ enlight_guardian_x3() {
 	move_wait_click $X_guard_enlight $Y_guard_enlight 2
 }
 
+auto_map_zoom_reset() {
+	go_to_map
+	sleep 10
+	smooth_drag_and_drop $X_map_zoom_slide $Y_map_zoom_slide $X_map_zoom_slide_dest $Y_map_zoom_slide_dest
+
+	focus_and_back_to_root_screen
+}

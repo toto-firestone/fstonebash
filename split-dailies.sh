@@ -31,6 +31,9 @@ daily_cmd=$(head -n 1 $f_task)
 sed -i '1d' $f_task
 
 case $daily_cmd in
+	"map_zoom") echo "* command read : $daily_cmd"
+		auto_map_zoom_reset
+		echo;;
 	"libe_dung") echo "* command read : $daily_cmd"
 		echo "* expedition check before all liberations and dungeons"
 		launch_and_claim_expedition

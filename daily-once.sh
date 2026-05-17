@@ -56,6 +56,9 @@ elif [ "$1" == "reset" ]; then
 		f_task="./tmp/$serv.daily.todo"
 		source $serv.firestone.conf
 
+		### map zoom reset ###
+		echo "map_zoom" >> $f_task
+
 		if $(game_is_over_on_server $serv); then
 			if ${do_libe_H[$serv]}; then
 				echo "* game over : no liberation / dungeon"
