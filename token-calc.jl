@@ -177,6 +177,31 @@ function wm_level_up_once(wm)
 	return n
 end
 
+function wm_xp_up_once(wm)
+	curr_lev = wm.level
+	curr_xp_bar = wm.xp_bar
+	xp_thresh = 100 + (curr_lev-1)*10
+
+	curr_xp_bar += 100
+	if curr_xp_bar < xp_thresh
+		n = WarMachine(wm.name,curr_lev,curr_xp_bar)
+	else
+		curr_xp_bar -= xp_thresh
+		n = WarMachine(wm.name,curr_lev+1,curr_xp_bar)
+	end
+
+	return n
+end
+
+function wm_xp_up(wm,n_up)
+	n = wm
+	for i in 1:n_up
+		n = wm_xp_up_once(n)
+	end
+
+	return n
+end
+
 function wm_level_up(wm,n_times)
 	nw = wm
 	for i in 1:n_times
