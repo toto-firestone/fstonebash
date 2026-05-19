@@ -108,9 +108,13 @@ if $(game_is_over_on_server $current_servname); then
 fi
 
 ### War missions during first 3 hours
+# update for parametric timing
+war_tf=4
+# legacy value is 5
+# trying 4 in order to clear the map a bit sooner
 
-if [ "$elapsed" -le "5" ]; then
-	echo "** doing war missions before 6 half-hours"
+if [ "$elapsed" -le "$war_tf" ]; then
+	echo "** do war between half-hours 0 and $war_tf"
 	for i_m in ${!X_war_map_mission_A[@]}; do
 		X_mission=${X_war_map_mission_A[$i_m]}
 		Y_mission=${Y_war_map_mission_A[$i_m]}
@@ -125,13 +129,16 @@ if [ "$elapsed" -le "5" ]; then
 		fast_return_to_map
 	done
 else
-	echo "** skip war missions after 6 half-hours"
+	echo "** skip war outside half-hours 0 and $war_tf"
 fi
 
 ### Adventure missions in 4th and 5th hours
+# update for parametric timing
+adv_t0=$((war_tf+1))
+adv_tf=$((adv_t0+3))
 
-if [ "$elapsed" -ge "6" ] && [ "$elapsed" -le "9" ]; then
-	echo "** doing adventure missions between half-hours 6 and 9"
+if [ "$elapsed" -ge "$adv_t0" ] && [ "$elapsed" -le "$adv_tf" ]; then
+	echo "** do adventure between half-hours $adv_t0 and $adv_tf"
 	for i_m in ${!X_adv_map_mission_A[@]}; do
 		X_mission=${X_adv_map_mission_A[$i_m]}
 		Y_mission=${Y_adv_map_mission_A[$i_m]}
@@ -146,13 +153,16 @@ if [ "$elapsed" -ge "6" ] && [ "$elapsed" -le "9" ]; then
 		fast_return_to_map
 	done
 else
-	echo "** skip adventure missions outside half-hours 6 and 9"
+	echo "** skip adventure outside half-hours $adv_t0 and $adv_tf"
 fi
 
 ### Scout missions during last hour
+# update for parametric timing
+sco_t0=$((adv_tf+1))
+sco_tf="11"
 
-if [ "$elapsed" -ge "10" ] && [ "$elapsed" -le "11" ]; then
-	echo "** doing scout missions during half-hours 10 and 11"
+if [ "$elapsed" -ge "$sco_t0" ] && [ "$elapsed" -le "$sco_tf" ]; then
+	echo "** do scout during half-hours $sco_t0 and $sco_tf"
 	for i_m in ${!X_sco_map_mission_A[@]}; do
 		X_mission=${X_sco_map_mission_A[$i_m]}
 		Y_mission=${Y_sco_map_mission_A[$i_m]}
@@ -167,5 +177,5 @@ if [ "$elapsed" -ge "10" ] && [ "$elapsed" -le "11" ]; then
 		fast_return_to_map
 	done
 else
-	echo "** skip scout missions outside half-hours 10 and 11"
+	echo "** skip scout outside half-hours $sco_t0 and $sco_tf"
 fi
