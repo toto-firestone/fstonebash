@@ -107,7 +107,7 @@ else
 		xdotool windowactivate --sync $termwin_id
 	fi
 	#sleep 20
-	wait_game_start 8 20 "non-blocking"
+	wait_game_start 16 20 "non-blocking"
 	fail_crit=$(tail -n 1 ./tmp/firestone.log | grep 'success=0')
 	if [ -n "$fail_crit" ]; then
 		echo "* game did non restarted after server switch"
