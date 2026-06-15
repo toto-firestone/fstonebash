@@ -87,7 +87,7 @@ auto_beer_token_5_pull() {
 }
 
 auto_scarab_10_pull_and_vault() {
-	echo "*** auto play 10 scarab pulls and open vaults"
+	echo "*** auto scarab"
 	go_to_town
 	move_wait_click $X_tavern_main $Y_tavern_main 2
 	move_wait_click $X_tavern_scarab $Y_tavern_scarab 4
@@ -113,6 +113,14 @@ auto_scarab_10_pull_and_vault() {
 		move_wait_click $X_scarab_tavern_play $Y_scarab_tavern_play 2
 		sleep 10
 	fi
+
+	# claim daily free token
+	move_wait_click $X_scarab_shop $Y_scarab_shop 3
+	sleep 2
+	move_wait_click $X_scarab_claim_free $Y_scarab_claim_free 3
+	sleep 4
+	xdotool key Escape
+	sleep 2
 
 	# 50 vaults open
 	move_wait_click $X_scarab_vault_tab $Y_scarab_vault_tab 2
