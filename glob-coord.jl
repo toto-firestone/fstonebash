@@ -62,7 +62,7 @@ fstone_globcoord("daily_quests", "X_daily_quests", "Y_daily_quests", "552", "258
 fstone_globcoord("weekly_quests", "X_weekly_quests", "Y_weekly_quests", "828", "257", "CheckIn", "weekly quests selector in quest window")
 ;
 # (7) quests_claim
-fstone_globcoord("quests_claim", "X_quests_claim", "Y_quests_claim", "1028", "368", "CheckIn", "daily/weekly quest claim button")
+fstone_globcoord("quests_claim", "X_quests_claim", "Y_quests_claim", "1099", "362", "CheckIn", "daily/weekly quest claim button")
 ;
 
 
@@ -155,7 +155,7 @@ fstone_globcoord("guard_slot_4", "X_guard_slot_4", "SOLO_VAR", "843", "0", "Guar
 fstone_globcoord("guard_slot", "Y_guard_slot", "SOLO_VAR", "841", "0", "Guardian", "all guardian slots Y coordinate")
 ;
 # (7) guard_holy_tab
-fstone_globcoord("guard_holy_tab", "X_guard_holy_tab", "Y_guard_holy_tab", "1024", "270", "Guardian", "tab for holy upgrades for guardians")
+fstone_globcoord("guard_holy_tab", "X_guard_holy_tab", "Y_guard_holy_tab", "979", "270", "Guardian", "tab for holy upgrades for guardians")
 ;
 # (8) guard_holy_upgrade
 fstone_globcoord("guard_holy_upgrade", "X_guard_holy_upgrade", "Y_guard_holy_upgrade", "1207", "677", "Guardian", "upgrade button of holy damage for guardians")
