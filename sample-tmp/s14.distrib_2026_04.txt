@@ -1,0 +1,240 @@
+*** Natael80 [i=1]********************************************************
+* tavern = 3
+* dust = 162
+* contract = 32
+* tome = 5
+* check status : ok
+
+
+
+
+*** Shiftax [i=2]*********************************************************
+* tavern = 2
+* dust = 76
+* contract = 15
+* tome = 2
+* check status : ok
+
+
+
+
+*** Guest [i=3]***********************************************************
+* tavern = 1
+* dust = 66
+* contract = 13
+* tome = 2
+* check status : ok
+
+
+
+
+*** Steamy Wombat [i=4]***************************************************
+* tavern = 1
+* dust = 65
+* contract = 13
+* tome = 2
+* check status : ok
+
+
+
+
+*** PinkDragon [i=5]******************************************************
+* tavern = 1
+* dust = 65
+* contract = 13
+* tome = 2
+* check status : ok
+
+
+
+
+*** Woozy Numbat [i=6]****************************************************
+* tavern = 1
+* dust = 64
+* contract = 12
+* tome = 2
+* check status : ok
+
+
+
+
+*** SuperManAdragon [i=7]*************************************************
+* tavern = 1
+* dust = 62
+* contract = 12
+* tome = 2
+* check status : ok
+
+
+
+
+*** Snootyx [i=8]*********************************************************
+* tavern = 1
+* dust = 59
+* contract = 11
+* tome = 2
+* check status : ok
+
+
+
+
+*** Jukkei [i=9]**********************************************************
+* tavern = 1
+* dust = 58
+* contract = 11
+* tome = 2
+* check status : ok
+
+
+
+
+*** Troudhuk [i=10]*******************************************************
+* tavern = 1
+* dust = 57
+* contract = 11
+* tome = 2
+* check status : ok
+
+
+
+
+*** Maurice [i=11]********************************************************
+* tavern = 1
+* dust = 55
+* contract = 11
+* tome = 2
+* check status : ok
+
+
+
+
+*** toto [i=12]***********************************************************
+* tavern = 0
+* dust = 0
+* contract = 0
+* tome = 0
+* check status : 
+
+
+
+
+*** BrianShih [i=13]******************************************************
+* tavern = 1
+* dust = 46
+* contract = 10
+* tome = 1
+* check status : ok
+
+
+
+
+*** depoy [i=14]**********************************************************
+* tavern = 1
+* dust = 45
+* contract = 10
+* tome = 1
+* check status : ok
+
+
+
+
+*** PI PEH [i=15]*********************************************************
+* tavern = 1
+* dust = 30
+* contract = 6
+* tome = 1
+* check status : ok
+
+
+
+
+*** TrueChiter [i=16]*****************************************************
+* tavern = 1
+* dust = 28
+* contract = 5
+* tome = 1
+* check status : ok +1 contract
+
+
+
+
+*** Harry21 [i=17]********************************************************
+* tavern = 1
+* dust = 20
+* contract = 4
+* tome = 1
+* check status : ok
+
+
+
+
+*** Keimu_1 [i=18]********************************************************
+* tavern = 1
+* dust = 12
+* contract = 3
+* tome = 0
+* check status : ok
+
+
+
+
+*** Athena [i=19]*********************************************************
+* tavern = 1
+* dust = 12
+* contract = 3
+* tome = 0
+* check status : ok +3 contract
+
+
+
+
+*** Behemoth2332 [i=20]***************************************************
+* tavern = 0
+* dust = 9
+* contract = 1
+* tome = 0
+* check status : sleeper
+
+
+
+
+*** Arailea [i=21]********************************************************
+* tavern = 0
+* dust = 9
+* contract = 2
+* tome = 0
+* check status : ok
+
+
+
+
+*** NRPB [i=22]***********************************************************
+* tavern = 0
+* dust = 8
+* contract = 1
+* tome = 0
+* check status : ok
+
+
+
+
+*** dRagon [i=23]*********************************************************
+* tavern = 0
+* dust = 6
+* contract = 1
+* tome = 0
+* check status : ok
+
+
+
+
+*** N. [i=24]*************************************************************
+* tavern = 0
+* dust = 5
+* contract = 1
+* tome = 0
+* check status : ok
+
+
+
+
