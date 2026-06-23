@@ -6,6 +6,7 @@
 *.swp
 *.dat
 *.todo
+*.hit
 # add ftree data files and queue files in order to provide more examples
 !ftree/ftree*.dat
 !ftree/ftree*.unlock.todo
